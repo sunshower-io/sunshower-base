@@ -1,11 +1,9 @@
 package io.sunshower.reflect.incant;
 
-import io.sunshower.arcus.incant.OperationScanner;
-import io.sunshower.arcus.incant.ServiceDescriptor;
-import io.sunshower.arcus.incant.ServiceResolver;
-import io.sunshower.arcus.incant.TrieServiceRegistry;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -16,14 +14,13 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 
-/**
- * Created by haswell on 4/10/16.
- */
+
+@RunWith(JUnitPlatform.class)
 public class TrieServiceRegistryTest {
 
-    private io.sunshower.arcus.incant.OperationScanner objectScanner;
+    private io.sunshower.reflect.incant.OperationScanner objectScanner;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         objectScanner = new OpScanner();
     }
@@ -35,14 +32,14 @@ public class TrieServiceRegistryTest {
                 return "a";
             }
         }
-        final io.sunshower.arcus.incant.TrieServiceRegistry registry =
-                new io.sunshower.arcus.incant.TrieServiceRegistry(
+        final io.sunshower.reflect.incant.TrieServiceRegistry registry =
+                new io.sunshower.reflect.incant.TrieServiceRegistry(
                         objectScanner,
                         init(A.class)
                 );
         registry.refresh();
         final A                                        instance = new A();
-        io.sunshower.arcus.incant.ServiceDescriptor<A> service  = registry.resolve("A");
+        io.sunshower.reflect.incant.ServiceDescriptor<A> service  = registry.resolve("A");
         assertThat(service.getIdentifier(), is("A"));
         assertThat(service.resolve("a").invoke(instance), is("a"));
     }
@@ -59,14 +56,14 @@ public class TrieServiceRegistryTest {
             }
         }
 
-        final io.sunshower.arcus.incant.TrieServiceRegistry registry =
+        final io.sunshower.reflect.incant.TrieServiceRegistry registry =
                 new TrieServiceRegistry(
                         objectScanner,
                         init(A.class)
                 );
         registry.refresh();
         final A                                        instance = new A();
-        io.sunshower.arcus.incant.ServiceDescriptor<A> service  = registry.resolve("A");
+        io.sunshower.reflect.incant.ServiceDescriptor<A> service  = registry.resolve("A");
         assertThat(service.getIdentifier(), is("A"));
         assertThat(service.resolve("a").invoke(instance), is("a"));
         assertThat(service.resolve("b",
@@ -83,14 +80,14 @@ public class TrieServiceRegistryTest {
 
 
 
-    static io.sunshower.arcus.incant.ServiceResolver init(Class<?> types) {
+    static io.sunshower.reflect.incant.ServiceResolver init(Class<?> types) {
         return new TestServiceResolver(types);
     }
 
     private static class OpScanner implements OperationScanner {
 
         @Override
-        public Set<io.sunshower.arcus.incant.ServiceDescriptor<?>> scan(Class<?> type) {
+        public Set<io.sunshower.reflect.incant.ServiceDescriptor<?>> scan(Class<?> type) {
             return Collections.singleton(new ServiceDescriptor<>(
                     type, type.getSimpleName(),
                     type.getDeclaredMethods()));

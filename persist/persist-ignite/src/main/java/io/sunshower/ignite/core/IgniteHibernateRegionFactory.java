@@ -7,9 +7,7 @@ import org.hibernate.cfg.Settings;
 import javax.cache.CacheException;
 import java.util.Properties;
 
-/**
- * Created by haswell on 5/3/17.
- */
+
 @SuppressWarnings("deprecation")
 public class IgniteHibernateRegionFactory extends HibernateRegionFactory {
 

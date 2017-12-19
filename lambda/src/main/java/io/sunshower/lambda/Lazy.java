@@ -6,9 +6,7 @@ import java.util.function.Predicate;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
-/**
- * Created by haswell on 3/23/16.
- */
+
 public class Lazy {
 
     private Lazy() {}

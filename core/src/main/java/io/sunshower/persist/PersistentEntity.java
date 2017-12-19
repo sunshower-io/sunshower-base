@@ -3,9 +3,7 @@ package io.sunshower.persist;
 import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
 
-/**
- * Created by haswell on 7/21/17.
- */
+
 @MappedSuperclass
 public abstract class PersistentEntity<ID extends Serializable>
         implements Persistable<ID>

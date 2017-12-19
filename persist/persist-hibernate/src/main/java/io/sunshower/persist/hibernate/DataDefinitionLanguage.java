@@ -2,9 +2,7 @@ package io.sunshower.persist.hibernate;
 
 import org.springframework.beans.factory.annotation.Value;
 
-/**
- * Created by haswell on 5/2/17.
- */
+
 public class DataDefinitionLanguage {
     private String strategy;
 

@@ -10,9 +10,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-/**
- * Created by haswell on 4/20/16.
- */
+
 @ThreadSafe
 public class LazyPropertyAware implements PropertyAware {
 

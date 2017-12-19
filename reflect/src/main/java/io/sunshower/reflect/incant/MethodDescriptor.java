@@ -6,9 +6,7 @@ import java.security.PrivilegedAction;
 import java.util.Arrays;
 import java.util.Map;
 
-/**
- * Created by haswell on 4/10/16.
- */
+
 public final class MethodDescriptor<U, T>
         extends LazyPropertyAware
         implements PrivilegedAction<Void> {

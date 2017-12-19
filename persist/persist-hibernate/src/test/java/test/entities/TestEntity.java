@@ -6,9 +6,7 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Created by haswell on 11/16/16.
- */
+
 @Entity
 @Table(name = "TestEntity")
 public class TestEntity extends DistributableEntity {

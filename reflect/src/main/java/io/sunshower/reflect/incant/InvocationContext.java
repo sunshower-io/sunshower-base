@@ -2,9 +2,7 @@ package io.sunshower.reflect.incant;
 
 import io.sunshower.lang.Refreshable;
 
-/**
- * Created by haswell on 4/10/16.
- */
+
 public interface InvocationContext extends Refreshable {
 
 

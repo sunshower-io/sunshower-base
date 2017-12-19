@@ -24,9 +24,7 @@ import javax.sql.DataSource;
 import java.util.Properties;
 import java.util.logging.Logger;
 
-/**
- * Created by haswell on 10/16/16.
- */
+
 @Configuration
 @EnableTransactionManagement
 @Import(IgniteNodeConfiguration.class)
@@ -131,39 +129,39 @@ public class HibernateConfiguration {
 
 
 
-//        if (mode != CacheMode.Mode.None) {
-//            log.info("Cache mode set to: " + mode);
-//            jpaProperties.put(
-//                    "hibernate.cache.use_second_level_cache",
-//                    true
-//            );
-//
-//            jpaProperties.put(
-//                    "hibernate.cache.use_query_cache",
-//                    true
-//            );
-//
-//            if (mode == CacheMode.Mode.Local) {
-//                jpaProperties.put(
-//                        "hibernate.cache.region.factory_class",
-//                        "io.sunshower.persist.infinispan.LocalInfinispanCacheManagerFactory"
-//                );
-//            } else {
-//                jpaProperties.put(
-//                        "hibernate.cache.region.factory_class",
-//                        "org.jboss.as.jpa.hibernate5.infinispan.InfinispanRegionFactory"
-//                );
-//                jpaProperties.put(
-//                        "hibernate.cache.infinispan.cachemanager",
-//                        "java:jboss/infinispan/container/hibernate"
-//                );
-//
-//                jpaProperties.put(
-//                        "hibernate.transaction.transaction_manager_lookup_class",
-//                        "org.hibernate.transaction.JBossTransactionManagerLookup"
-//                );
-//            }
-//        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
 

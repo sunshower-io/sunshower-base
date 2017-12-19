@@ -5,9 +5,7 @@ import io.sunshower.common.Identifier;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
-/**
- * Created by haswell on 3/17/17.
- */
+
 public class IdentifierConverter extends XmlAdapter<String, Identifier> {
 
     @Override

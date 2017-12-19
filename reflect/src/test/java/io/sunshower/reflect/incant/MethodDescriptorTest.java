@@ -1,9 +1,9 @@
 package io.sunshower.reflect.incant;
 
-import io.sunshower.arcus.incant.MethodDescriptor;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
 
-import java.beans.ParameterDescriptor;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,9 +14,9 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.*;
 
-/**
- * Created by haswell on 4/10/16.
- */
+
+
+@RunWith(JUnitPlatform.class)
 public class MethodDescriptorTest {
 
     @Test
@@ -30,7 +30,7 @@ public class MethodDescriptorTest {
         }
 
 
-        final io.sunshower.arcus.incant.MethodDescriptor descriptor = new io.sunshower.arcus.incant.MethodDescriptor(A.class, A.class.getMethod("m", List.class));
+        final io.sunshower.reflect.incant.MethodDescriptor descriptor = new io.sunshower.reflect.incant.MethodDescriptor(A.class, A.class.getMethod("m", List.class));
         assertThat(descriptor.matches(new Class[]{ArrayList.class}, "m"), is(true));
 
 
@@ -44,8 +44,8 @@ public class MethodDescriptorTest {
             }
         }
 
-        final io.sunshower.arcus.incant.MethodDescriptor<A, Void> methodDescriptor = new
-                io.sunshower.arcus.incant.MethodDescriptor<>(A.class, A.class.getDeclaredMethod("m"));
+        final io.sunshower.reflect.incant.MethodDescriptor<A, Void> methodDescriptor = new
+                io.sunshower.reflect.incant.MethodDescriptor<>(A.class, A.class.getDeclaredMethod("m"));
         Void a = methodDescriptor.invoke(new A());
         assertThat(a, is(nullValue()));
     }
@@ -59,8 +59,8 @@ public class MethodDescriptorTest {
             }
         }
 
-        final io.sunshower.arcus.incant.MethodDescriptor<A, String> methodDescriptor = new
-                io.sunshower.arcus.incant.MethodDescriptor<>(A.class, A.class.getDeclaredMethod("m"));
+        final io.sunshower.reflect.incant.MethodDescriptor<A, String> methodDescriptor = new
+                io.sunshower.reflect.incant.MethodDescriptor<>(A.class, A.class.getDeclaredMethod("m"));
         String a = methodDescriptor.invoke(new A());
         assertThat(a, is("Frapper"));
     }
@@ -75,8 +75,8 @@ public class MethodDescriptorTest {
             }
         }
 
-        final io.sunshower.arcus.incant.MethodDescriptor<A, String> methodDescriptor = new
-                io.sunshower.arcus.incant.MethodDescriptor<>(A.class, A.class.getDeclaredMethod("m", String.class));
+        final io.sunshower.reflect.incant.MethodDescriptor<A, String> methodDescriptor = new
+                io.sunshower.reflect.incant.MethodDescriptor<>(A.class, A.class.getDeclaredMethod("m", String.class));
         A a = new A();
         methodDescriptor.invoke(a, new Object[]{"Bean"});
         assertThat(a.s, is("Bean"));
@@ -92,8 +92,8 @@ public class MethodDescriptorTest {
             }
         }
 
-        final io.sunshower.arcus.incant.MethodDescriptor<A, String> methodDescriptor = new
-                io.sunshower.arcus.incant.MethodDescriptor<>(
+        final io.sunshower.reflect.incant.MethodDescriptor<A, String> methodDescriptor = new
+                io.sunshower.reflect.incant.MethodDescriptor<>(
                 A.class,
                 A.class.getDeclaredMethod("m", String.class)
         );
@@ -111,8 +111,8 @@ public class MethodDescriptorTest {
         }
 
         Method m = A.class.getDeclaredMethod("m", String.class);
-        final io.sunshower.arcus.incant.MethodDescriptor<A, String> methodDescriptor = new
-                io.sunshower.arcus.incant.MethodDescriptor<>(
+        final io.sunshower.reflect.incant.MethodDescriptor<A, String> methodDescriptor = new
+                io.sunshower.reflect.incant.MethodDescriptor<>(
                 A.class,
                 m
         );
@@ -129,13 +129,13 @@ public class MethodDescriptorTest {
         }
 
         Method m = A.class.getDeclaredMethod("m", String.class);
-        final io.sunshower.arcus.incant.MethodDescriptor<A, String> methodDescriptor = new
-                io.sunshower.arcus.incant.MethodDescriptor<>(
+        final io.sunshower.reflect.incant.MethodDescriptor<A, String> methodDescriptor = new
+                io.sunshower.reflect.incant.MethodDescriptor<>(
                 A.class,
                 m
         );
 
-        final io.sunshower.arcus.incant.MethodDescriptor<A, String> b = new io.sunshower.arcus.incant.MethodDescriptor<>(A.class, m);
+        final io.sunshower.reflect.incant.MethodDescriptor<A, String> b = new io.sunshower.reflect.incant.MethodDescriptor<>(A.class, m);
         assertThat(b.equals(methodDescriptor), is(true));
     }
 
@@ -149,13 +149,13 @@ public class MethodDescriptorTest {
         }
 
         Method m = A.class.getDeclaredMethod("m", String.class);
-        final io.sunshower.arcus.incant.MethodDescriptor<A, String> methodDescriptor = new
-                io.sunshower.arcus.incant.MethodDescriptor<>(
+        final io.sunshower.reflect.incant.MethodDescriptor<A, String> methodDescriptor = new
+                io.sunshower.reflect.incant.MethodDescriptor<>(
                 A.class,
                 m
         );
 
-        final io.sunshower.arcus.incant.MethodDescriptor<A, String> b           = new io.sunshower.arcus.incant.MethodDescriptor<>(A.class, m);
+        final io.sunshower.reflect.incant.MethodDescriptor<A, String> b           = new io.sunshower.reflect.incant.MethodDescriptor<>(A.class, m);
         final Map<MethodDescriptor<?, ?>, Boolean>                  descriptors = new HashMap<>();
         descriptors.put(methodDescriptor, true);
         assertThat(descriptors.containsKey(b), is(true));

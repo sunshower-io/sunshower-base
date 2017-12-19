@@ -4,9 +4,7 @@ import io.sunshower.lang.tuple.Pair;
 
 import java.util.Set;
 
-/**
- * Created by haswell on 4/20/16.
- */
+
 public interface PropertyAware {
 
 

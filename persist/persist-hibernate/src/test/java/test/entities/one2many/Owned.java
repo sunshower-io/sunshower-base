@@ -4,9 +4,7 @@ import javax.inject.Named;
 import javax.persistence.*;
 import java.util.UUID;
 
-/**
- * Created by haswell on 2/24/17.
- */
+
 @Entity
 @Table(name = "one2many_owned")
 public class Owned {

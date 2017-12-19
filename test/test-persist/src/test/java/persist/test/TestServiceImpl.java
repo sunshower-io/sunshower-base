@@ -6,9 +6,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.Collection;
 
-/**
- * Created by haswell on 3/29/17.
- */
+
 public class TestServiceImpl implements TestService {
     @Override
     public void save() {

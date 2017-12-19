@@ -3,12 +3,7 @@ package io.sunshower.common.configuration;
 import io.sunshower.core.api.Startable;
 import io.sunshower.core.api.Stoppable;
 
-/**
- * Created by haswell on 10/16/16.
- *
- *
- * Abstraction over configuration sources (e.g file, Consul, Vault, etc.)
- */
+
 public interface ConfigurationSource extends Startable, Stoppable {
 
     default String sayHello() {

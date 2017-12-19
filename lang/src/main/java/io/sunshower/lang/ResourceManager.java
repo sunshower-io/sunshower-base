@@ -1,9 +1,7 @@
 package io.sunshower.lang;
 
 
-/**
- * Created by haswell on 3/29/16.
- */
+
 public interface ResourceManager {
 
 

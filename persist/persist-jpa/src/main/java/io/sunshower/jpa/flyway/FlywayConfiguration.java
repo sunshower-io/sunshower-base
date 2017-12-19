@@ -15,9 +15,7 @@ import org.springframework.context.annotation.Configuration;
 import javax.inject.Singleton;
 import javax.sql.DataSource;
 
-/**
- * Created by haswell on 10/17/16.
- */
+
 @Configuration
 public class FlywayConfiguration {
     static final Logger log = LoggerFactory.getLogger(FlywayConfiguration.class);

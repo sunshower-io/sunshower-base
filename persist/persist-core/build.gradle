@@ -14,6 +14,7 @@ dependencies {
 
     testCompile('com.h2database:h2')
     testCompile('org.postgresql:postgresql')
+    testCompile 'org.springframework:spring-test'
     testCompile 'org.springframework.boot:spring-boot-test'
     testCompile 'org.springframework.boot:spring-boot-starter'
 }

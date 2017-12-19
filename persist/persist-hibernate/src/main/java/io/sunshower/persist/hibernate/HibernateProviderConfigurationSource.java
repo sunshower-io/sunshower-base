@@ -5,9 +5,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.util.Properties;
 
-/**
- * Created by haswell on 5/2/17.
- */
+
 
 @ConfigurationProperties("jpa")
 public class HibernateProviderConfigurationSource extends JpaProviderProperties {

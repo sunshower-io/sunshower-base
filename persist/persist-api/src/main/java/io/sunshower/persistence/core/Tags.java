@@ -4,9 +4,7 @@ import io.sunshower.persistence.core.converters.ClassConverter;
 
 import javax.persistence.*;
 
-/**
- * Created by haswell on 3/27/17.
- */
+
 @Entity
 @Table(name = "ENTITY_TAGS")
 public class Tags extends DistributableEntity {

@@ -6,9 +6,7 @@ import io.sunshower.common.Nodes;
 
 import java.time.Clock;
 
-/**
- * Created by haswell on 7/18/17.
- */
+
 public class Identifiers {
 
     public static Sequence<Identifier> randomSequence() {

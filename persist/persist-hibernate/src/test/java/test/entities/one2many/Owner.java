@@ -8,9 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-/**
- * Created by haswell on 2/24/17.
- */
+
 @Entity
 @IdClass(Identifier.class)
 @Table(name = "one2many_owner")

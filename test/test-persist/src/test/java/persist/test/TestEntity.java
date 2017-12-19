@@ -3,9 +3,7 @@ package persist.test;
 import javax.persistence.*;
 import java.util.UUID;
 
-/**
- * Created by haswell on 11/17/16.
- */
+
 @Entity
 @Table(name = "TEST_ENTITY")
 public class TestEntity {

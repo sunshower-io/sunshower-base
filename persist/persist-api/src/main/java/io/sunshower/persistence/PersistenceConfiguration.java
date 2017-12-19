@@ -2,9 +2,7 @@ package io.sunshower.persistence;
 
 import java.util.*;
 
-/**
- * Created by haswell on 11/16/16.
- */
+
 public class PersistenceConfiguration {
     final String id;
     final Set<String> migrationPaths;

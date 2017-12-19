@@ -5,9 +5,7 @@ import io.sunshower.common.Identifiers;
 
 import javax.persistence.AttributeConverter;
 
-/**
- * Created by haswell on 10/17/17.
- */
+
 public class IdentifierConverter implements AttributeConverter<Identifier, byte[]> {
     @Override
     public byte[] convertToDatabaseColumn(Identifier identifier) {

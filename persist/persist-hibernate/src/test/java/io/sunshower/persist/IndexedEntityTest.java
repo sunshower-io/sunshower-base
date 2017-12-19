@@ -5,9 +5,14 @@ import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.query.dsl.QueryBuilder;
 import org.junit.FixMethodOrder;
 import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.springframework.test.annotation.Commit;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 import test.entities.IndexedEntity;
 
@@ -20,10 +25,10 @@ import java.util.List;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 
-/**
- * Created by haswell on 3/3/17.
- */
+
 @Transactional
+@RunWith(JUnitPlatform.class)
+@ExtendWith(SpringExtension.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class IndexedEntityTest extends HibernateTestCase {
 
@@ -63,7 +68,7 @@ public class IndexedEntityTest extends HibernateTestCase {
     }
 
     @Test
-    @Ignore
+    @Disabled
     @Transactional
     public void b_ensureEntityManagerIsSearchable() throws InterruptedException {
 
@@ -77,7 +82,6 @@ public class IndexedEntityTest extends HibernateTestCase {
         Query query = queryBuilder.keyword()
                 .wildcard()
                 .onFields("name")
-
                 .matching("test*cool").createQuery();
 
         List<IndexedEntity> resultList = entityManager
@@ -89,7 +93,7 @@ public class IndexedEntityTest extends HibernateTestCase {
     }
 
     @Test
-    @Ignore
+    @Disabled
     @Transactional
     public void b_ensureEntityManagerIsSearchable_fuzzy() throws InterruptedException {
 

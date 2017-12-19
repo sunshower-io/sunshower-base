@@ -5,9 +5,7 @@ import java.io.Serializable;
 import io.sunshower.common.Identifier;
 import io.sunshower.persist.Sequence;
 
-/**
- * Created by haswell on 2/23/17.
- */
+
 public interface Persistable<ID extends Serializable> {
 
     ID getId();

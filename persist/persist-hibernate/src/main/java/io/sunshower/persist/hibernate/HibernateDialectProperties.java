@@ -1,8 +1,6 @@
 package io.sunshower.persist.hibernate;
 
-/**
- * Created by haswell on 5/2/17.
- */
+
 public class HibernateDialectProperties {
 
     private String name;

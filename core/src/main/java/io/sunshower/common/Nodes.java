@@ -8,9 +8,7 @@ import java.nio.ByteBuffer;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 
-/**
- * Created by haswell on 7/17/17.
- */
+
 public class Nodes {
 
     private static final Object lock = new Object();

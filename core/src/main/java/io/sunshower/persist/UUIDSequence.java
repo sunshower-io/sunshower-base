@@ -5,9 +5,7 @@ import io.sunshower.common.Identifier;
 import java.nio.ByteBuffer;
 import java.util.UUID;
 
-/**
- * Created by haswell on 7/20/17.
- */
+
 public class UUIDSequence implements Sequence<Identifier> {
 
     @Override

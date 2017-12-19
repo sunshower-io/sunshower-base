@@ -3,7 +3,7 @@ package io.sunshower.persist.hibernate;
 import io.sunshower.common.Identifier;
 import io.sunshower.persist.HibernateTestCase;
 import org.junit.FixMethodOrder;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.runners.MethodSorters;
 import org.springframework.test.annotation.Commit;
 import org.springframework.test.context.ContextConfiguration;
@@ -21,9 +21,7 @@ import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 
-/**
- * Created by haswell on 2/24/17.
- */
+
 @ContextConfiguration(classes = HibernateConfiguration.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class OneToOneTest extends HibernateTestCase {
@@ -73,6 +71,6 @@ public class OneToOneTest extends HibernateTestCase {
         owner.setOwnee(ownee);
         entityManager.persist(owner);
         entityManager.flush();
-//        assertThat(owner.getVersion(), is(ownee.getVersion()));
+
     }
 }

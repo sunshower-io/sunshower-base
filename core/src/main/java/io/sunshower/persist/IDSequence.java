@@ -8,50 +8,34 @@ import java.nio.ByteBuffer;
 import java.time.Clock;
 import java.util.Objects;
 
-/**
- * Created by haswell on 7/18/17.
- */
+
 final class IDSequence implements Sequence<Identifier>, NodeAware, TimeBased {
 
 
-    /**
-     * Length of a Flake ID in bytes
-     */
+    
     static final int ID_SIZE = 16;
 
 
-    /**
-     * Length of the node portion of an id
-     */
+    
     static final int NODE_SIZE = 6;
 
 
-    /**
-     *
-     */
+    
     static final int SEQUENCE_MAXIMUM = 0xFFFF;
 
 
-    /**
-     * Every sequence needs its own lock.  Making this static would serialize all sequences
-     */
+    
     final Object sequenceLock = new Object();
 
-    /**
-     * Sequence lock
-     */
+    
 
     final Clock clock;
 
-    /**
-     * Sequence node ID
-     */
+    
     final InetAddress node;
 
 
-    /**
-     *
-     */
+    
     final InetAddress nodeIdentity;
 
     final byte[] seed;

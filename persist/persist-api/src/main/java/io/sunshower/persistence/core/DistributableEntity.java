@@ -12,9 +12,7 @@ import io.sunshower.persist.internal.jaxb.Base58ByteArrayConverter;
 import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.FieldBridge;
 
-/**
- * Created by haswell on 2/26/17.
- */
+
 @MappedSuperclass
 @IdClass(Identifier.class)
 @XmlRootElement(name = "entity")

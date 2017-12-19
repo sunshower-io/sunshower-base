@@ -2,9 +2,7 @@ package io.sunshower.persistence.annotations;
 
 import java.lang.annotation.*;
 
-/**
- * Created by haswell on 2/20/17.
- */
+
 @Documented
 @Inherited
 @Target(ElementType.TYPE)

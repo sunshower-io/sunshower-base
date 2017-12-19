@@ -1,8 +1,9 @@
 package io.sunshower.lambda;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -12,9 +13,8 @@ import static io.sunshower.lambda.Lazy.takeWhile;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
-/**
- * Created by haswell on 3/23/16.
- */
+
+@RunWith(JUnitPlatform.class)
 public class LazyTest {
 
     @Test

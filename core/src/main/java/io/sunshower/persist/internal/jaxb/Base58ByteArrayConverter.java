@@ -5,9 +5,7 @@ import io.sunshower.encodings.Encoding;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
-/**
- * Created by haswell on 7/20/17.
- */
+
 public class Base58ByteArrayConverter extends XmlAdapter<String, byte[]> {
 
     static final Encoding encoding =

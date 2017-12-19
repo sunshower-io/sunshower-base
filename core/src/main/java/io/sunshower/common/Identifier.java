@@ -20,9 +20,7 @@ import static io.sunshower.encodings.Base58.Alphabets.Default;
 import static java.lang.String.format;
 
 
-/**
- * Created by haswell on 7/17/17.
- */
+
 
 @XmlRootElement(name = "id")
 @XmlAccessorType(XmlAccessType.NONE)

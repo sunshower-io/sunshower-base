@@ -1,11 +1,13 @@
 package io.sunshower.persist.hibernate;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.platform.runner.JUnitPlatform;
 import org.junit.runner.RunWith;
 import static org.hamcrest.CoreMatchers.*;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.inject.Inject;
 
@@ -14,10 +16,9 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 
-/**
- * Created by haswell on 5/2/17.
- */
-@RunWith(SpringRunner.class)
+
+@RunWith(JUnitPlatform.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest
 @ContextConfiguration(classes = ProviderTestConfiguration.class)
 public class HibernateProviderConfigurationSourceTest {

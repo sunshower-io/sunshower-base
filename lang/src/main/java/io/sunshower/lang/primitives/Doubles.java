@@ -3,9 +3,7 @@ package io.sunshower.lang.primitives;
 import static java.lang.Double.doubleToLongBits;
 import static java.lang.Double.longBitsToDouble;
 
-/**
- * Created by haswell on 4/29/16.
- */
+
 public class Doubles {
 
     public static final byte[] toByteArray(double[] ds) {

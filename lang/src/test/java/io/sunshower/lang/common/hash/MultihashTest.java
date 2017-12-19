@@ -1,6 +1,8 @@
 package io.sunshower.lang.common.hash;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
 
 import java.util.Arrays;
 import java.util.Random;
@@ -8,9 +10,8 @@ import java.util.Random;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
-/**
- * Created by haswell on 5/25/16.
- */
+
+@RunWith(JUnitPlatform.class)
 public class MultihashTest {
 
 

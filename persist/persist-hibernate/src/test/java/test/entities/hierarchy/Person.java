@@ -9,9 +9,7 @@ import javax.persistence.*;
 import java.util.Set;
 import java.util.UUID;
 
-/**
- * Created by haswell on 3/13/17.
- */
+
 @Entity
 @Table(name = "HIER_PERSON")
 public class Person extends DistributableHierarchicalEntity<Person> {

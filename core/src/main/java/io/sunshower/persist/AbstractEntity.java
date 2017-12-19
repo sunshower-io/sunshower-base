@@ -9,9 +9,7 @@ import javax.persistence.MappedSuperclass;
 import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
-/**
- * Created by haswell on 7/24/17.
- */
+
 @MappedSuperclass
 @XmlDiscriminatorNode("@type")
 public class AbstractEntity extends

@@ -1,13 +1,13 @@
 package io.sunshower.common.crypto;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
-/**
- * Created by haswell on 11/22/16.
- */
+@RunWith(JUnitPlatform.class)
 public class HashesTest {
 
 
@@ -25,11 +25,5 @@ public class HashesTest {
         assertThat(actual, is(expected));
     }
 
-//    @Test
-//    public void ensureHashFunctionReturnsExpectedResults_512() {
-//        Hashes.HashFunction hashFunction = Hashes.create(Multihash.Type.SHA_2_512);
-//        String expected = "5qWYQ9U6jDxZmm45p2gGLpYUKN8hhTXhtQo93NEU2EKFuuq4svEQ4kuoLhdbhEvqt7zZ38gkzqAVsFGXua6piiqJ";
-//        String actual = hashFunction.hash("hello", null, new Whatever());
-//        assertThat(actual, is(expected));
-//    }
+    
 }

@@ -1,8 +1,6 @@
 package io.sunshower.reflect.reflect;
 
-/**
- * Created by haswell on 3/23/16.
- */
+
 public class InstantiationException extends ReflectionException {
 
     public InstantiationException() {

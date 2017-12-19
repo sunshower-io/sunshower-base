@@ -4,9 +4,7 @@ import com.zaxxer.hikari.HikariConfig;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-/**
- * Created by haswell on 5/2/17.
- */
+
 @ConfigurationProperties("jdbc")
 public class DatabaseConfigurationSource {
 

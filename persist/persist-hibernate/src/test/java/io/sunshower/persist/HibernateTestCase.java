@@ -1,16 +1,19 @@
 package io.sunshower.persist;
 
-import io.sunshower.barometer.jaxrs.SerializationAware;
-import io.sunshower.barometer.jaxrs.SerializationTestCase;
 import io.sunshower.jpa.flyway.FlywayConfiguration;
 import io.sunshower.persist.core.DataSourceConfiguration;
 import io.sunshower.persist.hibernate.HibernateConfiguration;
 import io.sunshower.persist.hibernate.TestConfig;
+import io.sunshower.test.common.SerializationAware;
+import io.sunshower.test.common.SerializationTestCase;
 import org.junit.FixMethodOrder;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.platform.runner.JUnitPlatform;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,12 +24,11 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Logger;
 
-/**
- * Created by haswell on 2/25/17.
- */
+
 
 @Transactional
-@RunWith(SpringJUnit4ClassRunner.class)
+@RunWith(JUnitPlatform.class)
+@ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {
         TestConfig.class,
         FlywayConfiguration.class,

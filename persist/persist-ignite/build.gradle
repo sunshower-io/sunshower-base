@@ -8,6 +8,8 @@ dependencies {
     compile 'org.springframework.boot:spring-boot'
 
 
+    testCompile 'org.junit.platform:junit-platform-runner'
+    testCompile 'org.springframework:spring-test'
     testCompile 'org.springframework.boot:spring-boot-test'
     testCompile 'org.springframework.boot:spring-boot-starter'
 

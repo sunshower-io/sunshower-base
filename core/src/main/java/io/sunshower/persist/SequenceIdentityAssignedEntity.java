@@ -4,9 +4,7 @@ import javax.persistence.Id;
 import javax.persistence.Transient;
 import java.io.Serializable;
 
-/**
- * Created by haswell on 7/21/17.
- */
+
 public class SequenceIdentityAssignedEntity<
         ID extends Serializable
         > extends PersistentEntity<ID>

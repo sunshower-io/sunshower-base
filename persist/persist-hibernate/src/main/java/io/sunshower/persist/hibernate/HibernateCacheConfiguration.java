@@ -2,9 +2,7 @@ package io.sunshower.persist.hibernate;
 
 import org.springframework.beans.factory.annotation.Value;
 
-/**
- * Created by haswell on 5/3/17.
- */
+
 public class HibernateCacheConfiguration {
 
     @Value("${jpa.provider.cache.fabric-name")

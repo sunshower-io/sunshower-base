@@ -1,13 +1,13 @@
 package io.sunshower.common.rs;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
-/**
- * Created by haswell on 6/15/17.
- */
+@RunWith(JUnitPlatform.class)
 public class MapAdapterTest {
 
     @Test

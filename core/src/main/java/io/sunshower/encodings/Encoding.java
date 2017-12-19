@@ -4,9 +4,7 @@ package io.sunshower.encodings;
 import java.io.IOException;
 import java.io.OutputStream;
 
-/**
- * Created by haswell on 7/17/17.
- */
+
 public interface Encoding {
     
     boolean test(byte[] input) ;

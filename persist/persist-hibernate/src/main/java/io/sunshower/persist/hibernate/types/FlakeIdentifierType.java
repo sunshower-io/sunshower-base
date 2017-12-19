@@ -4,9 +4,7 @@ import io.sunshower.common.Identifier;
 import org.hibernate.type.AbstractSingleColumnStandardBasicType;
 import org.hibernate.type.descriptor.sql.BinaryTypeDescriptor;
 
-/**
- * Created by haswell on 10/17/17.
- */
+
 public class FlakeIdentifierType extends AbstractSingleColumnStandardBasicType<Identifier> {
 
 

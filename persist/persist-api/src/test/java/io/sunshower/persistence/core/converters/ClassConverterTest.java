@@ -1,19 +1,20 @@
 package io.sunshower.persistence.core.converters;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 
-/**
- * Created by haswell on 5/11/17.
- */
+
+@RunWith(JUnitPlatform.class)
 public class ClassConverterTest {
     private ClassConverter converter;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         converter = new ClassConverter();
     }

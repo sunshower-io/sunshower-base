@@ -1,8 +1,6 @@
 package io.sunshower.lambda.spliterators;
 
-/**
- * Created by haswell on 3/23/16.
- */
+
 
 import java.util.Comparator;
 import java.util.Spliterator;

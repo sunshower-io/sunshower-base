@@ -5,9 +5,7 @@ import java.nio.ByteBuffer;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-/**
- * Created by haswell on 7/17/17.
- */
+
 public class Hashes {
 
 

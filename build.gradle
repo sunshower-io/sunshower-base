@@ -10,7 +10,6 @@ allprojects {
     apply plugin: 'java'
 
 }
-apply from: "$rootDir/gradle/bom.gradle"
 
 /**
  * Subproject configurations
@@ -31,7 +30,7 @@ subprojects {
     dependencies {
         compile group: 'org.eclipse.persistence', name: 'org.eclipse.persistence.moxy'
         testCompile 'javax.mail:mail'
-        testCompile("io.sunshower.barometer.modules:jaxrs")
+//        testCompile("io.sunshower.barometer.modules:jaxrs")
         testCompile('org.junit.platform:junit-platform-launcher')
     }
 }
@@ -62,5 +61,3 @@ task wrapper(type: Wrapper) {
 }
 
 
-apply from: "$rootDir/gradle/tasks.gradle"
-defaultTasks "installBillOfMaterials", "clean", "build"

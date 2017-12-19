@@ -1,8 +1,6 @@
 package io.sunshower.reflect.incant;
 
-/**
- * Created by haswell on 4/10/16.
- */
+
 public class InvocationFailureException extends RuntimeException {
 
     public InvocationFailureException() {

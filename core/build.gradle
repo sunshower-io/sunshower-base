@@ -1,0 +1,5 @@
+
+dependencies {
+    testCompile project(':test:test-common')
+    testCompile 'org.junit.platform:junit-platform-runner'
+}

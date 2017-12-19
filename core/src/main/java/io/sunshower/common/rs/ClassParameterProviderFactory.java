@@ -9,9 +9,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 import java.util.UUID;
 
-/**
- * Created by haswell on 11/3/16.
- */
+
 @Provider
 @SuppressWarnings("unchecked")
 public class ClassParameterProviderFactory

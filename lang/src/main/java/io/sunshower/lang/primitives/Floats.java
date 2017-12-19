@@ -6,9 +6,7 @@ import static java.lang.Float.floatToIntBits;
 import static java.lang.Float.floatToRawIntBits;
 import static java.lang.Float.intBitsToFloat;
 
-/**
- * Created by haswell on 4/29/16.
- */
+
 public class Floats {
 
     public static final byte[] toByteArray(float[] floats) {

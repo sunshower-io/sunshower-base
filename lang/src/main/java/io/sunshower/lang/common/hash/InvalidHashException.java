@@ -1,8 +1,6 @@
 package io.sunshower.lang.common.hash;
 
-/**
- * Created by haswell on 5/25/16.
- */
+
 public class InvalidHashException extends RuntimeException {
 
     public InvalidHashException() {

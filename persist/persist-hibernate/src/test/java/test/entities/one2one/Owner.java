@@ -5,9 +5,7 @@ import io.sunshower.persistence.core.DistributableEntity;
 
 import javax.persistence.*;
 
-/**
- * Created by haswell on 2/24/17.
- */
+
 
 @Entity
 @Table(name = "OWNER")

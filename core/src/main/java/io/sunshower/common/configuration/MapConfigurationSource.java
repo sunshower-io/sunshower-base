@@ -4,9 +4,7 @@ package io.sunshower.common.configuration;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
-/**
- * Created by haswell on 10/16/16.
- */
+
 public class MapConfigurationSource implements ConfigurationSource {
 
     final Map<String, String> source;

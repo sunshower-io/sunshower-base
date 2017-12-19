@@ -12,9 +12,7 @@ import java.util.stream.Stream;
 
 import static io.sunshower.lambda.Lazy.takeWhile;
 
-/**
- * Created by haswell on 3/23/16.
- */
+
 public class Reflect {
 
     private Reflect(){

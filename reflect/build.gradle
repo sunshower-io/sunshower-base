@@ -1,6 +1,8 @@
 
 
+
 dependencies {
+    
     compile project(':lang')
     compile project(':lambda')
 
@@ -11,4 +13,5 @@ dependencies {
 
 
     testCompile 'junit:junit'
+    testCompile 'org.junit.platform:junit-platform-runner'
 }

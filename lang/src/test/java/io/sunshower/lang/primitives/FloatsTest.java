@@ -1,14 +1,15 @@
 package io.sunshower.lang.primitives;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
 
 import java.util.Arrays;
 
 import static org.junit.Assert.*;
 
-/**
- * Created by haswell on 4/29/16.
- */
+
+@RunWith(JUnitPlatform.class)
 public class FloatsTest {
 
 

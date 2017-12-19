@@ -4,11 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.*;
 
-/**
- *
- * @param <T>
- * @param <U>
- */
+
 
 @MappedSuperclass
 public abstract class HierarchichalEntity<
@@ -58,15 +54,9 @@ public abstract class HierarchichalEntity<
         return children().add(child);
     }
 
-    /**
-     *
-     * @return
-     */
+    
     protected abstract Set<U> children();
 
-    /**
-     *
-     * @param children
-     */
+    
     protected abstract void setChildren(Set<U> children);
 }

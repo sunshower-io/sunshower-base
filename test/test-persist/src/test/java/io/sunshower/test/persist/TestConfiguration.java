@@ -8,9 +8,7 @@ import persist.test.TestService;
 import persist.test.TestServiceImpl;
 
 
-/**
- * Created by haswell on 11/17/16.
- */
+
 @Configuration
 @Import(HibernateTestCase.class)
 @Persistence(

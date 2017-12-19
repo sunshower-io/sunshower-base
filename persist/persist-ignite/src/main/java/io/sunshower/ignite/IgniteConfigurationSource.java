@@ -9,9 +9,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import javax.xml.bind.annotation.XmlValue;
 
-/**
- * Created by haswell on 5/2/17.
- */
+
 @ConfigurationProperties("ignite")
 public class IgniteConfigurationSource {
 

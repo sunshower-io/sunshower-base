@@ -2,9 +2,7 @@ package io.sunshower.lang.common;
 
 import javax.annotation.Nullable;
 
-/**
- * Created by haswell on 5/26/16.
- */
+
 public class Strings {
     private Strings() {
 

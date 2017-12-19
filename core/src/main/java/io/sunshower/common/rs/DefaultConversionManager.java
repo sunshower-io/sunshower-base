@@ -5,9 +5,7 @@ import org.eclipse.persistence.internal.oxm.XMLConversionManager;
 
 import java.util.UUID;
 
-/**
- * Created by haswell on 11/7/16.
- */
+
 public class DefaultConversionManager extends XMLConversionManager {
     private DefaultConversionManager() {
         super();

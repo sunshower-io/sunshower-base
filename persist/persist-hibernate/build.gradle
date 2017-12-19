@@ -9,7 +9,6 @@ dependencies {
     compile project(':persist:persist-core')
 
     testCompile 'com.h2database:h2'
-    testCompile 'io.sunshower.barometer.modules:jaxrs'
 
 
     compile 'org.aspectj:aspectjrt'
@@ -35,6 +34,9 @@ dependencies {
     compile 'org.apache.ignite:ignite-hibernate'
 
     testCompile('com.h2database:h2')
+    
+    testCompile 'org.springframework:spring-test'
+    testCompile project(':test:test-common')
     testCompile('org.postgresql:postgresql')
     testCompile 'org.springframework.boot:spring-boot-test'
     testCompile 'org.springframework.boot:spring-boot-starter'

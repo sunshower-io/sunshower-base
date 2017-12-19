@@ -13,9 +13,7 @@ import org.springframework.context.annotation.Configuration;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-/**
- * Created by haswell on 5/2/17.
- */
+
 @Configuration
 @EnableConfigurationProperties(IgniteConfigurationSource.class)
 public class IgniteNodeConfiguration {

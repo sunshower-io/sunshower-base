@@ -8,9 +8,7 @@ import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-/**
- * Created by haswell on 3/3/17.
- */
+
 @Entity
 @Indexed(index = "entity")
 @Table(name = "INDEXED_ENTITY")

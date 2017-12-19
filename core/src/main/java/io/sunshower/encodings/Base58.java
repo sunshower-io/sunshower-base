@@ -6,9 +6,7 @@ import java.util.Arrays;
 import java.util.BitSet;
 import java.util.HashSet;
 
-/**
- * Created by haswell on 7/17/17.
- */
+
 public class Base58 implements Encoding {
 
 

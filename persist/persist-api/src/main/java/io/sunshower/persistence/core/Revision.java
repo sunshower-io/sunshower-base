@@ -10,9 +10,7 @@ import java.util.UUID;
 import io.sunshower.common.Identifier;
 import io.sunshower.persist.Sequence;
 
-/**
- * Created by haswell on 2/25/17.
- */
+
 @Entity
 @Table(name = "REVISION")
 public class Revision extends AbstractEntity<Identifier> {

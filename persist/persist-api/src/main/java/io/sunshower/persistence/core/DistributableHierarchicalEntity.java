@@ -11,9 +11,7 @@ import io.sunshower.common.Identifier;
 import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.FieldBridge;
 
-/**
- * Created by haswell on 3/13/17.
- */
+
 @MappedSuperclass
 @IdClass(Identifier.class)
 @XmlRootElement(name = "hierarchical-entity")

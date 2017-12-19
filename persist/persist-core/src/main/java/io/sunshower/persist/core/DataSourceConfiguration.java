@@ -15,9 +15,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Logger;
 
-/**
- * Created by haswell on 10/16/16.
- */
+
 @Configuration
 @EnableConfigurationProperties(DatabaseConfigurationSource.class)
 public class DataSourceConfiguration {

@@ -3,9 +3,7 @@ package io.sunshower.persistence.core;
 import javax.persistence.MappedSuperclass;
 import java.util.Set;
 
-/**
- * Created by haswell on 3/27/17.
- */
+
 @MappedSuperclass
 public interface Taggable {
 

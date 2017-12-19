@@ -6,9 +6,7 @@ import org.hibernate.boot.spi.MetadataImplementor;
 import org.hibernate.boot.spi.SessionFactoryBuilderFactory;
 import org.hibernate.boot.spi.SessionFactoryBuilderImplementor;
 
-/**
- * Created by haswell on 10/17/17.
- */
+
 public class TypeRegistrationBuilderFactory implements SessionFactoryBuilderFactory {
     @Override
     public SessionFactoryBuilder getSessionFactoryBuilder(

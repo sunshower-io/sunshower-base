@@ -5,9 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-/**
- * Created by haswell on 2/24/17.
- */
+
 @Entity
 @Table(name = "TAG")
 public class Tag {

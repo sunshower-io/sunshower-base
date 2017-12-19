@@ -19,9 +19,7 @@ import java.lang.reflect.Field;
 
 import static java.lang.String.format;
 
-/**
- * Created by haswell on 3/3/17.
- */
+
 public class FullTextPostProcessor implements BeanPostProcessor, ApplicationContextAware {
 
 
@@ -74,7 +72,7 @@ public class FullTextPostProcessor implements BeanPostProcessor, ApplicationCont
     }
 
     private void setUnconditionally(Class<?> injectedClass, Object bean, Field field, String beanName) throws IllegalAccessException, NoSuchFieldException {
-//        final Field actualField = injectedClass.getDeclaredField(field.getName());
+
         field.setAccessible(true);
         FullTextEntityManager fullTextEntityManager =
                 Search.getFullTextEntityManager(entityManagerFactory.createEntityManager());

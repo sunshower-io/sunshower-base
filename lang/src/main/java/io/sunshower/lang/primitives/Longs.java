@@ -1,8 +1,6 @@
 package io.sunshower.lang.primitives;
 
-/**
- * Created by haswell on 4/29/16.
- */
+
 public class Longs {
 
     public static byte[] toByteArray(long[] longs) {

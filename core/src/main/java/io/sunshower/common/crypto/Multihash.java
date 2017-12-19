@@ -1,8 +1,8 @@
 package io.sunshower.common.crypto;
 
-/**
- * Created by haswell on 11/8/16.
- */
+
+
+import io.sunshower.encodings.Base58;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -134,7 +134,7 @@ public class Multihash implements Serializable {
     }
 
     public String toBase58() {
-        return Base58.encode(toBytes());
+        return Base58.getInstance(Base58.Alphabets.Default).encode(toBytes());
     }
 
     public static Multihash fromHex(String hex) {
@@ -147,6 +147,6 @@ public class Multihash implements Serializable {
     }
 
     public static Multihash fromBase58(String base58) {
-        return new Multihash(Base58.decode(base58));
+        return new Multihash(Base58.getInstance(Base58.Alphabets.Default).decode(base58));
     }
 }

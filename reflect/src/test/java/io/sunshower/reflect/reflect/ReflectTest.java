@@ -1,11 +1,10 @@
 package io.sunshower.reflect.reflect;
-
-import io.sunshower.arcus.reflect.InstantiationException;
-import io.sunshower.arcus.reflect.Reflect;
 import io.sunshower.lambda.Option;
 import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
 
 import java.lang.annotation.Annotation;
 import java.lang.annotation.Retention;
@@ -17,19 +16,18 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static io.sunshower.arcus.reflect.Reflect.instantiate;
+import static io.sunshower.reflect.reflect.Reflect.instantiate;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
-/**
- * Created by haswell on 3/23/16.
- */
+@RunWith(JUnitPlatform.class)
 public class ReflectTest {
 
 
     @Test
     public void ensureReflectConstructorIsInaccessible() throws Exception {
         try {
-            Constructor ctor = io.sunshower.arcus.reflect.Reflect.class.getDeclaredConstructor();
+            Constructor ctor = io.sunshower.reflect.reflect.Reflect.class.getDeclaredConstructor();
             ctor.setAccessible(true);
             ctor.newInstance();
         } catch(InvocationTargetException ex) {
@@ -40,7 +38,7 @@ public class ReflectTest {
     @Test
     public void ensureStreamCollectsSingleType() {
         class A{}
-        List<Class<?>> types = io.sunshower.arcus.reflect.Reflect
+        List<Class<?>> types = io.sunshower.reflect.reflect.Reflect
                 .linearSupertypes(A.class).collect(Collectors.toList());
         Assert.assertThat(types.contains(A.class), CoreMatchers.is(true));
         Assert.assertThat(types.size(), CoreMatchers.is(2));
@@ -56,7 +54,7 @@ public class ReflectTest {
 
         }
 
-        List<Annotation> a = io.sunshower.arcus.reflect.Reflect.mapOverHierarchy(A.class,
+        List<Annotation> a = io.sunshower.reflect.reflect.Reflect.mapOverHierarchy(A.class,
                 i -> Option.of(i.getAnnotation(Uninherited.class)))
                 .collect(Collectors.toList());
         Assert.assertThat(a.size(), CoreMatchers.is(1));
@@ -68,7 +66,7 @@ public class ReflectTest {
         class A { }
         class B extends A {}
 
-        HashSet<Uninherited> collect = io.sunshower.arcus.reflect.Reflect.mapOverHierarchy(
+        HashSet<Uninherited> collect = io.sunshower.reflect.reflect.Reflect.mapOverHierarchy(
                 B.class, i -> Option.of(i.getAnnotation(Uninherited.class)))
                 .collect(Collectors.toCollection(HashSet::new));
         Assert.assertThat(collect.size(), CoreMatchers.is(1));
@@ -80,7 +78,7 @@ public class ReflectTest {
         class A implements UninheritedIface {}
 
 
-        HashSet<Uninherited> collect = io.sunshower.arcus.reflect.Reflect.mapOverHierarchy(
+        HashSet<Uninherited> collect = io.sunshower.reflect.reflect.Reflect.mapOverHierarchy(
                 A.class, i -> Option.of(i.getAnnotation(Uninherited.class)))
                 .collect(Collectors.toCollection(HashSet::new));
         Assert.assertThat(collect.size(), CoreMatchers.is(1));
@@ -93,7 +91,7 @@ public class ReflectTest {
         class B extends A{}
 
 
-        HashSet<Uninherited> collect = io.sunshower.arcus.reflect.Reflect.mapOverHierarchy(
+        HashSet<Uninherited> collect = io.sunshower.reflect.reflect.Reflect.mapOverHierarchy(
                 B.class, i -> Option.of(i.getAnnotation(Uninherited.class)))
                 .collect(Collectors.toCollection(HashSet::new));
         Assert.assertThat(collect.size(), CoreMatchers.is(1));
@@ -115,29 +113,35 @@ public class ReflectTest {
         Assert.assertThat(collect, CoreMatchers.is(Arrays.asList("b", "", "a", "", "test")));
     }
 
-    @Test(expected = io.sunshower.arcus.reflect.InstantiationException.class)
+    @Test
     public void ensureReflectCannotInstantiateNonStaticClass() {
         class A {}
-        instantiate(A.class);
+        assertThrows(
+                io.sunshower.reflect.reflect.InstantiationException.class, 
+                () -> instantiate(A.class));
     }
 
-    @Test(expected = io.sunshower.arcus.reflect.InstantiationException.class)
+    @Test
     public void ensureAttemptingToInstantiateNonInnerClassWithPrivateMethodThrowsException() {
-        instantiate(PrivateConstructor.class);
+        assertThrows(
+                io.sunshower.reflect.reflect.InstantiationException.class, () -> instantiate(PrivateConstructor.class));
     }
 
     @Test
     public void ensureConstructorThrowingExceptionPassesCorrectException() {
         try {
             instantiate(ConstructorThrowsException.class);
-        } catch(io.sunshower.arcus.reflect.InstantiationException e)  {
+        } catch(io.sunshower.reflect.reflect.InstantiationException e)  {
             Assert.assertThat(e.getCause().getMessage(), CoreMatchers.is("woah"));
         }
     }
 
-    @Test(expected = InstantiationException.class)
+    @Test
     public void ensureInstantiatingInterfaceFails() {
-        instantiate(AbstractClass.class);
+        assertThrows(
+                InstantiationException.class, 
+                () -> instantiate(AbstractClass.class)
+        );
     }
 
 

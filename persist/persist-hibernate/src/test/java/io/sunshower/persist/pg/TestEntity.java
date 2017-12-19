@@ -2,9 +2,7 @@ package io.sunshower.persist.pg;
 
 import javax.persistence.*;
 
-/**
- * Created by haswell on 5/3/17.
- */
+
 @Entity
 @Table(name = "FRAP")
 public class TestEntity {

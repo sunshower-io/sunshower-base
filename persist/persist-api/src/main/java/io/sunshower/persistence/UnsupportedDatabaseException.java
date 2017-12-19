@@ -1,8 +1,6 @@
 package io.sunshower.persistence;
 
-/**
- * Created by haswell on 10/17/16.
- */
+
 public class UnsupportedDatabaseException extends RuntimeException {
 
     public UnsupportedDatabaseException() {

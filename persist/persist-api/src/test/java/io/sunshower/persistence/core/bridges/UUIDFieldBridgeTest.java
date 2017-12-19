@@ -1,13 +1,14 @@
 package io.sunshower.persistence.core.bridges;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
 
 import java.util.UUID;
 import java.nio.ByteBuffer;
 
-/**
- * Created by haswell on 4/12/17.
- */
+
+@RunWith(JUnitPlatform.class)
 public class UUIDFieldBridgeTest {
 
 

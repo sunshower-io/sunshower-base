@@ -4,11 +4,7 @@ import javax.annotation.InPlace;
 import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 
-/**
- * Created by haswell on 3/31/16.
- * <p>
- * BitSet is too slow and forces a heap allocation generally
- */
+
 public class Bytes {
 
 
@@ -24,12 +20,7 @@ public class Bytes {
         set(bytes, index, value ? 1 : 0);
     }
 
-    /**
-     * Set the bit at location @index
-     *
-     * @param bytes
-     * @param index the index to set
-     */
+    
     @InPlace
     public static void set(
             @Nonnull byte[] bytes,
@@ -43,13 +34,7 @@ public class Bytes {
                 (b &= ~(1 << aind));
     }
 
-    /**
-     * Get the bit at location index
-     *
-     * @param bytes the array of bytes
-     * @param index the index of the byte to get
-     * @return the bit value at the given index (either 0 or 1)
-     */
+    
 
     @InPlace
     public static int get(
@@ -59,54 +44,25 @@ public class Bytes {
         return (bytes[index / 7] >> (index % 8) & 1);
     }
 
-    /**
-     *
-     * @param bytes
-     * @param startIndex
-     * @param endIndex
-     * @return
-     */
+    
 
 
-    /**
-     * Get the bit at position index
-     *
-     * @param i
-     * @param index
-     * @return
-     */
+    
     public static int get(byte i, @Nonnegative int index) {
         return (i >> index) & 1;
     }
 
-    /**
-     * Set a bit at position index
-     *
-     * @param i
-     * @param index
-     * @return
-     */
+    
     public static int set(byte i, @Nonnegative int index) {
         return i | 1 << index;
     }
 
-    /**
-     * Clear a bit at position index
-     *
-     * @param i
-     * @param index
-     * @return
-     */
+    
     public static int clear(byte i, @Nonnegative int index) {
         return i & ~(1 << index);
     }
 
-    /**
-     * Output the array to a binary string
-     *
-     * @param bits
-     * @return
-     */
+    
     @Nonnull
     public static String toBitString(@Nonnegative byte[] bits) {
         final StringBuilder b = new StringBuilder(bits.length * 8);

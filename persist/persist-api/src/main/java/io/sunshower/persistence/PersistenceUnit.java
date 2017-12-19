@@ -10,9 +10,7 @@ import javax.inject.Inject;
 import java.util.*;
 import java.util.stream.Collectors;
 
-/**
- * Created by haswell on 11/16/16.
- */
+
 public class PersistenceUnit {
     private final Dialect dialect;
     private final Map<String, PersistenceConfiguration> configurations;

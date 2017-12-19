@@ -2,9 +2,7 @@ package io.sunshower.common.io;
 
 import java.io.*;
 
-/**
- * Created by haswell on 3/20/17.
- */
+
 public class Bytes {
 
     public static byte[] read(File file) throws IOException {

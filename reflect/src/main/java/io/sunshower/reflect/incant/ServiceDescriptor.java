@@ -4,9 +4,7 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Collection;
 
-/**
- * Created by haswell on 4/10/16.
- */
+
 public final class ServiceDescriptor<T> extends LazyPropertyAware {
 
 

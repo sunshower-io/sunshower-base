@@ -5,9 +5,7 @@ import io.sunshower.common.Identifiers;
 import org.hibernate.type.descriptor.WrapperOptions;
 import org.hibernate.type.descriptor.java.AbstractTypeDescriptor;
 
-/**
- * Created by haswell on 10/17/17.
- */
+
 public class FlakeSQLTypeDescriptor extends AbstractTypeDescriptor<Identifier> {
 
     

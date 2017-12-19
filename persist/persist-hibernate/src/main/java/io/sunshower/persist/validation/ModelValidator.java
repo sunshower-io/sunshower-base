@@ -10,9 +10,7 @@ import org.springframework.validation.Validator;
 import javax.validation.*;
 import java.util.Set;
 
-/**
- * Created by haswell on 2/26/17.
- */
+
 public class ModelValidator implements
         Validator,
         ConstraintValidatorFactory,

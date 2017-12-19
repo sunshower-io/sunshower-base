@@ -1,14 +1,13 @@
 package io.sunshower.common.crypto;
 
-import io.sunshower.barometer.jaxrs.SerializationAware;
-import io.sunshower.barometer.jaxrs.SerializationTestCase;
-import org.junit.Test;
+import io.sunshower.test.common.SerializationAware;
+import io.sunshower.test.common.SerializationTestCase;
+import org.junit.jupiter.api.Test;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
 
-import static org.junit.Assert.*;
 
-/**
- * Created by haswell on 1/27/17.
- */
+@RunWith(JUnitPlatform.class)
 public class MultihashTest extends SerializationTestCase {
 
     public MultihashTest() {
@@ -18,8 +17,6 @@ public class MultihashTest extends SerializationTestCase {
     @Test
     public void ensureDocumentLooksCorrect() {
         System.out.println(this.write(new Hashes.SHA256().compute("fuckwidget".getBytes())));
-
-
     }
 
 }

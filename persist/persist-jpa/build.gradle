@@ -7,6 +7,8 @@ dependencies {
     compile 'org.hibernate:hibernate-validator'
     compile 'org.springframework.boot:spring-boot'
 
+    testCompile 'org.springframework:spring-test'
+    testCompile 'org.junit.platform:junit-platform-runner'
     testCompile('com.h2database:h2')
     testCompile('org.postgresql:postgresql')
     testCompile 'org.springframework.boot:spring-boot-test'

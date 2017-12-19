@@ -1,20 +1,21 @@
 package io.sunshower.lambda;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
 
 
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static io.sunshower.lambda.Option.none;
 import static io.sunshower.lambda.Option.some;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
-/**
- * Created by haswell on 3/23/16.
- */
+
+@RunWith(JUnitPlatform.class)
 public class OptionTest {
 
 
@@ -186,9 +187,9 @@ public class OptionTest {
         assertTrue(new Option.Some<>("a").retainAll(Arrays.asList("a")));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void ensureClearThrowsUnsupportedOperationException() {
-        new Option.Some<>("a").clear();
+        assertThrows(UnsupportedOperationException.class, () -> new Option.Some<>("a").clear());
     }
 
     @Test
@@ -227,9 +228,9 @@ public class OptionTest {
         assertTrue(none().isNone());
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void ensureNoneGetThrowsNoSuchElementException() {
-        none().get();
+        assertThrows(NoSuchElementException.class, () -> none().get());
     }
 
     @Test
@@ -284,9 +285,9 @@ public class OptionTest {
         assertThat(none().iterator().hasNext(), is(false));
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void ensureNoneIteratorNextThrowsException() {
-        none().iterator().next();
+        assertThrows(NoSuchElementException.class, () -> none().iterator().next());
     }
 
     @Test
@@ -311,9 +312,9 @@ public class OptionTest {
         assertFalse(none().retainAll(Arrays.asList("a")));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void ensureNoneClearThrowsUnsupportedOperationException() {
-        none().clear();
+        assertThrows(UnsupportedOperationException.class, () -> none().clear());
     }
 
     @Test
@@ -347,11 +348,11 @@ public class OptionTest {
         some("a").addAll(Arrays.asList("a"));
     }
 
-    @Test(expected = NoSuchElementException.class)
+    @Test
     public void ensureSomeIteratorThrowsNoSuchElementExceptionWhenCalledTooManyTimes() {
         Iterator<String> a = some("a").iterator();
         a.next();
-        a.next();
+        assertThrows(NoSuchElementException.class, a::next);
     }
 
     @Test

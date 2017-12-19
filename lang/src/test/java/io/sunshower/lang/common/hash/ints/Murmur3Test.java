@@ -2,8 +2,9 @@ package io.sunshower.lang.common.hash.ints;
 
 import io.sunshower.lang.common.hash.HashFunction;
 import io.sunshower.lang.common.hash.integers.Murmur3;
-import io.sunshower.lang.common.hash.integers.StringHash;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
 
 import java.util.Random;
 
@@ -11,9 +12,8 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.*;
 
-/**
- * Created by haswell on 4/4/16.
- */
+
+@RunWith(JUnitPlatform.class)
 public class Murmur3Test {
 
     @Test

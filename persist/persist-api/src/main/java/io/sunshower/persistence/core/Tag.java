@@ -4,9 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-/**
- * Created by haswell on 3/27/17.
- */
+
 
 @Entity
 @Table(name = "TAG")

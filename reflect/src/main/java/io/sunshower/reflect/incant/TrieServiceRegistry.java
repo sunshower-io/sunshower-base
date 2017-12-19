@@ -4,9 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * Created by haswell on 4/10/16.
- */
+
 public class TrieServiceRegistry implements InvocationContext {
 
     private final OperationScanner scanner;

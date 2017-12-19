@@ -2,18 +2,22 @@ package io.sunshower.common.crypto;
 
 
 
+import io.sunshower.encodings.Base58;
+import io.sunshower.encodings.Encoding;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.EnumMap;
 import java.util.Map;
 
-/**
- * Created by haswell on 11/17/16.
- */
+
 public class Hashes {
+    static final Encoding encoding;
+    
     static final Map<Multihash.Type, HashFunction> hashes;
 
     static {
+        encoding = Base58.getInstance(Base58.Alphabets.Default);
         hashes = new EnumMap<>(Multihash.Type.class) ;
         hashes.put(Multihash.Type.SHA_2_256, new SHA256());
         hashes.put(Multihash.Type.SHA_2_512, new SHA512());
@@ -45,9 +49,10 @@ public class Hashes {
                     final byte[] values = o == null ?
                             "".getBytes() : o.toString().getBytes();
 
-                    b.append(Base58.encode(values));
+                    
+                    b.append(encoding.encode(values));
                 }
-                return Base58.encode(digest.digest(b.toString().getBytes()));
+                return encoding.encode(digest.digest(b.toString().getBytes()));
             } catch (NoSuchAlgorithmException e) {
                 throw new RuntimeException(e);
             }
@@ -75,9 +80,9 @@ public class Hashes {
                     final byte[] values = o == null ?
                             "".getBytes() : o.toString().getBytes();
 
-                    b.append(Base58.encode(values));
+                    b.append(encoding.encode(values));
                 }
-                return Base58.encode(digest.digest(b.toString().getBytes()));
+                return encoding.encode(digest.digest(b.toString().getBytes()));
             } catch (NoSuchAlgorithmException e) {
                 throw new RuntimeException(e);
             }

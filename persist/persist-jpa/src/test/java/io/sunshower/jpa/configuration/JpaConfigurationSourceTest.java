@@ -2,11 +2,14 @@ package io.sunshower.jpa.configuration;
 
 import io.sunshower.persist.core.DataSourceConfiguration;
 import io.sunshower.persistence.annotations.Persistence;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.platform.runner.JUnitPlatform;
 import org.junit.runner.RunWith;
 import io.sunshower.jpa.flyway.FlywayConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.inject.Inject;
@@ -20,10 +23,9 @@ import java.sql.SQLException;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-/**
- * Created by haswell on 5/2/17.
- */
-@RunWith(SpringRunner.class)
+
+
+@RunWith(JUnitPlatform.class)
 @ContextConfiguration(
         classes = {
                 FlywayConfiguration.class,
@@ -31,6 +33,7 @@ import static org.junit.Assert.assertThat;
                 H2TestConfiguration.class
         }
 )
+@ExtendWith(SpringExtension.class)
 @SpringBootTest
 public class JpaConfigurationSourceTest {
 

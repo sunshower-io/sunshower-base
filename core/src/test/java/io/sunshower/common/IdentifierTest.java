@@ -1,11 +1,14 @@
 package io.sunshower.common;
 
-import io.sunshower.barometer.jaxrs.SerializationAware;
-import io.sunshower.barometer.jaxrs.SerializationTestCase;
-import io.sunshower.common.crypto.Base58;
+import io.sunshower.encodings.Base58;
+import io.sunshower.encodings.Encoding;
 import io.sunshower.persist.Identifiers;
 import io.sunshower.persist.Sequence;
-import org.junit.Test;
+import io.sunshower.test.common.SerializationAware;
+import io.sunshower.test.common.SerializationTestCase;
+import org.junit.jupiter.api.Test;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,9 +17,8 @@ import java.util.UUID;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
-/**
- * Created by haswell on 3/26/17.
- */
+
+@RunWith(JUnitPlatform.class)
 public class IdentifierTest extends SerializationTestCase {
 
     final Sequence<Identifier> sequence = Identifiers.newSequence();
@@ -117,7 +119,8 @@ public class IdentifierTest extends SerializationTestCase {
     public void ensureDecodingAndEncodingWorks() {
 
         String value = "6Rwk8SVHrW6CQy4LLsfjBw";
-        String encode = Base58.encode(Base58.decode(value));
+        final Encoding encoding = Base58.getInstance(Base58.Alphabets.Default);
+        String encode = encoding.encode(encoding.decode(value));
         assertThat(value, is(encode));
 
     }

@@ -1,17 +1,18 @@
 package io.sunshower.persistence.core;
 
 import io.sunshower.persist.Sequence;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.*;
 
 import io.sunshower.common.Identifier;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
 
-/**
- * Created by haswell on 2/26/17.
- */
+
+@RunWith(JUnitPlatform.class)
 public class AbstractEntityTest {
 
 

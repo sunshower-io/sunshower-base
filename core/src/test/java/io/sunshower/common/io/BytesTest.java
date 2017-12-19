@@ -1,6 +1,8 @@
 package io.sunshower.common.io;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -8,9 +10,8 @@ import java.io.IOException;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
-/**
- * Created by haswell on 3/20/17.
- */
+
+@RunWith(JUnitPlatform.class)
 public class BytesTest {
 
     @Test

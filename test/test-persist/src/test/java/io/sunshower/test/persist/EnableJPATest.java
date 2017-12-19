@@ -19,9 +19,7 @@ import javax.persistence.PersistenceContext;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
 
-/**
- * Created by haswell on 11/17/16.
- */
+
 @Configuration
 @Transactional
 @SpringBootTest

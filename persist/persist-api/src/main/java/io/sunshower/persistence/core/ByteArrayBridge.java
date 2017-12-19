@@ -5,9 +5,7 @@ import io.sunshower.encodings.Base58;
 import io.sunshower.encodings.Encoding;
 import org.hibernate.search.bridge.TwoWayStringBridge;
 
-/**
- * Created by haswell on 10/17/17.
- */
+
 public class ByteArrayBridge implements TwoWayStringBridge {
     static final Encoding encoding = Base58.getInstance(Base58.Alphabets.Default);
 

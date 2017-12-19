@@ -4,9 +4,7 @@ import io.sunshower.lang.common.Strings;
 
 import java.util.function.Predicate;
 
-/**
- * Created by haswell on 5/26/16.
- */
+
 public class VersionRange {
 
 

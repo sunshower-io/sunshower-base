@@ -1,9 +1,11 @@
 package io.sunshower.persist;
 
-import io.sunshower.barometer.jaxrs.SerializationAware;
-import io.sunshower.barometer.jaxrs.SerializationTestCase;
 import io.sunshower.common.Identifier;
-import org.junit.Test;
+import io.sunshower.test.common.SerializationAware;
+import io.sunshower.test.common.SerializationTestCase;
+import org.junit.jupiter.api.Test;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
 
 import java.time.Clock;
 import java.util.*;
@@ -11,9 +13,8 @@ import java.util.*;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
-/**
- * Created by haswell on 10/16/17.
- */
+
+@RunWith(JUnitPlatform.class)
 public class IdentifierTest extends SerializationTestCase {
     
     public IdentifierTest() {

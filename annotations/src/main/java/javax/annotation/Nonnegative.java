@@ -8,7 +8,7 @@ import javax.annotation.meta.TypeQualifier;
 import javax.annotation.meta.TypeQualifierValidator;
 import javax.annotation.meta.When;
 
-/** Used to annotate a value that should only contain nonnegative values */
+
 @Documented
 @TypeQualifier(applicableTo = Number.class)
 @Retention(RetentionPolicy.RUNTIME)

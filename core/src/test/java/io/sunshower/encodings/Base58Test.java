@@ -1,15 +1,16 @@
 package io.sunshower.encodings;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
 
 import java.util.UUID;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
-/**
- * Created by haswell on 10/16/17.
- */
+
+@RunWith(JUnitPlatform.class)
 public class Base58Test {
 
 

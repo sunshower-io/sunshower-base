@@ -6,9 +6,7 @@ import io.sunshower.persistence.core.DistributableEntity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-/**
- * Created by haswell on 2/24/17.
- */
+
 @Entity
 @Table(name = "OWNEE")
 @Access(AccessType.FIELD)
