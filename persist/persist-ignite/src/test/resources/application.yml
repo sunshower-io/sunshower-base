@@ -1,0 +1,8 @@
+ignite:
+  fabric-name: test
+  discovery:
+    mode: vm-local
+  memory:
+    mode: OFFHEAP_TIERED
+    max: 1000000000
+

@@ -1,0 +1,42 @@
+dependencies {
+    compile 'javax.inject:javax.inject'
+    compile project(':persist:persist-ignite')
+
+    compile 'org.hibernate:hibernate-validator'
+
+
+    compile project(':persist:persist-jpa')
+    compile project(':persist:persist-core')
+
+    testCompile 'com.h2database:h2'
+    testCompile 'io.sunshower.barometer.modules:jaxrs'
+
+
+    compile 'org.aspectj:aspectjrt'
+    compile 'org.aspectj:aspectjweaver'
+    compile 'org.springframework:spring-aop'
+
+    compile 'com.zaxxer:HikariCP'
+    compile 'org.flywaydb:flyway-core'
+    compile('org.hibernate:hibernate-core')
+
+    compile 'org.glassfish:javax.el'
+
+    compile 'org.apache.lucene:lucene-backward-codecs'
+    compile 'org.apache.lucene:lucene-core'
+    compile 'org.apache.lucene:lucene-codecs'
+
+    compile('org.hibernate:hibernate-search-orm')
+    compile('org.hibernate:hibernate-entitymanager')
+    compile('org.hibernate.javax.persistence:hibernate-jpa-2.1-api')
+
+    compile 'org.springframework.boot:spring-boot'
+
+    compile 'org.apache.ignite:ignite-hibernate'
+
+    testCompile('com.h2database:h2')
+    testCompile('org.postgresql:postgresql')
+    testCompile 'org.springframework.boot:spring-boot-test'
+    testCompile 'org.springframework.boot:spring-boot-starter'
+
+}

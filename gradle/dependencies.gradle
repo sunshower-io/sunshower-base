@@ -1,0 +1,51 @@
+apply plugin: 'io.spring.dependency-management'
+
+def repos = [
+        'http://repo.spring.io/snapshot',
+        "http://repo.spring.io/libs-milestone",
+        "$artifactory_contextUrl/libs-release",
+        "$artifactory_contextUrl/libs-snapshot",
+        "http://oss.sonatype.org/content/repositories/snapshots"
+]
+
+
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+
+    repos.each { repo ->
+        maven { url "$repo" }
+    }
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "io.sunshower.common:bom-imported:${version}"
+    }
+}
+
+configurations {
+    wildfly
+}
+
+
+allprojects {
+    apply plugin: 'nebula.optional-base'
+
+    plugins.withType(JavaPlugin) {
+        dependencies {
+            compile 'javax.ws.rs:javax.ws.rs-api'
+            compile 'org.eclipse.persistence:org.eclipse.persistence.moxy'
+            compile 'org.hibernate.javax.persistence:hibernate-jpa-2.1-api'
+
+
+            testCompile('org.mockito:mockito-core')
+            testCompile('org.junit.jupiter:junit-jupiter-engine')
+            testCompile('org.junit.vintage:junit-vintage-engine')
+        }
+    }
+
+}
+
+

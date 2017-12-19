@@ -1,0 +1,19 @@
+
+dependencies {
+    compile 'com.zaxxer:HikariCP'
+    compile project(':persist:persist-api')
+
+    compile project(':core')
+
+
+
+
+
+    compile 'org.hibernate:hibernate-validator'
+    compile 'org.springframework.boot:spring-boot'
+
+    testCompile('com.h2database:h2')
+    testCompile('org.postgresql:postgresql')
+    testCompile 'org.springframework.boot:spring-boot-test'
+    testCompile 'org.springframework.boot:spring-boot-starter'
+}

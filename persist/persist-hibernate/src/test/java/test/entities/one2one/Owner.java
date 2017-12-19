@@ -1,0 +1,54 @@
+package test.entities.one2one;
+
+import io.sunshower.common.Identifier;
+import io.sunshower.persistence.core.DistributableEntity;
+
+import javax.persistence.*;
+
+/**
+ * Created by haswell on 2/24/17.
+ */
+
+@Entity
+@Table(name = "OWNER")
+@Access(AccessType.FIELD)
+public class Owner extends DistributableEntity {
+
+
+    @OneToOne(
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL
+    )
+    @JoinColumns({
+            @JoinColumn(
+                    name = "ownee_id",
+                    insertable = false,
+                    updatable = false,
+                    referencedColumnName = "id"
+            )
+    })
+    private Ownee ownee;
+
+    @Basic
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+
+
+    public Ownee getOwnee() {
+        return ownee;
+    }
+
+    public void setOwnee(Ownee ownee) {
+        ownee.setOwner(this);
+        this.ownee = ownee;
+    }
+
+}

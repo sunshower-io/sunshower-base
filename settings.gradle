@@ -1,0 +1,16 @@
+include(
+        'core',
+        'annotations',
+        'lambda',
+        'lang',
+        'reflect',
+        'test',
+        'test:test-common',
+        'test:test-core',
+        'test:test-persist',
+        'persist:persist-api',
+        'persist:persist-core',
+        'persist:persist-hibernate',
+        'persist:persist-ignite',
+        'persist:persist-jpa'
+)
