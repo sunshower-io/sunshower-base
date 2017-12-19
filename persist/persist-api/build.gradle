@@ -1,7 +1,7 @@
 dependencies {
     compile 'javax.inject:javax.inject'
     compile 'org.springframework:spring-context'
-    compile project(':core')
+    compile project(':common:core')
     compile 'org.junit.platform:junit-platform-runner'
     compile('org.hibernate:hibernate-search-orm')
 }

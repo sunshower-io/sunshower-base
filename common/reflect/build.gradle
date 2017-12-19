@@ -3,8 +3,8 @@
 
 dependencies {
     
-    compile project(':lang')
-    compile project(':lambda')
+    compile project(':common:lang')
+    compile project(':common:lambda')
 
 
 

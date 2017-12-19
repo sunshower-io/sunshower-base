@@ -3,7 +3,7 @@ dependencies {
     compile 'com.zaxxer:HikariCP'
     compile project(':persist:persist-api')
 
-    compile project(':core')
+    compile project(':common:core')
 
 
 
