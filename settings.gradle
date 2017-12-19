@@ -6,6 +6,7 @@ include(
         'common:lang',
         'common:reflect',
         'test',
+        'test:test-api',
         'test:test-common',
         'test:test-core',
         'test:test-persist',
