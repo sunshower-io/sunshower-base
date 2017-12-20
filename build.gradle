@@ -1,23 +1,22 @@
 buildscript {
     apply from: 'gradle/buildscript.gradle', to: buildscript
 }
-apply plugin: 'build-dashboard'
-
-buildDashboard {
-    reports {
-        html {
-            destination file("build/dashboard")
-        }
-    }
-}
+apply plugin: 'nebula-aggregate-javadocs'
 
 allprojects {
     apply plugin: 'java'
     apply plugin: 'maven-publish'
+    apply plugin: 'project-report'
+    apply plugin: 'com.bmuschko.clover'
     apply plugin: 'io.spring.dependency-management'
-
-
-
+    
+    clover {
+        report {
+            html = true
+        }
+    }
+    
+    
     def repos = [
             'https://mymavenrepo.com/repo/Bwb7CZ1J9Ud5KCkBvnhI',
             'http://repo.spring.io/snapshot',
@@ -33,6 +32,10 @@ allprojects {
         from sourceSets.main.allSource
     }
 
+    
+    dependencies {
+        clover 'org.openclover:clover:4.2.0'
+    }
 
     repositories {
         mavenLocal()
@@ -103,3 +106,6 @@ allprojects {
     }
 
 }
+
+defaultTasks 'clean', 'build', 'cloverAggregateReports', 'aggregateJavaDocs'
+
