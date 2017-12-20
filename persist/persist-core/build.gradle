@@ -9,7 +9,7 @@ dependencies {
 
 
 
-    compile 'org.hibernate:hibernate-validator'
+    compile 'org.hibernate.validator:hibernate-validator'
     compile 'org.springframework.boot:spring-boot'
 
     testCompile('com.h2database:h2')

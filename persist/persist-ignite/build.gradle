@@ -2,7 +2,7 @@ dependencies {
 
     compile 'javax.inject:javax.inject'
     compile 'org.hibernate:hibernate-core'
-    compile 'org.hibernate:hibernate-validator'
+    compile 'org.hibernate.validator:hibernate-validator'
     compile 'org.springframework:spring-context'
     compile 'org.springframework:spring-orm'
     compile 'org.springframework.boot:spring-boot'

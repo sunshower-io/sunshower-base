@@ -8,7 +8,7 @@ dependencies {
 
 
 
-    compile 'net.bytebuddy:byte-buddy', optional
+    compile 'net.bytebuddy:byte-buddy'
 
 
 

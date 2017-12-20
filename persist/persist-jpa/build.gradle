@@ -4,7 +4,7 @@ dependencies {
     compile 'org.flywaydb:flyway-core'
 
 
-    compile 'org.hibernate:hibernate-validator'
+    compile 'org.hibernate.validator:hibernate-validator'
     compile 'org.springframework.boot:spring-boot'
 
     testCompile 'org.springframework:spring-test'

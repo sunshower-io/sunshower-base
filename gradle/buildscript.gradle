@@ -9,7 +9,6 @@ repositories {
 }
 
 dependencies {
-    classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4.0.0"
-    classpath "io.spring.gradle:dependency-management-plugin:0.6.1.RELEASE"
+    classpath "io.spring.gradle:dependency-management-plugin:1.0.4.RELEASE"
     classpath "com.netflix.nebula:gradle-extra-configurations-plugin:3.0.3"
 }
