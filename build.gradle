@@ -9,14 +9,14 @@ allprojects {
     apply plugin: 'project-report'
     apply plugin: 'com.bmuschko.clover'
     apply plugin: 'io.spring.dependency-management'
-    
+
     clover {
         report {
             html = true
         }
     }
-    
-    
+
+
     def repos = [
             'https://mymavenrepo.com/repo/Bwb7CZ1J9Ud5KCkBvnhI',
             'http://repo.spring.io/snapshot',
@@ -32,7 +32,7 @@ allprojects {
         from sourceSets.main.allSource
     }
 
-    
+
     dependencies {
         clover 'org.openclover:clover:4.2.0'
     }
@@ -101,11 +101,6 @@ allprojects {
                 artifact sourceJar {
                     classifier "sources"
                 }
-                
-                artifact archiveReports {
-                    classifier 'reports'
-                }
-                    
             }
         }
     }
@@ -113,12 +108,33 @@ allprojects {
 }
 
 
+publishing {
+    repositories {
+        maven {
+            url mavenRepositoryUrl
+
+            credentials {
+                username mavenRepositoryUsername
+                password mavenRepositoryPassword
+            }
+        }
+    }
+
+    publications {
+        maven(MavenPublication) {
+            artifact archiveReports {
+                classifier 'reports'
+            }
+        }
+    }
+}
+
 task archiveReports(type: Zip) {
     from "$buildDir/docs"
     include "/**/*"
-    
+
     from "$buildDir/reports/clover"
-    
+
     archiveName 'reports.zip'
 }
 
