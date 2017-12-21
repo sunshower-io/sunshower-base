@@ -2,40 +2,6 @@ buildscript {
     apply from: 'gradle/buildscript.gradle', to: buildscript
 }
 
-//allprojects {
-//    apply plugin: 'java'
-//}
-//
-//dependencies {
-//    compile group: 'org.eclipse.persistence', name: 'org.eclipse.persistence.moxy'
-//}
-//
-///**
-// * Subproject configurations
-// */
-//
-//subprojects {
-//    version = rootProject.version
-//
-//    apply plugin: 'java'
-//    apply plugin: 'nebula.optional-base'
-//    
-//    apply from: "$rootDir/gradle/jacoco.gradle"
-//    apply from: "$rootDir/gradle/publishing.gradle"
-//    apply from: "$rootDir/gradle/dependencies.gradle"
-//    
-//    dependencies {
-//        compile group: 'org.eclipse.persistence', name: 'org.eclipse.persistence.moxy'
-//        testCompile 'javax.mail:mail'
-//        testCompile('org.junit.platform:junit-platform-launcher')
-//    }
-//}
-//
-//task wrapper(type: Wrapper) {
-//    gradleVersion = gradleWrapperVersion
-//}
-//
-//
 
 allprojects {
     apply plugin: 'java'
@@ -126,5 +92,7 @@ allprojects {
             }
         }
     }
-
 }
+
+
+
