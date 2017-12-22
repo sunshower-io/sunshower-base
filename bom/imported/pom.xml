@@ -33,11 +33,7 @@
   </properties>
 
   <dependencyManagement>
-
-
     <dependencies>
-
-
       <dependency>
         <groupId>io.sunshower.env</groupId>
         <artifactId>hal-dependencies</artifactId>

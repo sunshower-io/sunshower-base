@@ -21,9 +21,9 @@ dependencies {
 
     compile 'org.glassfish:javax.el'
 
-    compile 'org.apache.lucene:lucene-backward-codecs'
     compile 'org.apache.lucene:lucene-core'
     compile 'org.apache.lucene:lucene-codecs'
+    compile 'org.apache.lucene:lucene-backward-codecs'
 
     compile('org.hibernate:hibernate-search-orm')
     compile('org.hibernate:hibernate-entitymanager')
