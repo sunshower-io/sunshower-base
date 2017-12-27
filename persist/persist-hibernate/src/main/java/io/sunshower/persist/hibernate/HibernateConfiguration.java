@@ -1,17 +1,12 @@
 package io.sunshower.persist.hibernate;
 
-import io.sunshower.common.configuration.ConfigurationSource;
 import io.sunshower.ignite.IgniteNodeConfiguration;
 import io.sunshower.persist.validation.ModelValidator;
-import io.sunshower.persistence.Dialect;
 import io.sunshower.persistence.PersistenceUnit;
-import io.sunshower.persistence.annotations.CacheMode;
 import org.apache.ignite.Ignite;
-import org.apache.ignite.configuration.IgniteConfiguration;
 import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.jpa.Search;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.*;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
