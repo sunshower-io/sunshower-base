@@ -29,7 +29,7 @@ public class Murmur3Test {
             final Murmur3 murmur3 = (Murmur3) HashFunction.murmur3(1341234);
             String testString = generate(100000);
             long t1 = System.currentTimeMillis();
-            for (int i = 0; i < 10000; ++i) {
+            for (int i = 0; i < 100; ++i) {
                 int j = murmur3.apply(testString);
             }
             long t2 = System.currentTimeMillis();
@@ -38,7 +38,7 @@ public class Murmur3Test {
 
             char[] ch = testString.toCharArray();
             t1 = System.currentTimeMillis();
-            for (int i = 0; i < 10000; ++i) {
+            for (int i = 0; i < 100; ++i) {
                 hashCode(ch);
             }
             t2 = System.currentTimeMillis();
