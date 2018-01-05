@@ -15,6 +15,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Logger;
 
+import static io.sunshower.persist.core.DataSourceConfigurations.toNative;
+import static io.sunshower.persist.core.DataSourceConfigurations.useLocation;
+
 
 @Configuration
 public class DataSourceConfiguration {
@@ -47,9 +50,9 @@ public class DataSourceConfiguration {
 
     @Bean
     public DataSource dataSource(DatabaseConfigurationSource cfg) throws NamingException {
-        if(cfg.useLocation()) {
+        if(useLocation(cfg)) {
             log.info("Starting JDBC data-source...");
-            final DataSource result = new HikariDataSource(cfg.toNative());
+            final DataSource result = new HikariDataSource(toNative(cfg));
             log.info("Successfully started data-source");
             return result;
         } else {

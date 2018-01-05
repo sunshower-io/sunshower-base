@@ -11,10 +11,6 @@ public interface DatabaseConfigurationSource {
     boolean baseline();
 
 
-    default boolean isBaseline() {
-        String version = version();
-        return baseline() && !(version == null || version.trim().isEmpty() || "-1".equals(version));
-    }
 
     String version();
 
@@ -26,32 +22,6 @@ public interface DatabaseConfigurationSource {
 
     String password();
 
-    default HikariConfig toNative() {
-        final HikariConfig cfg = new HikariConfig();
-        cfg.setJdbcUrl(url());
-        cfg.setUsername(username());
-        cfg.setPassword(password());
-        cfg.setDriverClassName(driverClass());
-        return cfg;
-    }
-
-
-    default boolean useLocation() {
-        return nullOrEmpty(jndiPath());
-    }
-
-    default boolean nullOrEmpty(String value) {
-        if (value == null || value.trim().equals("")) {
-            return true;
-        }
-        return false;
-    }
-
-    default void validate() {
-        if(!(nullOrEmpty(jndiPath()) || nullOrEmpty(username()))) {
-            throw new IllegalStateException("Only one of jndi-path or username may be set");
-        }
-    }
     
 
 

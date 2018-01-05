@@ -10,6 +10,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.inject.Inject;
 
+import static io.sunshower.persist.core.DataSourceConfigurations.isBaseline;
+import static io.sunshower.persist.core.DataSourceConfigurations.validate;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
@@ -27,7 +29,7 @@ public class DatabaseConfigurationSourceTest {
 
     @Test
     public void ensureBaselineIsRead() {
-        assertThat(source.isBaseline(), is(true));
+        assertThat(isBaseline(source), is(true));
     }
 
     @Test
@@ -37,7 +39,7 @@ public class DatabaseConfigurationSourceTest {
 
     @Test
     public void ensureValidationWorks() {
-        source.validate();
+        validate(source);
     }
 
 

@@ -4,6 +4,7 @@ jdbc:
   driverClass: org.h2.Driver
   baseline: true
   baselineVersion: 0
+  jndiPath: ""
 
 ignite:
   fabricName: sunshower-data-fabric
