@@ -1,4 +1,6 @@
 dependencies {
-//    compile project(":api:core-api")
-//    compile "io.sunshower.api:core-api"
+    compile project(':common:common-config')
+
+    compile 'org.springframework:spring-test'
+    compile 'org.springframework:spring-context'
 }

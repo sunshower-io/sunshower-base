@@ -1,10 +1,10 @@
 package io.sunshower.persist.core;
 
+import io.sunshower.test.common.TestConfigurationConfiguration;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.platform.runner.JUnitPlatform;
 import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -22,12 +22,12 @@ import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 
 
-@SpringBootTest
 @ActiveProfiles("postgres")
 @RunWith(JUnitPlatform.class)
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {
-        DataSourceConfiguration.class
+        DataSourceConfiguration.class,
+        TestConfigurationConfiguration.class
 })
 
 public class PostgresDataSourceConfigurationTest {
@@ -40,7 +40,7 @@ public class PostgresDataSourceConfigurationTest {
 
     @Test
     public void ensureUrlIsExpected() {
-        assertThat(source.getUrl(), is("jdbc:h2:mem:test;MODE=PostgreSQL;DB_CLOSE_DELAY=-1"));
+        assertThat(source.url(), is("jdbc:h2:mem:test;MODE=PostgreSQL;DB_CLOSE_DELAY=-1"));
     }
 
 

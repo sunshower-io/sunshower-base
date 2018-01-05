@@ -1,12 +1,12 @@
 jdbc:
   username: sa
   url: jdbc:h2:mem:frap;MODE=PostgreSQL;LOCK_MODE=0;MV_STORE=false;
-  driver-class: org.h2.Driver
+  driverClass: org.h2.Driver
   baseline: true
-  baseline-version: 0
+  baselineVersion: 0
 
 ignite:
-  fabric-name: sunshower-data-fabric
+  fabricName: sunshower-data-fabric
   discovery:
     mode: vm-local
   memory:
@@ -24,14 +24,14 @@ jpa:
       value: filesystem
     ddl:
       generate: false
-      show-sql: false
-      format-sql: false
+      showSql: false
+      formatSql: false
     cache:
       enabled: true
       provider: ignite
-      fabric-name: sunshower-data-fabric
-      enable-query-cache: true
-      generate-statistics: true
-      region-factory: org.apache.ignite.cache.hibernate.HibernateRegionFactory
-      release-mode: on-close
-      default-access-type: read-only
+      fabricName: sunshower-data-fabric
+      enableQueryCache: true
+      generateStatistics: true
+      regionFactory: org.apache.ignite.cache.hibernate.HibernateRegionFactory
+      releaseMode: on-close
+      defaultAccessType: read-only

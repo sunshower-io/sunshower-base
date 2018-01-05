@@ -7,9 +7,7 @@ dependencies {
     compile project(':persist:persist-hibernate')
     compile("org.hibernate:hibernate-core")
     compile("org.springframework:spring-test")
-    compile("org.hibernate:hibernate-entitymanager")
     compile("org.springframework.security:spring-security-test")
-    compile 'org.springframework.boot:spring-boot-test'
     compile 'org.yaml:snakeyaml'
     compile 'org.junit.platform:junit-platform-runner'
 }

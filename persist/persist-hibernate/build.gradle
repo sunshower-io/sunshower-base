@@ -7,6 +7,7 @@ dependencies {
 
     compile project(':persist:persist-jpa')
     compile project(':persist:persist-core')
+    compile project(':common:common-config')
 
     testCompile 'com.h2database:h2'
 

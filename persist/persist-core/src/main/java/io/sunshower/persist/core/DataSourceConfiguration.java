@@ -3,6 +3,7 @@ package io.sunshower.persist.core;
 import com.zaxxer.hikari.HikariDataSource;
 import io.sunshower.persistence.Dialect;
 import io.sunshower.persistence.UnsupportedDatabaseException;
+import org.cfg4j.provider.ConfigurationProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -19,6 +20,8 @@ import java.util.logging.Logger;
 public class DataSourceConfiguration {
 
     static final Logger log = Logger.getLogger(DataSourceConfiguration.class.getName());
+    
+    
     @Bean
     @Singleton
     public Dialect databaseDialect(DataSource dataSource) throws SQLException {
@@ -36,6 +39,11 @@ public class DataSourceConfiguration {
         }
     }
 
+    
+    @Bean
+    public DatabaseConfigurationSource databaseConfigurationSource(ConfigurationProvider provider) {
+        return provider.bind("jdbc", DatabaseConfigurationSource.class);
+    }
 
     @Bean
     public DataSource dataSource(DatabaseConfigurationSource cfg) throws NamingException {
@@ -46,7 +54,7 @@ public class DataSourceConfiguration {
             return result;
         } else {
             log.info("Starting JNDI data-source...");
-            final DataSource result = InitialContext.doLookup(cfg.getJndiPath()) ;
+            final DataSource result = InitialContext.doLookup(cfg.jndiPath()) ;
             log.info("Successfully started data-source");
             return result;
         }

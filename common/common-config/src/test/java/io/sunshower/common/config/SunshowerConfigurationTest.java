@@ -52,7 +52,6 @@ public class SunshowerConfigurationTest {
     public void ensureRetrievingTestEnvironmentWorks() {
         SampleJdbc jdbc = provider.bind("jdbc", SampleJdbc.class);
         assertThat(jdbc.username(), is("sa"));
-
     }
 
     

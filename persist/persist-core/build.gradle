@@ -1,12 +1,24 @@
 
 dependencies {
+
+    /**
+     * Compile dependencies
+     */
     compile 'com.zaxxer:HikariCP'
-    compile project(':persist:persist-api')
-
     compile project(':common:core')
-
+    compile project(':persist:persist-api')
+    compile project(':common:common-config')
 
     compile 'org.hibernate.validator:hibernate-validator'
+
+    /**
+     * Test dependencies
+     */
+    
+    
+    
     testCompile('com.h2database:h2')
+    testCompile project(':test:test-ws')
+    testCompile project(':test:test-common')
     testCompile('org.postgresql:postgresql')
 }

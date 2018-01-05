@@ -2,7 +2,6 @@ package io.sunshower.persist;
 
 import io.sunshower.jpa.flyway.FlywayConfiguration;
 import io.sunshower.persist.core.DataSourceConfiguration;
-import io.sunshower.persist.hibernate.HibernateConfiguration;
 import io.sunshower.persist.hibernate.TestConfig;
 import io.sunshower.test.common.SerializationAware;
 import io.sunshower.test.common.SerializationTestCase;
@@ -11,10 +10,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.platform.runner.JUnitPlatform;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,7 +32,6 @@ import java.util.logging.Logger;
         DataSourceConfiguration.class,
         HibernateConfiguration.class
 })
-@SpringBootTest
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public abstract class HibernateTestCase extends SerializationTestCase {
 
