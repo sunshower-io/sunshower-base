@@ -31,7 +31,11 @@ public class DatabaseConfigurationSourceTest {
     @Test
     public void ensureBaselineVersionIsRead() {
         assertThat(source.getVersion(), is("0"));
-
+    }
+    
+    @Test
+    public void ensureValidationWorks() {
+        source.validate();
     }
 
 

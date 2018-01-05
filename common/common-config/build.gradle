@@ -1,0 +1,3 @@
+dependencies {
+    compile 'org.cfg4j:cfg4j-core'
+}

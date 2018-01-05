@@ -2,10 +2,9 @@ package io.sunshower.persist.core;
 
 import com.zaxxer.hikari.HikariConfig;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 
 
-@ConfigurationProperties("jdbc")
+
 public class DatabaseConfigurationSource {
 
 
@@ -14,8 +13,8 @@ public class DatabaseConfigurationSource {
     private String username;
 
     private String password;
-
-    @Value("${jdbc.driver-class}")
+    
+    @Value("${jdbc.driver-class:}")
     private String driverClass;
 
     @Value("${jdbc.baseline:0}")
@@ -23,6 +22,11 @@ public class DatabaseConfigurationSource {
 
     @Value("${jdbc.baseline-version:-1}")
     private String version;
+    
+  
+    @Value("${jdbc.jndi-location:}")
+    private String jndiPath;
+    
 
     public String getUrl() {
         return url;
@@ -61,6 +65,14 @@ public class DatabaseConfigurationSource {
     }
 
 
+    public String getJndiPath() {
+        return jndiPath;
+    }
+
+    public void setJndiPath(String jndiPath) {
+        this.jndiPath = jndiPath;
+    }
+
     public void setBaseline(boolean baseline) {
         this.baseline = baseline;
     }
@@ -83,6 +95,27 @@ public class DatabaseConfigurationSource {
         cfg.setPassword(this.password);
         cfg.setDriverClassName(this.driverClass);
         return cfg;
+    }
+
+    public boolean useLocation() {
+        return nullOrEmpty(jndiPath);
+    }
+    
+    private void check() {
+        if(!(nullOrEmpty(jndiPath) || nullOrEmpty(username))) {
+            throw new IllegalStateException("Only one of jndi-path or username may be set");
+        }
+    }
+
+    private boolean nullOrEmpty(String value) {
+        if(value == null || value.trim().equals("")) {
+            return true;
+        }
+        return false;
+    }
+    
+    public void validate() {
+        check();
     }
 
 }

@@ -22,7 +22,8 @@ allprojects {
             'https://mymavenrepo.com/repo/Bwb7CZ1J9Ud5KCkBvnhI',
             'http://repo.spring.io/snapshot',
             "http://repo.spring.io/libs-milestone",
-            "http://oss.sonatype.org/content/repositories/snapshots"
+            "http://oss.sonatype.org/content/repositories/snapshots",
+            "http://www.gridgainsystems.com/nexus/content/repositories/external"
     ]
 
 
@@ -59,7 +60,7 @@ allprojects {
         imports {
             mavenBom("io.sunshower.base:bom-imported:${version}") {
                 bomProperties([
-                        'env.version': '1.0.0.Final'
+                        'env.version': '1.0.0-SNAPSHOT'
                 ])
             }
         }

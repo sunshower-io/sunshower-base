@@ -5,12 +5,8 @@ import org.apache.ignite.configuration.IgniteConfiguration;
 import org.apache.ignite.spi.discovery.tcp.TcpDiscoverySpi;
 import org.apache.ignite.spi.discovery.tcp.ipfinder.vm.TcpDiscoveryVmIpFinder;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-
-import javax.xml.bind.annotation.XmlValue;
 
 
-@ConfigurationProperties("ignite")
 public class IgniteConfigurationSource {
 
     @Value("${ignite.fabric-name}")

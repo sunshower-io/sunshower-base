@@ -26,19 +26,17 @@ dependencies {
     compile 'org.apache.lucene:lucene-backward-codecs'
 
     compile('org.hibernate:hibernate-search-orm')
-    compile('org.hibernate:hibernate-entitymanager')
+
+    compile 'org.apache.ignite:ignite-core'
+    compile 'org.apache.ignite:ignite-hibernate-core'
+    compile 'org.apache.ignite:ignite-hibernate_5.1:2.3.1'
     compile('org.hibernate.javax.persistence:hibernate-jpa-2.1-api')
-
-    compile 'org.springframework.boot:spring-boot'
-
-    compile 'org.apache.ignite:ignite-hibernate'
+    
 
     testCompile('com.h2database:h2')
     
-    testCompile 'org.springframework:spring-test'
     testCompile project(':test:test-common')
     testCompile('org.postgresql:postgresql')
-    testCompile 'org.springframework.boot:spring-boot-test'
-    testCompile 'org.springframework.boot:spring-boot-starter'
+    testCompile 'org.springframework:spring-test'
 
 }

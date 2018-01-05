@@ -59,7 +59,7 @@ public class HibernateProviderConfigurationSourceTest {
     @Test
     public void ensureRegionFactoryIsCorrect() {
         String regionFactory = props.getProvider().getCache().getRegionFactory();
-        assertThat(regionFactory, is("io.sunshower.ignite.core.IgniteHibernateRegionFactory"));
+        assertThat(regionFactory, is("org.apache.ignite.cache.hibernate.HibernateRegionFactory"));
     }
 
     @Test

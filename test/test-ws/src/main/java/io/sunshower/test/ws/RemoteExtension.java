@@ -1,7 +1,7 @@
 package io.sunshower.test.ws;
 
-import org.glassfish.jersey.client.ClientConfig;
-import org.glassfish.jersey.client.proxy.WebResourceFactory;
+import org.jboss.resteasy.client.ProxyFactory;
+import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.env.Environment;
@@ -13,6 +13,8 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 import java.lang.reflect.Field;
 import java.util.NoSuchElementException;
+
+import static javax.ws.rs.client.ClientBuilder.newClient;
 
 
 public class RemoteExtension extends SpringExtension {
@@ -34,27 +36,27 @@ public class RemoteExtension extends SpringExtension {
 
 
     private WebTarget createClient(ExtensionContext context) {
-        ApplicationContext applicationContext = 
+        ApplicationContext applicationContext =
                 SpringExtension.getApplicationContext(context);
         Environment environment = applicationContext.getEnvironment();
         Integer port = Integer.parseInt(String.valueOf(
                 environment.getProperty("local.server.port")));
-        Client client = ClientBuilder.newClient();
+        Client    client    = newClient();
         WebTarget localhost = client.target(String.format("http://%s:%s/", "localhost", port));
         return localhost;
     }
 
     private void inject(Class<?> testClass, Object testInstance, WebTarget client) throws IllegalAccessException {
-        
-        for(
-                Class<?> current = testClass; 
-                current != null; 
+
+        for (
+                Class<?> current = testClass;
+                current != null;
                 current = current.getSuperclass()
                 ) {
 
             Field[] declaredFields = current.getDeclaredFields();
-            for(Field field : declaredFields) {
-                if(field.isAnnotationPresent(Remote.class)) {
+            for (Field field : declaredFields) {
+                if (field.isAnnotationPresent(Remote.class)) {
                     injectField(testClass, testInstance, client, field);
                 }
             }
@@ -64,20 +66,20 @@ public class RemoteExtension extends SpringExtension {
 
     private void injectField(Class<?> testClass, Object testInstance, WebTarget client, Field field) throws IllegalAccessException {
         field.setAccessible(true);
-        Class<?> type = field.getType();
+        Class<?> type       = field.getType();
         Class<?> actualType = findTypeAnnotatedWith(type, Path.class, testClass, field);
-        Object   o = WebResourceFactory.newResource(actualType, client);
+        Object   o          = ((ResteasyWebTarget) client).proxy(actualType);
         field.set(testInstance, o);
     }
 
     private Class<?> findTypeAnnotatedWith(Class<?> type, Class<Path> pathClass, Class<?> testClass, Field field) {
-        for(Class<?> current = type; current != null; current = current.getSuperclass()) {
-            if(current.isAnnotationPresent(Path.class)) {
+        for (Class<?> current = type; current != null; current = current.getSuperclass()) {
+            if (current.isAnnotationPresent(Path.class)) {
                 return current;
             }
             Class<?>[] interfaces = current.getInterfaces();
-            for(Class<?> iface : interfaces) {
-                if(iface.isAnnotationPresent(Path.class)) {
+            for (Class<?> iface : interfaces) {
+                if (iface.isAnnotationPresent(Path.class)) {
                     return iface;
                 }
             }

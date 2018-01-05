@@ -1,8 +1,12 @@
+security:
+  ignored: 
 
 jdbc:
   username: sa
-  url: jdbc:h2:mem:test
+  url: jdbc:h2:mem:frap;MODE=PostgreSQL;LOCK_MODE=0;MV_STORE=false;
   driver-class: org.h2.Driver
+  baseline: true
+  baseline-version: 0
 
 ignite:
   fabric-name: sunshower-data-fabric
@@ -23,8 +27,8 @@ jpa:
       value: filesystem
     ddl:
       generate: false
-      show-sql: true
-      format-sql: true
+      show-sql: false
+      format-sql: false
     cache:
       enabled: true
       provider: ignite
@@ -34,5 +38,3 @@ jpa:
       region-factory: org.apache.ignite.cache.hibernate.HibernateRegionFactory
       release-mode: on-close
       default-access-type: read-only
-
-

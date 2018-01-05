@@ -31,7 +31,7 @@ jpa:
       fabric-name: sunshower-data-fabric
       enable-query-cache: true
       generate-statistics: true
-      region-factory: io.sunshower.ignite.core.IgniteHibernateRegionFactory
+      region-factory: org.apache.ignite.cache.hibernate.HibernateRegionFactory
       release-mode: on-close
       default-access-type: read-only
 

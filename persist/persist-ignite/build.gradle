@@ -2,18 +2,14 @@ dependencies {
 
     compile 'javax.inject:javax.inject'
     compile 'org.hibernate:hibernate-core'
-    compile 'org.hibernate.validator:hibernate-validator'
     compile 'org.springframework:spring-context'
     compile 'org.springframework:spring-orm'
-    compile 'org.springframework.boot:spring-boot'
 
-
+    compile 'org.hibernate.validator:hibernate-validator'
     testCompile 'org.junit.platform:junit-platform-runner'
     testCompile 'org.springframework:spring-test'
-    testCompile 'org.springframework.boot:spring-boot-test'
-    testCompile 'org.springframework.boot:spring-boot-starter'
 
-    ['ignite-core', 'ignite-spring', 'ignite-indexing', 'ignite-hibernate'].each {
+    ['ignite-core', 'ignite-spring', 'ignite-indexing', 'ignite-hibernate-core'].each {
         compile("org.apache.ignite:$it")
     }
 

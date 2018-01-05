@@ -2,19 +2,9 @@
 
 dependencies {
     compile project(":common:core")
-    compile group: 'org.eclipse.persistence', name: 'org.eclipse.persistence.moxy', version: '2.7.0'
-
-    compile 'org.glassfish.jersey.media:jersey-media-moxy'
-
-    compile group: 'org.glassfish.jersey.media', name: 'jersey-media-jaxb'
-
-    compile('org.glassfish.jersey.core:jersey-server')
+    compile 'org.eclipse.persistence:org.eclipse.persistence.moxy'
     compile 'org.springframework.security:spring-security-acl'
     compile 'org.springframework.security:spring-security-config'
-
-    compile "org.springframework.boot:spring-boot-starter-jersey"
-    compile "org.springframework.boot:spring-boot-starter-undertow"
-
 
 
 }

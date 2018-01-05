@@ -6,7 +6,6 @@ import io.sunshower.persistence.PersistenceUnit;
 import org.apache.ignite.Ignite;
 import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.jpa.Search;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.*;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -23,7 +22,6 @@ import java.util.logging.Logger;
 @Configuration
 @EnableTransactionManagement
 @Import(IgniteNodeConfiguration.class)
-@EnableConfigurationProperties(HibernateProviderConfigurationSource.class)
 public class HibernateConfiguration {
 
     static final Logger log = Logger.getLogger(HibernateConfiguration.class.getName());

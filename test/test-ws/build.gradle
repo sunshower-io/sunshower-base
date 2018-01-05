@@ -1,21 +1,10 @@
 dependencies {
+    compile 'org.jboss.resteasy:resteasy-client'
     compile project(':common:common-ws')
     compile 'javax.inject:javax.inject'
     compile 'javax.ws.rs:javax.ws.rs-api:2.1'
     compile 'org.junit.platform:junit-platform-runner'
     compile 'org.springframework:spring-test'
-    compile 'org.springframework.boot:spring-boot-test'
     compile 'org.junit.jupiter:junit-jupiter-api'
-    compile "org.glassfish.jersey.ext:jersey-proxy-client"
-    compile "org.glassfish.jersey.core:jersey-common"
-    compile "org.glassfish.jersey.core:jersey-client"
-    compile 'org.springframework.security:spring-security-web'
-    compile("org.springframework.boot:spring-boot-starter-web:2.0.0.M7")
-    compile("org.springframework.boot:spring-boot-starter-undertow:2.0.0.M7")
-    compile("org.springframework.boot:spring-boot-starter-jersey:2.0.0.M7")
-}
-
-configurations {
-    compile.exclude module: "spring-boot-starter-tomcat"
 }
 

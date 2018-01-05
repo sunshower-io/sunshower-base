@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.ContextConfiguration;
 
 @ContextConfiguration
-@EnableAutoConfiguration(exclude = SecurityAutoConfiguration.class)
 public class TestRemoteConfiguration {
 
     @Bean
