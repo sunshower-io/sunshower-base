@@ -6,6 +6,7 @@ jdbc:
   baselineVersion: 0
   jndiPath: ""
   password: ""
+  version: -1
 
 ignite:
   fabricName: sunshower-data-fabric
