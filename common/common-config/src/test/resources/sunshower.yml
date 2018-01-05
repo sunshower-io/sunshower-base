@@ -1,5 +1,5 @@
 security:
-  ignored: 
+  ignored: null
 
 jdbc:
   username: sa

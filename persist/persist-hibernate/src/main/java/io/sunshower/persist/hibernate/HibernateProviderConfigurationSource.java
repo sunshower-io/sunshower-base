@@ -1,13 +1,11 @@
 package io.sunshower.persist.hibernate;
 
 import io.sunshower.jpa.configuration.JpaProviderProperties;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.util.Properties;
 
 
 
-@ConfigurationProperties("jpa")
 public class HibernateProviderConfigurationSource extends JpaProviderProperties {
 
 

@@ -1,3 +1,6 @@
 dependencies {
     compile 'org.cfg4j:cfg4j-core'
+    compile 'org.cfg4j:cfg4j-git'
+    
+    testCompile 'org.junit.platform:junit-platform-runner'
 }
