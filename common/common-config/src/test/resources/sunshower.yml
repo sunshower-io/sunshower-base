@@ -24,7 +24,7 @@ jpa:
     dialect: org.hibernate.dialect.H2Dialect
     search:
       type: hibernate.search.default.directory_provider
-      value: filesystem
+      value: local-heap 
     ddl:
       strategy: none
       generate: false

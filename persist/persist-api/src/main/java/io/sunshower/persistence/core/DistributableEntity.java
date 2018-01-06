@@ -28,7 +28,7 @@ public class DistributableEntity extends AbstractEntity<Identifier> {
     @DocumentId
     @Column(name = "id")
     @XmlAttribute(name = "id")
-    @FieldBridge(impl = ByteArrayBridge.class)
+    @FieldBridge(impl = IdentifierBridge.class)
     @XmlJavaTypeAdapter(Base58ByteArrayConverter.class)
     private byte[] id;
     

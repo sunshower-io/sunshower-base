@@ -4,10 +4,14 @@ dependencies {
 
     compile 'org.hibernate.validator:hibernate-validator'
 
+    compile 'org.glassfish:javax.el'
 
     compile project(':persist:persist-jpa')
     compile project(':persist:persist-core')
     compile project(':common:common-config')
+    
+    compile group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
+
 
     testCompile 'com.h2database:h2'
 

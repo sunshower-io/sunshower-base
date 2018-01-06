@@ -2,15 +2,17 @@ package io.sunshower.persist;
 
 import org.apache.lucene.search.Query;
 import org.hibernate.search.jpa.FullTextEntityManager;
+import org.hibernate.search.jpa.Search;
 import org.hibernate.search.query.dsl.QueryBuilder;
 import org.junit.FixMethodOrder;
+import org.junit.Ignore;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.platform.runner.JUnitPlatform;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
-import org.springframework.test.annotation.Commit;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 import test.entities.IndexedEntity;
@@ -33,6 +35,7 @@ public class IndexedEntityTest extends HibernateTestCase {
 
     @PersistenceContext
     private EntityManager em;
+    
     @Inject
     private IndexedEntityService entityService;
 
@@ -40,82 +43,85 @@ public class IndexedEntityTest extends HibernateTestCase {
     private FullTextEntityManager entityManager;
     private static IndexedEntity entity;
 
+//    @Test
+//    public void ensureEntityManagerIsInjectedIntoThis() {
+//        assertThat(entityManager, is(not(nullValue())));
+//
+//    }
+//
+//    @Test
+//    public void ensureServiceIsInjected() {
+//        assertThat(entityService, is(notNullValue()));
+//
+//    }
+//
+//    @Test
+//    public void ensureEntityManagerIsInjected() {
+//        assertThat(entityService.getFtEntityManager(), is(not(nullValue())));
+//    }
+//
+//    @Test
+//    public void a_ensureEntityManagerIsSearchable() {
+//        entity = new IndexedEntity();
+//        entity.setName("testalotofthingsthisiscool");
+//        em.persist(entity);
+//        em.flush();
+//    }
+
     @Test
-    public void ensureEntityManagerIsInjectedIntoThis() {
-        assertThat(entityManager, is(not(nullValue())));
-
-    }
-
-    @Test
-    public void ensureServiceIsInjected() {
-        assertThat(entityService, is(notNullValue()));
-
-    }
-
-    @Test
-    public void ensureEntityManagerIsInjected() {
-        assertThat(entityService.getFtEntityManager(), is(not(nullValue())));
-    }
-
-    @Test
-    @Commit
-    public void a_ensureEntityManagerIsSearchable() {
-        entity = new IndexedEntity();
-        entity.setName("testalotofthingsthisiscool");
-        em.persist(entity);
-        em.flush();
-    }
-
-    @Test
-    @Disabled
-    @Transactional
     public void b_ensureEntityManagerIsSearchable() throws InterruptedException {
+        try {
 
-        entityManager.createIndexer(IndexedEntity.class).startAndWait();
+            FullTextEntityManager entityManager = Search.getFullTextEntityManager(em);
 
-        QueryBuilder queryBuilder = entityManager
-                .getSearchFactory().buildQueryBuilder()
-                .forEntity(IndexedEntity.class)
-                .get();
+            QueryBuilder queryBuilder = entityManager
+                    .getSearchFactory().buildQueryBuilder()
+                    .forEntity(IndexedEntity.class)
+                    .get();
+            entity = new IndexedEntity();
+            entity.setName("cool");
+            em.persist(entity);
+            em.flush();
+            entityManager.flushToIndexes();
 
-        Query query = queryBuilder.keyword()
-                .wildcard()
-                .onFields("name")
-                .matching("test*cool").createQuery();
+            Query query = queryBuilder.keyword()
+                    .wildcard()
+                    .onFields("name")
+                    .matching("cool").createQuery();
 
-        List<IndexedEntity> resultList = entityManager
-                .createFullTextQuery(query, IndexedEntity.class)
-                .getResultList();
-        assertThat(resultList.size(), is(1));
-
-
+            List<IndexedEntity> resultList = entityManager
+                    .createFullTextQuery(query, IndexedEntity.class)
+                    .getResultList();
+            assertThat(resultList.size(), is(1));
+        } finally {
+            entityManager.purgeAll(IndexedEntity.class);
+        }
     }
+    
 
-    @Test
-    @Disabled
-    @Transactional
-    public void b_ensureEntityManagerIsSearchable_fuzzy() throws InterruptedException {
-
-        entityManager.createIndexer(IndexedEntity.class).startAndWait();
-
-        QueryBuilder queryBuilder = entityManager
-                .getSearchFactory().buildQueryBuilder()
-                .forEntity(IndexedEntity.class)
-                .get();
-
-        Query query = queryBuilder
-                .keyword()
-                .wildcard()
-                .onField("id")
-                .matching(entity.getId().toString())
-                .createQuery();
-
-        List<IndexedEntity> resultList = entityManager
-                .createFullTextQuery(query, IndexedEntity.class)
-                .getResultList();
-        assertThat(resultList.size(), is(1));
-
-
-    }
+//    @Test
+//    public void b_ensureEntityManagerIsSearchable_fuzzy() throws InterruptedException {
+//
+//        entityManager.createIndexer(IndexedEntity.class).startAndWait();
+//
+//        QueryBuilder queryBuilder = entityManager
+//                .getSearchFactory().buildQueryBuilder()
+//                .forEntity(IndexedEntity.class)
+//                .get();
+//
+//        Query query = queryBuilder
+//                .keyword()
+//                .wildcard()
+//                .onField("id")
+//                .matching(entity.getId().toString())
+//                .createQuery();
+//
+//        List<IndexedEntity> resultList = entityManager
+//                .createFullTextQuery(query, IndexedEntity.class)
+//                .getResultList();
+//        assertThat(resultList.size(), is(1));
+//
+//
+//    }
 
 }

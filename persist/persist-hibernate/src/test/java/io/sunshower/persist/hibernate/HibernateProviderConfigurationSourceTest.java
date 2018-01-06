@@ -1,5 +1,7 @@
 package io.sunshower.persist.hibernate;
 
+import io.sunshower.persist.HibernateTestCase;
+import io.sunshower.test.common.TestConfigurationConfiguration;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.platform.runner.JUnitPlatform;
@@ -18,8 +20,7 @@ import static org.junit.Assert.assertTrue;
 
 @RunWith(JUnitPlatform.class)
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = ProviderTestConfiguration.class)
-public class HibernateProviderConfigurationSourceTest {
+public class HibernateProviderConfigurationSourceTest extends HibernateTestCase {
 
     @Inject
     private HibernateProviderConfigurationSource props;
@@ -36,7 +37,7 @@ public class HibernateProviderConfigurationSourceTest {
 
     @Test
     public void ensureDdlShowSqlExists() {
-        assertThat(props.ddl().showSql(), is(true));
+        assertThat(props.ddl().showSql(), is(false));
     }
 
     @Test
@@ -46,11 +47,11 @@ public class HibernateProviderConfigurationSourceTest {
 
     @Test
     public void ensureSearchTypeIsCorrect() {
-        assertThat(props.getSearch().type(), is("hibernate.getSearch.default.directory_provider"));
+        assertThat(props.getSearch().type(), is("hibernate.search.default.directory_provider"));
     }
     @Test
     public void ensureSearchValueIsCorrect() {
-        assertThat(props.getSearch().type(), is("filesystem"));
+        assertThat(props.getSearch().value(), is("filesystem"));
     }
 
 
