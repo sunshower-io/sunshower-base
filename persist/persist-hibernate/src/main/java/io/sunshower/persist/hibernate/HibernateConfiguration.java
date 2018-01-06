@@ -142,7 +142,7 @@ public class HibernateConfiguration {
 
         jpaProperties.put("hibernate.cache.use_second_level_cache", true);
 
-        if(cache.queryCacheEnabled()) {
+        if(cache.enableQueryCache()) {
             log.info("Query cache is enabled");
             jpaProperties.put("hibernate.cache.use_query_cache", true);
         }

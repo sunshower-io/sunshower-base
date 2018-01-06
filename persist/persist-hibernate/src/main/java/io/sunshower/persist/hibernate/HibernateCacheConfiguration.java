@@ -9,7 +9,7 @@ public interface HibernateCacheConfiguration {
 
     String provider();
 
-    boolean queryCacheEnabled();
+    boolean enableQueryCache();
 
     boolean generateStatistics();
 
