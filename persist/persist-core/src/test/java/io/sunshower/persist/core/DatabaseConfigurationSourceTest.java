@@ -29,12 +29,12 @@ public class DatabaseConfigurationSourceTest {
 
     @Test
     public void ensureBaselineIsRead() {
-        assertThat(isBaseline(source), is(true));
+        assertThat(isBaseline(source), is(false));
     }
 
     @Test
     public void ensureBaselineVersionIsRead() {
-        assertThat(source.version(), is("0"));
+        assertThat(source.version(), is("-1"));
     }
 
     @Test

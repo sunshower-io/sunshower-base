@@ -4,6 +4,8 @@ import io.sunshower.ignite.IgniteNodeConfiguration;
 import io.sunshower.persist.validation.ModelValidator;
 import io.sunshower.persistence.PersistenceUnit;
 import org.apache.ignite.Ignite;
+import org.cfg4j.provider.ConfigurationProvider;
+import org.cfg4j.source.ConfigurationSource;
 import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.jpa.Search;
 import org.springframework.context.annotation.*;
@@ -27,8 +29,34 @@ public class HibernateConfiguration {
     static final Logger log = Logger.getLogger(HibernateConfiguration.class.getName());
 
 
+    @Bean
+    public HibernateProviderConfigurationSource hibernateProviderConfigurationSource(
+            SearchConfiguration searchConfiguration,
+            HibernateDialectProperties props,
+            HibernateCacheConfiguration cacheConfiguration
+    ) {
+        return new HibernateProviderConfigurationSource(
+                searchConfiguration, 
+                props, 
+                cacheConfiguration
+        );
+        
+    }
 
+    @Bean
+    public HibernateCacheConfiguration hibernateCacheConfiguration(ConfigurationProvider source) {
+        return source.bind("jpa.cache", HibernateCacheConfiguration.class);
+    }
 
+    @Bean
+    public SearchConfiguration searchConfiguration(ConfigurationProvider source) {
+        return source.bind("jpa.search", SearchConfiguration.class);
+    }
+
+    @Bean
+    public HibernateDialectProperties hibernateDialectProperties(ConfigurationProvider source) {
+        return source.bind("jpa.provider", HibernateDialectProperties.class);
+    }
 
     @Bean
     public JpaTransactionManager transactionManager(
@@ -58,6 +86,7 @@ public class HibernateConfiguration {
             DataSource dataSource,
             HibernateProviderConfigurationSource source,
             PersistenceUnit persistenceConfiguration,
+            ConfigurationProvider provider,
             Ignite ignite
     ) {
         LocalContainerEntityManagerFactoryBean entityManagerFactoryBean =
@@ -71,8 +100,8 @@ public class HibernateConfiguration {
                 persistenceConfiguration
                         .getScannedPackages());
 
-        Properties properties = source.toNative();
-        configureCache(properties, source);
+        Properties properties = Configurations.toNative(provider, source);
+        configureCache(properties, provider, source);
         entityManagerFactoryBean.setJpaProperties(properties);
         return entityManagerFactoryBean;
     }
@@ -80,43 +109,44 @@ public class HibernateConfiguration {
 
     private void configureCache(
             Properties jpaProperties,
+            ConfigurationProvider cfgProvider,
             HibernateProviderConfigurationSource source
     ) {
-        HibernateDialectProperties provider = source.getProvider();
+        HibernateDialectProperties provider = Configurations.getProvider(cfgProvider);
         if(provider == null) {
             log.info("No L2 Cache configured");
             return;
         }
 
-        HibernateCacheConfiguration cache = provider.getCache();
+        HibernateCacheConfiguration cache = provider.cache();
         if(cache == null) {
             log.info("No L2 Cache configured");
             return;
         }
 
-        if(!cache.isEnabled()) {
+        if(!cache.enabled()) {
             log.info("L2 Cache is disabled");
             return;
         }
 
-        String cacheProvider = cache.getProvider();
+        String cacheProvider = cache.provider();
         log.info("L2 Cache is enabled");
         log.info("Cache provider: '" + cacheProvider + "'");
 
         jpaProperties.put("hibernate.cache.use_second_level_cache", true);
 
-        if(cache.isQueryCacheEnabled()) {
+        if(cache.queryCacheEnabled()) {
             log.info("Query cache is enabled");
             jpaProperties.put("hibernate.cache.use_query_cache", true);
         }
 
-        jpaProperties.put("hibernate.cache.region.factory_class", cache.getRegionFactory());
+        jpaProperties.put("hibernate.cache.region.factory_class", cache.regionFactory());
 
 
 
         jpaProperties.put(
                 "org.apache.ignite.hibernate.grid_name",
-                cache.getFabricName()
+                cache.fabricName()
 
         );
 

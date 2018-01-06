@@ -5,9 +5,12 @@ dependencies {
     compile 'org.springframework:spring-context'
     compile 'org.springframework:spring-orm'
 
+    compile project(":common:common-config")
     compile 'org.hibernate.validator:hibernate-validator'
     testCompile 'org.junit.platform:junit-platform-runner'
     testCompile 'org.springframework:spring-test'
+    
+    testCompile project(':test:test-common')
 
     ['ignite-core', 'ignite-spring', 'ignite-indexing', 'ignite-hibernate-core'].each {
         compile("org.apache.ignite:$it")

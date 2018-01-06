@@ -9,14 +9,22 @@ import org.springframework.beans.factory.annotation.Value;
 
 public class IgniteConfigurationSource {
 
-    @Value("${ignite.fabric-name}")
-    private String fabricName;
+    private final String fabricName;
 
+    private final IgniteMemorySettings memory;
 
+    private final IgniteDiscoverySettings discovery;
 
-    private IgniteMemorySettings memory;
+    public IgniteConfigurationSource(
+            String name,
+            IgniteMemorySettings memory, 
+            IgniteDiscoverySettings discovery
+    ) {
+        this.memory = memory;
+        this.fabricName = name;
+        this.discovery = discovery;
+    }
 
-    private IgniteDiscoverySettings discovery;
 
     public String getFabricName() {
         return fabricName;
@@ -27,13 +35,6 @@ public class IgniteConfigurationSource {
         return memory;
     }
 
-    public void setMemory(IgniteMemorySettings memory) {
-        this.memory = memory;
-    }
-
-    public void setFabricName(String fabricName) {
-        this.fabricName = fabricName;
-    }
 
     public IgniteConfiguration toNative() {
         final IgniteConfiguration cfg = new IgniteConfiguration();
@@ -45,7 +46,7 @@ public class IgniteConfigurationSource {
 
     private void configureDiscovery(IgniteConfiguration cfg) {
         if(discovery != null) {
-            if(discovery.getMode() != null && discovery.getMode().trim().equals("vm-local")) {
+            if(discovery.mode() != null && discovery.mode().trim().equals("vm-local")) {
 
                 TcpDiscoverySpi disco = new TcpDiscoverySpi()
                         .setIpFinder(new TcpDiscoveryVmIpFinder(true));
@@ -58,9 +59,6 @@ public class IgniteConfigurationSource {
         return discovery;
     }
 
-    public void setDiscovery(IgniteDiscoverySettings discovery) {
-        this.discovery = discovery;
-    }
 
     protected CacheConfiguration<?, ?> cacheConfiguration() {
         final CacheConfiguration<?, ?> cfg = new CacheConfiguration<>();
@@ -69,44 +67,21 @@ public class IgniteConfigurationSource {
     }
 
     protected long externalMax() {
-        return memory != null ? memory.max : 0;
+        return memory != null ? memory.max() : 0;
     }
 
 
 
-    public static class IgniteMemorySettings {
+    public interface IgniteMemorySettings {
 
-        private long max;
-        private String mode;
-
-
-        public String getMode() {
-            return mode;
-        }
-
-        public void setMode(String mode) {
-            this.mode = mode;
-        }
-
-        public long getMax() {
-            return max;
-        }
-
-        public void setMax(long max) {
-            this.max = max;
-        }
+        long max();
+        String mode();
     }
 
-    public static class IgniteDiscoverySettings {
+    public interface IgniteDiscoverySettings {
 
-        private String mode;
-
-        public String getMode() {
-            return mode;
-        }
-
-        public void setMode(String mode) {
-            this.mode = mode;
+        default String mode() {
+            return "vm-local";
         }
     }
 }

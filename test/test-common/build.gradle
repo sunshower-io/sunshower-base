@@ -1,6 +1,8 @@
 dependencies {
     compile project(':common:common-config')
 
+    compile 'javax.inject:javax.inject'
     compile 'org.springframework:spring-test'
     compile 'org.springframework:spring-context'
+    compile 'org.junit.platform:junit-platform-runner'
 }

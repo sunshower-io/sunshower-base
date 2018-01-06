@@ -5,7 +5,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.platform.runner.JUnitPlatform;
 import org.junit.runner.RunWith;
 import static org.hamcrest.CoreMatchers.*;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -19,7 +18,6 @@ import static org.junit.Assert.assertTrue;
 
 @RunWith(JUnitPlatform.class)
 @ExtendWith(SpringExtension.class)
-@SpringBootTest
 @ContextConfiguration(classes = ProviderTestConfiguration.class)
 public class HibernateProviderConfigurationSourceTest {
 
@@ -38,33 +36,33 @@ public class HibernateProviderConfigurationSourceTest {
 
     @Test
     public void ensureDdlShowSqlExists() {
-        assertThat(props.getProvider().getDdl().isShowSql(), is(true));
+        assertThat(props.getProvider().ddl().isShowSql(), is(true));
     }
 
     @Test
     public void ensureDdlGenerateExists() {
-        assertThat(props.getProvider().getDdl().isGenerate(), is(false));
+        assertThat(props.getProvider().ddl().isGenerate(), is(false));
     }
 
     @Test
     public void ensureSearchTypeIsCorrect() {
-        assertThat(props.getProvider().getSearch().getType(), is("hibernate.search.default.directory_provider"));
+        assertThat(props.getProvider().search().type(), is("hibernate.search.default.directory_provider"));
     }
     @Test
     public void ensureSearchValueIsCorrect() {
-        assertThat(props.getProvider().getSearch().getValue(), is("filesystem"));
+        assertThat(props.getProvider().search().type(), is("filesystem"));
     }
 
 
     @Test
     public void ensureRegionFactoryIsCorrect() {
-        String regionFactory = props.getProvider().getCache().getRegionFactory();
+        String regionFactory = props.cache().regionFactory();
         assertThat(regionFactory, is("org.apache.ignite.cache.hibernate.HibernateRegionFactory"));
     }
 
     @Test
     public void ensureL2CacheIsEnabled() {
-        boolean queryCacheEnabled = props.getProvider().getCache().isEnabled();
+        boolean queryCacheEnabled = props.cache().enabled();
         assertTrue(queryCacheEnabled);
     }
 }

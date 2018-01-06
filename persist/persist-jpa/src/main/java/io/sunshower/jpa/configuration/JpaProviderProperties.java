@@ -1,7 +1,7 @@
 package io.sunshower.jpa.configuration;
 
 
-public class JpaProviderProperties {
+public interface JpaProviderProperties {
 
 
 }

@@ -1,5 +1,6 @@
 package io.sunshower.persist.core;
 
+import io.sunshower.test.common.TestConfigurationConfiguration;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.platform.runner.JUnitPlatform;
@@ -21,7 +22,10 @@ import static org.junit.Assert.*;
 
 @RunWith(JUnitPlatform.class)
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = DataSourceConfiguration.class)
+@ContextConfiguration(classes = {
+        DataSourceConfiguration.class,
+        TestConfigurationConfiguration.class
+})
 public class DataSourceConfigurationTest {
     @Inject
     private DataSource dataSource;

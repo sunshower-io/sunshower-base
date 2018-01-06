@@ -40,7 +40,7 @@ public class PostgresDataSourceConfigurationTest {
 
     @Test
     public void ensureUrlIsExpected() {
-        assertThat(source.url(), is("jdbc:h2:mem:test;MODE=PostgreSQL;DB_CLOSE_DELAY=-1"));
+        assertThat(source.url(), is("jdbc:h2:mem:frap;MODE=PostgreSQL;LOCK_MODE=0;MV_STORE=false;"));
     }
 
 

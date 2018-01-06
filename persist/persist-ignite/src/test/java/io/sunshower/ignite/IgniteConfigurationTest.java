@@ -1,15 +1,14 @@
 package io.sunshower.ignite;
 
+import io.sunshower.test.common.TestConfigurationConfiguration;
 import org.apache.ignite.Ignite;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.platform.runner.JUnitPlatform;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.inject.Inject;
 
@@ -23,13 +22,11 @@ import static org.hamcrest.core.IsNull.nullValue;
 @RunWith(JUnitPlatform.class)
 @ContextConfiguration(
         classes = {
-        IgniteNodeConfiguration.class
-})
-@SpringBootTest
+                IgniteNodeConfiguration.class,
+                TestConfigurationConfiguration.class
+        })
 public class IgniteConfigurationTest {
 
-    @Value("${ignite.fabric-name}")
-    private String name;
 
     @Inject
     private Ignite ignite;
@@ -40,23 +37,15 @@ public class IgniteConfigurationTest {
 
     @Test
     public void ensureDiscoveryModeIsCorrect() {
-        String mode = igniteConfiguration.getDiscovery().getMode();
+        String mode = igniteConfiguration.getDiscovery().mode();
         assertThat(mode, is("vm-local"));
-
     }
 
     @Test
     public void ensureFabricNameIsCorrect() {
-        assertThat(igniteConfiguration.getFabricName(), is("test"));
+        assertThat(igniteConfiguration.getFabricName(), is("sunshower-data-fabric"));
 
     }
-
-    @Test
-    public void ensureNameIsLoaded() {
-        assertThat(name, is("test"));
-    }
-
-
 
 
     @Test
@@ -66,7 +55,7 @@ public class IgniteConfigurationTest {
 
     @Test
     public void ensureNameIsExpected() {
-        assertThat(igniteConfiguration.getFabricName(), is("test"));
+        assertThat(igniteConfiguration.getFabricName(), is("sunshower-data-fabric"));
     }
 
 

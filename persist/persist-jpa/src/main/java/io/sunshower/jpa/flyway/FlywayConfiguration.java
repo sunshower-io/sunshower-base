@@ -1,5 +1,6 @@
 package io.sunshower.jpa.flyway;
 
+import io.sunshower.persist.core.DataSourceConfigurations;
 import io.sunshower.persist.core.DatabaseConfigurationSource;
 import io.sunshower.persistence.Dialect;
 import io.sunshower.persistence.MigrationResult;
@@ -14,6 +15,8 @@ import org.springframework.context.annotation.Configuration;
 
 import javax.inject.Singleton;
 import javax.sql.DataSource;
+
+import static io.sunshower.persist.core.DataSourceConfigurations.isBaselineVersion;
 
 
 @Configuration
@@ -34,18 +37,18 @@ public class FlywayConfiguration {
             DatabaseConfigurationSource source
     ) {
         for(PersistenceConfiguration ctx : context.configurations()) {
-            final Flyway flyway = new Flyway();
+            final Flyway             flyway = new Flyway();
 
-            if(source.baselineVersion()) {
-                log.info("Setting baseline version to {}", source.getVersion());
-                flyway.setBaselineVersionAsString(source.getVersion());
+            if(isBaselineVersion(source)) {
+                log.info("Setting baseline version to {}", source.version());
+                flyway.setBaselineVersionAsString(source.version());
             }
             final String table = ctx.getId() + "_migrations";
             flyway.setTable(table);
             flyway.setDataSource(dataSource);
             String[] migrationPaths = ctx.getMigrationPaths();
             flyway.setLocations(migrationPaths);
-            if(source.isBaseline()) {
+            if(isBaselineVersion(source)) {
                 log.info("baselining database...");
                 flyway.baseline();
                 log.info("database baselined");

@@ -34,4 +34,12 @@ public class DataSourceConfigurations {
             throw new IllegalStateException("Only one of jndi-path or username may be set");
         }
     }
+
+
+
+    public static boolean isBaselineVersion(DatabaseConfigurationSource source) {
+        String version = source.version();
+        return source.baseline() && !(version == null || version.trim().isEmpty() || "-1".equals(version));
+    }
+
 }

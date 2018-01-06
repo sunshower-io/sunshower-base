@@ -6,19 +6,32 @@ import java.util.Properties;
 
 
 
-public class HibernateProviderConfigurationSource extends JpaProviderProperties {
+public class HibernateProviderConfigurationSource implements  JpaProviderProperties {
 
 
-    private HibernateDialectProperties provider;
+    private final SearchConfiguration search;
+    private final HibernateCacheConfiguration cache;
+    private final HibernateDialectProperties provider;
+    
+    public HibernateProviderConfigurationSource(
+            final SearchConfiguration search,
+            final HibernateDialectProperties provider,
+            final HibernateCacheConfiguration cache
+    ) {
+        this.cache = cache;
+        this.search = search;
+        this.provider = provider;
+    }
 
+
+    public HibernateCacheConfiguration cache() {
+        return cache;
+    }
 
     public HibernateDialectProperties getProvider() {
         return provider;
     }
 
-    public void setProvider(HibernateDialectProperties provider) {
-        this.provider = provider;
-    }
 
     public Properties toNative() {
         final Properties properties = new Properties();
@@ -31,11 +44,11 @@ public class HibernateProviderConfigurationSource extends JpaProviderProperties 
     }
 
     private void configureDialect(Properties properties) {
-        properties.put("jpa.dialect", provider.getDialect());
+        properties.put("jpa.dialect", provider.dialect());
     }
 
     private void configureDiagnostics(Properties properties) {
-        DataDefinitionLanguage ddl = provider.getDdl();
+        DataDefinitionLanguage ddl = provider.ddl();
         properties.setProperty("hibernate.show_sql", Boolean.toString(ddl.isShowSql()));
         properties.setProperty("hibernate.format_sql", Boolean.toString(ddl.isFormatSql()));
         if(ddl.isGenerate()) {
@@ -44,9 +57,8 @@ public class HibernateProviderConfigurationSource extends JpaProviderProperties 
     }
 
     private void configureSearch(Properties properties) {
-        SearchConfiguration search = provider.getSearch();
         if(search != null) {
-            properties.setProperty(search.getType(), search.getValue());
+            properties.setProperty(search.type(), search.value());
         }
     }
 }
