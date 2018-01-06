@@ -31,7 +31,7 @@ jpa:
       showSql: false
       formatSql: false
     cache:
-      accessType:
+      accessType: ""
       enabled: true
       provider: ignite
       fabricName: sunshower-data-fabric
