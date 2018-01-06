@@ -9,20 +9,26 @@ import java.util.Properties;
 public class HibernateProviderConfigurationSource implements  JpaProviderProperties {
 
 
+    private final DataDefinitionLanguage ddl;
     private final SearchConfiguration search;
     private final HibernateCacheConfiguration cache;
     private final HibernateDialectProperties provider;
     
     public HibernateProviderConfigurationSource(
+            final DataDefinitionLanguage ddl,
             final SearchConfiguration search,
             final HibernateDialectProperties provider,
             final HibernateCacheConfiguration cache
     ) {
+        this.ddl = ddl;
         this.cache = cache;
         this.search = search;
         this.provider = provider;
     }
 
+    public DataDefinitionLanguage ddl() {
+        return ddl;
+    }
 
     public HibernateCacheConfiguration cache() {
         return cache;
@@ -32,6 +38,13 @@ public class HibernateProviderConfigurationSource implements  JpaProviderPropert
         return provider;
     }
 
+    public SearchConfiguration getSearch() {
+        return search;
+    }
+
+    public HibernateCacheConfiguration getCache() {
+        return cache;
+    }
 
     public Properties toNative() {
         final Properties properties = new Properties();
@@ -48,11 +61,10 @@ public class HibernateProviderConfigurationSource implements  JpaProviderPropert
     }
 
     private void configureDiagnostics(Properties properties) {
-        DataDefinitionLanguage ddl = provider.ddl();
-        properties.setProperty("hibernate.show_sql", Boolean.toString(ddl.isShowSql()));
-        properties.setProperty("hibernate.format_sql", Boolean.toString(ddl.isFormatSql()));
-        if(ddl.isGenerate()) {
-            properties.setProperty("hibernate.hbm2ddl.auto", ddl.getStrategy());
+        properties.setProperty("hibernate.show_sql", Boolean.toString(ddl.showSql()));
+        properties.setProperty("hibernate.format_sql", Boolean.toString(ddl.formatSql()));
+        if(ddl.generate()) {
+            properties.setProperty("hibernate.hbm2ddl.auto", ddl.strategy());
         }
     }
 

@@ -3,7 +3,10 @@ package io.sunshower.persist.hibernate;
 
 public interface SearchConfiguration {
 
-    String type();
+    default String type() {
+        return "hibernate.search.default.directory_provider";
+        
+    }
 
     String value();
 

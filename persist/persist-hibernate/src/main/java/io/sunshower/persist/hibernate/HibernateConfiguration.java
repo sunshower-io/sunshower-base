@@ -31,26 +31,33 @@ public class HibernateConfiguration {
 
     @Bean
     public HibernateProviderConfigurationSource hibernateProviderConfigurationSource(
+            DataDefinitionLanguage ddl,
             SearchConfiguration searchConfiguration,
             HibernateDialectProperties props,
             HibernateCacheConfiguration cacheConfiguration
     ) {
         return new HibernateProviderConfigurationSource(
+                ddl,
                 searchConfiguration, 
                 props, 
                 cacheConfiguration
         );
         
     }
+    
+    @Bean
+    public DataDefinitionLanguage dataDefinitionLanguage(ConfigurationProvider source) {
+        return source.bind("jpa.provider.ddl", DataDefinitionLanguage.class);
+    }
 
     @Bean
     public HibernateCacheConfiguration hibernateCacheConfiguration(ConfigurationProvider source) {
-        return source.bind("jpa.cache", HibernateCacheConfiguration.class);
+        return source.bind("jpa.provider.cache", HibernateCacheConfiguration.class);
     }
 
     @Bean
     public SearchConfiguration searchConfiguration(ConfigurationProvider source) {
-        return source.bind("jpa.search", SearchConfiguration.class);
+        return source.bind("jpa.provider.search", SearchConfiguration.class);
     }
 
     @Bean
@@ -101,7 +108,7 @@ public class HibernateConfiguration {
                         .getScannedPackages());
 
         Properties properties = Configurations.toNative(provider, source);
-        configureCache(properties, provider, source);
+        configureCache(properties, provider, source.getCache(), source);
         entityManagerFactoryBean.setJpaProperties(properties);
         return entityManagerFactoryBean;
     }
@@ -110,6 +117,7 @@ public class HibernateConfiguration {
     private void configureCache(
             Properties jpaProperties,
             ConfigurationProvider cfgProvider,
+            HibernateCacheConfiguration cache,
             HibernateProviderConfigurationSource source
     ) {
         HibernateDialectProperties provider = Configurations.getProvider(cfgProvider);
@@ -118,7 +126,6 @@ public class HibernateConfiguration {
             return;
         }
 
-        HibernateCacheConfiguration cache = provider.cache();
         if(cache == null) {
             log.info("No L2 Cache configured");
             return;

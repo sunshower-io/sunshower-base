@@ -36,21 +36,21 @@ public class HibernateProviderConfigurationSourceTest {
 
     @Test
     public void ensureDdlShowSqlExists() {
-        assertThat(props.getProvider().ddl().isShowSql(), is(true));
+        assertThat(props.ddl().showSql(), is(true));
     }
 
     @Test
     public void ensureDdlGenerateExists() {
-        assertThat(props.getProvider().ddl().isGenerate(), is(false));
+        assertThat(props.ddl().generate(), is(false));
     }
 
     @Test
     public void ensureSearchTypeIsCorrect() {
-        assertThat(props.getProvider().search().type(), is("hibernate.search.default.directory_provider"));
+        assertThat(props.getSearch().type(), is("hibernate.getSearch.default.directory_provider"));
     }
     @Test
     public void ensureSearchValueIsCorrect() {
-        assertThat(props.getProvider().search().type(), is("filesystem"));
+        assertThat(props.getSearch().type(), is("filesystem"));
     }
 
 

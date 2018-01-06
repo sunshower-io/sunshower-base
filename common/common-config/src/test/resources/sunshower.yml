@@ -26,6 +26,7 @@ jpa:
       type: hibernate.search.default.directory_provider
       value: filesystem
     ddl:
+      strategy: none
       generate: false
       showSql: false
       formatSql: false
