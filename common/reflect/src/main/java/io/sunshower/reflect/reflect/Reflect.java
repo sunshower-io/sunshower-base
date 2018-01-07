@@ -2,6 +2,8 @@ package io.sunshower.reflect.reflect;
 
 import io.sunshower.lambda.Lazy;
 import io.sunshower.lambda.Option;
+import org.springframework.aop.framework.Advised;
+import org.springframework.aop.support.AopUtils;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -11,11 +13,14 @@ import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 import static io.sunshower.lambda.Lazy.takeWhile;
+import static org.springframework.aop.support.AopUtils.isAopProxy;
+import static org.springframework.aop.support.AopUtils.isCglibProxy;
+import static org.springframework.aop.support.AopUtils.isJdkDynamicProxy;
 
 
 public class Reflect {
 
-    private Reflect(){
+    private Reflect() {
         throw new RuntimeException("No reflect instances for you!");
     }
 
@@ -33,8 +38,22 @@ public class Reflect {
         return collectOverHierarchy(type, cl -> f.apply(cl).stream());
     }
 
+    
+    public static boolean isProxy(Object o) {
+        return isJdkDynamicProxy(o) ||
+                isCglibProxy(o) ||
+                isAopProxy(o);
+        
+    }
 
-
+    @SuppressWarnings("unchecked")
+    public static <T> T resolveProxied(Object proxy) throws Exception {
+        if (isProxy(proxy)) {
+            return (T) ((Advised) proxy).getTargetSource().getTarget();
+        } else {
+            return (T) proxy;
+        }
+    }
 
     @SuppressWarnings("unchecked")
     public static Stream<Class<?>> linearSupertypes(Class<?> a) {
@@ -55,7 +74,7 @@ public class Reflect {
         } catch (java.lang.InstantiationException e) {
             throw new InstantiationException(
                     "Failed to instantiate class.  " +
-                            "Did you pass an interface or abstract class?",  e);
+                            "Did you pass an interface or abstract class?", e);
         }
     }
 }

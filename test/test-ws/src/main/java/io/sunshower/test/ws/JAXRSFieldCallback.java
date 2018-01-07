@@ -1,6 +1,8 @@
 package io.sunshower.test.ws;
 
+import io.sunshower.reflect.reflect.Reflect;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
+import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.util.ReflectionUtils;
 
@@ -29,7 +31,11 @@ public class JAXRSFieldCallback implements ReflectionUtils.FieldCallback {
         }
         ReflectionUtils.makeAccessible(field);
         if (isRemote(field)) {
-            injectRemote(bean, field);
+            try {
+                injectRemote(Reflect.resolveProxied(bean), field);
+            } catch (Exception ex) {
+                throw new IllegalArgumentException(ex);
+            }
         }
         if (isContext(field)) {
             injectContext(field);
@@ -61,7 +67,7 @@ public class JAXRSFieldCallback implements ReflectionUtils.FieldCallback {
                 try {
                     field.set(instance, value);
                     return true;
-                } catch(ReflectiveOperationException ex) {
+                } catch (ReflectiveOperationException ex) {
                     throw new IllegalStateException(ex);
                 }
             }

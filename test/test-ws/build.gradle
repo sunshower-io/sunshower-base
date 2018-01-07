@@ -3,6 +3,7 @@ dependencies {
     compile 'org.jboss.resteasy:resteasy-jaxrs'
     compile 'org.jboss.resteasy:resteasy-spring'
     compile project(':common:common-ws')
+    compile project(':common:reflect')
     compile project(':common:common-config')
     compile project(':test:test-core')
     compile 'javax.inject:javax.inject'

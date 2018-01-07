@@ -5,6 +5,7 @@ dependencies {
     
     compile project(':common:lang')
     compile project(':common:lambda')
+    compile 'org.springframework:spring-aop'
 
 
 

@@ -9,8 +9,7 @@ import org.junit.runner.RunWith;
 import java.lang.annotation.Annotation;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.*;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -22,6 +21,18 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @RunWith(JUnitPlatform.class)
 public class ReflectTest {
+
+
+    interface Iface {
+
+    }
+    @Test
+    public void ensureResolvingProxiedObjectWorks() throws Exception {
+        Iface iface = (Iface) Proxy.newProxyInstance(getClass().getClassLoader(), new Class<?>[]{Iface.class}, 
+                (proxy, method, args) -> null);
+        
+        Reflect.resolveProxied(iface);
+    }
 
 
     @Test
