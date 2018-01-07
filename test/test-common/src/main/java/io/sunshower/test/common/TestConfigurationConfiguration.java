@@ -9,6 +9,7 @@ import org.cfg4j.source.git.GitConfigurationSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.ContextConfiguration;
 
+import javax.inject.Named;
 import java.io.File;
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -27,12 +28,21 @@ public class TestConfigurationConfiguration {
 
 
     @Bean
-    public ConfigurationProvider testConfigurationProvider(ConfigurationSource source) {
+    public ConfigurationProvider testConfigurationProvider(ConfigurationSource source,
+                                                           @Named(
+                                                                   TestConfigurations.TEST_CONFIGURATION_REPOSITORY_PATH
+                                                           ) String location
+    ) {
         return new ConfigurationProviderBuilder()
                 .withConfigurationSource(source)
                 .withEnvironment(
-                        new ImmutableEnvironment("/common/common-config/src/test/resources")
+                        new ImmutableEnvironment(location)
                 ).build();
+    }
+
+    @Bean(name = TestConfigurations.TEST_CONFIGURATION_REPOSITORY_PATH)
+    public String testConfigurationLocation() {
+        return "/common/common-config/src/test/resources";
     }
 
 
