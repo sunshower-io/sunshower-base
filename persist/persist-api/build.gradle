@@ -4,4 +4,5 @@ dependencies {
     compile project(':common:core')
     compile 'org.junit.platform:junit-platform-runner'
     compile('org.hibernate:hibernate-search-orm')
+    compile group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
 }

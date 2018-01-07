@@ -2,6 +2,7 @@ package io.sunshower.persist.hibernate;
 
 import io.sunshower.persist.DefaultIndexedEntityService;
 import io.sunshower.persist.IndexedEntityService;
+import io.sunshower.persistence.Dialect;
 import io.sunshower.persistence.annotations.CacheMode;
 import io.sunshower.test.common.TestConfigurationConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -15,6 +16,11 @@ import org.springframework.context.annotation.Import;
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 @CacheMode(CacheMode.Mode.Local)
 public class TestConfig {
+    
+    @Bean
+    public Dialect dialect() {
+        return Dialect.Postgres;
+    }
     
     
     

@@ -11,7 +11,7 @@ import io.sunshower.persistence.annotations.Persistence;
                 "test.entities.one2many",
                 "test.entities.many2many",
         },
-        migrationLocations = "classpath:h2"
+        migrationLocations = "classpath:{dialect}"
 )
 public class Pcfg {
 }
