@@ -1,7 +1,5 @@
 package io.sunshower.test.ws;
 
-import io.sunshower.common.ws.SdkManifest;
-import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.internal.ClientConfiguration;
 import org.jboss.resteasy.core.Dispatcher;
 import org.jboss.resteasy.core.ResourceMethodRegistry;
@@ -16,16 +14,11 @@ import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.DependsOn;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.core.annotation.Order;
 
-import javax.inject.Singleton;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.ext.Providers;
-import java.util.ArrayList;
-import java.util.List;
 
 public class JAXRSConfiguration {
     
