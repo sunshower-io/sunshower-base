@@ -11,6 +11,8 @@ import java.lang.annotation.*;
         ElementType.TYPE
 })
 @Retention(RetentionPolicy.RUNTIME)
-@ExtendWith(RemoteExtension.class)
-public @interface RESTTest {
+@BootstrapWith(RESTBootstrapper.class)
+public @interface EnableJAXRS {
+    int port() default -1;
+    String location() default "127.0.0.1";
 }

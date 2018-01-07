@@ -1,13 +1,11 @@
 package io.sunshower.persist.hibernate;
 
 import io.sunshower.persist.HibernateTestCase;
-import io.sunshower.test.common.TestConfigurationConfiguration;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.platform.runner.JUnitPlatform;
 import org.junit.runner.RunWith;
 import static org.hamcrest.CoreMatchers.*;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.inject.Inject;
@@ -51,7 +49,7 @@ public class HibernateProviderConfigurationSourceTest extends HibernateTestCase 
     }
     @Test
     public void ensureSearchValueIsCorrect() {
-        assertThat(props.getSearch().value(), is("filesystem"));
+        assertThat(props.getSearch().value(), is("local-heap"));
     }
 
 

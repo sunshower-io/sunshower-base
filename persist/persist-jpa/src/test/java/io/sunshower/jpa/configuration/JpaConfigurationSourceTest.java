@@ -1,16 +1,15 @@
 package io.sunshower.jpa.configuration;
 
 import io.sunshower.persist.core.DataSourceConfiguration;
-import io.sunshower.persistence.annotations.Persistence;
+import io.sunshower.test.common.TestConfigurationConfiguration;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.platform.runner.JUnitPlatform;
 import org.junit.runner.RunWith;
 import io.sunshower.jpa.flyway.FlywayConfiguration;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.inject.Inject;
 import javax.sql.DataSource;
@@ -30,11 +29,12 @@ import static org.junit.Assert.assertThat;
         classes = {
                 FlywayConfiguration.class,
                 DataSourceConfiguration.class,
-                H2TestConfiguration.class
+                H2TestConfiguration.class,
+                TestConfigurationConfiguration.class
         }
 )
+@DirtiesContext
 @ExtendWith(SpringExtension.class)
-@SpringBootTest
 public class JpaConfigurationSourceTest {
 
 

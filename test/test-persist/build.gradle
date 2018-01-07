@@ -1,4 +1,8 @@
 dependencies {
+
+
+    compile 'org.glassfish:javax.el'
+    compile 'org.hibernate.validator:hibernate-validator'
     testCompile 'com.zaxxer:HikariCP'
     compile "com.h2database:h2"
     compile project(":test:test-common")
@@ -10,4 +14,5 @@ dependencies {
     compile("org.springframework.security:spring-security-test")
     compile 'org.yaml:snakeyaml'
     compile 'org.junit.platform:junit-platform-runner'
+    compile group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
 }

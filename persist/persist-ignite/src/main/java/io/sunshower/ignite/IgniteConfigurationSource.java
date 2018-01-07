@@ -17,7 +17,7 @@ public class IgniteConfigurationSource {
 
     public IgniteConfigurationSource(
             String name,
-            IgniteMemorySettings memory, 
+            IgniteMemorySettings memory,
             IgniteDiscoverySettings discovery
     ) {
         this.memory = memory;
@@ -45,13 +45,10 @@ public class IgniteConfigurationSource {
     }
 
     private void configureDiscovery(IgniteConfiguration cfg) {
-        if(discovery != null) {
-            if(discovery.mode() != null && discovery.mode().trim().equals("vm-local")) {
-
-                TcpDiscoverySpi disco = new TcpDiscoverySpi()
-                        .setIpFinder(new TcpDiscoveryVmIpFinder(true));
-                cfg.setDiscoverySpi(disco);
-            }
+        if (!(discovery == null || discovery.mode() == null) && discovery.mode().trim().equals("vm-local")) {
+            TcpDiscoverySpi disco = new TcpDiscoverySpi()
+                    .setIpFinder(new TcpDiscoveryVmIpFinder(true));
+            cfg.setDiscoverySpi(disco);
         }
     }
 
@@ -71,10 +68,10 @@ public class IgniteConfigurationSource {
     }
 
 
-
     public interface IgniteMemorySettings {
 
         long max();
+
         String mode();
     }
 

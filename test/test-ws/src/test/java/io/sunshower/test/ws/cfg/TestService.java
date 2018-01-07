@@ -14,6 +14,7 @@ public interface TestService {
     
     @GET
     @Path("{value}")
+    @Produces({MediaType.TEXT_PLAIN})
     String call(@PathParam("value") String input);
     
     

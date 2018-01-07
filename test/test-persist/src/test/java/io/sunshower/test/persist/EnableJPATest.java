@@ -1,12 +1,12 @@
 package io.sunshower.test.persist;
 
+import io.sunshower.test.common.TestConfigurationConfiguration;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.platform.runner.JUnitPlatform;
 import org.junit.runner.RunWith;
 
 import io.sunshower.persistence.PersistenceUnit;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -22,12 +22,12 @@ import static org.hamcrest.CoreMatchers.*;
 
 @Configuration
 @Transactional
-@SpringBootTest
 @ExtendWith(SpringExtension.class)
 @RunWith(JUnitPlatform.class)
 @ContextConfiguration(classes = {
         TestConfiguration.class,
-        HibernateTestCase.class
+        HibernateTestCase.class,
+        TestConfigurationConfiguration.class
 })
 public class EnableJPATest {
 

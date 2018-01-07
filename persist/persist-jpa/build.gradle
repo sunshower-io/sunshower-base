@@ -4,6 +4,7 @@ dependencies {
     compile 'org.flywaydb:flyway-core'
 
 
+    testCompile project(':test:test-common')
     compile 'org.hibernate.validator:hibernate-validator'
 
     testCompile 'org.springframework:spring-test'
