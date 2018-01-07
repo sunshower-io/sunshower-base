@@ -126,10 +126,5 @@ public class JAXRSConfiguration {
     }
 
 
-    @Bean
-    public SdkManifest sdkManifest(ApplicationContext context) {
-        return new SdkManifest(context);
-    }
-
 
 }
