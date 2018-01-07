@@ -7,6 +7,7 @@ import org.cfg4j.source.context.environment.ImmutableEnvironment;
 import org.cfg4j.source.git.FirstTokenBranchResolver;
 import org.cfg4j.source.git.GitConfigurationSourceBuilder;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Primary;
 import org.springframework.test.context.ContextConfiguration;
 
 import javax.inject.Named;
