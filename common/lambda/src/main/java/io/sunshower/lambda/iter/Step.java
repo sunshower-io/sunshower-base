@@ -1,17 +1,14 @@
 package io.sunshower.lambda.iter;
 
-
 public interface Step<T, U, V extends Exception> {
 
-    void read(T input);
+  void read(T input);
 
-    Iteratee.State getState();
+  Iteratee.State getState();
 
+  V getError();
 
-    V getError();
+  U getResult();
 
-    U getResult();
-
-    void reset();
-
+  void reset();
 }

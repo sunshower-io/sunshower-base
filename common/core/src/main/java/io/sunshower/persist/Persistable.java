@@ -2,15 +2,13 @@ package io.sunshower.persist;
 
 import java.io.Serializable;
 
-
 public interface Persistable<ID extends Serializable> {
 
-    ID getId();
+  ID getId();
 
-    int hashCode();
+  int hashCode();
 
-    boolean equals(Object o);
+  boolean equals(Object o);
 
-    String toString();
-
+  String toString();
 }

@@ -1,4 +1,3 @@
-
 @XmlAccessorType(XmlAccessType.NONE)
 package io.sunshower.persistence.core;
 

@@ -1,17 +1,13 @@
 package io.sunshower.persist.hibernate;
 
-
-
 public interface DataDefinitionLanguage {
-    default String strategy() {
-        return "none";
-    }
+  default String strategy() {
+    return "none";
+  }
 
-    boolean generate();
+  boolean generate();
 
+  boolean showSql();
 
-    boolean showSql();
-
-
-    boolean formatSql();
+  boolean formatSql();
 }

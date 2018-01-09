@@ -1,6 +1,3 @@
 package io.sunshower.reflect.incant;
 
-public interface Invocation<U> {
-    
-    
-}
+public interface Invocation<U> {}

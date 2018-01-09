@@ -2,23 +2,19 @@ package io.sunshower.persist.hibernate;
 
 public interface HibernateCacheConfiguration {
 
-    String fabricName();
+  String fabricName();
 
-    boolean enabled();
+  boolean enabled();
 
+  String provider();
 
-    String provider();
+  boolean enableQueryCache();
 
-    boolean enableQueryCache();
+  boolean generateStatistics();
 
-    boolean generateStatistics();
+  String regionFactory();
 
-    String regionFactory();
+  String releaseMode();
 
-
-    String releaseMode();
-
-
-    String accessType();
-
+  String accessType();
 }

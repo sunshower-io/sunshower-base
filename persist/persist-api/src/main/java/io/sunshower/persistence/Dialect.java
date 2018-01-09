@@ -1,16 +1,16 @@
 package io.sunshower.persistence;
 
-
 public enum Dialect {
-    H2("h2"),
-    Postgres("postgres");
+  H2("h2"),
+  Postgres("postgres");
 
-    final String key;
-    Dialect(String key) {
-        this.key = key;
-    }
+  final String key;
 
-    public String getKey() {
-        return key;
-    }
+  Dialect(String key) {
+    this.key = key;
+  }
+
+  public String getKey() {
+    return key;
+  }
 }

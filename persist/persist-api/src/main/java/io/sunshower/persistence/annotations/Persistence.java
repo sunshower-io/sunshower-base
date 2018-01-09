@@ -5,17 +5,15 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Persistence {
 
-    String id() default "";
+  String id() default "";
 
-    String[] scannedPackages() default {};
+  String[] scannedPackages() default {};
 
-    Class<?>[] entities() default {};
+  Class<?>[] entities() default {};
 
-    String[] migrationLocations() default {};
-
+  String[] migrationLocations() default {};
 }

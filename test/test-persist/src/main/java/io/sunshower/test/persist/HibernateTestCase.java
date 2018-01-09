@@ -7,23 +7,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.transaction.annotation.Transactional;
 
-
-
-
-
 @Import({
-        FlywayConfiguration.class,
-        DataSourceConfiguration.class,
-        FlywayConfiguration.class,
-        HibernateConfiguration.class,
+  FlywayConfiguration.class,
+  DataSourceConfiguration.class,
+  FlywayConfiguration.class,
+  HibernateConfiguration.class,
 })
 @Transactional
 @Configuration
-public class HibernateTestCase {
-
-
-
-
-
-
-}
+public class HibernateTestCase {}

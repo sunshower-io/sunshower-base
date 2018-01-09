@@ -1,18 +1,14 @@
 package io.sunshower.persistence.core;
 
-import java.io.Serializable;
 import java.util.Collection;
-
 
 public interface Hierarchical<T, U extends Hierarchical<T, U>> {
 
-    U getParent();
+  U getParent();
 
+  Collection<U> getChildren();
 
-    Collection<U> getChildren();
+  boolean addChild(U child);
 
-    boolean addChild(U child);
-
-
-    void setParent(U parent);
+  void setParent(U parent);
 }

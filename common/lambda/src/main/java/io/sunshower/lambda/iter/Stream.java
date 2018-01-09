@@ -2,11 +2,9 @@ package io.sunshower.lambda.iter;
 
 import java.util.Iterator;
 
-
 public interface Stream<T> extends Iterator<T> {
 
-    T next();
+  T next();
 
-    boolean hasNext();
-
+  boolean hasNext();
 }

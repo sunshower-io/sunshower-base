@@ -8,26 +8,13 @@ import org.springframework.context.annotation.Import;
 import persist.test.TestService;
 import persist.test.TestServiceImpl;
 
-
-
 @Configuration
-@Import({
-        HibernateTestCase.class,
-        TestConfigurationConfiguration.class
-})
-@Persistence(
-        id = "audit",
-        scannedPackages = "persist.test",
-        migrationLocations = "classpath:h2"
-)
-
+@Import({HibernateTestCase.class, TestConfigurationConfiguration.class})
+@Persistence(id = "audit", scannedPackages = "persist.test", migrationLocations = "classpath:h2")
 public class TestConfiguration {
 
-    @Bean
-    public TestService testService() {
-        return new TestServiceImpl();
-    }
-
-    
-
+  @Bean
+  public TestService testService() {
+    return new TestServiceImpl();
+  }
 }

@@ -1,14 +1,11 @@
 package io.sunshower.persist;
 
-import org.hibernate.search.jpa.FullTextEntityManager;
-
 import javax.persistence.EntityManager;
-
+import org.hibernate.search.jpa.FullTextEntityManager;
 
 public interface IndexedEntityService {
 
-    EntityManager entityManager();
+  EntityManager entityManager();
 
-
-    FullTextEntityManager getFtEntityManager();
+  FullTextEntityManager getFtEntityManager();
 }

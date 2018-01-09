@@ -8,7 +8,10 @@ dependencies {
 
     compile project(':persist:persist-jpa')
     compile project(':persist:persist-core')
-    compile project(':common:common-config')
+
+    compile(project(':common:common-config')) {
+        transitive = true
+    }
     
     compile group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
 

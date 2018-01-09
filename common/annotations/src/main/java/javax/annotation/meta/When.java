@@ -1,14 +1,11 @@
 package javax.annotation.meta;
 
-
 public enum When {
-    
-    ALWAYS,
-    
-    UNKNOWN,
-    
-    MAYBE,
-    
-    NEVER;
+  ALWAYS,
 
+  UNKNOWN,
+
+  MAYBE,
+
+  NEVER;
 }

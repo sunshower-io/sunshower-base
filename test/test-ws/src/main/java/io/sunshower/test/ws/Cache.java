@@ -5,16 +5,15 @@ import java.util.Map;
 
 class Cache extends LinkedHashMap<String, Class<?>> {
 
-    private final int maxSize;
+  private final int maxSize;
 
-    Cache(int maxSize) {
-        super(16, 0.75f, true);
-        this.maxSize = maxSize;
-    }
+  Cache(int maxSize) {
+    super(16, 0.75f, true);
+    this.maxSize = maxSize;
+  }
 
-    @Override
-    protected boolean removeEldestEntry(Map.Entry<String, Class<?>> eldest) {
-        return size() > this.maxSize;
-    }
-
+  @Override
+  protected boolean removeEldestEntry(Map.Entry<String, Class<?>> eldest) {
+    return size() > this.maxSize;
+  }
 }

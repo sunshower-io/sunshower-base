@@ -1,9 +1,5 @@
-
 @XmlJavaTypeAdapters({
-        @XmlJavaTypeAdapter(
-                value = IdentifierConverter.class,
-                type = Identifier.class
-        )
+  @XmlJavaTypeAdapter(value = IdentifierConverter.class, type = Identifier.class)
 })
 package io.sunshower.common.rs;
 

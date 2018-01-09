@@ -1,11 +1,9 @@
 package io.sunshower.persistence.core;
 
-
 public enum EventType {
-    Create,
+  Create,
 
-    Update,
+  Update,
 
-    Delete
-
+  Delete
 }

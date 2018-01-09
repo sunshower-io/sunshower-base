@@ -20,11 +20,10 @@
     <env.version>1.0.0-SNAPSHOT</env.version>
 
 
-    <jaxrs-api.version>2.0.1</jaxrs-api.version>
+    <jaxrs-api.version>2.1</jaxrs-api.version>
     <jsr-330.version>1</jsr-330.version>
     <mockito.version>2.0.44-beta</mockito.version>
     <moxy.version>2.7.0-SNAPSHOT</moxy.version>
-    <barometer.version>1.0.3.Final</barometer.version>
     <h2.version>1.4.192</h2.version>
     <hibernate-jpa-2.1-api.version>1.0.0.Final</hibernate-jpa-2.1-api.version>
   </properties>

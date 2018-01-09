@@ -1,9 +1,3 @@
 package io.sunshower.lang.io;
 
-
-public class Reverser {
-
-
-
-
-}
+public class Reverser {}

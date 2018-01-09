@@ -4,28 +4,27 @@ import java.io.File;
 import java.net.URI;
 import java.net.URL;
 
-
 public interface Resource {
 
-    long length();
+  long length();
 
-    Resource get(String relativePath);
+  Resource get(String relativePath);
 
-    boolean exists();
+  boolean exists();
 
-    String getDescription();
+  String getDescription();
 
-    File getFile();
+  File getFile();
 
-    String getFilename();
+  String getFilename();
 
-    URI getURI();
+  URI getURI();
 
-    URL getURL();
+  URL getURL();
 
-    boolean isOpen();
+  boolean isOpen();
 
-    boolean isReadable();
+  boolean isReadable();
 
-    long lastModified();
+  long lastModified();
 }

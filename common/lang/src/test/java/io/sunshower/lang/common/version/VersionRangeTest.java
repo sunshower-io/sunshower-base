@@ -1,75 +1,71 @@
 package io.sunshower.lang.common.version;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.*;
+
 import org.junit.jupiter.api.Test;
 import org.junit.platform.runner.JUnitPlatform;
 import org.junit.runner.RunWith;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
-
-
 @RunWith(JUnitPlatform.class)
 public class VersionRangeTest {
 
+  @Test
+  public void ensureVersionRangeParsesSingleVersionCorrectly() {
 
-    @Test
-    public void ensureVersionRangeParsesSingleVersionCorrectly() {
+    VersionRange range = VersionRange.parse("1.0");
+    Version lowerBound = range.getLowerBound();
+    Version upperBound = range.getUpperBound();
+    assertThat(lowerBound.isClosed(), is(true));
+    assertThat(lowerBound, is(upperBound));
+  }
 
-        VersionRange range = VersionRange.parse("1.0");
-        Version lowerBound = range.getLowerBound();
-        Version upperBound = range.getUpperBound();
-        assertThat(lowerBound.isClosed(), is(true));
-        assertThat(lowerBound, is(upperBound));
-    }
+  @Test
+  public void ensureVersionRangeParsingTwoOpenRangesProducesExpectedResults() {
+    VersionRange range = VersionRange.parse("(1.0, 1.1)");
+    Version lowerBound = range.getLowerBound();
+    assertThat(lowerBound.getValue(), is("1.0"));
+    assertThat(lowerBound.isClosed(), is(false));
 
-    @Test
-    public void ensureVersionRangeParsingTwoOpenRangesProducesExpectedResults() {
-        VersionRange range = VersionRange.parse("(1.0, 1.1)");
-        Version lowerBound = range.getLowerBound();
-        assertThat(lowerBound.getValue(), is("1.0"));
-        assertThat(lowerBound.isClosed(), is(false));
+    Version upperBound = range.getUpperBound();
+    assertThat(upperBound.getValue(), is("1.1"));
+    assertThat(upperBound.isClosed(), is(false));
+  }
 
-        Version upperBound = range.getUpperBound();
-        assertThat(upperBound.getValue(), is("1.1"));
-        assertThat(upperBound.isClosed(), is(false));
-    }
+  @Test
+  public void ensureVersionRangeParsingOpenLowerBoundAndClosedUpperBoundProducesExpectedResult() {
+    VersionRange range = VersionRange.parse("(1.0, 1.1]");
+    Version lowerBound = range.getLowerBound();
+    assertThat(lowerBound.getValue(), is("1.0"));
+    assertThat(lowerBound.isClosed(), is(false));
 
-    @Test
-    public void ensureVersionRangeParsingOpenLowerBoundAndClosedUpperBoundProducesExpectedResult() {
-        VersionRange range = VersionRange.parse("(1.0, 1.1]");
-        Version lowerBound = range.getLowerBound();
-        assertThat(lowerBound.getValue(), is("1.0"));
-        assertThat(lowerBound.isClosed(), is(false));
+    Version upperBound = range.getUpperBound();
+    assertThat(upperBound.getValue(), is("1.1"));
+    assertThat(upperBound.isClosed(), is(true));
+  }
 
-        Version upperBound = range.getUpperBound();
-        assertThat(upperBound.getValue(), is("1.1"));
-        assertThat(upperBound.isClosed(), is(true));
-    }
+  @Test
+  public void ensureVersionRangeParsingClosedLowerBoundAndOpenUpperBoundProducesExpectedResult() {
+    VersionRange range = VersionRange.parse("[1.0, 1.1]");
+    Version lowerBound = range.getLowerBound();
+    assertThat(lowerBound.getValue(), is("1.0"));
+    assertThat(lowerBound.isClosed(), is(true));
+    Version upperBound = range.getUpperBound();
+    assertThat(upperBound.getValue(), is("1.1"));
+    assertThat(upperBound.isClosed(), is(true));
+  }
 
-    @Test
-    public void ensureVersionRangeParsingClosedLowerBoundAndOpenUpperBoundProducesExpectedResult() {
-        VersionRange range = VersionRange.parse("[1.0, 1.1]");
-        Version lowerBound = range.getLowerBound();
-        assertThat(lowerBound.getValue(), is("1.0"));
-        assertThat(lowerBound.isClosed(), is(true));
-        Version upperBound = range.getUpperBound();
-        assertThat(upperBound.getValue(), is("1.1"));
-        assertThat(upperBound.isClosed(), is(true));
-    }
+  @Test
+  public void ensureVersionRangeContainsValueThatsBetweenThem() {
 
+    VersionRange range = VersionRange.parse("[1.0, 1.1]");
+    assertThat(range.contains(new Version("1.0")), is(true));
+  }
 
-    @Test
-    public void ensureVersionRangeContainsValueThatsBetweenThem() {
+  @Test
+  public void ensureOpenLowerRangeDoesNotContainLowerValue() {
 
-        VersionRange range = VersionRange.parse("[1.0, 1.1]");
-        assertThat(range.contains(new Version("1.0")), is(true));
-    }
-
-    @Test
-    public void ensureOpenLowerRangeDoesNotContainLowerValue() {
-
-        VersionRange range = VersionRange.parse("(1.0, 1.1]");
-        assertThat(range.contains(new Version("1.0")), is(false));
-    }
-
+    VersionRange range = VersionRange.parse("(1.0, 1.1]");
+    assertThat(range.contains(new Version("1.0")), is(false));
+  }
 }

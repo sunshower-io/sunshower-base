@@ -7,18 +7,14 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.test.context.ActiveProfiles;
 
-
 @Configuration
 @ActiveProfiles("postgres")
-@Persistence(
-        id = "test",
-        migrationLocations = "classpath:{dialect}"
-)
+@Persistence(id = "test", migrationLocations = "classpath:{dialect}")
 public class PostgresTestConfiguration {
 
-    @Bean
-    @Primary
-    public Dialect databaseDialect() {
-        return Dialect.Postgres;
-    }
+  @Bean
+  @Primary
+  public Dialect databaseDialect() {
+    return Dialect.Postgres;
+  }
 }

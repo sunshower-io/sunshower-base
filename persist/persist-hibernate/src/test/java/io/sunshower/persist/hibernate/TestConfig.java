@@ -10,30 +10,24 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Import;
 
-
 @Configuration
 @Import(TestConfigurationConfiguration.class)
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 @CacheMode(CacheMode.Mode.Local)
 public class TestConfig {
-    
-    @Bean
-    public Dialect dialect() {
-        return Dialect.Postgres;
-    }
-    
-    
-    
 
-    @Bean
-    public Pcfg pcfg() {
-        return new Pcfg();
-    }
+  @Bean
+  public Dialect dialect() {
+    return Dialect.Postgres;
+  }
 
-    @Bean
-    public IndexedEntityService indexedEntityService() {
-        return new DefaultIndexedEntityService();
-    }
+  @Bean
+  public Pcfg pcfg() {
+    return new Pcfg();
+  }
 
-
+  @Bean
+  public IndexedEntityService indexedEntityService() {
+    return new DefaultIndexedEntityService();
+  }
 }

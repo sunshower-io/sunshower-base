@@ -1,6 +1,3 @@
 package io.sunshower.persist.hibernate;
 
-
-
-public class ProviderTestConfiguration {
-}
+public class ProviderTestConfiguration {}

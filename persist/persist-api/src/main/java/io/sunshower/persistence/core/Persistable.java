@@ -1,28 +1,22 @@
 package io.sunshower.persistence.core;
 
-import java.io.Serializable;
-
 import io.sunshower.common.Identifier;
 import io.sunshower.persist.Sequence;
-
+import java.io.Serializable;
 
 public interface Persistable<ID extends Serializable> {
 
-    ID getId();
+  ID getId();
 
-    void setId(ID id);
+  void setId(ID id);
 
+  String toString();
 
-    String toString();
+  int hashCode();
 
+  Identifier getIdentifier();
 
-    int hashCode();
+  boolean equals(Object o);
 
-    Identifier getIdentifier();
-
-    boolean equals(Object o);
-
-    
-    Sequence<ID> getSequence();
-
+  Sequence<ID> getSequence();
 }

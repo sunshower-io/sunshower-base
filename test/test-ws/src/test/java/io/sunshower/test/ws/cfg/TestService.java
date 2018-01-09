@@ -7,15 +7,13 @@ import javax.ws.rs.core.MediaType;
 @Produces({MediaType.APPLICATION_JSON})
 @Consumes({MediaType.APPLICATION_JSON})
 public interface TestService {
-    
-    @POST
-    @Path("test")
-    TestEntity save(TestEntity testEntity);
-    
-    @GET
-    @Path("{value}")
-    @Produces({MediaType.TEXT_PLAIN})
-    String call(@PathParam("value") String input);
-    
-    
+
+  @POST
+  @Path("test")
+  TestEntity save(TestEntity testEntity);
+
+  @GET
+  @Path("{value}")
+  @Produces({MediaType.TEXT_PLAIN})
+  String call(@PathParam("value") String input);
 }
