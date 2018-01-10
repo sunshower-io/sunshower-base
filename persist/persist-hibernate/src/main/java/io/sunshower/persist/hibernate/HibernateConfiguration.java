@@ -128,6 +128,7 @@ public class HibernateConfiguration {
     }
 
     jpaProperties.put("hibernate.cache.region.factory_class", cache.regionFactory());
+    jpaProperties.put("hibernate.default_schema", "SUNSHOWER");
 
     jpaProperties.put("org.apache.ignite.hibernate.grid_name", cache.fabricName());
   }

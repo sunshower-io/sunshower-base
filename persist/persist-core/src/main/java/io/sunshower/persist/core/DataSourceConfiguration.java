@@ -8,19 +8,20 @@ import io.sunshower.persistence.Dialect;
 import io.sunshower.persistence.UnsupportedDatabaseException;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.logging.Logger;
 import javax.inject.Singleton;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 import org.cfg4j.provider.ConfigurationProvider;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class DataSourceConfiguration {
 
-  static final Logger log = Logger.getLogger(DataSourceConfiguration.class.getName());
+  static final Logger log = LoggerFactory.getLogger(DataSourceConfiguration.class);
 
   @Bean
   @Singleton

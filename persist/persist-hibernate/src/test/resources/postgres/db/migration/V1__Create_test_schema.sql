@@ -1,4 +1,6 @@
 
+
+
 create table TS_V_ENTITY (
   id binary(16) primary key,
   name varchar(52),
@@ -78,3 +80,10 @@ create table HIER_PERSON (
 
     foreign key (parent_id) references HIER_PERSON(id)
 );
+
+create schema TEST_SCHEMA;
+
+create table TEST_SCHEMA.Entity (
+  id binary(16) primary key,
+  name varchar(255)
+)

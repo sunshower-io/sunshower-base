@@ -5,13 +5,8 @@ import io.sunshower.encodings.Encoding;
 import org.apache.lucene.document.Document;
 import org.hibernate.search.bridge.LuceneOptions;
 import org.hibernate.search.bridge.TwoWayFieldBridge;
-import org.hibernate.search.bridge.spi.EncodingBridge;
-import org.hibernate.search.bridge.spi.IgnoreAnalyzerBridge;
-import org.hibernate.search.bridge.spi.NullMarker;
-import org.hibernate.search.bridge.util.impl.ToStringNullMarker;
-import org.hibernate.search.metadata.NumericFieldSettingsDescriptor;
 
-public class IdentifierBridge implements IgnoreAnalyzerBridge, EncodingBridge, TwoWayFieldBridge {
+public class IdentifierBridge implements TwoWayFieldBridge {
 
   static final Encoding encoding = Base58.getInstance(Base58.Alphabets.Default);
 
@@ -35,15 +30,5 @@ public class IdentifierBridge implements IgnoreAnalyzerBridge, EncodingBridge, T
       return null;
     }
     return object.toString();
-  }
-
-  @Override
-  public NumericFieldSettingsDescriptor.NumericEncodingType getEncodingType() {
-    return NumericFieldSettingsDescriptor.NumericEncodingType.UNKNOWN;
-  }
-
-  @Override
-  public NullMarker createNullMarker(String indexNullAs) throws NumberFormatException {
-    return new ToStringNullMarker("");
   }
 }

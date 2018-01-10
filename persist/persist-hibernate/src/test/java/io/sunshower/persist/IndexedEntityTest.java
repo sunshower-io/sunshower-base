@@ -21,6 +21,7 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 import test.entities.IndexedEntity;
+import test.entities.SchemaEntity;
 
 @Transactional
 @RunWith(JUnitPlatform.class)
@@ -45,6 +46,12 @@ public class IndexedEntityTest extends HibernateTestCase {
   @SuppressWarnings("unchecked")
   List<IndexedEntity> query(Query query) {
     return entityManager.createFullTextQuery(query, IndexedEntity.class).getResultList();
+  }
+
+  @Test
+  public void ensureSchemaEntityIsPersistable() {
+    em.persist(new SchemaEntity());
+    em.flush();
   }
 
   @AfterEach
