@@ -9,11 +9,8 @@ dependencies {
     compile project(':persist:persist-jpa')
     compile project(':persist:persist-core')
 
-    compile(project(':common:common-config')) {
-        transitive = true
-    }
+    compile project(':common:common-config')
     
-    compile group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
 
 
     testCompile 'com.h2database:h2'
@@ -37,8 +34,8 @@ dependencies {
 
     compile 'org.apache.ignite:ignite-core'
     compile 'org.apache.ignite:ignite-hibernate-core'
-    compile 'org.apache.ignite:ignite-hibernate_5.1:2.3.1'
-    compile('org.hibernate.javax.persistence:hibernate-jpa-2.1-api')
+//    compile 'org.apache.ignite:ignite-hibernate_5.1:2.3.1'
+//    compile('org.hibernate.javax.persistence:hibernate-jpa-2.1-api')
     
 
     testCompile('com.h2database:h2')

@@ -14,5 +14,4 @@ dependencies {
     compile("org.springframework.security:spring-security-test")
     compile 'org.yaml:snakeyaml'
     compile 'org.junit.platform:junit-platform-runner'
-    compile group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
 }
