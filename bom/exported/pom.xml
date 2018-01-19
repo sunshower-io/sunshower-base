@@ -17,6 +17,7 @@
   <url>http://www.sunshower.io</url>
   <properties>
     <env.version>1.0.0-SNAPSHOT</env.version>
+    <sunshower-base.version>1.0.0-SNAPSHOT</sunshower-base.version>
   </properties>
 
 
@@ -32,87 +33,87 @@
       <dependency>
         <groupId>io.sunshower.common</groupId>
         <artifactId>common-api</artifactId>
-        <version>${project.version}</version>
+        <version>${sunshower-base.version}</version>
       </dependency>
 
       <dependency>
         <groupId>io.sunshower.common</groupId>
         <artifactId>annotations</artifactId>
-        <version>${project.version}</version>
+        <version>${sunshower-base.version}</version>
       </dependency>
 
       <dependency>
         <groupId>io.sunshower.common</groupId>
-        <artifactId>common-core</artifactId>
-        <version>${project.version}</version>
+        <artifactId>core</artifactId>
+        <version>${sunshower-base.version}</version>
       </dependency>
 
       <dependency>
         <groupId>io.sunshower.common</groupId>
         <artifactId>common-config</artifactId>
-        <version>${project.version}</version>
+        <version>${sunshower-base.version}</version>
       </dependency>
 
 
       <dependency>
         <groupId>io.sunshower.common</groupId>
         <artifactId>common-ws</artifactId>
-        <version>${project.version}</version>
+        <version>${sunshower-base.version}</version>
       </dependency>
 
       <dependency>
         <groupId>io.sunshower.common</groupId>
         <artifactId>core</artifactId>
-        <version>${project.version}</version>
+        <version>${sunshower-base.version}</version>
       </dependency>
 
       <dependency>
         <groupId>io.sunshower.common</groupId>
         <artifactId>lambda</artifactId>
-        <version>${project.version}</version>
+        <version>${sunshower-base.version}</version>
       </dependency>
 
       <dependency>
         <groupId>io.sunshower.common</groupId>
         <artifactId>lang</artifactId>
-        <version>${project.version}</version>
+        <version>${sunshower-base.version}</version>
       </dependency>
 
       <dependency>
         <groupId>io.sunshower.common</groupId>
         <artifactId>reflect</artifactId>
-        <version>${project.version}</version>
+        <version>${sunshower-base.version}</version>
       </dependency>
 
       <dependency>
-        <groupId>io.sunshower.persit</groupId>
+        <groupId>io.sunshower.persist</groupId>
         <artifactId>persist-api</artifactId>
-        <version>${project.version}</version>
+        <version>${sunshower-base.version}</version>
       </dependency>
 
       <dependency>
-        <groupId>io.sunshower.persit</groupId>
+        <groupId>io.sunshower.persist</groupId>
         <artifactId>persist-core</artifactId>
-        <version>${project.version}</version>
+        <version>${sunshower-base.version}</version>
       </dependency>
 
       <dependency>
-        <groupId>io.sunshower.persit</groupId>
+        <groupId>io.sunshower.persist</groupId>
         <artifactId>persist-hibernate</artifactId>
-        <version>${project.version}</version>
+        <version>${sunshower-base.version}</version>
       </dependency>
 
 
       <dependency>
-        <groupId>io.sunshower.persit</groupId>
+        <groupId>io.sunshower.persist</groupId>
         <artifactId>persist-ignite</artifactId>
-        <version>${project.version}</version>
+        <version>${sunshower-base.version}</version>
       </dependency>
 
       <dependency>
-        <groupId>io.sunshower.persit</groupId>
+        <groupId>io.sunshower.persist</groupId>
         <artifactId>persist-jpa</artifactId>
-        <version>${project.version}</version>
+        <version>${sunshower-base.version}</version>
       </dependency>
       
       
@@ -123,31 +124,31 @@
       <dependency>
         <groupId>io.sunshower.test</groupId>
         <artifactId>test-api</artifactId>
-        <version>${project.version}</version>
+        <version>${sunshower-base.version}</version>
       </dependency>
 
       <dependency>
         <groupId>io.sunshower.test</groupId>
         <artifactId>test-common</artifactId>
-        <version>${project.version}</version>
+        <version>${sunshower-base.version}</version>
       </dependency>
 
       <dependency>
         <groupId>io.sunshower.test</groupId>
         <artifactId>test-core</artifactId>
-        <version>${project.version}</version>
+        <version>${sunshower-base.version}</version>
       </dependency>
 
       <dependency>
         <groupId>io.sunshower.test</groupId>
         <artifactId>test-persist</artifactId>
-        <version>${project.version}</version>
+        <version>${sunshower-base.version}</version>
       </dependency>
 
       <dependency>
         <groupId>io.sunshower.test</groupId>
         <artifactId>test-ws</artifactId>
-        <version>${project.version}</version>
+        <version>${sunshower-base.version}</version>
       </dependency>
       
     </dependencies>
