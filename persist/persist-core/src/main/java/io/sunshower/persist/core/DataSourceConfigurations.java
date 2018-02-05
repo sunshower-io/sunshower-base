@@ -24,7 +24,7 @@ public class DataSourceConfigurations {
   }
 
   public static boolean nullOrEmpty(String value) {
-    if (value == null || value.trim().equals("")) {
+    if (value == null || value.trim().equals("") || value.trim().toLowerCase().equals("empty")) {
       return true;
     }
     return false;
