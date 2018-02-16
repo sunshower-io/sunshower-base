@@ -1,7 +1,5 @@
 package io.sunshower.persist.hibernate;
 
-import com.arjuna.ats.internal.jta.transaction.arjunacore.TransactionManagerImple;
-import com.arjuna.ats.internal.jta.transaction.arjunacore.UserTransactionImple;
 import io.sunshower.ignite.IgniteNodeConfiguration;
 import io.sunshower.persist.validation.ModelValidator;
 import io.sunshower.persistence.PersistenceUnit;
@@ -13,15 +11,12 @@ import org.apache.ignite.Ignite;
 import org.cfg4j.provider.ConfigurationProvider;
 import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.jpa.Search;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.*;
+import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
-import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.transaction.jta.JtaTransactionManager;
 
 @Configuration
 @EnableTransactionManagement
@@ -61,17 +56,12 @@ public class HibernateConfiguration {
   }
 
   @Bean
-  public PlatformTransactionManager transactionManager(
+  public JpaTransactionManager transactionManager(
       EntityManagerFactory entityManagerFactory, DataSource dataSource) {
-    JtaTransactionManager mgr = new JtaTransactionManager();
-    mgr.setUserTransaction(new UserTransactionImple());
-    mgr.setTransactionManager(new TransactionManagerImple());
-    return mgr;
-
-    //    JpaTransactionManager transactionManager = new JpaTransactionManager();
-    //    transactionManager.setDataSource(dataSource);
-    //    transactionManager.setEntityManagerFactory(entityManagerFactory);
-    //    return transactionManager;
+    JpaTransactionManager transactionManager = new JpaTransactionManager();
+    transactionManager.setDataSource(dataSource);
+    transactionManager.setEntityManagerFactory(entityManagerFactory);
+    return transactionManager;
   }
 
   @Bean
@@ -93,11 +83,9 @@ public class HibernateConfiguration {
       Ignite ignite) {
     LocalContainerEntityManagerFactoryBean entityManagerFactoryBean =
         new LocalContainerEntityManagerFactoryBean();
-    entityManagerFactoryBean.setJtaDataSource(dataSource);
     entityManagerFactoryBean.setPersistenceUnitName("default-persistence-unit");
-    //    entityManagerFactoryBean.setDataSource(dataSource);
-    HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-    entityManagerFactoryBean.setJpaVendorAdapter(vendorAdapter);
+    entityManagerFactoryBean.setDataSource(dataSource);
+    entityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 
     entityManagerFactoryBean.setPackagesToScan(persistenceConfiguration.getScannedPackages());
 
