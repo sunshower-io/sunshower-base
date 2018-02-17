@@ -1,6 +1,6 @@
 jdbc:
   username: sa
-  url: jdbc:h2:mem:;MODE=PostgreSQL;LOCK_MODE=0;MV_STORE=false;
+  url: jdbc:h2:mem:test_db;MODE=PostgreSQL;LOCK_MODE=0;MV_STORE=false;DB_CLOSE_DELAY=-1;
   driverClass: org.h2.Driver
   baseline: true
   baselineVersion: 0

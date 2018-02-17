@@ -62,9 +62,14 @@ public class DataSourceConfiguration {
       //
       result.setConnectionProperties(properties);
       //      result.setMaximumPoolSize(1);
-      result.setUrl(
-          process(
-              "jdbc:arjuna:h2:mem:frapper;MODE=PostgreSQL;LOCK_MODE=0;MV_STORE=false;DB_CLOSE_DELAY=-1;"));
+
+      result.setUrl(process(cfg.url()));
+      //
+      // "jdbc:arjuna:h2:mem:frapper;MODE=PostgreSQL;LOCK_MODE=0;MV_STORE=false;DB_CLOSE_DELAY=-1;"));
+      //      result.setUrl(
+      //          process(
+      //
+      // "jdbc:arjuna:h2:mem:frapper;MODE=PostgreSQL;LOCK_MODE=0;MV_STORE=false;DB_CLOSE_DELAY=-1;"));
       log.info("Successfully started data-source");
       return result;
     } else {

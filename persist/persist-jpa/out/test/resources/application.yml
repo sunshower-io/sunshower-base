@@ -1,8 +1,13 @@
 
 jdbc:
   username: sa
-  url: jdbc:h2:mem:pg
-  driver-class: org.h2.Driver
+  url: jdbc:arjuna:h2:mem:h2;LOCK_MODE=0;MV_STORE=false;DB_CLOSE_DELAY=-1;
+  driverClass: org.h2.Driver
+  baseline: true
+  baselineVersion: 0
+  jndiPath: ""
+  password: ""
+  version: -1
 
 jpa:
   provider:

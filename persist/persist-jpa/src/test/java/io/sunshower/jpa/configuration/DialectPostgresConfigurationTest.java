@@ -1,27 +1,29 @@
 package io.sunshower.jpa.configuration;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.assertThat;
-
 import io.sunshower.jpa.flyway.FlywayConfiguration;
 import io.sunshower.persist.core.DataSourceConfiguration;
 import io.sunshower.persist.core.DatabaseConfigurationSource;
+import io.sunshower.persistence.Dialect;
 import io.sunshower.persistence.MigrationResult;
-import io.sunshower.test.common.TestConfigurationConfiguration;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import javax.inject.Inject;
-import javax.sql.DataSource;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.platform.runner.JUnitPlatform;
 import org.junit.runner.RunWith;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import javax.inject.Inject;
+import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.assertThat;
 
 @ExtendWith(SpringExtension.class)
 @ActiveProfiles("postgres")
@@ -31,7 +33,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
     FlywayConfiguration.class,
     DataSourceConfiguration.class,
     PostgresTestConfiguration.class,
-    TestConfigurationConfiguration.class
   }
 )
 public class DialectPostgresConfigurationTest {
@@ -39,14 +40,18 @@ public class DialectPostgresConfigurationTest {
   @Inject private DataSource dataSource;
 
   @Inject private MigrationResult result;
+  @Inject private Dialect dialect;
 
   @Inject private DatabaseConfigurationSource source;
 
   @Test
-  @Disabled
+  public void ensureDialectIsAsExpected() {
+    assertThat(dialect, is(Dialect.Postgres));
+  }
+
+  @Test
   public void ensureUrlIsExpected() {
-    //    assertThat(source.url(),
-    // is("jdbc:h2:./build/{{RANDOM}}:;MODE=PostgreSQL;LOCK_MODE=0;MV_STORE=false;"));
+    assertThat(source.url(), is("jdbc:arjuna:h2:mem:pg;MODE=PostgreSQL;LOCK_MODE=0;MV_STORE=false;DB_CLOSE_DELAY=-1;"));
   }
 
   @Test
