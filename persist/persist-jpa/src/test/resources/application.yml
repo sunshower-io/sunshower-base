@@ -1,7 +1,7 @@
 
 jdbc:
   username: sa
-  url: jdbc:h2:mem:
+  url: jdbc:h2:mem:pg
   driver-class: org.h2.Driver
 
 jpa:
