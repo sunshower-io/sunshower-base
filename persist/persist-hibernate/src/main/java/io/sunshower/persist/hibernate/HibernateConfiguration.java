@@ -1,5 +1,8 @@
 package io.sunshower.persist.hibernate;
 
+import com.arjuna.ats.internal.jta.transaction.arjunacore.TransactionManagerImple;
+import com.arjuna.ats.internal.jta.transaction.arjunacore.TransactionSynchronizationRegistryImple;
+import com.arjuna.ats.internal.jta.transaction.arjunacore.UserTransactionImple;
 import io.sunshower.ignite.IgniteNodeConfiguration;
 import io.sunshower.persist.validation.ModelValidator;
 import io.sunshower.persistence.PersistenceUnit;
@@ -7,16 +10,23 @@ import java.util.Properties;
 import java.util.logging.Logger;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
+import javax.transaction.TransactionManager;
+import javax.transaction.TransactionSynchronizationRegistry;
+import javax.transaction.UserTransaction;
 import org.apache.ignite.Ignite;
 import org.cfg4j.provider.ConfigurationProvider;
 import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.jpa.Search;
-import org.springframework.context.annotation.*;
-import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor;
+import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.transaction.jta.JtaTransactionManager;
 
 @Configuration
 @EnableTransactionManagement
@@ -56,12 +66,38 @@ public class HibernateConfiguration {
   }
 
   @Bean
-  public JpaTransactionManager transactionManager(
-      EntityManagerFactory entityManagerFactory, DataSource dataSource) {
-    JpaTransactionManager transactionManager = new JpaTransactionManager();
-    transactionManager.setDataSource(dataSource);
-    transactionManager.setEntityManagerFactory(entityManagerFactory);
+  public UserTransaction userTransaction() {
+    return new UserTransactionImple();
+  }
+
+  @Bean
+  public TransactionManager jtaTransactionManager() {
+    return new TransactionManagerImple();
+  }
+
+  @Bean
+  public TransactionSynchronizationRegistry transactionSynchronizationRegistry() {
+    return new TransactionSynchronizationRegistryImple();
+  }
+
+  @Bean
+  public PlatformTransactionManager transactionManager(
+      EntityManagerFactory entityManagerFactory,
+      DataSource dataSource,
+      UserTransaction userTransaction,
+      TransactionManager txManager,
+      TransactionSynchronizationRegistry registry) {
+    final JtaTransactionManager transactionManager = new JtaTransactionManager();
+    transactionManager.setUserTransaction(userTransaction);
+    transactionManager.setTransactionManager(txManager);
+    transactionManager.setAllowCustomIsolationLevels(true);
+
+    transactionManager.setTransactionSynchronizationRegistry(registry);
     return transactionManager;
+    //    JpaTransactionManager transactionManager = new JpaTransactionManager();
+    //    transactionManager.setDataSource(dataSource);
+    //    transactionManager.setEntityManagerFactory(entityManagerFactory);
+    //    return transactionManager;
   }
 
   @Bean
@@ -84,8 +120,10 @@ public class HibernateConfiguration {
     LocalContainerEntityManagerFactoryBean entityManagerFactoryBean =
         new LocalContainerEntityManagerFactoryBean();
     entityManagerFactoryBean.setPersistenceUnitName("default-persistence-unit");
-    entityManagerFactoryBean.setDataSource(dataSource);
-    entityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
+    entityManagerFactoryBean.setJtaDataSource(dataSource);
+    final HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+    vendorAdapter.setDatabase(Database.POSTGRESQL);
+    entityManagerFactoryBean.setJpaVendorAdapter(vendorAdapter);
 
     entityManagerFactoryBean.setPackagesToScan(persistenceConfiguration.getScannedPackages());
 
@@ -127,6 +165,11 @@ public class HibernateConfiguration {
       jpaProperties.put("hibernate.cache.use_query_cache", true);
     }
 
+    jpaProperties.put(
+        "hibernate.transaction.factory_class", "org.hibernate.transaction.JTATransactionFactory");
+    jpaProperties.put(
+        "hibernate.transaction.manager_lookup_class",
+        "org.hibernate.transaction.JBossTransactionManagerLookup");
     jpaProperties.put("hibernate.cache.region.factory_class", cache.regionFactory());
     jpaProperties.put("hibernate.default_schema", "SUNSHOWER");
 

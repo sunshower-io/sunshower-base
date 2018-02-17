@@ -8,6 +8,7 @@ dependencies {
     compile 'org.apache.logging.log4j:log4j-api'
     compile 'org.apache.logging.log4j:log4j-core'
     compile 'org.apache.logging.log4j:log4j-slf4j-impl'
+    
 
     compile 'com.zaxxer:HikariCP'
     compile project(':common:core')
@@ -16,13 +17,21 @@ dependencies {
 
     compile 'org.hibernate.validator:hibernate-validator'
 
+    compile group: 'org.jboss.narayana.jta', name: 'jdbc', version: '5.5.30.Final'
+    compile group: 'org.jboss.narayana.jta', name: 'narayana-jta', version: '5.5.30.Final'
+    compile group: 'org.jboss.narayana.jts', name: 'narayana-jts-integration', version: '5.5.30.Final'
+    compile group: 'org.jboss.narayana.jta', name: 'jta', version: '5.5.30.Final'
+    compile group: 'org.jboss.narayana.jta', name: 'jdbc', version: '5.5.30.Final'
+
+    compile group: 'org.jboss', name: 'jboss-transaction-spi', version: '7.6.0.Final'
     /**
      * Test dependencies
      */
     
     
     
-    testCompile('com.h2database:h2')
+    compile('com.h2database:h2')
+    compile 'org.springframework:spring-jdbc'
     testCompile project(':test:test-ws')
     testCompile project(':test:test-common')
     testCompile('org.postgresql:postgresql')

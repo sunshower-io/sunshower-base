@@ -43,7 +43,7 @@ public class DialectPostgresConfigurationTest {
 
   @Test
   public void ensureUrlIsExpected() {
-    assertThat(source.url(), is("jdbc:h2:mem:frap;MODE=PostgreSQL;LOCK_MODE=0;MV_STORE=false;"));
+    assertThat(source.url(), is("jdbc:h2:mem:;MODE=PostgreSQL;LOCK_MODE=0;MV_STORE=false;"));
   }
 
   @Test

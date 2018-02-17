@@ -36,26 +36,26 @@ create table one2many_owner (
 );
 
 create table one2many_owned(
-  id binary(16) primary key,
-  owner_id binary(16),
+  id  bytea primary key,
+  owner_id bytea,
 
   foreign key (owner_id) references one2many_owner(id)
 );
 
 create table TAG (
 
-  id binary(16) primary key,
+  id bytea primary key,
   name varchar(22)
 );
 
 
 create table BLOG_ENTRY (
-  id binary(16) primary key
+  id bytea primary key
 );
 
 create table BLOGS_TO_TAGS (
-  entry_id binary(16),
-  tag_id binary(16),
+  entry_id bytea,
+  tag_id bytea,
 
   foreign key (entry_id) references BLOG_ENTRY(id),
   foreign key (tag_id) references TAG(id)

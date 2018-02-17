@@ -1,8 +1,6 @@
 package io.sunshower.persist.core;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
-import static org.hamcrest.CoreMatchers.nullValue;
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
 
 import io.sunshower.test.common.TestConfigurationConfiguration;
@@ -30,6 +28,12 @@ public class PostgresDataSourceConfigurationTest {
   @Inject private DataSource dataSource;
 
   @Inject private DatabaseConfigurationSource source;
+
+  @Test
+  public void ensureUrlIsExpectedAfterProcessing() {
+    String s = DataSourceConfiguration.process("{{RANDOM}}//hello");
+    System.out.println(s);
+  }
 
   @Test
   public void ensureUrlIsExpected() {
