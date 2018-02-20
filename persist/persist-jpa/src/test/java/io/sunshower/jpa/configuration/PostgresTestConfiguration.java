@@ -2,6 +2,8 @@ package io.sunshower.jpa.configuration;
 
 import io.sunshower.persistence.Dialect;
 import io.sunshower.persistence.annotations.Persistence;
+import java.nio.file.Paths;
+import java.util.Collections;
 import org.cfg4j.provider.ConfigurationProvider;
 import org.cfg4j.provider.ConfigurationProviderBuilder;
 import org.cfg4j.source.ConfigurationSource;
@@ -12,9 +14,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
-
-import java.nio.file.Paths;
-import java.util.Collections;
 
 @Configuration
 @ActiveProfiles("postgres")
