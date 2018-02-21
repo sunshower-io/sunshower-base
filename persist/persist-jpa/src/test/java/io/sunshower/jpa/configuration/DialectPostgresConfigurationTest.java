@@ -6,6 +6,7 @@ import static org.junit.Assert.assertThat;
 import io.sunshower.jpa.flyway.FlywayConfiguration;
 import io.sunshower.persist.core.DataSourceConfiguration;
 import io.sunshower.persist.core.DatabaseConfigurationSource;
+import io.sunshower.persist.core.JtaDynamicClass;
 import io.sunshower.persistence.Dialect;
 import io.sunshower.persistence.MigrationResult;
 import java.sql.Connection;
@@ -14,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.inject.Inject;
 import javax.sql.DataSource;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.platform.runner.JUnitPlatform;
@@ -40,6 +42,11 @@ public class DialectPostgresConfigurationTest {
   @Inject private Dialect dialect;
 
   @Inject private DatabaseConfigurationSource source;
+
+  @BeforeAll
+  public static void configure() {
+    JtaDynamicClass.clear();
+  }
 
   @Test
   public void ensureDialectIsAsExpected() {

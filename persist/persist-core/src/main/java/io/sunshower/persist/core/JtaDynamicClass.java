@@ -7,12 +7,28 @@ import org.h2.jdbcx.JdbcDataSource;
 
 public class JtaDynamicClass implements DynamicClass {
 
+  static final Object lock = new Object();
+  static volatile XADataSource datasource;
+
+  public static void clear() {
+    synchronized (lock) {
+      datasource = null;
+    }
+  }
+
   @Override
   public XADataSource getDataSource(String dbName) throws SQLException {
-    final JdbcDataSource dataSource = new JdbcDataSource();
-    dataSource.setUser("sa");
-    dataSource.setPassword("");
-    dataSource.setURL("jdbc:" + dbName);
-    return dataSource;
+    if (datasource == null) {
+      synchronized (lock) {
+        if (datasource == null) {
+          final JdbcDataSource dataSource = new JdbcDataSource();
+          dataSource.setUser("sa");
+          dataSource.setPassword("");
+          dataSource.setURL("jdbc:" + dbName);
+          return (datasource = dataSource);
+        }
+      }
+    }
+    return datasource;
   }
 }
