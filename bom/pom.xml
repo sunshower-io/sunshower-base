@@ -26,8 +26,8 @@
   </modules>
   <distributionManagement>
     <repository>
-      <id>sunshower-repo</id>
-      <url>https://mymavenrepo.com/repo/IRgrTxMdF4OnnbNAkfnJ</url>
+      <id>sunshower-oss-repo</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
     </repository>
   </distributionManagement>
 
@@ -44,8 +44,8 @@
   </build>
   <repositories>
     <repository>
-      <id>sunshower-repo</id>
-      <url>https://mymavenrepo.com/repo/IRgrTxMdF4OnnbNAkfnJ</url>
+      <id>sunshower-oss-repo</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
     </repository>
     <repository>
       <snapshots>
