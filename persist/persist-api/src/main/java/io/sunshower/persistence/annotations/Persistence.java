@@ -11,6 +11,8 @@ public @interface Persistence {
 
   String id() default "";
 
+  String schema() default "";
+
   String[] scannedPackages() default {};
 
   Class<?>[] entities() default {};

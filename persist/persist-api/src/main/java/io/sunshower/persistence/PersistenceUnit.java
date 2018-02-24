@@ -53,7 +53,7 @@ public class PersistenceUnit {
         include(packageNames, migrationPaths, entityTypes, persistence);
         final PersistenceConfiguration cfg =
             new PersistenceConfiguration(
-                persistence.id(), migrationPaths, packageNames, entityTypes);
+                persistence.id(), persistence.schema(), migrationPaths, packageNames, entityTypes);
         addConfiguration(cfg);
       } catch (NoSuchBeanDefinitionException ex) {
       }

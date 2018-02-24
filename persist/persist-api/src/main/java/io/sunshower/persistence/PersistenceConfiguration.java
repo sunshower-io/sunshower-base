@@ -4,16 +4,19 @@ import java.util.*;
 
 public class PersistenceConfiguration {
   final String id;
+  final String schema;
   final Set<String> migrationPaths;
   final Set<String> packagesToScan;
   final Set<Class<?>> entityTypes;
 
   public PersistenceConfiguration(
       String id,
+      String schema,
       Collection<String> mpaths,
       Collection<String> pnames,
       Collection<Class<?>> etypes) {
     this.id = id;
+    this.schema = schema;
     this.entityTypes = new HashSet<>(etypes);
     this.migrationPaths = new HashSet<>(mpaths);
     this.packagesToScan = new HashSet<>(pnames);
@@ -24,6 +27,10 @@ public class PersistenceConfiguration {
     packagesToScan.addAll(cfg.packagesToScan);
     entityTypes.addAll(cfg.entityTypes);
     return this;
+  }
+
+  public String getSchema() {
+    return schema;
   }
 
   public String getId() {

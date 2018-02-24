@@ -40,6 +40,9 @@ public class FlywayConfiguration {
       }
       final String table = ctx.getId() + "_migrations";
       flyway.setTable(table);
+      if (!ctx.getSchema().trim().isEmpty()) {
+        flyway.setSchemas(ctx.getSchema());
+      }
       flyway.setDataSource(dataSource);
       String[] migrationPaths = ctx.getMigrationPaths();
       flyway.setLocations(migrationPaths);
