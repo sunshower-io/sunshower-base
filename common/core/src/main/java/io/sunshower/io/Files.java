@@ -5,7 +5,6 @@ import java.nio.file.FileVisitOption;
 import java.nio.file.Path;
 import java.util.Comparator;
 
-/** Created by haswell on 5/22/17. */
 public class Files {
 
   public static void delete(File path) throws IOException {

@@ -10,5 +10,5 @@ gradle clean build pTML publish \
 -PmavenRepositoryUsername=${MVN_REPO_USERNAME} \
 -PmavenRepositoryPassword=${MVN_REPO_PASSWORD} \
 -Pversion=1.0.0-SNAPSHOT \
--Penv.version=1.0.0.Final
+-Penv.version=1.0.0-SNAPSHOT
     
