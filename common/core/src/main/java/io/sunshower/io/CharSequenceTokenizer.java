@@ -1,21 +1,21 @@
 package io.sunshower.io;
 
+import io.sunshower.lambda.Lazy;
+
 import java.util.stream.IntStream;
 
 public class CharSequenceTokenizer implements CharacterTokenizer {
 
   public static final char EOF = '\0';
 
-  private int index;
   private char unread;
   private boolean nextUnread;
-  private final CharSequence seq;
+  private final CharacterSequence seq;
 
   private boolean skipCarriageReturn;
 
-  public CharSequenceTokenizer(final CharSequence seq) {
+  public CharSequenceTokenizer(final CharacterSequence seq) {
     this.seq = seq;
-    this.index = 0;
     this.skipCarriageReturn = true;
   }
 
@@ -24,8 +24,8 @@ public class CharSequenceTokenizer implements CharacterTokenizer {
     if (nextUnread) {
       return unread;
     }
-    if (index < seq.length()) {
-      return collapseNewline(seq.charAt(index));
+    if (seq.hasNext()) {
+      return collapseNewline(seq.peek());
     }
     return EOF;
   }
@@ -37,9 +37,9 @@ public class CharSequenceTokenizer implements CharacterTokenizer {
       return unread;
     }
 
-    if (index < seq.length()) {
+    if (seq.hasNext()) {
       skipCarriageReturn();
-      return collapseNewline(seq.charAt(index++));
+      return collapseNewline(seq.next());
     }
     return EOF;
   }
@@ -59,9 +59,11 @@ public class CharSequenceTokenizer implements CharacterTokenizer {
     stream().forEach(t -> ch.apply((char) t));
   }
 
+  boolean hasNext = true;
+
   @Override
   public IntStream stream() {
-    return IntStream.generate(this).limit(seq.length()).filter(t -> (char) t != EOF);
+    return Lazy.Ints.takeWhile(IntStream.generate(this), new LookPast(seq));
   }
 
   @Override
@@ -74,11 +76,10 @@ public class CharSequenceTokenizer implements CharacterTokenizer {
   }
 
   private void skipCarriageReturn() {
-    if (index + 1 < seq.length()) {
-      char current = seq.charAt(index);
-      char next = seq.charAt(index + 1);
-      if (current == '\r' && next == '\n') {
-        index++;
+    if (seq.hasNext()) {
+      char current = seq.peek();
+      if (current == '\r') {
+        seq.next();
       }
     }
   }

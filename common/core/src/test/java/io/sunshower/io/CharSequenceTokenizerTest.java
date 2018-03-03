@@ -1,11 +1,21 @@
 package io.sunshower.io;
 
+import org.junit.jupiter.api.Test;
+
+import java.io.StringReader;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-import org.junit.jupiter.api.Test;
-
 class CharSequenceTokenizerTest {
+
+  @Test
+  public void ensureReadingFromStreamWorks() {
+    String input = "hello world!";
+    long expectedSize = input.length();
+    long size = IO.tokenize(new StringReader(input)).stream().count();
+    assertThat(expectedSize, is(size));
+  }
 
   @Test
   public void ensureReadingWorks() {
@@ -14,6 +24,18 @@ class CharSequenceTokenizerTest {
 
     long size = IO.tokenize(input).stream().count();
     assertThat(expectedSize, is(size));
+  }
+
+  @Test
+  public void ensureAdvanceWorksCorrectly() {
+
+    String input = "h";
+    CharacterSequence cs = new CharacterSequenceSequence(input);
+    assertThat(cs.peek(), is('h'));
+    assertThat(cs.hasNext(), is(true));
+    assertThat(cs.peek(), is('h'));
+    assertThat(cs.next(), is('h'));
+    assertThat(cs.hasNext(), is(false));
   }
 
   @Test
