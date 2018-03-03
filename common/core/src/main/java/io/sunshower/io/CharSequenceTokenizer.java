@@ -1,7 +1,6 @@
 package io.sunshower.io;
 
 import io.sunshower.lambda.Lazy;
-
 import java.util.stream.IntStream;
 
 public class CharSequenceTokenizer implements CharacterTokenizer {

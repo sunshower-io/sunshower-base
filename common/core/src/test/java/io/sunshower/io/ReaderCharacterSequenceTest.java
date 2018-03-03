@@ -1,12 +1,11 @@
 package io.sunshower.io;
 
-import io.sunshower.encodings.Base58;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import io.sunshower.encodings.Base58;
 import java.io.StringReader;
 import java.util.Random;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
 
 class ReaderCharacterSequenceTest {
 

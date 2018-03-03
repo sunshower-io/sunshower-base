@@ -1,11 +1,10 @@
 package io.sunshower.io;
 
-import org.junit.jupiter.api.Test;
-
-import java.io.StringReader;
-
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+
+import java.io.StringReader;
+import org.junit.jupiter.api.Test;
 
 class CharSequenceTokenizerTest {
 

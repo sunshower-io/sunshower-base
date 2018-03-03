@@ -2,10 +2,9 @@ package io.sunshower.io;
 
 public interface CharacterSequence {
 
-    char next();
-    
-    boolean hasNext();
+  char next();
 
-    char peek();
-    
+  boolean hasNext();
+
+  char peek();
 }
