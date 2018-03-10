@@ -3,7 +3,6 @@ package io.sunshower.lambda;
 import io.sunshower.lambda.spliterators.IntTakeUntil;
 import io.sunshower.lambda.spliterators.IntTakeWhile;
 import io.sunshower.lambda.spliterators.TakeWhile;
-
 import java.util.function.IntPredicate;
 import java.util.function.Predicate;
 import java.util.stream.IntStream;
@@ -19,7 +18,6 @@ public class Lazy {
   }
 
   public static class Ints {
-      
 
     public static IntStream takeUntil(IntStream intStream, IntPredicate condition) {
       return StreamSupport.intStream(new IntTakeUntil(intStream.spliterator(), condition), false);

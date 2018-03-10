@@ -1,22 +1,21 @@
 package io.sunshower.common;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
+
 import io.sunshower.encodings.Base58;
 import io.sunshower.encodings.Encoding;
 import io.sunshower.persist.Identifiers;
 import io.sunshower.persist.Sequence;
 import io.sunshower.test.common.SerializationAware;
 import io.sunshower.test.common.SerializationTestCase;
-import org.junit.jupiter.api.Test;
-import org.junit.platform.runner.JUnitPlatform;
-import org.junit.runner.RunWith;
-
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
-
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
+import org.junit.jupiter.api.Test;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.runner.RunWith;
 
 @RunWith(JUnitPlatform.class)
 public class IdentifierTest extends SerializationTestCase {

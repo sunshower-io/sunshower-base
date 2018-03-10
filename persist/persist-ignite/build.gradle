@@ -3,6 +3,7 @@ dependencies {
     compile 'org.slf4j:slf4j-log4j12'
     compile 'javax.inject:javax.inject'
     compile 'org.hibernate:hibernate-core'
+    compile 'org.hibernate:hibernate-entitymanager'
     compile 'org.springframework:spring-context'
     compile 'org.springframework:spring-orm'
 

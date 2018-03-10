@@ -31,7 +31,7 @@ dependencies {
 
     compile 'org.glassfish:javax.el'
 
-    compile 'org.apache.lucene:lucene-core'
+    //compile 'org.apache.lucene:lucene-core'
     compile 'org.apache.lucene:lucene-codecs'
     compile 'org.apache.lucene:lucene-backward-codecs'
 
@@ -39,7 +39,8 @@ dependencies {
 
     compile 'org.apache.ignite:ignite-core'
     compile 'org.apache.ignite:ignite-hibernate-core'
-//    compile 'org.apache.ignite:ignite-hibernate_5.1:2.3.1'
+    compile 'org.apache.ignite:ignite-hibernate_5.1'
+    compile 'org.hibernate:hibernate-entitymanager'
 //    compile('org.hibernate.javax.persistence:hibernate-jpa-2.1-api')
 
 

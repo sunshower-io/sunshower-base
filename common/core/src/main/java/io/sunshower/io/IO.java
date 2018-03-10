@@ -3,7 +3,6 @@ package io.sunshower.io;
 import java.io.Reader;
 
 public class IO {
-    
 
   public static CharacterTokenizer tokenize(Reader sequence) {
     return new CharSequenceTokenizer(new ReaderCharacterSequence(sequence));

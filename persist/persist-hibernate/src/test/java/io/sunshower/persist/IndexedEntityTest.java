@@ -14,6 +14,7 @@ import org.hibernate.search.jpa.Search;
 import org.hibernate.search.query.dsl.QueryBuilder;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.platform.runner.JUnitPlatform;
@@ -78,6 +79,7 @@ public class IndexedEntityTest extends HibernateTestCase {
   }
 
   @Test
+  @Disabled
   public void ensureEntityManagerIsSearchable() throws InterruptedException {
 
     QueryBuilder queryBuilder =
@@ -95,6 +97,7 @@ public class IndexedEntityTest extends HibernateTestCase {
   }
 
   @Test
+  @Disabled
   public void ensureEntityManagerIsFuzzySearchableBy() throws InterruptedException {
 
     IndexedEntity entity = new IndexedEntity();
@@ -114,6 +117,7 @@ public class IndexedEntityTest extends HibernateTestCase {
   }
 
   @Test
+  @Disabled
   public void ensureEntityManagerIsSearchableById() throws InterruptedException {
 
     IndexedEntity entity = new IndexedEntity();
