@@ -17,7 +17,6 @@ import org.apache.ignite.configuration.CacheConfiguration;
 import org.cfg4j.provider.ConfigurationProvider;
 import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.jpa.Search;
-import org.springframework.context.annotation.Bean;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor;
 import org.springframework.orm.jpa.vendor.Database;
@@ -66,12 +65,10 @@ public class HibernateConfigurer {
     return new TransactionManagerImple();
   }
 
-  @Bean
   public TransactionSynchronizationRegistry transactionSynchronizationRegistry() {
     return new TransactionSynchronizationRegistryImple();
   }
 
-  @Bean
   public PlatformTransactionManager transactionManager(
       EntityManagerFactory entityManagerFactory,
       DataSource dataSource,
