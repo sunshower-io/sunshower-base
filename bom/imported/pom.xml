@@ -1,24 +1,30 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-  <parent>
+    <parent>
+        <groupId>io.sunshower.base</groupId>
+        <artifactId>bom</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <relativePath>../</relativePath>
+    </parent>
     <groupId>io.sunshower.base</groupId>
-    <artifactId>bom</artifactId>
+    <artifactId>bom-imported</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <relativePath>../</relativePath>
-  </parent>
-  <groupId>io.sunshower.base</groupId>
-  <artifactId>bom-imported</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
-  <packaging>pom</packaging>
+    <packaging>pom</packaging>
 
-  <name>Sunshower.io Imported Bill-Of-Materials</name>
-  <url>http://www.sunshower.io</url>
+    <name>Sunshower.io Imported Bill-Of-Materials</name>
+    <url>http://www.sunshower.io</url>
 
-  <properties>
-    <env.version>1.0.0-SNAPSHOT</env.version>
-  </properties>
+    <properties>
+        <env.version>1.0.0-SNAPSHOT</env.version>
+    </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

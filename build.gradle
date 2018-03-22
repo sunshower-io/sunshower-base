@@ -1,7 +1,5 @@
 buildscript {
     apply from: 'gradle/buildscript.gradle', to: buildscript
-
-
 }
 
 
