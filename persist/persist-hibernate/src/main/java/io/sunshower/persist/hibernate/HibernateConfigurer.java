@@ -6,6 +6,7 @@ import com.arjuna.ats.internal.jta.transaction.arjunacore.UserTransactionImple;
 import io.sunshower.persist.validation.ModelValidator;
 import io.sunshower.persistence.PersistenceUnit;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
@@ -79,6 +80,7 @@ public class HibernateConfigurer {
     transactionManager.setUserTransaction(userTransaction);
     transactionManager.setTransactionManager(txManager);
     transactionManager.setAllowCustomIsolationLevels(true);
+    transactionManager.setDefaultTimeout((int) TimeUnit.MINUTES.toMillis(20));
 
     transactionManager.setTransactionSynchronizationRegistry(registry);
     return transactionManager;
