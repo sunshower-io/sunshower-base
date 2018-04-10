@@ -1,7 +1,9 @@
 package io.sunshower.persistence.core.converters;
 
 import javax.persistence.AttributeConverter;
+import javax.persistence.Converter;
 
+@Converter(autoApply = true)
 public class ClassConverter implements AttributeConverter<Class<?>, String> {
   @Override
   public String convertToDatabaseColumn(Class<?> attribute) {

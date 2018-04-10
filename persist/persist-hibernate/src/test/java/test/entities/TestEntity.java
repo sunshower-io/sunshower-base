@@ -1,6 +1,9 @@
 package test.entities;
 
 import io.sunshower.persistence.core.DistributableEntity;
+import io.sunshower.persistence.core.MachineAddress;
+import io.sunshower.persistence.core.NetworkAddress;
+
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
@@ -15,6 +18,10 @@ public class TestEntity extends DistributableEntity {
 
   @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
   private Set<TestEntity> children;
+
+  @Basic private MachineAddress mac;
+
+  @Basic private NetworkAddress inet;
 
   @Column private String name;
 
@@ -40,6 +47,22 @@ public class TestEntity extends DistributableEntity {
     }
     entity.parent = this;
     this.children.add(entity);
+  }
+
+  public MachineAddress getMac() {
+    return mac;
+  }
+
+  public void setMac(MachineAddress mac) {
+    this.mac = mac;
+  }
+
+  public NetworkAddress getInet() {
+    return inet;
+  }
+
+  public void setInet(NetworkAddress inet) {
+    this.inet = inet;
   }
 
   public void setParent(TestEntity parent) {

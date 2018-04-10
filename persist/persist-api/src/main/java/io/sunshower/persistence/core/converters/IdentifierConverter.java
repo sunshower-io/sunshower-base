@@ -3,7 +3,9 @@ package io.sunshower.persistence.core.converters;
 import io.sunshower.common.Identifier;
 import io.sunshower.common.Identifiers;
 import javax.persistence.AttributeConverter;
+import javax.persistence.Converter;
 
+@Converter(autoApply = true)
 public class IdentifierConverter implements AttributeConverter<Identifier, byte[]> {
   @Override
   public byte[] convertToDatabaseColumn(Identifier identifier) {

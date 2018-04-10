@@ -13,6 +13,9 @@ import java.util.HashSet;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
+import io.sunshower.persistence.core.MachineAddress;
+import io.sunshower.persistence.core.NetworkAddress;
 import org.junit.FixMethodOrder;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -58,6 +61,10 @@ public class HibernateConfigurationTest {
   @Test
   public void ensureEntityWithComplexRelationshipCanBeSaved() {
     TestEntity e = new TestEntity();
+    MachineAddress address = new MachineAddress("asdfasdfasdf".toCharArray());
+    e.setMac(address);
+    NetworkAddress address1 = new NetworkAddress("asdfasdfasdf".toCharArray());
+    e.setInet(address1);
     e.addChild(new TestEntity());
     entityManager.persist(e);
     entityManager.flush();
@@ -65,6 +72,8 @@ public class HibernateConfigurationTest {
     assertThat(
         entityManager.find(TestEntity.class, e.getId()).getChildren().iterator().next().getParent(),
         is(e));
+    assertThat(entityManager.find(TestEntity.class, e.getId()).getMac(), is(address));
+    assertThat(entityManager.find(TestEntity.class, e.getId()).getInet(), is(address1));
   }
 
   @Test
