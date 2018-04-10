@@ -6,9 +6,9 @@ import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
 @Converter(autoApply = true)
-public class MACConverter implements AttributeConverter<MachineAddress, char[]> {
+public class MACConverter implements AttributeConverter<MachineAddress, String> {
   @Override
-  public char[] convertToDatabaseColumn(MachineAddress machineAddress) {
+  public String convertToDatabaseColumn(MachineAddress machineAddress) {
     if (machineAddress == null) {
       return null;
     }
@@ -16,7 +16,7 @@ public class MACConverter implements AttributeConverter<MachineAddress, char[]> 
   }
 
   @Override
-  public MachineAddress convertToEntityAttribute(char[] chars) {
+  public MachineAddress convertToEntityAttribute(String chars) {
     if (chars == null) {
       return null;
     }

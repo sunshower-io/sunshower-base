@@ -6,10 +6,10 @@ import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
 @Converter(autoApply = true)
-public class IPConverter implements AttributeConverter<NetworkAddress, char[]> {
+public class IPConverter implements AttributeConverter<NetworkAddress, String> {
 
   @Override
-  public char[] convertToDatabaseColumn(NetworkAddress machineAddress) {
+  public String convertToDatabaseColumn(NetworkAddress machineAddress) {
     if (machineAddress == null) {
       return null;
     }
@@ -17,10 +17,13 @@ public class IPConverter implements AttributeConverter<NetworkAddress, char[]> {
   }
 
   @Override
-  public NetworkAddress convertToEntityAttribute(char[] chars) {
+  public NetworkAddress convertToEntityAttribute(String chars) {
     if (chars == null) {
       return null;
     }
     return new NetworkAddress(chars);
   }
+
+
+
 }

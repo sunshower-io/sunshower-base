@@ -1,23 +1,24 @@
 package io.sunshower.persistence.core;
 
-import javax.persistence.Embeddable;
-import javax.persistence.MappedSuperclass;
-import java.util.Arrays;
 import java.util.Objects;
 
 public abstract class Address {
 
-  protected char[] value;
+  protected String value;
 
   protected Address() {}
 
   protected Address(char[] value) {
     Objects.requireNonNull(value);
+    this.value = new String(value);
+  }
+
+  protected Address(String value) {
     this.value = value;
   }
 
   public String toString() {
-    return Arrays.toString(value);
+    return value;
   }
 
   @Override
@@ -25,15 +26,15 @@ public abstract class Address {
     if (this == o) return true;
     if (!(o instanceof Address)) return false;
     Address that = (Address) o;
-    return Arrays.equals(value, that.value);
+    return Objects.equals(value, that.value);
   }
 
   @Override
   public int hashCode() {
-    return Arrays.hashCode(value);
+    return value == null ? 0 : value.hashCode();
   }
 
-  public char[] getValue() {
+  public String getValue() {
     return value;
   }
 }
