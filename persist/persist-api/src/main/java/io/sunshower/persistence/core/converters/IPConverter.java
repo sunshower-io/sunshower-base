@@ -1,7 +1,6 @@
 package io.sunshower.persistence.core.converters;
 
 import io.sunshower.persistence.core.NetworkAddress;
-
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
@@ -23,7 +22,4 @@ public class IPConverter implements AttributeConverter<NetworkAddress, String> {
     }
     return new NetworkAddress(chars);
   }
-
-
-
 }

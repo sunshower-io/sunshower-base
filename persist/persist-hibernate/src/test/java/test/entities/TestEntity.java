@@ -3,7 +3,6 @@ package test.entities;
 import io.sunshower.persistence.core.DistributableEntity;
 import io.sunshower.persistence.core.MachineAddress;
 import io.sunshower.persistence.core.NetworkAddress;
-
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;

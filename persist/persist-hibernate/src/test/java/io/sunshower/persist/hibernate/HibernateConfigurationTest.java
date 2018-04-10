@@ -8,14 +8,13 @@ import static org.junit.Assert.*;
 import io.sunshower.jpa.flyway.FlywayConfiguration;
 import io.sunshower.persist.core.DataSourceConfiguration;
 import io.sunshower.persistence.PersistenceUnit;
+import io.sunshower.persistence.core.MachineAddress;
+import io.sunshower.persistence.core.NetworkAddress;
 import java.util.Arrays;
 import java.util.HashSet;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
-import io.sunshower.persistence.core.MachineAddress;
-import io.sunshower.persistence.core.NetworkAddress;
 import org.junit.FixMethodOrder;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

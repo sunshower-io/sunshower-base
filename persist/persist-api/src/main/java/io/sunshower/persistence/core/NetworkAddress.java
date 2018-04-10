@@ -1,7 +1,5 @@
 package io.sunshower.persistence.core;
 
-import sun.net.util.IPAddressUtil;
-
 import javax.persistence.Embeddable;
 import javax.persistence.Transient;
 
@@ -13,6 +11,8 @@ public class NetworkAddress extends Address {
     IPV6,
     DNS
   }
+
+  public static transient AddressValidator validator;
 
   @Transient private transient Type version;
 
@@ -30,13 +30,10 @@ public class NetworkAddress extends Address {
   }
 
   private void checkValue() {
-    if (IPAddressUtil.isIPv4LiteralAddress(value)) {
-      version = Type.IPV4;
-    } else if (IPAddressUtil.isIPv6LiteralAddress(value)) {
-      version = Type.IPV6;
-    } else {
-      version = Type.DNS;
+    if (validator == null) {
+      validator = new AddressValidator() {};
     }
+    version = validator.check(value);
   }
 
   public Type getType() {

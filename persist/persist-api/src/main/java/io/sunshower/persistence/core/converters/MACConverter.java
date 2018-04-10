@@ -1,7 +1,6 @@
 package io.sunshower.persistence.core.converters;
 
 import io.sunshower.persistence.core.MachineAddress;
-
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
