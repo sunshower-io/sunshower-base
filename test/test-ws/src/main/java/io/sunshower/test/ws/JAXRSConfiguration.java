@@ -9,6 +9,9 @@ import org.jboss.resteasy.core.ResourceMethodRegistry;
 import org.jboss.resteasy.core.SynchronousDispatcher;
 import org.jboss.resteasy.plugins.providers.DefaultTextPlain;
 import org.jboss.resteasy.plugins.providers.StringTextStar;
+import org.jboss.resteasy.plugins.providers.sse.SseEventOutputProvider;
+import org.jboss.resteasy.plugins.providers.sse.SseEventProvider;
+import org.jboss.resteasy.plugins.providers.sse.SseEventSinkInterceptor;
 import org.jboss.resteasy.plugins.spring.SpringBeanProcessor;
 import org.jboss.resteasy.spi.Registry;
 import org.jboss.resteasy.spi.ResteasyDeployment;
@@ -32,6 +35,21 @@ public class JAXRSConfiguration {
   public JAXRSPostProcessor jaxrsPostProcessor(ApplicationContext context) {
     return new JAXRSPostProcessor(
         (ConfigurableListableBeanFactory) context.getAutowireCapableBeanFactory());
+  }
+
+  @Bean
+  public SseEventProvider sseEventProvider() {
+    return new SseEventProvider();
+  }
+
+  @Bean
+  public SseEventOutputProvider sseEventOutputProvider() {
+    return new SseEventOutputProvider();
+  }
+
+  @Bean
+  public SseEventSinkInterceptor sseEventSinkInterceptor() {
+    return new SseEventSinkInterceptor();
   }
 
   @Bean

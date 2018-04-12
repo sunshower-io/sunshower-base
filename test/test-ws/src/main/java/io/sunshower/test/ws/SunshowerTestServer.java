@@ -42,6 +42,8 @@ public class SunshowerTestServer {
     deployment.setContextPath("/");
     deployment.setClassLoader(getClass().getClassLoader());
     deployment.setDeploymentName("sunshower-test" + hashCode());
+    //
+    // deployment.addServlet(servlet(HttpServlet30Dispatcher.class).setAsyncSupported(true).setLoadOnStartup(1));
     server.deploy(deployment);
     log.log(Level.INFO, "Sunshower test server started");
   }
