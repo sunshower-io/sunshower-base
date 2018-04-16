@@ -1,9 +1,21 @@
 package io.sunshower.test.ws.cfg;
 
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.sse.OutboundSseEvent;
 import javax.ws.rs.sse.Sse;
 import javax.ws.rs.sse.SseEventSink;
 
 public class DefaultTestService implements TestService {
+
+  @Override
+  public void custom(String id, SseEventSink sink, Sse sse) {
+    OutboundSseEvent build =
+        sse.newEventBuilder()
+            .mediaType(MediaType.APPLICATION_JSON_TYPE)
+            .data(new TestEntity(id))
+            .build();
+    sink.send(build);
+  }
 
   public void subscribe(String id, SseEventSink sink, Sse sse) {
 

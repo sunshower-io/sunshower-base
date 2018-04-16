@@ -9,7 +9,6 @@ import org.jboss.resteasy.core.ResourceMethodRegistry;
 import org.jboss.resteasy.core.SynchronousDispatcher;
 import org.jboss.resteasy.plugins.providers.DefaultTextPlain;
 import org.jboss.resteasy.plugins.providers.StringTextStar;
-import org.jboss.resteasy.plugins.providers.sse.SseEventSinkInterceptor;
 import org.jboss.resteasy.plugins.spring.SpringBeanProcessor;
 import org.jboss.resteasy.spi.Registry;
 import org.jboss.resteasy.spi.ResteasyDeployment;
@@ -36,11 +35,6 @@ public class JAXRSConfiguration {
   }
 
   @Bean
-  public SseEventSinkInterceptor sseEventSinkInterceptor() {
-    return new SseEventSinkInterceptor();
-  }
-
-  @Bean
   public SunshowerTestServer sunshowerTestServer(
       EnableJAXRS configuration, ResteasyDeployment deployment) {
     return new SunshowerTestServer(configuration, deployment);
@@ -58,9 +52,8 @@ public class JAXRSConfiguration {
   }
 
   @Bean
-  public JsonProvider jsonProvider() {
-    JsonProvider provider = new JsonProvider();
-    return provider;
+  public DefaultJsonProvider moXyJsonProvider() {
+    return new DefaultJsonProvider();
   }
 
   @Bean
@@ -85,7 +78,7 @@ public class JAXRSConfiguration {
 
   @Bean
   public ResteasyProviderFactory resteasyProviderFactory() {
-    return new ResteasyProviderFactory();
+    return ResteasyProviderFactory.getInstance();
   }
 
   @Bean

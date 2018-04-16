@@ -12,6 +12,11 @@ import javax.ws.rs.sse.SseEventSink;
 public interface TestService {
 
   @GET
+  @Path("{id}/custom")
+  @Produces(MediaType.SERVER_SENT_EVENTS)
+  void custom(@PathParam("id") String id, @Context SseEventSink sink, @Context Sse sse);
+
+  @GET
   @Path("{id}/events")
   @Produces(MediaType.SERVER_SENT_EVENTS)
   void subscribe(@PathParam("id") String id, @Context SseEventSink sink, @Context Sse sse);

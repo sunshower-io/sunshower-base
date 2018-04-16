@@ -8,7 +8,11 @@ import static org.hamcrest.MatcherAssert.*;
 import io.sunshower.test.ws.cfg.TestConfiguration;
 import io.sunshower.test.ws.cfg.TestEntity;
 import io.sunshower.test.ws.cfg.TestService;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
+import java.util.concurrent.atomic.AtomicInteger;
 import javax.inject.Inject;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.WebTarget;
@@ -36,23 +40,53 @@ class RemoteExtensionTest {
   @Inject private WebTarget webTarget;
 
   @Test
-  void ensureSseWorks() throws InterruptedException {
+  void ensureCustomSseWorks() throws InterruptedException, ExecutionException, TimeoutException {
+
+    ResteasyWebTarget path =
+        ((ResteasyWebTarget) webTarget).path(TestService.class).path("1/custom");
+    SseEventSource s = SseEventSource.target(path).reconnectingEvery(10, TimeUnit.SECONDS).build();
+    AtomicInteger i = new AtomicInteger();
+    s.register(
+        e -> {
+          System.out.println(e.readData());
+          i.incrementAndGet();
+        },
+        System.out::println);
+    s.open();
+    Executors.newWorkStealingPool()
+        .submit(
+            () -> {
+              System.out.println(i);
+              while (i.get() < 1) {
+                Thread.yield();
+              }
+            })
+        .get(10, TimeUnit.SECONDS);
+  }
+
+  @Test
+  void ensureSseWorks() throws InterruptedException, TimeoutException, ExecutionException {
 
     ResteasyWebTarget path =
         ((ResteasyWebTarget) webTarget).path(TestService.class).path("1/events");
     SseEventSource s = SseEventSource.target(path).reconnectingEvery(10, TimeUnit.SECONDS).build();
-    System.out.println("a");
+    AtomicInteger i = new AtomicInteger();
     s.register(
         e -> {
-          System.out.println("d");
           System.out.println(e.readData(String.class));
-          System.out.println("e");
+          i.incrementAndGet();
         },
         System.out::println);
-    System.out.println("b");
     s.open();
-    System.out.println("c");
-    Thread.sleep(1000);
+    Executors.newWorkStealingPool()
+        .submit(
+            () -> {
+              System.out.println(i);
+              while (i.get() < 6) {
+                Thread.yield();
+              }
+            })
+        .get(10, TimeUnit.SECONDS);
   }
 
   @Test
