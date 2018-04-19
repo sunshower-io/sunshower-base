@@ -55,7 +55,7 @@ public class OneToOneTest extends HibernateTestCase {
     owner =
         entityManager
             .createQuery("select e from Owner e where e.id = :id", Owner.class)
-            .setParameter("id", owner.getId().value())
+            .setParameter("id", owner.getId())
             .getSingleResult();
     Ownee ownee = new Ownee();
     ownee.setName("froadfasdf");

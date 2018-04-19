@@ -1,5 +1,6 @@
 package io.sunshower.persistence.core;
 
+import io.sunshower.common.Identifier;
 import io.sunshower.encodings.Base58;
 import io.sunshower.encodings.Encoding;
 import org.apache.lucene.document.Document;
@@ -13,15 +14,15 @@ public class IdentifierBridge implements TwoWayFieldBridge {
   @Override
   public void set(String name, Object value, Document document, LuceneOptions luceneOptions) {
     if (value != null) {
-      byte[] v = (byte[]) value;
-      luceneOptions.addFieldToDocument(name, encoding.encode(v), document);
+      Identifier v = (Identifier) value;
+      luceneOptions.addFieldToDocument(name, encoding.encode(v.getId()), document);
     }
   }
 
   @Override
   public Object get(String name, Document document) {
     String data = document.getField(name).stringValue();
-    return encoding.decode(data);
+    return Identifier.valueOf(encoding.decode(data));
   }
 
   @Override

@@ -10,7 +10,6 @@ import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.FieldBridge;
 
 @MappedSuperclass
-// @IdClass(Identifier.class)
 @XmlRootElement(name = "hierarchical-entity")
 public abstract class DistributableHierarchicalEntity<T extends Hierarchical<Identifier, T>>
     extends HierarchichalEntity<Identifier, T> {

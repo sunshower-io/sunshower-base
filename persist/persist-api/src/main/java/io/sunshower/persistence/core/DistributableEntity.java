@@ -12,7 +12,6 @@ import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.FieldBridge;
 
 @MappedSuperclass
-@IdClass(Identifier.class)
 @XmlRootElement(name = "entity")
 public class DistributableEntity extends AbstractEntity<Identifier> {
 
@@ -25,7 +24,7 @@ public class DistributableEntity extends AbstractEntity<Identifier> {
   @XmlAttribute(name = "id")
   @FieldBridge(impl = IdentifierBridge.class)
   @XmlJavaTypeAdapter(Base58ByteArrayConverter.class)
-  private byte[] id;
+  private Identifier id;
 
   public DistributableEntity() {
     super(null);
@@ -38,14 +37,12 @@ public class DistributableEntity extends AbstractEntity<Identifier> {
 
   @Override
   public Identifier getId() {
-    return Identifier.valueOf(id);
+    return id;
   }
 
   @Override
   public void setId(Identifier id) {
-    if (id != null) {
-      this.id = io.sunshower.common.Identifiers.getBytes(id);
-    }
+    this.id = id;
   }
 
   @Override
