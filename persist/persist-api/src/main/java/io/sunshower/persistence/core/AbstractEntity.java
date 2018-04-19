@@ -18,7 +18,11 @@ public abstract class AbstractEntity<T extends Serializable> implements Persista
   public abstract void setId(T id);
 
   public int hashCode() {
-    return getId().hashCode();
+    T id = getId();
+    if (id == null) {
+      return 0;
+    }
+    return id.hashCode();
   }
 
   public boolean equals(Object o) {
