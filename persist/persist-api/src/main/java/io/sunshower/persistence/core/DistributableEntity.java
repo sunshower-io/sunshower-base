@@ -2,7 +2,7 @@ package io.sunshower.persistence.core;
 
 import io.sunshower.common.Identifier;
 import io.sunshower.persist.Sequence;
-import io.sunshower.persist.internal.jaxb.Base58ByteArrayConverter;
+import io.sunshower.persist.internal.jaxb.IdentifierAdapter;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlID;
@@ -23,7 +23,7 @@ public class DistributableEntity extends AbstractEntity<Identifier> {
   @Column(name = "id")
   @XmlAttribute(name = "id")
   @FieldBridge(impl = IdentifierBridge.class)
-  @XmlJavaTypeAdapter(Base58ByteArrayConverter.class)
+  @XmlJavaTypeAdapter(IdentifierAdapter.class)
   private Identifier id;
 
   public DistributableEntity() {
