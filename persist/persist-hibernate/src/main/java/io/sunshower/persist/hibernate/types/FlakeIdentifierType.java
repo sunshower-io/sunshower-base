@@ -1,19 +1,24 @@
 package io.sunshower.persist.hibernate.types;
 
+import static io.sunshower.persist.hibernate.types.FlakeSQLTypeDescriptor.*;
+
 import io.sunshower.common.Identifier;
 import org.hibernate.type.AbstractSingleColumnStandardBasicType;
-import org.hibernate.type.descriptor.sql.BinaryTypeDescriptor;
 
 public class FlakeIdentifierType extends AbstractSingleColumnStandardBasicType<Identifier> {
 
   public static final FlakeIdentifierType INSTANCE = new FlakeIdentifierType();
 
   public FlakeIdentifierType() {
-    super(BinaryTypeDescriptor.INSTANCE, FlakeSQLTypeDescriptor.INSTANCE);
+    super(FlakeBinaryTypeDescriptor.INSTANCE, FlakeSQLTypeDescriptor.INSTANCE);
   }
 
   @Override
   public String getName() {
     return "flake-binary";
+  }
+
+  public String[] getRegistrationKeys() {
+    return new String[] {this.getName(), "identifier", Identifier.class.getName()};
   }
 }

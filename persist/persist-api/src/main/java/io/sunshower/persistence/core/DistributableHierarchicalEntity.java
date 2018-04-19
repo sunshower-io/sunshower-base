@@ -3,7 +3,6 @@ package io.sunshower.persistence.core;
 import io.sunshower.common.Identifier;
 import javax.persistence.Column;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.MappedSuperclass;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -11,7 +10,7 @@ import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.FieldBridge;
 
 @MappedSuperclass
-@IdClass(Identifier.class)
+// @IdClass(Identifier.class)
 @XmlRootElement(name = "hierarchical-entity")
 public abstract class DistributableHierarchicalEntity<T extends Hierarchical<Identifier, T>>
     extends HierarchichalEntity<Identifier, T> {
@@ -21,7 +20,7 @@ public abstract class DistributableHierarchicalEntity<T extends Hierarchical<Ide
   @Column(name = "id")
   @XmlAttribute(name = "id")
   @FieldBridge(impl = ByteArrayBridge.class)
-  private byte[] id;
+  private Identifier id;
 
   protected DistributableHierarchicalEntity(Identifier id) {
     super(id);
@@ -38,14 +37,12 @@ public abstract class DistributableHierarchicalEntity<T extends Hierarchical<Ide
 
   @Override
   public Identifier getId() {
-    return id == null ? null : Identifier.valueOf(id);
+    return id;
   }
 
   @Override
   public void setId(Identifier id) {
-    if (id != null) {
-      this.id = id.value();
-    }
+    this.id = id;
   }
 
   @Override

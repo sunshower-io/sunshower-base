@@ -1,6 +1,5 @@
 package io.sunshower.persist.hibernate;
 
-import io.sunshower.persist.hibernate.types.FlakeIdentifierType;
 import org.hibernate.boot.SessionFactoryBuilder;
 import org.hibernate.boot.spi.MetadataImplementor;
 import org.hibernate.boot.spi.SessionFactoryBuilderFactory;
@@ -10,7 +9,8 @@ public class TypeRegistrationBuilderFactory implements SessionFactoryBuilderFact
   @Override
   public SessionFactoryBuilder getSessionFactoryBuilder(
       MetadataImplementor metadata, SessionFactoryBuilderImplementor defaultBuilder) {
-    metadata.getTypeResolver().registerTypeOverride(FlakeIdentifierType.INSTANCE);
+    //    metadata.getTypeResolver().registerTypeOverride(FlakeIdentifierType.INSTANCE);
+    //    return defaultBuilder;
     return defaultBuilder;
   }
 }
