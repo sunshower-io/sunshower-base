@@ -11,11 +11,11 @@ public class TypeAttributeClassExtractor extends ClassExtractor {
     final String type = (String) databaseRow.get("@type");
     if (type != null) {
       try {
-        return Class.forName(type);
+        return Class.forName(type, true, Thread.currentThread().getContextClassLoader());
       } catch (ClassNotFoundException e) {
       }
     }
-    throw new IllegalStateException(
+    throw new IllegalArgumentException(
         "Did not specify attribute @type or it was not bound to an existing class: " + type);
   }
 }
