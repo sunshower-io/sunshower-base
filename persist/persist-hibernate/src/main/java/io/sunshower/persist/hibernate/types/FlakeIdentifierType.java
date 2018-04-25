@@ -1,6 +1,5 @@
 package io.sunshower.persist.hibernate.types;
 
-
 import io.sunshower.common.Identifier;
 import org.hibernate.type.AbstractSingleColumnStandardBasicType;
 
