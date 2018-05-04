@@ -2,6 +2,7 @@ package io.sunshower.test.common;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.NoSuchElementException;
 
 public class TestClasspath {
@@ -21,7 +22,9 @@ public class TestClasspath {
     throw new NoSuchElementException("Failed to resolve build directory");
   }
 
-
+  public static Path rootDir() {
+    return buildDir().getParentFile().toPath();
+  }
 
   public static File getOrCreateDirectoryInBuildDirectory(String path) throws IOException {
     File file = new File(buildDir(), path);
