@@ -8,8 +8,7 @@ import org.cfg4j.provider.ConfigurationProvider;
 import org.cfg4j.provider.ConfigurationProviderBuilder;
 import org.cfg4j.source.ConfigurationSource;
 import org.cfg4j.source.context.environment.ImmutableEnvironment;
-import org.cfg4j.source.git.FirstTokenBranchResolver;
-import org.cfg4j.source.git.GitConfigurationSourceBuilder;
+import org.cfg4j.source.files.FilesConfigurationSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.ContextConfiguration;
 
@@ -18,11 +17,12 @@ public class TestConfigurationConfiguration {
 
   @Bean
   public ConfigurationSource configurationSource() {
-    return new GitConfigurationSourceBuilder()
-        .withRepositoryURI(resolve())
-        .withBranchResolver(new FirstTokenBranchResolver())
-        .withConfigFilesProvider(() -> Arrays.asList(Paths.get("sunshower.yml")))
-        .build();
+    return new FilesConfigurationSource(() -> Arrays.asList(Paths.get("sunshower.yml")));
+    //    return new GitConfigurationSourceBuilder()
+    //        .withRepositoryURI(resolve())
+    //        .withBranchResolver(new FirstTokenBranchResolver())
+    //        .withConfigFilesProvider(() -> Arrays.asList(Paths.get("sunshower.yml")))
+    //        .build();
   }
 
   @Bean
@@ -37,7 +37,12 @@ public class TestConfigurationConfiguration {
 
   @Bean(name = TestConfigurations.TEST_CONFIGURATION_REPOSITORY_PATH)
   public String testConfigurationLocation() {
-    return "/common/common-config/src/test/resources";
+    return TestClasspath.rootDir()
+        .getParent()
+        .getParent()
+        .resolve("common/common-config/src/test/resources")
+        .toFile()
+        .getAbsolutePath();
   }
 
   String resolve() {
