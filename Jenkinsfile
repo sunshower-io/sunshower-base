@@ -11,12 +11,12 @@ pipeline {
     stages {
         stage('build-docker') {
             steps {
-                sh 'docker build -t sunshower-common -f Dockerfile .'
+                sh "docker build -t sunshower-common$env.BUILD_NUMBER -f Dockerfile ."
                 sh "docker run " +
                         "-e MVN_REPO_USERNAME=${MVN_REPO_USR} " +
                         "-e MVN_REPO_PASSWORD=${MVN_REPO_PSW} " +
                         "-e MVN_REPO_URL=${MAVEN_REPOSITORY_URL} " +
-                        "--rm --name 'sunshower-common' 'sunshower-common'"
+                        "--rm --name 'sunshower-common$env.BUILD_NUMBER' 'sunshower-common$env.BUILD_NUMBER'"
             }
         }
     }
