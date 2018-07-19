@@ -12,13 +12,10 @@ public class ClassConverter implements AttributeConverter<Class<?>, String> {
 
   @Override
   public Class<?> convertToEntityAttribute(String dbData) {
-    if (dbData != null) {
-      try {
-        return Class.forName(dbData);
-      } catch (Exception ex) {
-
-      }
+    try {
+      return Class.forName(dbData, true, Thread.currentThread().getContextClassLoader());
+    } catch (Exception ex) {
+      throw new RuntimeException(ex);
     }
-    return Void.class;
   }
 }

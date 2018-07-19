@@ -1,5 +1,6 @@
 package io.sunshower.persistence.core.converters;
 
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -20,6 +21,12 @@ public class ClassConverterTest {
   @Test
   public void ensureVoidIsInClassLoader() throws ClassNotFoundException {
     Class.forName("java.lang.Void");
+  }
+
+  @Test
+  public void ensureConverterConvertsNonVoidClass() {
+    final Class<?> s = converter.convertToEntityAttribute(ClassConverterTest.class.getName());
+    assertThat(ClassConverterTest.class, is(equalTo(s)));
   }
 
   @Test

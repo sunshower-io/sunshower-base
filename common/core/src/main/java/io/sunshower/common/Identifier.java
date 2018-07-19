@@ -7,6 +7,7 @@ import io.sunshower.encodings.Base58;
 import io.sunshower.encodings.Encoding;
 import io.sunshower.persist.Sequence;
 import io.sunshower.persist.internal.jaxb.Base58ByteArrayConverter;
+import io.sunshower.persist.internal.jaxb.IdentifierAdapter;
 import java.io.Serializable;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
@@ -19,6 +20,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 @XmlRootElement(name = "id")
 @XmlAccessorType(XmlAccessType.NONE)
+@XmlJavaTypeAdapter(IdentifierAdapter.class)
 public class Identifier implements Comparable<Identifier>, Serializable {
 
   static final transient Encoding base58 = Base58.getInstance(Default);
@@ -41,6 +43,10 @@ public class Identifier implements Comparable<Identifier>, Serializable {
     bb.putLong(id.getMostSignificantBits());
     bb.putLong(id.getLeastSignificantBits());
     return new Identifier(bb.array());
+  }
+
+  public Identifier(Identifier copy) {
+    this.id = copy.id;
   }
 
   public static Identifier valueOf(byte[] id) {

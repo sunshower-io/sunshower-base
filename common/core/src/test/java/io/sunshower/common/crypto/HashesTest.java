@@ -23,4 +23,17 @@ public class HashesTest {
     Multihash actual = hashFunction.compute("hello".getBytes());
     assertThat(actual, is(expected));
   }
+
+  @Test
+  void hashJalapeno() {
+    Hashes.HashFunction hashFunction = Hashes.create(Multihash.Type.SHA_2_512);
+
+    String toHash = "jalapeno.ii";
+
+    final String hash = hashFunction.hash(toHash);
+    System.out.println(hash);
+
+    final String actual = hashFunction.hash("jalapeno.io");
+    System.out.println("Actually, what I was expecting is:\n" + actual);
+  }
 }
