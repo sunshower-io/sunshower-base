@@ -160,7 +160,7 @@ public class AuthenticationTestExecutionListener extends AbstractTestExecutionLi
         }
       }
     }
-    return users;
+    return dedupe(users);
   }
 
   private GrantedAuthority[] resolveAuthorities(
@@ -236,6 +236,10 @@ public class AuthenticationTestExecutionListener extends AbstractTestExecutionLi
         }
       }
     }
+    return dedupe(users);
+  }
+
+  private Set<Object> dedupe(Set<Object> users) {
     final Set<String> usernames = new HashSet<>();
     return users.stream().filter(t -> !usernames.contains(id(t))).collect(Collectors.toSet());
   }
