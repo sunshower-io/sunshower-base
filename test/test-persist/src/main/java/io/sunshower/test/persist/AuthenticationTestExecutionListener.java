@@ -7,6 +7,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.*;
+import java.util.stream.Collectors;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
@@ -235,6 +236,7 @@ public class AuthenticationTestExecutionListener extends AbstractTestExecutionLi
         }
       }
     }
-    return users;
+    final Set<String> usernames = new HashSet<>();
+    return users.stream().filter(t -> !usernames.contains(id(t))).collect(Collectors.toSet());
   }
 }
