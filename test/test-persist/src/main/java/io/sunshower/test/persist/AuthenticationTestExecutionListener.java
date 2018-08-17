@@ -241,6 +241,6 @@ public class AuthenticationTestExecutionListener extends AbstractTestExecutionLi
 
   private Set<Object> dedupe(Set<Object> users) {
     final Set<String> usernames = new HashSet<>();
-    return users.stream().filter(t -> !usernames.contains(id(t))).collect(Collectors.toSet());
+    return users.stream().filter(t -> usernames.add(id(t))).collect(Collectors.toSet());
   }
 }

@@ -26,6 +26,12 @@ public class IdentifierTest extends SerializationTestCase {
     super(SerializationAware.Format.JSON, new Class[] {Identifier.class});
   }
 
+
+  @Test
+  void ensureLaxWorksOnInvalidId() {
+    Identifier.valueOf("gBxELyoVTnBZsjLVxreS77", true);
+  }
+
   @Test
   public void ensureIdIsExpected() {
 
