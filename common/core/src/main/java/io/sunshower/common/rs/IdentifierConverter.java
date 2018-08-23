@@ -15,14 +15,12 @@ public class IdentifierConverter extends XmlAdapter<String, Identifier> {
     this.lax = lax;
   }
 
-
-
   @Override
   public Identifier unmarshal(String v) throws Exception {
     if (v == null) {
       return null;
     }
-    return Identifier.valueOf(v);
+    return Identifier.valueOf(v, lax);
   }
 
   @Override

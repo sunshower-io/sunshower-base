@@ -53,11 +53,9 @@ public class Identifier implements Comparable<Identifier>, Serializable {
     return new Identifier(id);
   }
 
-
   public static Identifier valueOf(byte[] id, boolean lax) {
     return new Identifier(id, lax);
   }
-
 
   Identifier(byte[] id) {
     this(id, false);
@@ -131,7 +129,6 @@ public class Identifier implements Comparable<Identifier>, Serializable {
         return Base58.getInstance(alphabet).encode(Arrays.copyOf(id, id.length));
     }
   }
-
 
   public static Identifier valueOf(String id, boolean lax) {
     if (id == null) {
