@@ -1,7 +1,7 @@
 package io.sunshower.persistence.core.converters;
 
-import javax.persistence.AttributeConverter;
 import java.util.Locale;
+import javax.persistence.AttributeConverter;
 
 public class LocaleConverter implements AttributeConverter<Locale, String> {
 
