@@ -53,8 +53,16 @@ public class Identifier implements Comparable<Identifier>, Serializable {
     return new Identifier(id);
   }
 
+  public static Identifier valueOf(byte[] id, boolean lax) {
+    return new Identifier(id, lax);
+  }
+
   Identifier(byte[] id) {
-    if (id == null || id.length != 16) {
+    this(id, false);
+  }
+
+  Identifier(byte[] id, boolean lax) {
+    if (!lax && (id == null || id.length != 16)) {
       throw new IllegalArgumentException("Argument cannot possibly be a valid identifier");
     }
     this.id = id;
@@ -122,11 +130,15 @@ public class Identifier implements Comparable<Identifier>, Serializable {
     }
   }
 
-  public static Identifier valueOf(String id) {
+  public static Identifier valueOf(String id, boolean lax) {
     if (id == null) {
       throw new IllegalArgumentException("Identifier cannot be null");
     }
-    return new Identifier(base58.decode(id));
+    return new Identifier(base58.decode(id), lax);
+  }
+
+  public static Identifier valueOf(String id) {
+    return valueOf(id, false);
   }
 
   public static Identifier copyOf(Identifier id) {

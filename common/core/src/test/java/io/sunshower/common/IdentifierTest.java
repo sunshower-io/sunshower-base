@@ -27,6 +27,11 @@ public class IdentifierTest extends SerializationTestCase {
   }
 
   @Test
+  void ensureLaxWorksOnInvalidId() {
+    Identifier.valueOf("gBxELyoVTnBZsjLVxreS77", true);
+  }
+
+  @Test
   public void ensureIdIsExpected() {
 
     Identifier id = Identifier.valueOf(UUID.fromString("015cd8ef-54c9-db4d-e85d-f122d25639b7"));

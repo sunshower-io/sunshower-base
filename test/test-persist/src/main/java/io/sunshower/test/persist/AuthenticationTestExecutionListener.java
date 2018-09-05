@@ -7,6 +7,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.*;
+import java.util.stream.Collectors;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
@@ -159,7 +160,7 @@ public class AuthenticationTestExecutionListener extends AbstractTestExecutionLi
         }
       }
     }
-    return users;
+    return dedupe(users);
   }
 
   private GrantedAuthority[] resolveAuthorities(
@@ -235,6 +236,11 @@ public class AuthenticationTestExecutionListener extends AbstractTestExecutionLi
         }
       }
     }
-    return users;
+    return dedupe(users);
+  }
+
+  private Set<Object> dedupe(Set<Object> users) {
+    final Set<String> usernames = new HashSet<>();
+    return users.stream().filter(t -> usernames.add(id(t))).collect(Collectors.toSet());
   }
 }
