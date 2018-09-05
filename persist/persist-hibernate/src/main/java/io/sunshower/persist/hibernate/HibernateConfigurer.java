@@ -126,6 +126,7 @@ public class HibernateConfigurer {
     if (provider == null) {
       log.info("No L2 Cache configured");
     }
+    jpaProperties.put("hibernate.connection.autocommit", false);
 
     if (cache == null) {
       log.info("No L2 Cache configured");
