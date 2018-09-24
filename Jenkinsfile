@@ -13,7 +13,15 @@ pipeline {
         stage('Check Commit Message for Skip Condition') {
             steps {
                 skipRelease action: 'check', forceAbort: false
-                sh "ls -la"
+            }
+        }
+
+        stage('Build and deploy BOM POM') {
+            steps {
+                sh """
+                        mvn clean install deploy \
+                        -f bom/pom.xml 
+                    """
             }
         }
     }
