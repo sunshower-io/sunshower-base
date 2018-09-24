@@ -88,6 +88,7 @@ pipeline {
                     -PbomVersion=${env.CURRENT_VERSION}
                 """
 
+                sh "git tag -d v${env.NEXT_VERSION}"
 
 
                 /**
