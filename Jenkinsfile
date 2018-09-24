@@ -32,6 +32,7 @@ pipeline {
                     -PmavenRepositoryUrl=http://artifacts.sunshower.io/repository/sunshower-snapshots
                     -PmavenRepositoryUsername=${MVN_REPO_USR}
                     -PmavenRepositoryPassword=${MVN_REPO_PSW}
+                    -PbomVersion=${env.CURRENT_VERSION}
                 """
             }
         }
