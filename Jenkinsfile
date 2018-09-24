@@ -20,7 +20,7 @@ pipeline {
             steps {
                 sh """
                         mvn clean install deploy \
-                        -f bom/pom.xml -s /root/.m2/settings.xml
+                        -f bom/pom.xml 
                     """
             }
         }

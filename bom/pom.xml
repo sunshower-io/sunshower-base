@@ -24,12 +24,6 @@
     <module>imported</module>
     <module>exported</module>
   </modules>
-  <distributionManagement>
-    <repository>
-      <id>sunshower-oss-repo</id>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-    </repository>
-  </distributionManagement>
 
   <build>
     <pluginManagement>
