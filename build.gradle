@@ -76,9 +76,9 @@ allprojects {
     dependencyManagement {
         imports {
             mavenBom("io.sunshower.base:bom-imported:${version}") {
-                bomProperties([
-                        'env.version': bomVersion
-                ])
+//                bomProperties([
+//                        'env.version': bomVersion
+//                ])
             }
         }
     }
