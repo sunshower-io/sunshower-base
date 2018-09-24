@@ -41,12 +41,12 @@ pipeline {
             environment {
                 CURRENT_VERSION = readMavenPom(file: 'bom/pom.xml').getVersion()
             }
-//            when {
-////                branch 'master'
-////                expression {
-////                    env.SKIP_BUILD == "false"
-////                }
-//            }
+            when {
+                branch 'master'
+                expression {
+                    env.SKIP_BUILD == "false"
+                }
+            }
             steps {
                 extractVersions(version: env.CURRENT_VERSION)
 
@@ -87,9 +87,6 @@ pipeline {
                     -PmavenRepositoryPassword=${MVN_REPO_PSW} \
                     -PbomVersion=${env.CURRENT_VERSION}
                 """
-
-                sh "git tag -d v${env.NEXT_VERSION}"
-
 
                 /**
                  * Tag build
