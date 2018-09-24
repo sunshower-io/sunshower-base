@@ -36,6 +36,47 @@ pipeline {
                 """
             }
         }
+
+        stage('Release and Deploy Artifacts') {
+            environment {
+                CURRENT_VERSION = readMavenPom(file: 'sunshower-env/pom.xml').getVersion()
+            }
+            when {
+//                branch 'master'
+//                expression {
+//                    env.SKIP_BUILD == "false"
+//                }
+            }
+            steps {
+                extractVersions(version: env.CURRENT_VERSION)
+
+                /**
+                 * Update env
+                 */
+
+                sh 'mvn versions:set -DnewVersion=$NEXT_VERSION -f bom/pom.xml -P sunshower'
+
+                /**
+                 * Git config
+                 */
+
+                sh "git config user.name '$GITHUB_USR'"
+                sh "git config user.email '${GITHUB_USR}@sunshower.io'"
+
+                /**
+                 * Deploy boms
+                 */
+
+
+
+                sh """
+                       mvn clean install deploy \
+                       -f bom/pom.xml
+                   """
+
+                
+            }
+        }
     }
 
 
