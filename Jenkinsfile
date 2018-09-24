@@ -120,6 +120,10 @@ pipeline {
                 sh "git commit -am 'Releasing ${env.NEXT_VERSION} [skip-build]'"
                 sh "git push -u origin HEAD:master"
 
+                /**
+                 * Push tag
+                 */
+                sh "git push origin v${env.NEXT_VERSION}"
             }
         }
     }
