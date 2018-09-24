@@ -21,7 +21,7 @@ pipeline {
                 sh "cat /root/.m2/settings.xml"
                 sh """
                         mvn clean install deploy \
-                        -f bom/pom.xml 
+                        -f bom/pom.xml -s /root/.m2/settings.xml
                     """
             }
         }
