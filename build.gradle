@@ -33,9 +33,9 @@ allprojects {
 
 
     def repos = [
-            'http://artifacts.sunshower.io/repository/sunshower-snapshots',
             'http://artifacts.sunshower.io/repository/sunshower-releases',
             'http://artifacts.sunshower.io/repository/sunshower-cache',
+            'http://artifacts.sunshower.io/repository/sunshower-snapshots',
     ]
 
 
@@ -59,6 +59,9 @@ allprojects {
     repositories {
         mavenLocal()
         mavenCentral()
+        repos.each { repo ->
+            maven { url "$repo" }
+        }
 
         maven {
             url mavenRepositoryUrl
@@ -67,9 +70,6 @@ allprojects {
                 username mavenRepositoryUsername
                 password mavenRepositoryPassword
             }
-        }
-        repos.each { repo ->
-            maven { url "$repo" }
         }
     }
 
