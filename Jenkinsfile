@@ -24,6 +24,17 @@ pipeline {
                     """
             }
         }
+
+        stage('Build and Deploy Artifact Snapshots') {
+            steps {
+                sh """
+                    gradle clean build publish -i \
+                    -PmavenRepositoryUrl=http://artifacts.sunshower.io/repository/sunshower-snapshots
+                    -PmavenRepositoryUsername=${MVN_REPO_USR}
+                    -PmavenRepositoryPassword=${MVN_REPO_PSW}
+                """
+            }
+        }
     }
 
 

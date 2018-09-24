@@ -33,15 +33,14 @@ allprojects {
 
 
     def repos = [
-            'http://repo.spring.io/snapshot',
-            "http://repo.spring.io/libs-milestone",
-            "http://oss.sonatype.org/content/repositories/snapshots",
-            "http://www.gridgainsystems.com/nexus/content/repositories/external"
+            'http://artifacts.sunshower.io/repository/sunshower-snapshots',
+            'http://artifacts.sunshower.io/repository/sunshower-releases',
+            'http://artifacts.sunshower.io/repository/sunshower-cache',
     ]
 
 
 
-    task testArtifact(type:Jar, dependsOn: testClasses) {
+    task testArtifact(type: Jar, dependsOn: testClasses) {
         classifier = 'tests'
         from sourceSets.test.output
     }
@@ -78,7 +77,7 @@ allprojects {
         imports {
             mavenBom("io.sunshower.base:bom-imported:${version}") {
                 bomProperties([
-                        'env.version': '1.0.0-SNAPSHOT'
+                        'env.version': bomVersion
                 ])
             }
         }
@@ -121,7 +120,7 @@ allprojects {
                 artifact sourceJar {
                     classifier "sources"
                 }
-                
+
                 artifact testArtifact {
                     classifier = 'tests'
                 }
