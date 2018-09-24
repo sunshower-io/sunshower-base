@@ -8,10 +8,7 @@ import io.sunshower.lang.common.hash.HashFunction;
 import io.sunshower.lang.common.hash.integers.Murmur3;
 import java.util.Random;
 import org.junit.jupiter.api.Test;
-import org.junit.platform.runner.JUnitPlatform;
-import org.junit.runner.RunWith;
 
-@RunWith(JUnitPlatform.class)
 public class Murmur3Test {
 
   @Test

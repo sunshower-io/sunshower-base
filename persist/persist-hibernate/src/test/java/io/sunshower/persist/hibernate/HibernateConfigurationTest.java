@@ -18,8 +18,6 @@ import javax.persistence.PersistenceContext;
 import org.junit.FixMethodOrder;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.platform.runner.JUnitPlatform;
-import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor;
 import org.springframework.test.context.ContextConfiguration;
@@ -32,7 +30,6 @@ import org.springframework.transaction.annotation.Transactional;
 import test.entities.TestEntity;
 
 @ExtendWith(SpringExtension.class)
-@RunWith(JUnitPlatform.class)
 @Transactional
 @ContextConfiguration(
   classes = {

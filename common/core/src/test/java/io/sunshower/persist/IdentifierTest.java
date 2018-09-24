@@ -9,10 +9,7 @@ import io.sunshower.test.common.SerializationTestCase;
 import java.time.Clock;
 import java.util.*;
 import org.junit.jupiter.api.Test;
-import org.junit.platform.runner.JUnitPlatform;
-import org.junit.runner.RunWith;
 
-@RunWith(JUnitPlatform.class)
 public class IdentifierTest extends SerializationTestCase {
 
   public IdentifierTest() {

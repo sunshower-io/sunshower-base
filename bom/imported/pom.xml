@@ -25,6 +25,14 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.powermock.modules.test.powermockito</groupId>
+            <artifactId>powermock-modules-test-powermockito</artifactId>
+            <version>1.4.5-SONATYPE</version>
+        </dependency>
+
+
     </dependencies>
 
 </project>

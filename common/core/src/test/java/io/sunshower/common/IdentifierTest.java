@@ -14,10 +14,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
-import org.junit.platform.runner.JUnitPlatform;
-import org.junit.runner.RunWith;
 
-@RunWith(JUnitPlatform.class)
 public class IdentifierTest extends SerializationTestCase {
 
   final Sequence<Identifier> sequence = Identifiers.newSequence();

@@ -12,12 +12,9 @@ import org.cfg4j.provider.ConfigurationProviderBuilder;
 import org.cfg4j.source.files.FilesConfigurationSource;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.platform.runner.JUnitPlatform;
-import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-@RunWith(JUnitPlatform.class)
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(
   classes = {DataSourceConfiguration.class, TestConfigurationConfiguration.class}

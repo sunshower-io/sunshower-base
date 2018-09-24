@@ -15,12 +15,9 @@ import javax.inject.Inject;
 import javax.sql.DataSource;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.platform.runner.JUnitPlatform;
-import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-@RunWith(JUnitPlatform.class)
 @ContextConfiguration(
   classes = {FlywayConfiguration.class, DataSourceConfiguration.class, H2TestConfiguration.class}
 )

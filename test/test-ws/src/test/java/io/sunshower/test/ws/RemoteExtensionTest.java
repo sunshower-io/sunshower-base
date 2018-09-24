@@ -20,13 +20,10 @@ import javax.ws.rs.sse.SseEventSource;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.platform.runner.JUnitPlatform;
-import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @EnableJAXRS
-@RunWith(JUnitPlatform.class)
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {TestConfiguration.class})
 class RemoteExtensionTest {

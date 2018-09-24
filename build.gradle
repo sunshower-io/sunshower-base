@@ -97,6 +97,7 @@ allprojects {
             testCompile('org.junit.platform:junit-platform-commons')
             testCompile('org.junit.jupiter:junit-jupiter-engine')
             testCompile('org.junit.vintage:junit-vintage-engine')
+
         }
     }
 
@@ -126,6 +127,10 @@ allprojects {
                 }
             }
         }
+    }
+
+    test {
+        useJUnitPlatform()
     }
 
 }

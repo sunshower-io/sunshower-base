@@ -10,8 +10,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.platform.runner.JUnitPlatform;
-import org.junit.runner.RunWith;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -21,7 +19,6 @@ import persist.test.TestEntity;
 @Configuration
 @Transactional
 @ExtendWith(SpringExtension.class)
-@RunWith(JUnitPlatform.class)
 @ContextConfiguration(
   classes = {TestConfiguration.class, HibernateTestCase.class, TestConfigurationConfiguration.class}
 )

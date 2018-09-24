@@ -15,10 +15,7 @@ import java.util.stream.Collectors;
 import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
-import org.junit.platform.runner.JUnitPlatform;
-import org.junit.runner.RunWith;
 
-@RunWith(JUnitPlatform.class)
 public class ReflectTest {
 
   interface Iface {}
