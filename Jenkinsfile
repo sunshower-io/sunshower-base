@@ -41,12 +41,12 @@ pipeline {
             environment {
                 CURRENT_VERSION = readMavenPom(file: 'bom/pom.xml').getVersion()
             }
-//            when {
-////                branch 'master'
-////                expression {
-////                    env.SKIP_BUILD == "false"
-////                }
-//            }
+            when {
+                branch 'master'
+                expression {
+                    env.SKIP_BUILD == "false"
+                }
+            }
             steps {
                 extractVersions(version: env.CURRENT_VERSION)
 
@@ -88,9 +88,6 @@ pipeline {
                     -PbomVersion=${env.CURRENT_VERSION}
                 """
 
-                sh "git tag -d v${env.NEXT_VERSION}"
-
-
                 /**
                  * Tag build
                  */
@@ -123,6 +120,10 @@ pipeline {
                 sh "git commit -am 'Releasing ${env.NEXT_VERSION} [skip-build]'"
                 sh "git push -u origin HEAD:master"
 
+                /**
+                 * Push tag
+                 */
+                sh "git push origin v${env.NEXT_VERSION}"
             }
         }
     }
