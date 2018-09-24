@@ -18,6 +18,7 @@ pipeline {
 
         stage('Build and deploy BOM POM') {
             steps {
+                sh "docker system prune -af"
                 sh """
                         mvn clean install deploy \
                         -f bom/pom.xml 
