@@ -74,6 +74,11 @@ pipeline {
                        -f bom/pom.xml
                    """
 
+                /**
+                 * Update gradle versions
+                 */
+
+                sh "find . -name gradle.properties | xargs sed -i  's/^version=${env.CURRENT_VERSION}\$/version=${env.NEXT_VERSION}/g'"
 
             }
         }
