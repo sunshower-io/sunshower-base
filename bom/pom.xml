@@ -1,71 +1,28 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-  <groupId>io.sunshower.base</groupId>
-  <artifactId>bom</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
-  <packaging>pom</packaging>
-
-  <parent>
-    <groupId>io.sunshower.env</groupId>
-    <artifactId>parent</artifactId>
+    <groupId>io.sunshower.base</groupId>
+    <artifactId>bom</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-  </parent>
+    <packaging>pom</packaging>
 
-  <name>bom</name>
-  <url>http://maven.apache.org</url>
+    <parent>
+        <groupId>io.sunshower.env</groupId>
+        <artifactId>parent</artifactId>
+        <version>1.0.3.Final</version>
+    </parent>
 
-  <properties>
-    <env.version>1.0.0-SNAPSHOT</env.version>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
-  <modules>
-    <module>imported</module>
-    <module>exported</module>
-  </modules>
+    <name>bom</name>
+    <url>http://maven.apache.org</url>
 
-  <build>
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-source-plugin</artifactId>
-          <version>2.1.2</version>
-        </plugin>
-      </plugins>
-    </pluginManagement>
-  </build>
-  <repositories>
-    <repository>
-      <id>sunshower-oss-repo</id>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-    </repository>
-    <repository>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-      <id>sonatype</id>
-      <name>sonatype</name>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-    </repository>
-    <repository>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-      <id>central</id>
-      <name>bintray</name>
-      <url>http://jcenter.bintray.com</url>
-    </repository>
-  </repositories>
-  <pluginRepositories>
-    <pluginRepository>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-      <id>central</id>
-      <name>bintray-plugins</name>
-      <url>http://jcenter.bintray.com</url>
-    </pluginRepository>
-  </pluginRepositories>
+    <properties>
+        <env.version>1.0.3.Final</env.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+    <modules>
+        <module>imported</module>
+        <module>exported</module>
+    </modules>
+
 </project>
