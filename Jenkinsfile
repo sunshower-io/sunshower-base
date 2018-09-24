@@ -41,12 +41,12 @@ pipeline {
             environment {
                 CURRENT_VERSION = readMavenPom(file: 'sunshower-env/pom.xml').getVersion()
             }
-            when {
-//                branch 'master'
-//                expression {
-//                    env.SKIP_BUILD == "false"
-//                }
-            }
+//            when {
+////                branch 'master'
+////                expression {
+////                    env.SKIP_BUILD == "false"
+////                }
+//            }
             steps {
                 extractVersions(version: env.CURRENT_VERSION)
 
@@ -74,7 +74,7 @@ pipeline {
                        -f bom/pom.xml
                    """
 
-                
+
             }
         }
     }
