@@ -18,6 +18,7 @@ pipeline {
 
         stage('Build and deploy BOM POM') {
             steps {
+                sh "cat /root/.m2/settings.xml"
                 sh """
                         mvn clean install deploy \
                         -f bom/pom.xml 
