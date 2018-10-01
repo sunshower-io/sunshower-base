@@ -3,13 +3,10 @@ package io.sunshower.io;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
+import io.sunshower.encodings.Base58;
 import java.io.IOException;
 import java.io.StringReader;
-import java.security.SecureRandom;
 import java.util.Random;
-
-import io.sunshower.encodings.Base58;
-import io.sunshower.encodings.Encoding;
 import lombok.val;
 import org.junit.jupiter.api.Test;
 
