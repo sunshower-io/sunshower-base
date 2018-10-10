@@ -19,6 +19,9 @@ pipeline {
         stage('Build and deploy BOM POM') {
             steps {
                 sh "whoami"
+                sh "ls -la /"
+                sh "ls -la /root/"
+                sh "ls -la /root/.m2/"
                 sh """
                         mvn clean install deploy \
                         -f bom/pom.xml -P sunshower -s /root/.m2/settings.xml
