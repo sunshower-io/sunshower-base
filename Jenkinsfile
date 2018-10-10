@@ -20,7 +20,7 @@ pipeline {
             steps {
                 sh """
                         mvn clean install deploy \
-                        -f bom/pom.xml -P sunshower
+                        -f bom/pom.xml -P sunshower -s /root/.m2/settings.xml
                     """
             }
         }
@@ -54,7 +54,7 @@ pipeline {
                  * Update env
                  */
 
-                sh 'mvn versions:set -DnewVersion=$NEXT_VERSION -f bom/pom.xml -P sunshower'
+                sh 'mvn versions:set -DnewVersion=$NEXT_VERSION -f bom/pom.xml -P sunshower -s /root/.m2/settings.xml'
 
                 /**
                  * Git config
@@ -71,7 +71,7 @@ pipeline {
 
                 sh """
                        mvn clean install deploy \
-                       -f bom/pom.xml
+                       -f bom/pom.xml -s /root/.m2/settings.xml
                    """
 
                 /**
@@ -99,9 +99,9 @@ pipeline {
                 sh "git remote set-url origin https://${GITHUB_USR}:${GITHUB_PSW}@github.com/sunshower-io/sunshower-base"
 
 
-                sh 'mvn versions:set -DnewVersion=$NEXT_SNAPSHOT -f bom/pom.xml'
+                sh 'mvn versions:set -DnewVersion=$NEXT_SNAPSHOT -f bom/pom.xml -s /root/.m2/settings.xml'
 
-                sh 'mvn clean install deploy -f bom/pom.xml'
+                sh 'mvn clean install deploy -f bom/pom.xml -s /root/.m2/settings.xml'
 
                 sh "find . -name gradle.properties | xargs sed -i  's/^version=${env.NEXT_VERSION}\$/version=${env.NEXT_SNAPSHOT}/g'"
 
