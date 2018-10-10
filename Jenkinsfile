@@ -18,7 +18,6 @@ pipeline {
 
         stage('Build and deploy BOM POM') {
             steps {
-                sh "whoami"
                 sh "ls -la /"
                 sh "ls -la /root/"
                 sh "ls -la /root/.m2/"
