@@ -20,7 +20,8 @@ pipeline {
             steps {
                 sh "ls -la /"
                 sh "ls -la /home/"
-                sh "ls -la /home/.m2/"
+                sh "ls -la /home/build/.m2/"
+
                 sh """
                         mvn clean install deploy \
                         -f bom/pom.xml -P sunshower -s /root/.m2/settings.xml
