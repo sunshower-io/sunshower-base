@@ -29,8 +29,9 @@ class ReaderInputStreamTest {
 
   @Test
   void ensureReadingLargeStringWorks() throws IOException {
-    val size = 100000;
-    val randomBytes = new SecureRandom().generateSeed(size);
+    val size = 1000;
+    val randomBytes = new byte[size];
+    new Random().nextBytes(randomBytes);
     val bytes = Base58.getInstance(Base58.Alphabets.Default).encode(randomBytes);
     val s = new String(Files.read(new ReaderInputStream(new StringReader(bytes))));
     assertThat(s, is(bytes));
