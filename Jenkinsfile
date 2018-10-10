@@ -5,7 +5,7 @@ pipeline {
     }
     agent {
         docker {
-            image 'sunshower/sunshower-base:latest'
+            image 'sunshower/sunshower-base:1.0.0'
         }
     }
 
