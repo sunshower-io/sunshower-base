@@ -36,7 +36,7 @@ public class DatabaseConfigurationSourceTest {
     ConfigurationProvider p =
         new ConfigurationProviderBuilder()
             .withConfigurationSource(s)
-            .withEnvironment(new ImmutableEnvironment("application-2.yml"))
+            .withEnvironment(new ImmutableEnvironment("application-2.yaml"))
             .build();
     DatabaseConfigurationSource jdbc = p.bind("jdbc", DatabaseConfigurationSource.class);
     assertThat(jdbc.jndiPath(), is("coolbeans"));
