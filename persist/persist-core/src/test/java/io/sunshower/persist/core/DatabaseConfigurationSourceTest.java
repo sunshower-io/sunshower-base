@@ -11,11 +11,14 @@ import org.cfg4j.provider.ConfigurationProvider;
 import org.cfg4j.provider.ConfigurationProviderBuilder;
 import org.cfg4j.source.context.environment.DefaultEnvironment;
 import org.cfg4j.source.context.environment.Environment;
+import org.cfg4j.source.context.environment.ImmutableEnvironment;
 import org.cfg4j.source.files.FilesConfigurationSource;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import java.io.File;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(
@@ -32,10 +35,17 @@ public class DatabaseConfigurationSourceTest {
     ConfigurationProvider p =
         new ConfigurationProviderBuilder()
             .withConfigurationSource(s)
-            .withEnvironment(new DefaultEnvironment())
+            .withEnvironment(env())
             .build();
     DatabaseConfigurationSource jdbc = p.bind("jdbc", DatabaseConfigurationSource.class);
     assertThat(jdbc.jndiPath(), is("coolbeans"));
+  }
+
+  private Environment env() {
+    final File file =
+        new File(ClassLoader.getSystemResource(".").getFile()).getParentFile().getParentFile();
+    final Environment environment = new ImmutableEnvironment(file.getAbsolutePath());
+    return environment;
   }
 
   @Test
