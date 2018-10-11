@@ -18,9 +18,7 @@ pipeline {
 
         stage('Build and deploy BOM POM') {
             steps {
-                sh "ls -la ${env.M2_HOME}"
-                sh "env"
-
+                echo "${M2_HOME}"
                 sh """
                         mvn clean install deploy \
                         -f bom/pom.xml -P sunshower
