@@ -13,7 +13,7 @@ public class ClasspathFilesProvider implements ConfigFilesProvider {
   @Override
   @SneakyThrows
   public Iterable<Path> getConfigFiles() {
-    return Paths.get(ClassLoader.getSystemResource("application-2.yml").toURI());
+    return Paths.get(getClass().getResource("/application-2.yml").toURI());
 //    return Collections.singleton(
 //        Paths.get(ClasspathFilesProvider.class.getResource("application-2.yml").getFile()).toFile().toPath());
   }
