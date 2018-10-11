@@ -18,11 +18,6 @@ public class TestConfigurationConfiguration {
   @Bean
   public ConfigurationSource configurationSource() {
     return new FilesConfigurationSource(() -> Arrays.asList(Paths.get("sunshower.yml")));
-    //    return new GitConfigurationSourceBuilder()
-    //        .withRepositoryURI(resolve())
-    //        .withBranchResolver(new FirstTokenBranchResolver())
-    //        .withConfigFilesProvider(() -> Arrays.asList(Paths.get("sunshower.yml")))
-    //        .build();
   }
 
   @Bean
