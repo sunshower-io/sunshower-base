@@ -18,8 +18,7 @@ pipeline {
 
         stage('Build and deploy BOM POM') {
             steps {
-                sh "echo ${env.M2_HOME}"
-                sh "ls -la ${env.M2_HOME}"
+                sh "ls -la /opt/build/tools/maven/"
 
                 sh """
                         mvn clean install deploy \
