@@ -18,7 +18,7 @@ pipeline {
 
         stage('Build and deploy BOM POM') {
             steps {
-                sh "ls -la /opt/build/tools/maven/apache-maven-3.5.4/"
+                sh "ls -la ${env.M2_HOME}"
                 sh "env"
 
                 sh """
