@@ -2,11 +2,15 @@ package io.sunshower.jpa.configuration;
 
 import io.sunshower.persistence.Dialect;
 import io.sunshower.persistence.annotations.Persistence;
+import io.sunshower.test.common.TestClasspath;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collections;
 import org.cfg4j.provider.ConfigurationProvider;
 import org.cfg4j.provider.ConfigurationProviderBuilder;
 import org.cfg4j.source.ConfigurationSource;
+import org.cfg4j.source.context.environment.Environment;
+import org.cfg4j.source.context.environment.ImmutableEnvironment;
 import org.cfg4j.source.context.filesprovider.ConfigFilesProvider;
 import org.cfg4j.source.files.FilesConfigurationSource;
 import org.springframework.context.annotation.Bean;
@@ -27,14 +31,8 @@ public class H2TestConfiguration {
   @Primary
   public ConfigurationSource configurationSource() {
     final ConfigFilesProvider provider =
-        () -> {
-          try {
-            return Collections.singletonList(
-                Paths.get(ClassLoader.getSystemResource("application.yml").toURI()));
-          } catch (Exception e) {
-            throw new RuntimeException(e);
-          }
-        };
+        () -> Collections.singletonList(Paths.get("application.yml"));
+
     final FilesConfigurationSource source = new FilesConfigurationSource(provider);
     return source;
   }
@@ -42,6 +40,11 @@ public class H2TestConfiguration {
   @Bean
   @Primary
   public ConfigurationProvider testConfigurationProvider(ConfigurationSource source) {
-    return new ConfigurationProviderBuilder().withConfigurationSource(source).build();
+    final Path path = TestClasspath.rootDir().resolve("src/test/resources").toAbsolutePath();
+    final Environment environment = new ImmutableEnvironment(path.toAbsolutePath().toString());
+    return new ConfigurationProviderBuilder()
+        .withEnvironment(environment)
+        .withConfigurationSource(source)
+        .build();
   }
 }

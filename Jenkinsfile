@@ -71,7 +71,7 @@ pipeline {
 
                 sh """
                        mvn clean install deploy \
-                       -f bom/pom.xml
+                       -f bom/pom.xml 
                    """
 
                 /**

@@ -1,5 +1,8 @@
 buildscript {
     apply from: 'gradle/buildscript.gradle', to: buildscript
+    dependencies {
+        classpath "net.ltgt.gradle:gradle-apt-plugin:0.18"
+    }
 }
 
 
@@ -13,6 +16,7 @@ allprojects {
     apply plugin: 'java'
     apply plugin: 'idea'
     apply plugin: 'maven-publish'
+    apply plugin: 'net.ltgt.apt'
     apply plugin: 'project-report'
     apply plugin: 'com.bmuschko.clover'
     apply plugin: "com.diffplug.gradle.spotless"
@@ -86,6 +90,9 @@ allprojects {
     plugins.withType(JavaPlugin) {
 
         dependencies {
+            annotationProcessor "org.projectlombok:lombok:1.18.2"
+            compileOnly 'org.projectlombok:lombok:1.18.2'
+            testCompileOnly 'org.projectlombok:lombok:1.18.2'
             compile 'javax.ws.rs:javax.ws.rs-api'
             compile 'org.eclipse.persistence:org.eclipse.persistence.moxy'
             compile 'org.hibernate.javax.persistence:hibernate-jpa-2.1-api'
