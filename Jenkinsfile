@@ -18,7 +18,6 @@ pipeline {
 
         stage('Build and deploy BOM POM') {
             steps {
-                sh "echo M2-HOME=${M2_HOME}"
                 sh """
                         mvn clean install deploy \
                         -f bom/pom.xml -P sunshower
