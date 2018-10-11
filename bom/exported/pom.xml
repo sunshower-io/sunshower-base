@@ -16,7 +16,6 @@
   <name>Sunshower.io Exported Bill-Of-Materials</name>
   <url>http://www.sunshower.io</url>
   <properties>
-    <env.version>1.0.8.Final</env.version>
     <sunshower-base.version>1.0.4-SNAPSHOT</sunshower-base.version>
   </properties>
 
