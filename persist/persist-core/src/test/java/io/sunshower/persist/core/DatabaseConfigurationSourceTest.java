@@ -9,6 +9,8 @@ import io.sunshower.test.common.TestConfigurationConfiguration;
 import javax.inject.Inject;
 import org.cfg4j.provider.ConfigurationProvider;
 import org.cfg4j.provider.ConfigurationProviderBuilder;
+import org.cfg4j.source.context.environment.DefaultEnvironment;
+import org.cfg4j.source.context.environment.Environment;
 import org.cfg4j.source.files.FilesConfigurationSource;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,7 +29,11 @@ public class DatabaseConfigurationSourceTest {
   public void ensureJdbcIsRead() {
     FilesConfigurationSource s =
         new FilesConfigurationSource(new ClasspathFilesProvider("application-2.yml"));
-    ConfigurationProvider p = new ConfigurationProviderBuilder().withConfigurationSource(s).build();
+    ConfigurationProvider p =
+        new ConfigurationProviderBuilder()
+            .withConfigurationSource(s)
+            .withEnvironment(new DefaultEnvironment())
+            .build();
     DatabaseConfigurationSource jdbc = p.bind("jdbc", DatabaseConfigurationSource.class);
     assertThat(jdbc.jndiPath(), is("coolbeans"));
   }
