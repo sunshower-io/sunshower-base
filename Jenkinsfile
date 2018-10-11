@@ -24,7 +24,7 @@ pipeline {
 
                 sh """
                         mvn clean install deploy \
-                        -f bom/pom.xml -P sunshower -s /root/.m2/settings.xml
+                        -f bom/pom.xml -P sunshower
                     """
             }
         }
