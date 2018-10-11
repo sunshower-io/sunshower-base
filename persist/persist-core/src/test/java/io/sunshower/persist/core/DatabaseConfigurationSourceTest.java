@@ -44,12 +44,7 @@ public class DatabaseConfigurationSourceTest {
 
   private Environment env() {
     final Path path = TestClasspath.rootDir().resolve("src/test/resources").toAbsolutePath();
-    System.out.println(path);
-    System.out.println(path.toFile().exists());
     return new ImmutableEnvironment(path.toAbsolutePath().toString());
-    //
-    //
-    // TestClasspath.rootDir().toPath().resolve("resources/test").toAbsolutePath().toString());
   }
 
   @Test
