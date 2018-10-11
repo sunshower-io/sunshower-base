@@ -18,9 +18,8 @@ pipeline {
 
         stage('Build and deploy BOM POM') {
             steps {
-                sh "ls -la /"
-                sh "ls -la /home/"
-                sh "ls -la /home/build/.m2/"
+                sh "echo $M2_HOME"
+                sh "ls -la $M2_HOME"
 
                 sh """
                         mvn clean install deploy \
