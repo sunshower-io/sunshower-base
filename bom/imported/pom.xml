@@ -17,7 +17,7 @@
     <url>http://www.sunshower.io</url>
 
     <properties>
-        <env.version>1.0.0-SNAPSHOT</env.version>
+        <env.version>1.0.10.Final</env.version>
     </properties>
 
     <dependencies>
