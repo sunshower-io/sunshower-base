@@ -27,7 +27,7 @@ public class IdentifierParameterConverter implements ParamConverterProvider {
       if (value == null) {
         return null;
       }
-      return Identifier.valueOf(value);
+      return Identifier.valueOf(value, true);
     }
 
     @Override
