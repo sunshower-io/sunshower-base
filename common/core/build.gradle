@@ -1,6 +1,6 @@
 
 dependencies {
-    compile project(':common:lambda')
-    testCompile project(':test:test-common')
-    testCompile 'org.junit.platform:junit-platform-runner'
+    implementation project(':common:lambda')
+    testImplementation project(':test:test-common')
+    testImplementation 'org.junit.platform:junit-platform-runner'
 }

@@ -6,6 +6,5 @@ dependencies {
     compile 'org.springframework.security:spring-security-acl'
     compile 'org.springframework.security:spring-security-config'
 
-
 }
 
