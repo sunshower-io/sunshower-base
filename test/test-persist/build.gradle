@@ -1,17 +1,16 @@
 dependencies {
+    api("org.springframework:spring-test")
+    api("org.springframework.security:spring-security-test")
+    api project(':persist:persist-hibernate')
+    api project(":test:test-common")
+    api "com.h2database:h2"
+    api ("org.flywaydb:flyway-core")
+    api 'org.junit.platform:junit-platform-runner'
+    api 'org.hibernate:hibernate-search-orm'
+    api ("org.hibernate:hibernate-core")
+    api 'org.hibernate.validator:hibernate-validator'
 
-
-    compile 'org.glassfish:javax.el'
-    compile 'org.hibernate.validator:hibernate-validator'
-    testCompile 'com.zaxxer:HikariCP'
-    compile "com.h2database:h2"
-    compile project(":test:test-common")
-    compile("org.flywaydb:flyway-core")
-    compile 'org.hibernate:hibernate-search-orm'
-    compile project(':persist:persist-hibernate')
-    compile("org.hibernate:hibernate-core")
-    compile("org.springframework:spring-test")
-    compile("org.springframework.security:spring-security-test")
-    compile 'org.yaml:snakeyaml'
-    compile 'org.junit.platform:junit-platform-runner'
+    implementation 'org.glassfish:javax.el'
+    testImplementation 'com.zaxxer:HikariCP'
+    implementation 'org.yaml:snakeyaml'
 }

@@ -1,10 +1,10 @@
 dependencies {
-    compile 'org.slf4j:slf4j-log4j12'
-    compile project(':common:common-config')
+    implementation 'org.slf4j:slf4j-log4j12'
+    implementation project(':common:common-config')
 
-    compile 'javax.inject:javax.inject'
-    compile 'org.springframework:spring-test'
-    compile 'org.springframework:spring-context'
-    compile 'org.junit.platform:junit-platform-runner'
-    compile 'org.powermock:powermock-api-mockito2'
+    implementation 'javax.inject:javax.inject'
+    implementation 'org.springframework:spring-test'
+    implementation 'org.springframework:spring-context'
+    implementation 'org.junit.platform:junit-platform-runner'
+    implementation 'org.powermock:powermock-api-mockito2'
 }
