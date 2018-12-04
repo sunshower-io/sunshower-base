@@ -1,12 +1,12 @@
 dependencies {
     
-    compile 'org.cfg4j:cfg4j-core'
-    compile 'org.cfg4j:cfg4j-git'
+    api 'org.cfg4j:cfg4j-core'
+    implementation 'org.cfg4j:cfg4j-git'
 
-    compile 'org.apache.logging.log4j:log4j-core'
-    compile 'org.apache.logging.log4j:log4j-slf4j-impl'
+    implementation 'org.apache.logging.log4j:log4j-core'
+    implementation 'org.apache.logging.log4j:log4j-slf4j-impl'
 
-    testCompile project(':test:test-common')
+    testImplementation project(':test:test-common')
     
-    testCompile 'org.junit.platform:junit-platform-runner'
+    testImplementation 'org.junit.platform:junit-platform-runner'
 }

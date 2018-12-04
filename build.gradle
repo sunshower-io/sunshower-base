@@ -3,8 +3,12 @@ buildscript {
     dependencies {
         classpath "net.ltgt.gradle:gradle-apt-plugin:0.18"
     }
+
 }
 
+plugins {
+    id 'java-library'
+}
 
 apply plugin: 'nebula-aggregate-javadocs'
 
@@ -22,6 +26,7 @@ allprojects {
 
 
     apply plugin: 'java'
+    apply plugin: 'java-library'
     apply plugin: 'idea'
     apply plugin: 'maven-publish'
     apply plugin: 'net.ltgt.apt'
@@ -102,9 +107,9 @@ allprojects {
             annotationProcessor "org.projectlombok:lombok"
             compileOnly 'org.projectlombok:lombok'
             testCompileOnly 'org.projectlombok:lombok'
-            compile 'javax.ws.rs:javax.ws.rs-api'
-            compile 'org.eclipse.persistence:org.eclipse.persistence.moxy'
-            compile 'org.hibernate.javax.persistence:hibernate-jpa-2.1-api'
+            implementation 'javax.ws.rs:javax.ws.rs-api'
+            implementation 'org.eclipse.persistence:org.eclipse.persistence.moxy'
+            implementation 'org.hibernate.javax.persistence:hibernate-jpa-2.1-api'
 
 
             testCompile 'javax.mail:mail'
