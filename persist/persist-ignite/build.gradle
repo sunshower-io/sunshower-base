@@ -1,24 +1,24 @@
 dependencies {
 
-    compile 'org.slf4j:slf4j-log4j12'
-    compile 'javax.inject:javax.inject'
-    compile 'org.hibernate:hibernate-core'
-    compile 'org.hibernate:hibernate-entitymanager'
-    compile 'org.springframework:spring-context'
-    compile 'org.springframework:spring-orm'
+    implementation 'org.slf4j:slf4j-log4j12'
+    implementation 'javax.inject:javax.inject'
+    implementation 'org.hibernate:hibernate-core'
+    implementation 'org.hibernate:hibernate-entitymanager'
+    implementation 'org.springframework:spring-context'
+    implementation 'org.springframework:spring-orm'
 
 
-    compile project(':common:common-config')
+    implementation project(':common:common-config')
 
 
-    compile 'org.hibernate.validator:hibernate-validator'
-    testCompile 'org.junit.platform:junit-platform-runner'
-    testCompile 'org.springframework:spring-test'
+    implementation 'org.hibernate.validator:hibernate-validator'
+    testImplementation 'org.junit.platform:junit-platform-runner'
+    testImplementation 'org.springframework:spring-test'
     
-    testCompile project(':test:test-common')
+    testImplementation project(':test:test-common')
 
     ['ignite-core', 'ignite-spring', 'ignite-indexing', 'ignite-hibernate-core'].each {
-        compile("org.apache.ignite:$it")
+        implementation("org.apache.ignite:$it")
     }
 
 }
