@@ -9,6 +9,14 @@ buildscript {
 apply plugin: 'nebula-aggregate-javadocs'
 
 
+task archiveReports(type: Zip) {
+    from "$buildDir/docs"
+    include "/**/*"
+
+    from "$buildDir/reports/clover"
+
+    archiveName 'reports.zip'
+}
 
 allprojects {
 
@@ -165,14 +173,6 @@ publishing {
     }
 }
 
-task archiveReports(type: Zip) {
-    from "$buildDir/docs"
-    include "/**/*"
-
-    from "$buildDir/reports/clover"
-
-    archiveName 'reports.zip'
-}
 
 assemble.dependsOn cloverAggregateReports
 assemble.dependsOn 'aggregateJavadocs'
