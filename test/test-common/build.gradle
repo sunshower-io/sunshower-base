@@ -1,6 +1,6 @@
 dependencies {
-    implementation 'org.slf4j:slf4j-log4j12'
-    implementation project(':common:common-config')
+    api project(':common:common-config')
+    api 'org.mockito:mockito-junit-jupiter'
 
     implementation 'javax.inject:javax.inject'
     implementation 'org.springframework:spring-test'

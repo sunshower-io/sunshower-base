@@ -1,6 +1,6 @@
 dependencies {
-    implementation project(':persist:persist-api')
-    implementation project(':persist:persist-core')
+    api project(':persist:persist-api')
+    api project(':persist:persist-core')
     implementation 'org.flywaydb:flyway-core'
 
 

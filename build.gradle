@@ -50,10 +50,7 @@ allprojects {
 
 
     def repos = [
-            'http://www.gridgainsystems.com/nexus/content/repositories/external',
-            'http://artifacts.sunshower.io/repository/sunshower-releases',
-            'http://artifacts.sunshower.io/repository/sunshower-cache',
-            'http://artifacts.sunshower.io/repository/sunshower-snapshots',
+            'http://artifacts.sunshower.io/repository/sunshower-cache'
     ]
 
 
@@ -76,18 +73,8 @@ allprojects {
 
     repositories {
         mavenLocal()
-        mavenCentral()
         repos.each { repo ->
             maven { url "$repo" }
-        }
-
-        maven {
-            url mavenRepositoryUrl
-
-            credentials {
-                username mavenRepositoryUsername
-                password mavenRepositoryPassword
-            }
         }
     }
 
@@ -180,12 +167,12 @@ publishing {
 
 
 assemble.dependsOn cloverAggregateReports
-assemble.dependsOn 'aggregateJavadocs'
+//assemble.dependsOn 'aggregateJavadocs'
 
 assemble.dependsOn archiveReports
 archiveReports.mustRunAfter cloverAggregateReports
-archiveReports.mustRunAfter 'aggregateJavadocs'
+//archiveReports.mustRunAfter 'aggregateJavadocs'
 
 
-defaultTasks 'clean', 'build', 'cloverAggregateReports', 'aggregateJavadocs'
+defaultTasks 'clean', 'build', 'cloverAggregateReports'
 
