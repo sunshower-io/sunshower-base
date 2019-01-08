@@ -11,7 +11,7 @@ public class OS {
   }
 
   protected static Type type;
- /// http://www.docjar.com/html/api/org/apache/commons/lang/SystemUtils.java.html
+  /// http://www.docjar.com/html/api/org/apache/commons/lang/SystemUtils.java.html
 
   public static Type resolve() {
     if (type == null) {

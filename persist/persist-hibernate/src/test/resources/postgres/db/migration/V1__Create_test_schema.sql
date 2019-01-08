@@ -92,4 +92,11 @@ create schema TEST_SCHEMA;
 create table TEST_SCHEMA.Entity (
   id binary(16) primary key,
   name varchar(255)
-)
+);
+
+create table TEST_SCHEMA.SAMPLE_ENTITY (
+  id bytea primary key,
+  name varchar(255),
+  values varchar(255)
+
+);
