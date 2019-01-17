@@ -15,6 +15,7 @@ import java.util.HashSet;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import lombok.val;
 import org.junit.FixMethodOrder;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,6 +28,7 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
+import test.entities.SampleEntity;
 import test.entities.TestEntity;
 
 @ExtendWith(SpringExtension.class)
@@ -53,6 +55,15 @@ public class HibernateConfigurationTest {
   @PersistenceContext private EntityManager entityManager;
 
   @Inject private TestConfig contextConfiguration;
+
+  @Test
+  void ensureMapperWorks() {
+    val e = new SampleEntity();
+    e.setValues(new String[] {"Hello", "World"});
+    entityManager.persist(e);
+    entityManager.flush();
+    assertThat(entityManager.find(SampleEntity.class, e.getId()).getValues()[0], is("Hello"));
+  }
 
   @Test
   public void ensureEntityWithComplexRelationshipCanBeSaved() {

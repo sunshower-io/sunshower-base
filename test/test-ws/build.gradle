@@ -1,18 +1,20 @@
 dependencies {
-    compile 'org.jboss.resteasy:resteasy-client'
-    compile 'org.jboss.resteasy:resteasy-jaxrs'
-    compile 'org.jboss.resteasy:resteasy-spring'
-    compile project(':common:common-ws')
-    compile project(':common:reflect')
-    compile project(':common:common-config')
-    compile project(':test:test-core')
-    compile 'javax.inject:javax.inject'
-    compile 'org.junit.platform:junit-platform-runner'
-    compile 'org.springframework:spring-test'
-    compile 'org.junit.jupiter:junit-jupiter-api'
+    implementation 'org.springframework.security:spring-security-acl'
+    implementation 'org.springframework.security:spring-security-config'
+    implementation 'org.jboss.resteasy:resteasy-client'
+    implementation 'org.jboss.resteasy:resteasy-jaxrs'
+    implementation 'org.jboss.resteasy:resteasy-spring'
+    implementation project(':common:common-ws')
+    implementation project(':common:reflect')
+    implementation project(':common:common-config')
+    implementation project(':test:test-core')
+    implementation 'javax.inject:javax.inject'
+    implementation 'org.junit.platform:junit-platform-runner'
+    implementation 'org.springframework:spring-test'
+    implementation 'org.junit.jupiter:junit-jupiter-api'
     
-    compile 'org.jboss.resteasy:resteasy-undertow'
-    compile 'org.jboss.resteasy:resteasy-servlet-initializer'
+    implementation 'org.jboss.resteasy:resteasy-undertow'
+    implementation 'org.jboss.resteasy:resteasy-servlet-initializer'
 
 }
 

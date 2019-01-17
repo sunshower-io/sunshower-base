@@ -1,11 +1,10 @@
 
 
 dependencies {
-    compile project(":common:core")
-    compile 'org.eclipse.persistence:org.eclipse.persistence.moxy'
-    compile 'org.springframework.security:spring-security-acl'
-    compile 'org.springframework.security:spring-security-config'
-
+    implementation project(":common:core")
+    implementation 'org.eclipse.persistence:org.eclipse.persistence.moxy'
+    implementation 'org.springframework.security:spring-security-acl'
+    implementation 'org.springframework.security:spring-security-config'
 
 }
 

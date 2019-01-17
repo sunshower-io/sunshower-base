@@ -17,13 +17,21 @@
     <url>http://www.sunshower.io</url>
 
     <properties>
-        <env.version>1.0.10.Final</env.version>
+        <env.version>1.0.13-SNAPSHOT</env.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.sunshower.env</groupId>
+            <artifactId>common-dependencies</artifactId>
+            <type>pom</type>
+            <scope>import</scope>
+            <version>${env.version}</version>
         </dependency>
 
         <dependency>
