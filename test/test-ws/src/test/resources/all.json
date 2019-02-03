@@ -2385,7 +2385,7 @@
     "enhanced_networking": true,
     "family": "General purpose",
     "generation": "current",
-    "instance_type": "m5a.2xlarge",
+    "instance_type": "t2.micro",
     "intel_avx": null,
     "intel_avx2": null,
     "intel_avx512": null,
