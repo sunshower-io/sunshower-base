@@ -20,7 +20,16 @@ public class IgniteNodeConfiguration {
     final IgniteConfigurationSource.IgniteDiscoverySettings discoverySettings =
         provider.bind("ignite.discovery", IgniteConfigurationSource.IgniteDiscoverySettings.class);
 
-    return new IgniteConfigurationSource(fabricName, memorySettings, discoverySettings);
+    boolean peerClassloadingEnabled;
+    try {
+      peerClassloadingEnabled =
+          provider.getProperty("ignite.peer-classloading-enabled", boolean.class);
+    } catch (Exception ex) {
+      peerClassloadingEnabled = false;
+    }
+
+    return new IgniteConfigurationSource(
+        fabricName, memorySettings, discoverySettings, peerClassloadingEnabled);
   }
 
   @Bean
