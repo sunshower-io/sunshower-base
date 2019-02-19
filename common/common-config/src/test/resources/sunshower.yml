@@ -10,6 +10,7 @@ jdbc:
 
 ignite:
   fabricName: sunshower-data-fabric
+  peer-classloading-enabled: true
   discovery:
     mode: vm-local
   memory:

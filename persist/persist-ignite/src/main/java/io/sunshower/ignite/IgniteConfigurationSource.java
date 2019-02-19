@@ -1,10 +1,16 @@
 package io.sunshower.ignite;
 
+import static org.apache.ignite.internal.util.IgniteUtils.resolveClassLoader;
+
+import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.ignite.configuration.CacheConfiguration;
 import org.apache.ignite.configuration.IgniteConfiguration;
 import org.apache.ignite.spi.discovery.tcp.TcpDiscoverySpi;
 import org.apache.ignite.spi.discovery.tcp.ipfinder.vm.TcpDiscoveryVmIpFinder;
 
+@Slf4j
+@Getter
 public class IgniteConfigurationSource {
 
   private final String fabricName;
@@ -12,12 +18,17 @@ public class IgniteConfigurationSource {
   private final IgniteMemorySettings memory;
 
   private final IgniteDiscoverySettings discovery;
+  private final boolean peerClassloadingEnabled;
 
   public IgniteConfigurationSource(
-      String name, IgniteMemorySettings memory, IgniteDiscoverySettings discovery) {
+      String name,
+      IgniteMemorySettings memory,
+      IgniteDiscoverySettings discovery,
+      boolean peerClassloadingEnabled) {
     this.memory = memory;
     this.fabricName = name;
     this.discovery = discovery;
+    this.peerClassloadingEnabled = peerClassloadingEnabled;
   }
 
   public String getFabricName() {
@@ -32,15 +43,32 @@ public class IgniteConfigurationSource {
     final IgniteConfiguration cfg = new IgniteConfiguration();
     cfg.setIgniteInstanceName(this.fabricName);
     cfg.setCacheConfiguration(cacheConfiguration());
+    if (peerClassloadingEnabled) {
+      log.info("Peer classloading is enabled");
+    }
+    cfg.setPeerClassLoadingEnabled(peerClassloadingEnabled);
     configureDiscovery(cfg);
+
+    configureSerialization(cfg);
     return cfg;
   }
 
+  private void configureSerialization(IgniteConfiguration cfg) {
+    cfg.setClassLoader(new ThreadLocalProxyingClassLoader(resolveClassLoader(cfg)));
+  }
+
   private void configureDiscovery(IgniteConfiguration cfg) {
-    if (!(discovery == null || discovery.mode() == null)
-        && discovery.mode().trim().equals("vm-local")) {
-      TcpDiscoverySpi disco = new TcpDiscoverySpi().setIpFinder(new TcpDiscoveryVmIpFinder(true));
-      cfg.setDiscoverySpi(disco);
+    if (!(discovery == null || discovery.mode() == null)) {
+
+      if (discovery.mode().trim().equals("vm-local")) {
+        log.info("Configuring TCP Discovery");
+        TcpDiscoverySpi disco = new TcpDiscoverySpi().setIpFinder(new TcpDiscoveryVmIpFinder(true));
+        cfg.setDiscoverySpi(disco);
+      }
+
+      if (discovery.mode().trim().equals("multicast")) {
+        log.info("Configuring multicast discovery");
+      }
     }
   }
 

@@ -35,6 +35,11 @@ public class IgniteConfigurationTest {
   }
 
   @Test
+  void ensurePeerClassloadingEnabledIsSet() {
+    assertThat(igniteConfiguration.isPeerClassloadingEnabled(), is(true));
+  }
+
+  @Test
   public void ensureNameIsInjected() {
     assertThat(igniteConfiguration.getFabricName(), is(not(nullValue())));
   }
