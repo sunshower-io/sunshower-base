@@ -40,7 +40,6 @@ public class IgniteNodeConfiguration {
   @Singleton
   @Bean(destroyMethod = "close")
   public static Ignite ignite(IgniteConfiguration configuration) {
-
     return Ignition.getOrStart(configuration);
   }
 }

@@ -1,5 +1,7 @@
 package io.sunshower.ignite;
 
+import static org.apache.ignite.internal.util.IgniteUtils.resolveClassLoader;
+
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ignite.configuration.CacheConfiguration;
@@ -18,9 +20,11 @@ public class IgniteConfigurationSource {
   private final IgniteDiscoverySettings discovery;
   private final boolean peerClassloadingEnabled;
 
-
   public IgniteConfigurationSource(
-          String name, IgniteMemorySettings memory, IgniteDiscoverySettings discovery, boolean peerClassloadingEnabled) {
+      String name,
+      IgniteMemorySettings memory,
+      IgniteDiscoverySettings discovery,
+      boolean peerClassloadingEnabled) {
     this.memory = memory;
     this.fabricName = name;
     this.discovery = discovery;
@@ -39,12 +43,18 @@ public class IgniteConfigurationSource {
     final IgniteConfiguration cfg = new IgniteConfiguration();
     cfg.setIgniteInstanceName(this.fabricName);
     cfg.setCacheConfiguration(cacheConfiguration());
-    if(peerClassloadingEnabled) {
+    if (peerClassloadingEnabled) {
       log.info("Peer classloading is enabled");
     }
     cfg.setPeerClassLoadingEnabled(peerClassloadingEnabled);
     configureDiscovery(cfg);
+
+    configureSerialization(cfg);
     return cfg;
+  }
+
+  private void configureSerialization(IgniteConfiguration cfg) {
+    cfg.setClassLoader(new ThreadLocalProxyingClassLoader(resolveClassLoader(cfg)));
   }
 
   private void configureDiscovery(IgniteConfiguration cfg) {
