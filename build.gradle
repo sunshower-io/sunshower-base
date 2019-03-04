@@ -54,7 +54,6 @@ allprojects {
     ]
 
 
-
     task testArtifact(type: Jar, dependsOn: testClasses) {
         classifier = 'tests'
         from sourceSets.test.output
@@ -74,17 +73,19 @@ allprojects {
     repositories {
         mavenLocal()
         repos.each { repo ->
-            maven { url "$repo" }
+            maven {
+                url "$repo"
+                credentials {
+                    username mavenRepositoryUsername
+                    password mavenRepositoryPassword
+                }
+            }
         }
     }
 
     dependencyManagement {
         imports {
-            mavenBom("io.sunshower.base:bom-imported:${version}") {
-                bomProperties([
-                        'env.version': '1.0.13-SNAPSHOT'
-                ])
-            }
+            mavenBom("io.sunshower.base:bom-imported:${version}")
         }
     }
 
@@ -104,7 +105,6 @@ allprojects {
             testCompile('org.junit.platform:junit-platform-launcher')
             testCompile('org.junit.platform:junit-platform-commons')
             testCompile('org.junit.jupiter:junit-jupiter-engine')
-            testCompile('org.junit.vintage:junit-vintage-engine')
 
         }
     }
@@ -138,7 +138,9 @@ allprojects {
     }
 
     test {
-        useJUnitPlatform()
+        useJUnitPlatform {
+            includeEngines 'junit-jupiter'
+        }
     }
 
 }
