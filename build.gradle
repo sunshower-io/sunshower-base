@@ -73,13 +73,19 @@ allprojects {
     repositories {
         mavenLocal()
         repos.each { repo ->
-            maven { url "$repo" }
+            maven {
+                url "$repo"
+                credentials {
+                    username mavenRepositoryUsername
+                    password mavenRepositoryPassword
+                }
+            }
         }
     }
 
     dependencyManagement {
         imports {
-            mavenBom("io.sunshower.base:bom-imported:${version}") 
+            mavenBom("io.sunshower.base:bom-imported:${version}")
         }
     }
 
