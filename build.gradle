@@ -54,7 +54,6 @@ allprojects {
     ]
 
 
-
     task testArtifact(type: Jar, dependsOn: testClasses) {
         classifier = 'tests'
         from sourceSets.test.output
@@ -82,7 +81,7 @@ allprojects {
         imports {
             mavenBom("io.sunshower.base:bom-imported:${version}") {
                 bomProperties([
-                        'env.version': '1.0.13-SNAPSHOT'
+                        'env.version': '1.0.15.Final'
                 ])
             }
         }
