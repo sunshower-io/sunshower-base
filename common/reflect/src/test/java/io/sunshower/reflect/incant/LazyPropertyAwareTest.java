@@ -2,7 +2,7 @@ package io.sunshower.reflect.incant;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
-import static org.junit.Assert.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 import io.sunshower.lang.PropertyAware;
 import io.sunshower.lang.tuple.Pair;

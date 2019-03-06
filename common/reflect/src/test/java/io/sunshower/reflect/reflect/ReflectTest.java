@@ -1,6 +1,7 @@
 package io.sunshower.reflect.reflect;
 
 import static io.sunshower.reflect.reflect.Reflect.instantiate;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import io.sunshower.lambda.Option;
@@ -13,7 +14,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.hamcrest.CoreMatchers;
-import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
 public class ReflectTest {
@@ -39,7 +39,7 @@ public class ReflectTest {
       ctor.setAccessible(true);
       ctor.newInstance();
     } catch (InvocationTargetException ex) {
-      Assert.assertThat(
+      assertThat(
           ex.getTargetException().getMessage().startsWith("No reflect"), CoreMatchers.is(true));
     }
   }
@@ -49,10 +49,10 @@ public class ReflectTest {
     class A {}
     List<Class<?>> types =
         io.sunshower.reflect.reflect.Reflect.linearSupertypes(A.class).collect(Collectors.toList());
-    Assert.assertThat(types.contains(A.class), CoreMatchers.is(true));
-    Assert.assertThat(types.size(), CoreMatchers.is(2));
-    Assert.assertThat(types.contains(Object.class), CoreMatchers.is(true));
-    Assert.assertThat(types.contains(A.class), CoreMatchers.is(true));
+    assertThat(types.contains(A.class), CoreMatchers.is(true));
+    assertThat(types.size(), CoreMatchers.is(2));
+    assertThat(types.contains(Object.class), CoreMatchers.is(true));
+    assertThat(types.contains(A.class), CoreMatchers.is(true));
   }
 
   @Test
@@ -64,7 +64,7 @@ public class ReflectTest {
         io.sunshower.reflect.reflect.Reflect.mapOverHierarchy(
                 A.class, i -> Option.of(i.getAnnotation(Uninherited.class)))
             .collect(Collectors.toList());
-    Assert.assertThat(a.size(), CoreMatchers.is(1));
+    assertThat(a.size(), CoreMatchers.is(1));
   }
 
   @Test
@@ -77,7 +77,7 @@ public class ReflectTest {
         io.sunshower.reflect.reflect.Reflect.mapOverHierarchy(
                 B.class, i -> Option.of(i.getAnnotation(Uninherited.class)))
             .collect(Collectors.toCollection(HashSet::new));
-    Assert.assertThat(collect.size(), CoreMatchers.is(1));
+    assertThat(collect.size(), CoreMatchers.is(1));
   }
 
   @Test
@@ -88,7 +88,7 @@ public class ReflectTest {
         io.sunshower.reflect.reflect.Reflect.mapOverHierarchy(
                 A.class, i -> Option.of(i.getAnnotation(Uninherited.class)))
             .collect(Collectors.toCollection(HashSet::new));
-    Assert.assertThat(collect.size(), CoreMatchers.is(1));
+    assertThat(collect.size(), CoreMatchers.is(1));
   }
 
   @Test
@@ -101,7 +101,7 @@ public class ReflectTest {
         io.sunshower.reflect.reflect.Reflect.mapOverHierarchy(
                 B.class, i -> Option.of(i.getAnnotation(Uninherited.class)))
             .collect(Collectors.toCollection(HashSet::new));
-    Assert.assertThat(collect.size(), CoreMatchers.is(1));
+    assertThat(collect.size(), CoreMatchers.is(1));
   }
 
   @Test
@@ -117,7 +117,7 @@ public class ReflectTest {
         Reflect.mapOverHierarchy(B.class, i -> Option.of(i.getAnnotation(Uninherited.class)))
             .map(Uninherited::value)
             .collect(Collectors.toList());
-    Assert.assertThat(collect, CoreMatchers.is(Arrays.asList("b", "", "a", "", "test")));
+    assertThat(collect, CoreMatchers.is(Arrays.asList("b", "", "a", "", "test")));
   }
 
   @Test
@@ -139,7 +139,7 @@ public class ReflectTest {
     try {
       instantiate(ConstructorThrowsException.class);
     } catch (io.sunshower.reflect.reflect.InstantiationException e) {
-      Assert.assertThat(e.getCause().getMessage(), CoreMatchers.is("woah"));
+      assertThat(e.getCause().getMessage(), CoreMatchers.is("woah"));
     }
   }
 

@@ -3,7 +3,7 @@ package io.sunshower.persist.core;
 import static io.sunshower.persist.core.DataSourceConfigurations.isBaseline;
 import static io.sunshower.persist.core.DataSourceConfigurations.validate;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 import io.sunshower.test.common.TestClasspath;
 import io.sunshower.test.common.TestConfigurationConfiguration;

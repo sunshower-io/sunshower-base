@@ -1,7 +1,7 @@
 package io.sunshower.persist.core;
 
 import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 import io.sunshower.test.common.TestConfigurationConfiguration;
 import java.sql.Connection;

@@ -1,7 +1,7 @@
 package io.sunshower.test.persist;
 
 import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 import io.sunshower.persistence.PersistenceUnit;
 import io.sunshower.test.common.TestConfigurationConfiguration;

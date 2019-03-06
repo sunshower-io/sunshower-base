@@ -1,7 +1,7 @@
 package io.sunshower.jpa.configuration;
 
 import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 import io.sunshower.jpa.flyway.FlywayConfiguration;
 import io.sunshower.persist.core.DataSourceConfiguration;

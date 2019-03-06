@@ -1,6 +1,7 @@
 package io.sunshower.test.persist;
 
 import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -11,7 +12,6 @@ import java.util.stream.Collectors;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
-import org.junit.Assert;
 import org.springframework.aop.support.AopUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.orm.jpa.EntityManagerHolder;
@@ -41,7 +41,7 @@ public class AuthenticationTestExecutionListener extends AbstractTestExecutionLi
 
   @Override
   public void beforeTestMethod(TestContext testContext) throws Exception {
-    Assert.assertThat(entityManager, is(not(nullValue())));
+    assertThat(entityManager, is(not(nullValue())));
     Map<String, GrantedAuthority> authorities =
         collectRoles(
             entityManager,

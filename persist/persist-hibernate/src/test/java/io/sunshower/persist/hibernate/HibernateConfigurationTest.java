@@ -3,7 +3,8 @@ package io.sunshower.persist.hibernate;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.nullValue;
-import static org.junit.Assert.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 
 import io.sunshower.jpa.flyway.FlywayConfiguration;
 import io.sunshower.persist.core.DataSourceConfiguration;

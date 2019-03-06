@@ -1,7 +1,7 @@
 package io.sunshower.persist.hibernate;
 
 import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 import io.sunshower.common.Identifier;
 import io.sunshower.persist.HibernateTestCase;
