@@ -9,12 +9,14 @@ dependencies {
     implementation project(':common:common-config')
     implementation project(':test:test-core')
     implementation 'javax.inject:javax.inject'
-    implementation 'org.junit.platform:junit-platform-runner'
     implementation 'org.springframework:spring-test'
-    implementation 'org.junit.jupiter:junit-jupiter-api'
-    
+
     implementation 'org.jboss.resteasy:resteasy-undertow'
     implementation 'org.jboss.resteasy:resteasy-servlet-initializer'
+
+
+    api 'org.junit.jupiter:junit-jupiter-engine'
+    api 'org.junit.jupiter:junit-jupiter-api'
 
 }
 

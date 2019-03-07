@@ -9,7 +9,6 @@ dependencies {
     implementation 'org.hibernate.validator:hibernate-validator'
 
     testImplementation 'org.springframework:spring-test'
-    testImplementation 'org.junit.platform:junit-platform-runner'
     testImplementation('com.h2database:h2')
     testImplementation('org.postgresql:postgresql')
 }

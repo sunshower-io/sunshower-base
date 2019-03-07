@@ -8,8 +8,10 @@ dependencies {
     api project(':common:core')
     api project(':persist:persist-api')
     api project(':common:common-config')
+    api 'javax.inject:javax.inject'
 
 
+    api 'org.springframework:spring-context'
     implementation 'org.apache.logging.log4j:log4j-api'
     implementation 'org.apache.logging.log4j:log4j-core'
     implementation 'org.apache.logging.log4j:log4j-slf4j-impl'
