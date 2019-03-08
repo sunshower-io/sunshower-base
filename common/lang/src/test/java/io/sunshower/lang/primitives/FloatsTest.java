@@ -15,6 +15,6 @@ public class FloatsTest {
         };
     float[] b = Floats.fromByteArray(Floats.toByteArray(a));
     System.out.println(Arrays.toString(b));
-    assertArrayEquals(a, b, 0.0f);
+    assertArrayEquals(a, b);
   }
 }
