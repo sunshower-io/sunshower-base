@@ -2,7 +2,7 @@ package io.sunshower.lang.common.hash.ints;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
-import static org.junit.Assert.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 import io.sunshower.lang.common.hash.HashFunction;
 import io.sunshower.lang.common.hash.integers.Murmur3;

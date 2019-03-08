@@ -3,7 +3,7 @@ package io.sunshower.persist.hibernate;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import io.sunshower.persist.HibernateTestCase;
 import javax.inject.Inject;

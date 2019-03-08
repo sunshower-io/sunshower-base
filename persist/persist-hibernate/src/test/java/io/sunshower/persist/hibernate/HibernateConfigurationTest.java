@@ -3,7 +3,7 @@ package io.sunshower.persist.hibernate;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.nullValue;
-import static org.junit.Assert.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 import io.sunshower.jpa.flyway.FlywayConfiguration;
 import io.sunshower.persist.core.DataSourceConfiguration;
@@ -16,10 +16,10 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import lombok.val;
-import org.junit.FixMethodOrder;
+import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.runners.MethodSorters;
 import org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -42,12 +42,12 @@ import test.entities.TestEntity;
     HibernateConfiguration.class
   }
 )
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @TestExecutionListeners({
   DependencyInjectionTestExecutionListener.class,
   TransactionalTestExecutionListener.class,
   DirtiesContextTestExecutionListener.class,
 })
+@TestMethodOrder(MethodOrderer.Alphanumeric.class)
 public class HibernateConfigurationTest {
 
   @Inject private PersistenceUnit configuration;

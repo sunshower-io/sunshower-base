@@ -3,7 +3,8 @@ package io.sunshower.lang.primitives;
 import static io.sunshower.lang.primitives.Bytes.fromByteArray;
 import static io.sunshower.lang.primitives.Bytes.toByteArray;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.lang.reflect.Constructor;

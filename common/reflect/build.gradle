@@ -10,9 +10,5 @@ dependencies {
 
 
     compile 'net.bytebuddy:byte-buddy'
-
-
-
-    testCompile 'junit:junit'
     testCompile 'org.junit.platform:junit-platform-runner'
 }

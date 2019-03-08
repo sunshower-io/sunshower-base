@@ -1,7 +1,7 @@
 package io.sunshower.io;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 import io.sunshower.encodings.Base58;
 import java.io.IOException;

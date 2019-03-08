@@ -31,7 +31,6 @@ dependencies {
 
     implementation 'org.glassfish:javax.el'
 
-    //implementation 'org.apache.lucene:lucene-core'
     implementation 'org.apache.lucene:lucene-codecs'
     implementation 'org.apache.lucene:lucene-backward-codecs'
 

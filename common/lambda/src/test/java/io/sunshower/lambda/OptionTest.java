@@ -3,7 +3,8 @@ package io.sunshower.lambda;
 import static io.sunshower.lambda.Option.none;
 import static io.sunshower.lambda.Option.some;
 import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.*;

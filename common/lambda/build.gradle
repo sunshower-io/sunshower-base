@@ -1,6 +1,5 @@
 
 dependencies {
-    compile "junit:junit"
     compile "org.hamcrest:hamcrest-core"
     compile 'org.junit.platform:junit-platform-runner'
 }

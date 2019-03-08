@@ -1,8 +1,8 @@
 package io.sunshower.test.common;
 
 import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import javax.inject.Inject;

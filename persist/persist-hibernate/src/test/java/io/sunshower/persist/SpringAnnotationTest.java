@@ -1,7 +1,7 @@
 package io.sunshower.persist;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
 
 import java.lang.annotation.*;
 import java.util.ArrayList;

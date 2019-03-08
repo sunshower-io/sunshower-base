@@ -1,16 +1,16 @@
 package io.sunshower.persist.hibernate;
 
 import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 import io.sunshower.common.Identifier;
 import io.sunshower.persist.HibernateTestCase;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import org.junit.FixMethodOrder;
+import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
-import org.junit.runners.MethodSorters;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import test.entities.one2one.Ownee;
@@ -18,7 +18,7 @@ import test.entities.one2one.Owner;
 
 @Rollback
 @ContextConfiguration(classes = HibernateConfiguration.class)
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@TestMethodOrder(MethodOrderer.Alphanumeric.class)
 public class OneToOneTest extends HibernateTestCase {
 
   @PersistenceContext private EntityManager entityManager;
