@@ -3,6 +3,8 @@ package io.sunshower.persistence;
 import io.sunshower.persistence.annotations.Persistence;
 import java.util.*;
 import java.util.stream.Collectors;
+
+import lombok.val;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
@@ -19,16 +21,16 @@ public class PersistenceUnit {
   }
 
   public String[] getScannedPackages() {
-    return configurations
-        .values()
-        .stream()
+    return configurations.values().stream()
         .flatMap(cfg -> cfg.packagesToScan.stream())
         .collect(Collectors.toSet())
         .toArray(new String[0]);
   }
 
   public Set<PersistenceConfiguration> configurations() {
-    return new HashSet<>(configurations.values());
+    val sorted = new ArrayList<PersistenceConfiguration>(configurations.values());
+    Collections.sort(sorted);
+    return new LinkedHashSet<>(sorted);
   }
 
   public void addConfiguration(PersistenceConfiguration cfg) {
@@ -53,7 +55,12 @@ public class PersistenceUnit {
         include(packageNames, migrationPaths, entityTypes, persistence);
         final PersistenceConfiguration cfg =
             new PersistenceConfiguration(
-                persistence.id(), persistence.schema(), migrationPaths, packageNames, entityTypes);
+                persistence.id(),
+                persistence.schema(),
+                persistence.order(),
+                migrationPaths,
+                packageNames,
+                entityTypes);
         addConfiguration(cfg);
       } catch (NoSuchBeanDefinitionException ex) {
       }

@@ -9,6 +9,8 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Persistence {
 
+  int order() default -1;
+
   String id() default "";
 
   String schema() default "";
