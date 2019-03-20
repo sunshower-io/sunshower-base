@@ -3,7 +3,6 @@ package io.sunshower.persistence;
 import io.sunshower.persistence.annotations.Persistence;
 import java.util.*;
 import java.util.stream.Collectors;
-
 import lombok.val;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
@@ -21,7 +20,9 @@ public class PersistenceUnit {
   }
 
   public String[] getScannedPackages() {
-    return configurations.values().stream()
+    return configurations
+        .values()
+        .stream()
         .flatMap(cfg -> cfg.packagesToScan.stream())
         .collect(Collectors.toSet())
         .toArray(new String[0]);

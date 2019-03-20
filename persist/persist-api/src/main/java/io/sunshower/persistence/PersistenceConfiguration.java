@@ -1,8 +1,7 @@
 package io.sunshower.persistence;
 
-import lombok.val;
-
 import java.util.*;
+import lombok.val;
 
 public class PersistenceConfiguration implements Comparable<PersistenceConfiguration> {
   final Integer order;
@@ -60,7 +59,7 @@ public class PersistenceConfiguration implements Comparable<PersistenceConfigura
       return 1;
     }
     val oeq = order.compareTo(o.order);
-    if(oeq == 0) {
+    if (oeq == 0) {
       return id.compareTo(o.id);
     }
     return oeq;
