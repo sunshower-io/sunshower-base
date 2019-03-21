@@ -1,8 +1,10 @@
 package io.sunshower.persistence;
 
 import java.util.*;
+import lombok.val;
 
-public class PersistenceConfiguration {
+public class PersistenceConfiguration implements Comparable<PersistenceConfiguration> {
+  final Integer order;
   final String id;
   final String schema;
   final Set<String> migrationPaths;
@@ -12,10 +14,12 @@ public class PersistenceConfiguration {
   public PersistenceConfiguration(
       String id,
       String schema,
+      Integer order,
       Collection<String> mpaths,
       Collection<String> pnames,
       Collection<Class<?>> etypes) {
     this.id = id;
+    this.order = order;
     this.schema = schema;
     this.entityTypes = new HashSet<>(etypes);
     this.migrationPaths = new HashSet<>(mpaths);
@@ -47,5 +51,17 @@ public class PersistenceConfiguration {
 
   public Class<?>[] getEntityTypes() {
     return entityTypes.toArray(new Class[entityTypes.size()]);
+  }
+
+  @Override
+  public int compareTo(PersistenceConfiguration o) {
+    if (o == null) {
+      return 1;
+    }
+    val oeq = order.compareTo(o.order);
+    if (oeq == 0) {
+      return id.compareTo(o.id);
+    }
+    return oeq;
   }
 }
