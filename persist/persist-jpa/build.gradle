@@ -3,12 +3,13 @@ dependencies {
 
     api project(':persist:persist-api')
     api project(':persist:persist-core')
+    api 'org.hibernate.validator:hibernate-validator'
+    
     implementation project(':common:common-log')
     implementation 'org.flywaydb:flyway-core'
 
 
 
-    implementation 'org.hibernate.validator:hibernate-validator'
 
 
     testImplementation 'com.h2database:h2'
