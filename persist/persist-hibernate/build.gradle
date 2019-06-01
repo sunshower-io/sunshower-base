@@ -1,7 +1,19 @@
 dependencies {
-    implementation 'javax.inject:javax.inject'
-    api project(':persist:persist-ignite')
 
+
+
+    [
+            'spring-orm',
+            'spring-jdbc'
+    ].each {
+        implementation "org.springframework:$it"
+    }
+
+
+    implementation 'org.jboss:jboss-transaction-spi'
+
+
+    implementation 'javax.inject:javax.inject'
     implementation 'org.hibernate.validator:hibernate-validator'
 
     implementation 'org.glassfish:javax.el'
@@ -11,12 +23,16 @@ dependencies {
 
     api project(':common:common-config')
 
-    implementation group: 'org.jboss.narayana.jta', name: 'narayana-jta', version: '5.5.30.Final'
-    implementation group: 'org.jboss.narayana.jts', name: 'narayana-jts-integration', version: '5.5.30.Final'
-    implementation group: 'org.jboss.narayana.jta', name: 'jta', version: '5.5.30.Final'
-    implementation group: 'org.jboss.narayana.jta', name: 'jdbc', version: '5.5.30.Final'
+    [
+            'narayana-jta',
+            'jta',
+            'jdbc'
+    ].each {
+        implementation "org.jboss.narayana.jta:$it"
+    }
 
-    implementation group: 'org.jboss', name: 'jboss-transaction-spi', version: '7.6.0.Final'
+    implementation 'org.jboss.narayana.jts:narayana-jts-integration'
+
 
     testImplementation 'com.h2database:h2'
 
@@ -36,15 +52,8 @@ dependencies {
 
     implementation('org.hibernate:hibernate-search-orm')
 
-    implementation 'org.apache.ignite:ignite-core'
-    implementation 'org.apache.ignite:ignite-hibernate-core'
-    implementation 'org.apache.ignite:ignite-hibernate_5.1'
-    implementation 'org.hibernate:hibernate-entitymanager'
-//    implementation('org.hibernate.javax.persistence:hibernate-jpa-2.1-api')
-
 
     testImplementation('com.h2database:h2')
-
     testImplementation project(':test:test-common')
     testImplementation('org.postgresql:postgresql')
     testImplementation 'org.springframework:spring-test'

@@ -10,6 +10,16 @@ dependencies {
     api ("org.hibernate:hibernate-core")
     api 'org.hibernate.validator:hibernate-validator'
 
+
+
+    [
+            'spring-orm',
+            'spring-jdbc'
+    ].each {
+        api "org.springframework:$it"
+    }
+
+
     implementation 'org.glassfish:javax.el'
     testImplementation 'com.zaxxer:HikariCP'
     implementation 'org.yaml:snakeyaml'

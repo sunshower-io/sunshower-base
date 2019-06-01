@@ -4,10 +4,19 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Base64;
 import java.util.UUID;
+import lombok.val;
 import org.junit.jupiter.api.Test;
 
 public class Base58Test {
+
+  @Test
+  void show() {
+    val bytes = Base64.getDecoder().decode("AAABavnzlfEKWGRgAhMAAQ==");
+    val a = Base58.getInstance(Base58.Alphabets.Default).encode(bytes);
+    System.out.println(a);
+  }
 
   @Test
   public void ensureEncodingStringWithDefaultEncodingWorksForSimpleString() {

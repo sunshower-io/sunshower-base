@@ -1,6 +1,10 @@
 dependencies {
+    
+    
     api project(':common:common-config')
     api 'org.mockito:mockito-junit-jupiter'
+    api 'org.eclipse.persistence:org.eclipse.persistence.moxy'
+    api 'javax.xml.bind:jaxb-api'
 
     implementation 'javax.inject:javax.inject'
     implementation 'org.springframework:spring-test'

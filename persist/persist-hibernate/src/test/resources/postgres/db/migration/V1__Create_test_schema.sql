@@ -97,6 +97,6 @@ create table TEST_SCHEMA.Entity (
 create table TEST_SCHEMA.SAMPLE_ENTITY (
   id bytea primary key,
   name varchar(255),
-  values varchar(255)
+  vals varchar(255)
 
 );
