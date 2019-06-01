@@ -1,5 +1,9 @@
 
 dependencies {
-    compile project(':common:lambda')
-    compile project(':common:annotations')
+
+    api project(':common:lambda')
+    api project(':common:annotations')
+    
+    
+    testImplementation project(':test:test-common')
 }
