@@ -1,20 +1,29 @@
 
 dependencies {
+    api project(':common:lambda')
     api 'javax.xml.bind:jaxb-api'
-    api 'javax.json:javax.json-api'
-
-
-    implementation 'org.glassfish:javax.json'
-    implementation project(':common:lambda')
+    api 'javax.ws.rs:javax.ws.rs-api'
+    api 'javax.persistence:javax.persistence-api'
+    api 'org.eclipse.persistence:org.eclipse.persistence.core'
 
 
     testImplementation project(':test:test-common')
-    testImplementation 'org.junit.platform:junit-platform-runner'
+
+//    api 'javax.json:javax.json-api'
+//    implementation 'org.glassfish:javax.json'
+//    implementation project(':common:lambda')
+//    implementation 'org'
 
 
+//
+//
+//    testImplementation project(':test:test-common')
+//    testImplementation 'org.junit.platform:junit-platform-runner'
 
-    testAnnotationProcessor "org.projectlombok:lombok:1.18.6"
-    annotationProcessor "org.projectlombok:lombok:1.18.6"
-    compileOnly 'org.projectlombok:lombok:1.18.6'
-    testCompileOnly 'org.projectlombok:lombok:1.18.6'
+
+//
+//    testAnnotationProcessor "org.projectlombok:lombok:1.18.6"
+//    annotationProcessor "org.projectlombok:lombok:1.18.6"
+//    compileOnly 'org.projectlombok:lombok:1.18.6'
+//    testCompileOnly 'org.projectlombok:lombok:1.18.6'
 }

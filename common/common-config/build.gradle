@@ -1,12 +1,4 @@
 dependencies {
-    
     api 'org.cfg4j:cfg4j-core'
     implementation 'org.cfg4j:cfg4j-git'
-
-    implementation 'org.apache.logging.log4j:log4j-core'
-    implementation 'org.apache.logging.log4j:log4j-slf4j-impl'
-
-    testImplementation project(':test:test-common')
-    
-    testImplementation 'org.junit.platform:junit-platform-runner'
 }
