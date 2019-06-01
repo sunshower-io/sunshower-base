@@ -1,5 +1,4 @@
 
 dependencies {
-    compile "org.hamcrest:hamcrest-core"
-    compile 'org.junit.platform:junit-platform-runner'
+    testImplementation project(':test:test-api')
 }

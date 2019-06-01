@@ -109,22 +109,22 @@ allprojects {
 //        }
 
         dependencies {
-            annotationProcessor "org.projectlombok:lombok:1.18.6"
-            compileOnly 'org.projectlombok:lombok:1.18.6'
-            testCompileOnly 'org.projectlombok:lombok:1.18.6'
-            testAnnotationProcessor 'org.projectlombok:lombok:1.18.6'
-            implementation 'javax.ws.rs:javax.ws.rs-api'
-            implementation 'org.eclipse.persistence:org.eclipse.persistence.moxy'
-            implementation 'org.hibernate.javax.persistence:hibernate-jpa-2.1-api'
-
-
-            testCompile 'javax.mail:mail'
-
-            testImplementation('org.hamcrest:hamcrest-core')
-            testImplementation('org.mockito:mockito-core')
-
-            testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
-            testImplementation 'org.junit.jupiter:junit-jupiter-api'
+//            annotationProcessor "org.projectlombok:lombok:1.18.6"
+//            compileOnly 'org.projectlombok:lombok:1.18.6'
+//            testCompileOnly 'org.projectlombok:lombok:1.18.6'
+//            testAnnotationProcessor 'org.projectlombok:lombok:1.18.6'
+//            implementation 'javax.ws.rs:javax.ws.rs-api'
+//            implementation 'org.eclipse.persistence:org.eclipse.persistence.moxy'
+//            implementation 'org.hibernate.javax.persistence:hibernate-jpa-2.1-api'
+//
+//
+//            testCompile 'javax.mail:mail'
+//
+//            testImplementation('org.hamcrest:hamcrest-core')
+//            testImplementation('org.mockito:mockito-core')
+//
+//            testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+//            testImplementation 'org.junit.jupiter:junit-jupiter-api'
 
         }
     }
