@@ -1,10 +1,12 @@
 dependencies {
 
-    implementation project(':common:common-config')
-    implementation project(':persist:persist-jpa')
-    implementation project(':persist:persist-core')
+    api project(':common:common-config')
+    api project(':persist:persist-jpa')
+    api project(':persist:persist-core')
 
-    implementation 'org.hibernate.validator:hibernate-validator'
+    api 'org.hibernate.validator:hibernate-validator'
+    api 'org.hibernate.validator:hibernate-validator'
+
 
 
     testImplementation project(':test:test-persist')
@@ -26,7 +28,6 @@ dependencies {
     implementation 'org.jboss.narayana.jta:jdbc'
     implementation 'org.jboss:jboss-transaction-spi'
     implementation 'org.jboss.narayana.jta:narayana-jta'
-    implementation 'org.hibernate.validator:hibernate-validator'
     implementation 'org.jboss.narayana.jts:narayana-jts-integration'
 
 

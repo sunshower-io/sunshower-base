@@ -6,6 +6,7 @@ dependencies {
     api 'org.springframework:spring-context'
     api 'org.hibernate:hibernate-search-orm'
     api 'javax.persistence:javax.persistence-api'
+    api 'org.springframework.security:spring-security-core'
 
 
     testImplementation project(':test:test-common')
