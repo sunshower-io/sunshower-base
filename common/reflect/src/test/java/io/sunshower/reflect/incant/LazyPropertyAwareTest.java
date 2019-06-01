@@ -10,15 +10,15 @@ import java.util.Collections;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
 
-public class LazyPropertyAwareTest {
+class LazyPropertyAwareTest {
 
   @Test
-  public void ensurePropertyAwareHasPropertyReturnsFalseWhenNoPropertyIsAdded() {
+  void ensurePropertyAwareHasPropertyReturnsFalseWhenNoPropertyIsAdded() {
     assertThat(new io.sunshower.reflect.incant.LazyPropertyAware().hasProperty("hello"), is(false));
   }
 
   @Test
-  public void ensureHasPropertyReturnsFalseWhenPropertiesIsEmpty() {
+  void ensureHasPropertyReturnsFalseWhenPropertiesIsEmpty() {
 
     PropertyAware aware = new io.sunshower.reflect.incant.LazyPropertyAware();
     aware.addProperty("whatever", "whatever");
@@ -27,7 +27,7 @@ public class LazyPropertyAwareTest {
   }
 
   @Test
-  public void ensureHasPropertyReturnsTrueWhenPropertyExists() {
+  void ensureHasPropertyReturnsTrueWhenPropertyExists() {
 
     PropertyAware aware = new io.sunshower.reflect.incant.LazyPropertyAware();
     aware.addProperty("whatever", "whatever");
@@ -35,21 +35,21 @@ public class LazyPropertyAwareTest {
   }
 
   @Test
-  public void ensureGetPropertyReturnsPropertyWhenPropertyExists() {
+  void ensureGetPropertyReturnsPropertyWhenPropertyExists() {
     PropertyAware aware = new io.sunshower.reflect.incant.LazyPropertyAware();
     aware.addProperty("whatever", "whatever");
     assertThat(aware.getProperty("whatever"), is("whatever"));
   }
 
   @Test
-  public void ensureGetPropertiesReturnsEmptySetWhenNoPropertiesHaveBeenAdded() {
+  void ensureGetPropertiesReturnsEmptySetWhenNoPropertiesHaveBeenAdded() {
 
     PropertyAware aware = new io.sunshower.reflect.incant.LazyPropertyAware();
     assertThat(aware.getProperties().isEmpty(), is(true));
   }
 
   @Test
-  public void ensureGetPropertiesReturnsPropertiesWhenPropertiesExist() {
+  void ensureGetPropertiesReturnsPropertiesWhenPropertiesExist() {
     PropertyAware aware = new io.sunshower.reflect.incant.LazyPropertyAware();
     aware.addProperty("whatever", "whatever");
     Set<Pair<String, String>> results = Collections.singleton(Pair.of("whatever", "whatever"));
@@ -57,14 +57,14 @@ public class LazyPropertyAwareTest {
   }
 
   @Test
-  public void ensureGettingNonExistantPropertyReturnsNothing() {
+  void ensureGettingNonExistantPropertyReturnsNothing() {
     assertThat(
         new io.sunshower.reflect.incant.LazyPropertyAware().getProperty("whatever"),
         is(nullValue()));
   }
 
   @Test
-  public void ensureRemovingNonExistantPropertyReturnsNull() {
+  void ensureRemovingNonExistantPropertyReturnsNull() {
     assertThat(new LazyPropertyAware().removeProperty("whatever"), is(nullValue()));
   }
 }

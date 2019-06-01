@@ -126,6 +126,10 @@ allprojects {
 //            testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
 //            testImplementation 'org.junit.jupiter:junit-jupiter-api'
 
+            compileOnly 'org.projectlombok:lombok'
+            testCompileOnly 'org.projectlombok:lombok'
+            annotationProcessor "org.projectlombok:lombok"
+            testAnnotationProcessor "org.projectlombok:lombok"
         }
     }
 

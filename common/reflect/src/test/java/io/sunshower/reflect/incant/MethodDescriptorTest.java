@@ -12,11 +12,11 @@ import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
 
-public class MethodDescriptorTest {
+class MethodDescriptorTest {
 
   @Test
   @SuppressWarnings("unchecked")
-  public void ensureAssignmentMatches() throws NoSuchMethodException {
+  void ensureAssignmentMatches() throws NoSuchMethodException {
 
     class A {
       public void m(List<String> s) {}
@@ -29,9 +29,9 @@ public class MethodDescriptorTest {
   }
 
   @Test
-  public void ensureNullaryMethodWithNoArgumentsCanBeInvokedAndAssigned() throws Exception {
+  void ensureNullaryMethodWithNoArgumentsCanBeInvokedAndAssigned() throws Exception {
     class A {
-      public void m() {}
+      void m() {}
     }
 
     final io.sunshower.reflect.incant.MethodDescriptor<A, Void> methodDescriptor =
@@ -41,9 +41,9 @@ public class MethodDescriptorTest {
   }
 
   @Test
-  public void ensureNullaryMethodReturningAValueCanBeInvokedAndAssigned() throws Exception {
+  void ensureNullaryMethodReturningAValueCanBeInvokedAndAssigned() throws Exception {
     class A {
-      public String m() {
+      String m() {
         return "Frapper";
       }
     }
@@ -55,12 +55,12 @@ public class MethodDescriptorTest {
   }
 
   @Test
-  public void ensureInvokingMethodReturningNothingOnParametersProducesExpectedResults()
+  void ensureInvokingMethodReturningNothingOnParametersProducesExpectedResults()
       throws NoSuchMethodException {
     class A {
-      public String s;
+      String s;
 
-      public void m(String s) {
+      void m(String s) {
         this.s = s;
       }
     }
@@ -74,11 +74,11 @@ public class MethodDescriptorTest {
   }
 
   @Test
-  public void ensureMethodDescriptorReturnsCorrectValueForNonVoidMethodWithParameters()
+  void ensureMethodDescriptorReturnsCorrectValueForNonVoidMethodWithParameters()
       throws NoSuchMethodException {
 
     class A {
-      public String m(String s) {
+      String m(String s) {
         return "M(" + s + ")";
       }
     }
@@ -92,9 +92,9 @@ public class MethodDescriptorTest {
   }
 
   @Test
-  public void ensureMethodMatchesSameMethod() throws NoSuchMethodException {
+  void ensureMethodMatchesSameMethod() throws NoSuchMethodException {
     class A {
-      public String m(String s) {
+      String m(String s) {
         return "M(" + s + ")";
       }
     }
@@ -106,10 +106,10 @@ public class MethodDescriptorTest {
   }
 
   @Test
-  public void ensureMethodDescriptorsAreEquivalentWhenTheirBackingMethodsAreEquivalent()
+  void ensureMethodDescriptorsAreEquivalentWhenTheirBackingMethodsAreEquivalent()
       throws NoSuchMethodException {
     class A {
-      public String m(String s) {
+      String m(String s) {
         return "M(" + s + ")";
       }
     }
@@ -124,10 +124,10 @@ public class MethodDescriptorTest {
   }
 
   @Test
-  public void ensureMethodDescriptorCanBeUsedAsAKeyInAMap() throws NoSuchMethodException {
+  void ensureMethodDescriptorCanBeUsedAsAKeyInAMap() throws NoSuchMethodException {
 
     class A {
-      public String m(String s) {
+      String m(String s) {
         return "M(" + s + ")";
       }
     }

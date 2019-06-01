@@ -16,12 +16,12 @@ import java.util.stream.Collectors;
 import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.Test;
 
-public class ReflectTest {
+class ReflectTest {
 
   interface Iface {}
 
   @Test
-  public void ensureResolvingProxiedObjectWorks() throws Exception {
+  void ensureResolvingProxiedObjectWorks() throws Exception {
     Iface iface =
         (Iface)
             Proxy.newProxyInstance(
@@ -33,7 +33,7 @@ public class ReflectTest {
   }
 
   @Test
-  public void ensureReflectConstructorIsInaccessible() throws Exception {
+  void ensureReflectConstructorIsInaccessible() throws Exception {
     try {
       Constructor ctor = io.sunshower.reflect.reflect.Reflect.class.getDeclaredConstructor();
       ctor.setAccessible(true);
@@ -45,7 +45,7 @@ public class ReflectTest {
   }
 
   @Test
-  public void ensureStreamCollectsSingleType() {
+  void ensureStreamCollectsSingleType() {
     class A {}
     List<Class<?>> types =
         io.sunshower.reflect.reflect.Reflect.linearSupertypes(A.class).collect(Collectors.toList());
@@ -56,7 +56,7 @@ public class ReflectTest {
   }
 
   @Test
-  public void ensureStreamCollectsOnlyTypesAnnotatedWithAnnotation() {
+  void ensureStreamCollectsOnlyTypesAnnotatedWithAnnotation() {
     @Uninherited
     class A {}
 
@@ -68,7 +68,7 @@ public class ReflectTest {
   }
 
   @Test
-  public void ensureStreamCollectsTypesOnFirstLinearSupertype() {
+  void ensureStreamCollectsTypesOnFirstLinearSupertype() {
     @Uninherited
     class A {}
     class B extends A {}
@@ -81,7 +81,7 @@ public class ReflectTest {
   }
 
   @Test
-  public void ensureStreamCollectsInterfaceOnInterface() {
+  void ensureStreamCollectsInterfaceOnInterface() {
     class A implements UninheritedIface {}
 
     HashSet<Uninherited> collect =
@@ -92,7 +92,7 @@ public class ReflectTest {
   }
 
   @Test
-  public void ensureStreamCollectsannotationOnImplementingLinearSupertype() {
+  void ensureStreamCollectsannotationOnImplementingLinearSupertype() {
     class A implements UninheritedIface {}
 
     class B extends A {}
@@ -105,7 +105,7 @@ public class ReflectTest {
   }
 
   @Test
-  public void ensureStreamCollectsAnnotationsInCorrectOrder() {
+  void ensureStreamCollectsAnnotationsInCorrectOrder() {
 
     @Uninherited("a")
     class A implements UninheritedIface, OtherInterface {}
@@ -121,21 +121,21 @@ public class ReflectTest {
   }
 
   @Test
-  public void ensureReflectCannotInstantiateNonStaticClass() {
+  void ensureReflectCannotInstantiateNonStaticClass() {
     class A {}
     assertThrows(
         io.sunshower.reflect.reflect.InstantiationException.class, () -> instantiate(A.class));
   }
 
   @Test
-  public void ensureAttemptingToInstantiateNonInnerClassWithPrivateMethodThrowsException() {
+  void ensureAttemptingToInstantiateNonInnerClassWithPrivateMethodThrowsException() {
     assertThrows(
         io.sunshower.reflect.reflect.InstantiationException.class,
         () -> instantiate(PrivateConstructor.class));
   }
 
   @Test
-  public void ensureConstructorThrowingExceptionPassesCorrectException() {
+  void ensureConstructorThrowingExceptionPassesCorrectException() {
     try {
       instantiate(ConstructorThrowsException.class);
     } catch (io.sunshower.reflect.reflect.InstantiationException e) {
@@ -144,7 +144,7 @@ public class ReflectTest {
   }
 
   @Test
-  public void ensureInstantiatingInterfaceFails() {
+  void ensureInstantiatingInterfaceFails() {
     assertThrows(InstantiationException.class, () -> instantiate(AbstractClass.class));
   }
 
@@ -155,17 +155,17 @@ public class ReflectTest {
   interface UninheritedIface {}
 
   abstract static class AbstractClass {
-    public AbstractClass() {}
+    AbstractClass() {}
   }
 
-  public static class ConstructorThrowsException {
+  static class ConstructorThrowsException {
 
-    public ConstructorThrowsException() {
+    ConstructorThrowsException() {
       throw new IllegalStateException("woah");
     }
   }
 
-  public static class PrivateConstructor {
+  static class PrivateConstructor {
     private PrivateConstructor() {}
   }
 

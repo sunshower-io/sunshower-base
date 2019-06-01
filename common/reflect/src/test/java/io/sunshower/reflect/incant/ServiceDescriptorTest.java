@@ -8,13 +8,13 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import java.lang.reflect.Method;
 import org.junit.jupiter.api.Test;
 
-public class ServiceDescriptorTest {
+class ServiceDescriptorTest {
 
   @Test
-  public void ensureRetrievingAUnitaryMethodWithAnEmptyParameterArrayProducesCorrectResult()
+  void ensureRetrievingAUnitaryMethodWithAnEmptyParameterArrayProducesCorrectResult()
       throws Exception {
     class A {
-      public String m() {
+      String m() {
         return "M(" + "x" + ")";
       }
     }
@@ -26,5 +26,5 @@ public class ServiceDescriptorTest {
   }
 
   @Test
-  public void ensureService() {}
+  void ensureService() {}
 }
