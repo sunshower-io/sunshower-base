@@ -1,5 +1,6 @@
 dependencies {
     api project(':test:test-common')
+    api project(':persist:persist-jpa')
     api project(':persist:persist-hibernate')
 
     implementation project(':common:common-log')
@@ -17,7 +18,10 @@ dependencies {
 
 
     api 'com.h2database:h2'
+    api 'org.jboss.narayana.jta:jta'
     api 'org.jboss.narayana.jta:jdbc'
+    api 'org.jboss.narayana.jta:narayana-jta'
+    api 'org.jboss.narayana.jts:narayana-jts-integration'
 
 
 }

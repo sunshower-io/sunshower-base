@@ -1,8 +1,9 @@
-package io.sunshower.jpa.configuration;
+package io.sunshower.test.persist;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import io.sunshower.jpa.configuration.PostgresTestConfiguration;
 import io.sunshower.jpa.flyway.FlywayConfiguration;
 import io.sunshower.persist.core.DataSourceConfiguration;
 import io.sunshower.persist.core.DatabaseConfigurationSource;
@@ -88,7 +89,7 @@ public class DialectPostgresConfigurationTest {
       while (resultSet.next()) {
         count++;
       }
-      assertThat(count, is(1));
+      assertThat(count, is(0));
     }
   }
 }

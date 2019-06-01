@@ -1,5 +1,14 @@
 dependencies {
 
+    implementation project(':common:common-config')
+    implementation project(':persist:persist-jpa')
+    implementation project(':persist:persist-core')
+
+    implementation 'org.hibernate.validator:hibernate-validator'
+
+
+    testImplementation project(':test:test-persist')
+
 
     [
             'spring-orm',
@@ -8,27 +17,17 @@ dependencies {
         implementation "org.springframework:$it"
     }
 
-
-    implementation 'org.jboss:jboss-transaction-spi'
-
-
-    implementation 'javax.inject:javax.inject'
-    implementation 'org.hibernate.validator:hibernate-validator'
-
     implementation 'org.glassfish:javax.el'
+    implementation 'org.aspectj:aspectjrt'
+    implementation 'org.aspectj:aspectjweaver'
+    implementation 'org.springframework:spring-aop'
 
-    api project(':persist:persist-jpa')
-    api project(':persist:persist-core')
-
-    api project(':common:common-config')
-
-    [
-            'narayana-jta',
-            'jta',
-            'jdbc'
-    ].each {
-        implementation "org.jboss.narayana.jta:$it"
-    }
+    implementation 'org.jboss.narayana.jta:jta'
+    implementation 'org.jboss.narayana.jta:jdbc'
+    implementation 'org.jboss:jboss-transaction-spi'
+    implementation 'org.jboss.narayana.jta:narayana-jta'
+    implementation 'org.hibernate.validator:hibernate-validator'
+    implementation 'org.jboss.narayana.jts:narayana-jts-integration'
 
 
     [
@@ -37,33 +36,5 @@ dependencies {
     ].each {
         testImplementation "org.infinispan:$it:9.4.14.Final"
     }
-
-
-    implementation 'org.jboss.narayana.jts:narayana-jts-integration'
-
-
-    testImplementation 'com.h2database:h2'
-
-
-    implementation 'org.aspectj:aspectjrt'
-    implementation 'org.aspectj:aspectjweaver'
-    implementation 'org.springframework:spring-aop'
-
-    implementation 'com.zaxxer:HikariCP'
-    implementation 'org.flywaydb:flyway-core'
-    implementation('org.hibernate:hibernate-core')
-
-    implementation 'org.glassfish:javax.el'
-
-    implementation 'org.apache.lucene:lucene-codecs'
-    implementation 'org.apache.lucene:lucene-backward-codecs'
-
-    implementation('org.hibernate:hibernate-search-orm')
-
-
-    testImplementation('com.h2database:h2')
-    testImplementation project(':test:test-common')
-    testImplementation('org.postgresql:postgresql')
-    testImplementation 'org.springframework:spring-test'
 
 }
