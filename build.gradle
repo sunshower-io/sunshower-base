@@ -13,15 +13,6 @@ plugins {
 apply plugin: 'nebula-aggregate-javadocs'
 
 
-task archiveReports(type: Zip) {
-    from "$buildDir/docs"
-    include "/**/*"
-
-    from "$buildDir/reports/clover"
-
-    archiveName 'reports.zip'
-}
-
 allprojects {
 
 
@@ -31,7 +22,6 @@ allprojects {
     apply plugin: 'maven-publish'
     apply plugin: 'net.ltgt.apt'
     apply plugin: 'project-report'
-//    apply plugin: 'com.bmuschko.clover'
     apply plugin: "com.diffplug.gradle.spotless"
     apply plugin: 'io.spring.dependency-management'
 
@@ -42,11 +32,6 @@ allprojects {
         }
     }
 
-//    clover {
-//        report {
-//            html = true
-//        }
-//    }
 
 
     def repos = [
@@ -66,9 +51,6 @@ allprojects {
     }
 
 
-//    dependencies {
-//        clover 'org.openclover:clover:4.3.1'
-//    }
 
     repositories {
         mavenLocal()
@@ -91,40 +73,7 @@ allprojects {
 
 
     plugins.withType(JavaPlugin) {
-
-
-//        test {
-//            jvmArgs '--add-exports=java.base/jdk.internal.misc=ALL-UNNAMED'
-//            jvmArgs '--add-exports=java.base/sun.nio.ch=ALL-UNNAMED'
-//            jvmArgs '--illegal-access=permit'
-////            jvmArgs([
-////                    '--add-exports java.base/jdk.internal.misc=ALL-UNNAMED',
-////                    '--add-exports java.base/sun.nio.ch=ALL-UNNAMED',
-////                    '--add-exports java.management/com.sun.jmx.mbeanserver=ALL-UNNAMED',
-////                    '--add-exports jdk.internal.jvmstat/sun.jvmstat.monitor=ALL-UNNAMED',
-////                    '--add-exportsjava.base/sun.reflect.generics.reflectiveObjects=ALL-UNNAMED',
-////                    '--illegal-access=permit',
-////                    '-Djdk.tls.client.protocols=TLSv1.2'
-////            ].join(' '))
-//        }
-
         dependencies {
-//            annotationProcessor "org.projectlombok:lombok:1.18.6"
-//            compileOnly 'org.projectlombok:lombok:1.18.6'
-//            testCompileOnly 'org.projectlombok:lombok:1.18.6'
-//            testAnnotationProcessor 'org.projectlombok:lombok:1.18.6'
-//            implementation 'javax.ws.rs:javax.ws.rs-api'
-//            implementation 'org.eclipse.persistence:org.eclipse.persistence.moxy'
-//            implementation 'org.hibernate.javax.persistence:hibernate-jpa-2.1-api'
-//
-//
-//            testCompile 'javax.mail:mail'
-//
-//            testImplementation('org.hamcrest:hamcrest-core')
-//            testImplementation('org.mockito:mockito-core')
-//
-//            testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
-//            testImplementation 'org.junit.jupiter:junit-jupiter-api'
 
             compileOnly 'org.projectlombok:lombok'
             testCompileOnly 'org.projectlombok:lombok'
@@ -181,24 +130,7 @@ publishing {
             }
         }
     }
-
-//    publications {
-//        maven(MavenPublication) {
-//            artifact archiveReports {
-//                classifier 'reports'
-//            }
-//        }
-//    }
 }
-
-
-//assemble.dependsOn cloverAggregateReports
-//assemble.dependsOn 'aggregateJavadocs'
-
-assemble.dependsOn archiveReports
-//archiveReports.mustRunAfter cloverAggregateReports
-//archiveReports.mustRunAfter 'aggregateJavadocs'
-
 
 defaultTasks 'clean', 'build'
 
