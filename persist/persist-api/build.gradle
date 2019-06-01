@@ -1,13 +1,22 @@
 dependencies {
 
+    api project(':common:core')
 
-    implementation project(':common:core')
+    api 'javax.inject:javax.inject'
+    api 'org.springframework:spring-context'
+    api 'org.hibernate:hibernate-search-orm'
+    api 'javax.persistence:javax.persistence-api'
 
 
-    implementation 'javax.inject:javax.inject'
-    implementation 'org.springframework:spring-context'
+    testImplementation project(':test:test-common')
 
-    implementation 'org.hibernate:hibernate-search-orm'
-    implementation 'javax.validation:validation-api'
+//    implementation project(':common:core')
+//
+//
+//    implementation 'javax.inject:javax.inject'
+//    implementation 'org.springframework:spring-context'
+//
+//    implementation 'org.hibernate:hibernate-search-orm'
+//    implementation 'javax.validation:validation-api'
 
 }
