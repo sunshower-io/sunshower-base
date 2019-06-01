@@ -1,5 +1,6 @@
 include(
         'common',
+        'common:common-log',
         'common:core',
         'common:annotations',
         'common:lambda',

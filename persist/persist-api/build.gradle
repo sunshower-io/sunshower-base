@@ -10,13 +10,4 @@ dependencies {
 
     testImplementation project(':test:test-common')
 
-//    implementation project(':common:core')
-//
-//
-//    implementation 'javax.inject:javax.inject'
-//    implementation 'org.springframework:spring-context'
-//
-//    implementation 'org.hibernate:hibernate-search-orm'
-//    implementation 'javax.validation:validation-api'
-
 }

@@ -1,28 +1,53 @@
 dependencies {
-    api("org.springframework:spring-test")
-    api("org.springframework.security:spring-security-test")
+    api project(':test:test-common')
     api project(':persist:persist-hibernate')
-    api project(":test:test-common")
-    api "com.h2database:h2"
-    api ("org.flywaydb:flyway-core")
-    api 'org.junit.platform:junit-platform-runner'
-    api 'org.hibernate:hibernate-search-orm'
-    api ("org.hibernate:hibernate-core")
-    api 'org.hibernate.validator:hibernate-validator'
+
+    implementation project(':common:common-log')
+
+    api 'org.springframework:spring-jdbc'
+    api 'org.springframework:spring-test'
+    api 'org.springframework:spring-orm'
+    api 'org.springframework:spring-test'
+    api 'javax.persistence:javax.persistence-api'
+    api 'org.springframework.security:spring-security-test'
 
 
 
-    [
-            'spring-orm',
-            'spring-jdbc'
-    ].each {
-        api "org.springframework:$it"
-    }
 
-    testImplementation group: 'org.infinispan', name: 'infinispan-core', version: '9.4.14.Final'
-    testImplementation group: 'org.infinispan', name: 'infinispan-hibernate-cache-v53', version: '9.4.14.Final'
+    implementation 'com.h2database:h2'
+    implementation 'org.jboss.narayana.jta:jdbc'
 
-    implementation 'org.glassfish:javax.el'
-    testImplementation 'com.zaxxer:HikariCP'
-    implementation 'org.yaml:snakeyaml'
+    implementation 'org.infinispan:infinispan-core:9.4.14.Final'
+    implementation 'org.infinispan:infinispan-hibernate-cache-v53:9.4.14.Final'
+
+//    implementation group: 'org.infinispan', name: 'infinispan-core', version: '9.4.14.Final'
+//    testImplementation group: 'org.infinispan', name: 'infinispan-hibernate-cache-v53', version: '9.4.14.Final'
+
+
+//    api("org.springframework:spring-test")
+//    api project(':persist:persist-hibernate')
+//    api project(":test:test-common")
+//    api "com.h2database:h2"
+//    api ("org.flywaydb:flyway-core")
+//    api 'org.junit.platform:junit-platform-runner'
+//    api 'org.hibernate:hibernate-search-orm'
+//    api ("org.hibernate:hibernate-core")
+//    api 'org.hibernate.validator:hibernate-validator'
+//
+//    implementation 'org.jboss.narayana.jta:jdbc'
+//
+//
+//    [
+//            'spring-orm',
+//            'spring-jdbc'
+//    ].each {
+//        api "org.springframework:$it"
+//    }
+//
+//    testImplementation group: 'org.infinispan', name: 'infinispan-core', version: '9.4.14.Final'
+//    testImplementation group: 'org.infinispan', name: 'infinispan-hibernate-cache-v53', version: '9.4.14.Final'
+//
+//    implementation 'org.glassfish:javax.el'
+//    testImplementation 'com.zaxxer:HikariCP'
+//    implementation 'org.yaml:snakeyaml'
 }
