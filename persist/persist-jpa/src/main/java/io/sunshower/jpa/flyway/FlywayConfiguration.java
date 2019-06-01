@@ -9,6 +9,7 @@ import io.sunshower.persistence.PersistenceConfiguration;
 import io.sunshower.persistence.PersistenceUnit;
 import javax.inject.Singleton;
 import javax.sql.DataSource;
+import lombok.val;
 import org.flywaydb.core.Flyway;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,26 +33,27 @@ public class FlywayConfiguration {
   public MigrationResult createMigrations(
       DataSource dataSource, PersistenceUnit context, DatabaseConfigurationSource source) {
     for (PersistenceConfiguration ctx : context.configurations()) {
-      final Flyway flyway = new Flyway();
+      val flyway = Flyway.configure();
 
       if (isBaselineVersion(source)) {
         log.info("Setting baseline version to {}", source.version());
-        flyway.setBaselineVersionAsString(source.version());
+        flyway.baselineVersion(source.version());
       }
       final String table = ctx.getId() + "_migrations";
-      flyway.setTable(table);
+      flyway.table(table);
       if (!ctx.getSchema().trim().isEmpty()) {
-        flyway.setSchemas(ctx.getSchema());
+        flyway.schemas(ctx.getSchema());
       }
-      flyway.setDataSource(dataSource);
+      flyway.dataSource(dataSource);
       String[] migrationPaths = ctx.getMigrationPaths();
-      flyway.setLocations(migrationPaths);
+      flyway.locations(migrationPaths);
+      val fway = flyway.load();
       if (isBaselineVersion(source)) {
         log.info("baselining database...");
-        flyway.baseline();
+        fway.baseline();
         log.info("database baselined");
       }
-      flyway.migrate();
+      fway.migrate();
     }
     return new MigrationResult(context);
   }
