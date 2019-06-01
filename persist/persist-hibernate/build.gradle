@@ -31,6 +31,11 @@ dependencies {
         implementation "org.jboss.narayana.jta:$it"
     }
 
+
+    testImplementation group: 'org.infinispan', name: 'infinispan-core', version: '9.4.14.Final'
+    testImplementation group: 'org.infinispan', name: 'infinispan-hibernate-cache-v53', version: '9.4.14.Final'
+
+
     implementation 'org.jboss.narayana.jts:narayana-jts-integration'
 
 

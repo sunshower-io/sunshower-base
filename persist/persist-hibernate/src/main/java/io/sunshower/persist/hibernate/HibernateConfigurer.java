@@ -133,14 +133,17 @@ public class HibernateConfigurer {
         String cacheProvider = cache.provider();
         log.info("L2 Cache is enabled");
         log.info("Cache provider: '" + cacheProvider + "'");
-        //        jpaProperties.put("hibernate.cache.use_second_level_cache", true);
+        jpaProperties.put("hibernate.cache.use_second_level_cache", true);
       }
       if (cache.enableQueryCache()) {
         log.info("Query cache is enabled");
-        //        jpaProperties.put("hibernate.cache.use_query_cache", true);
+        jpaProperties.put("hibernate.cache.use_query_cache", true);
       }
-      //      jpaProperties.put("hibernate.cache.region.factory_class", cache.regionFactory());
-      //      jpaProperties.put("org.apache.ignite.hibernate.grid_name", cache.fabricName());
+      jpaProperties.put("hibernate.cache.region.factory_class", cache.regionFactory());
+      jpaProperties.put("org.apache.ignite.hibernate.grid_name", cache.fabricName());
+      jpaProperties.put(
+          "hibernate.cache.infinispan.cfg",
+          "org/infinispan/hibernate/cache/commons/builder/infinispan-configs-local.xml");
     }
 
     jpaProperties.put(
