@@ -43,7 +43,7 @@ allprojects {
                 "-server",
                 "-Xmx10g",
                 "-Xms2g",
-                "-Dfile.encoding=UTF8",
+                "-Dfile.encoding=UTF-8",
                 "-XX:MaxMetaspaceSize=2g",
                 "-XX:+UnlockExperimentalVMOptions",
                 "-XX:+UseZGC"
