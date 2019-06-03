@@ -49,7 +49,7 @@ public class HibernateProviderConfigurationSourceTest extends HibernateTestCase 
   @Test
   public void ensureRegionFactoryIsCorrect() {
     String regionFactory = props.cache().regionFactory();
-    assertThat(regionFactory, is("org.apache.ignite.cache.hibernate.HibernateRegionFactory"));
+    assertThat(regionFactory, is("infinispan"));
   }
 
   @Test

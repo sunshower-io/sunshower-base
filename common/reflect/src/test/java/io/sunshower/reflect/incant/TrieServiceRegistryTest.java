@@ -10,17 +10,17 @@ import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class TrieServiceRegistryTest {
+class TrieServiceRegistryTest {
 
   private io.sunshower.reflect.incant.OperationScanner objectScanner;
 
   @BeforeEach
-  public void setUp() {
+  void setUp() {
     objectScanner = new OpScanner();
   }
 
   @Test
-  public void ensureScanningSimpleClassWithSingleMethodProducesExpectedResults() {
+  void ensureScanningSimpleClassWithSingleMethodProducesExpectedResults() {
     class A {
       String a() {
         return "a";
@@ -36,7 +36,7 @@ public class TrieServiceRegistryTest {
   }
 
   @Test
-  public void ensureScanningSimpleClassWithMultipleMethodsWithVaryingTypesProducesResults() {
+  void ensureScanningSimpleClassWithMultipleMethodsWithVaryingTypesProducesResults() {
     class A {
       String a() {
         return "a";

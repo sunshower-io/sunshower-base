@@ -1,6 +1,5 @@
 package io.sunshower.persist.hibernate;
 
-import io.sunshower.ignite.IgniteNodeConfiguration;
 import io.sunshower.persist.validation.ModelValidator;
 import io.sunshower.persistence.PersistenceUnit;
 import java.util.Properties;
@@ -9,12 +8,10 @@ import javax.sql.DataSource;
 import javax.transaction.TransactionManager;
 import javax.transaction.TransactionSynchronizationRegistry;
 import javax.transaction.UserTransaction;
-import org.apache.ignite.Ignite;
 import org.cfg4j.provider.ConfigurationProvider;
 import org.hibernate.search.jpa.FullTextEntityManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -22,7 +19,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-@Import(IgniteNodeConfiguration.class)
 public class HibernateConfiguration extends HibernateConfigurer {
 
   @Bean
@@ -108,20 +104,17 @@ public class HibernateConfiguration extends HibernateConfigurer {
       DataSource dataSource,
       HibernateProviderConfigurationSource source,
       PersistenceUnit persistenceConfiguration,
-      ConfigurationProvider provider,
-      Ignite ignite) {
-    return super.entityManagerFactory(
-        dataSource, source, persistenceConfiguration, provider, ignite);
+      ConfigurationProvider provider) {
+    return super.entityManagerFactory(dataSource, source, persistenceConfiguration, provider);
   }
 
   @Override
   protected void configureCache(
-      Ignite ignite,
       Properties jpaProperties,
       ConfigurationProvider cfgProvider,
       HibernateCacheConfiguration cache,
       HibernateProviderConfigurationSource source) {
-    super.configureCache(ignite, jpaProperties, cfgProvider, cache, source);
+    super.configureCache(jpaProperties, cfgProvider, cache, source);
   }
 
   @Bean

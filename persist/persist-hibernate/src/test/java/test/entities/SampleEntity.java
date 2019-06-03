@@ -15,7 +15,7 @@ import lombok.Setter;
 @Table(name = "SAMPLE_ENTITY", schema = "TEST_SCHEMA")
 public class SampleEntity extends DistributableEntity {
 
-  @Column
+  @Column(name = "vals")
   @Convert(converter = StringArrayConverter.class)
   private String[] values;
 

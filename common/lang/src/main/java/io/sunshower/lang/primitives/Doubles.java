@@ -5,7 +5,6 @@ import static java.lang.Double.longBitsToDouble;
 
 import java.nio.ByteBuffer;
 import lombok.val;
-import lombok.var;
 
 public class Doubles {
 

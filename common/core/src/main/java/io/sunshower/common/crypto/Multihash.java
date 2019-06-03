@@ -12,6 +12,7 @@ import javax.xml.bind.annotation.XmlSchemaType;
 @Embeddable
 @XmlRootElement
 public class Multihash implements Serializable {
+
   public enum Type {
     SHA1(0x11, 20),
     SHA_2_256(0x12, 32),

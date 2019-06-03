@@ -1,10 +1,13 @@
 dependencies {
-    api project(':common:common-config')
-    api 'org.mockito:mockito-junit-jupiter'
 
-    implementation 'javax.inject:javax.inject'
-    implementation 'org.springframework:spring-test'
-    implementation 'org.springframework:spring-context'
-    implementation 'org.junit.platform:junit-platform-runner'
-    implementation 'org.powermock:powermock-api-mockito2'
+    api project(':test:test-api')
+    api project(':common:common-config')
+
+
+    api 'javax.xml.bind:jaxb-api'
+    api 'javax.inject:javax.inject'
+    api 'org.springframework:spring-test'
+    api 'org.springframework:spring-context'
+    api 'org.eclipse.persistence:org.eclipse.persistence.moxy'
+
 }

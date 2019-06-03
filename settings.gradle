@@ -1,5 +1,6 @@
 include(
         'common',
+        'common:common-log',
         'common:core',
         'common:annotations',
         'common:lambda',
@@ -16,6 +17,6 @@ include(
         'persist:persist-api',
         'persist:persist-core',
         'persist:persist-hibernate',
-        'persist:persist-ignite',
+//        'persist:persist-ignite',
         'persist:persist-jpa'
 )

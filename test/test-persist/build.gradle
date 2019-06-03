@@ -1,16 +1,27 @@
 dependencies {
-    api("org.springframework:spring-test")
-    api("org.springframework.security:spring-security-test")
+    api project(':test:test-common')
+    api project(':persist:persist-jpa')
     api project(':persist:persist-hibernate')
-    api project(":test:test-common")
-    api "com.h2database:h2"
-    api ("org.flywaydb:flyway-core")
-    api 'org.junit.platform:junit-platform-runner'
-    api 'org.hibernate:hibernate-search-orm'
-    api ("org.hibernate:hibernate-core")
-    api 'org.hibernate.validator:hibernate-validator'
 
-    implementation 'org.glassfish:javax.el'
-    testImplementation 'com.zaxxer:HikariCP'
-    implementation 'org.yaml:snakeyaml'
+    implementation project(':common:common-log')
+
+    api 'org.springframework:spring-jdbc'
+    api 'org.springframework:spring-test'
+    api 'org.springframework:spring-orm'
+    api 'org.springframework:spring-test'
+    api 'javax.persistence:javax.persistence-api'
+    api 'org.springframework.security:spring-security-test'
+    api 'org.infinispan:infinispan-core:9.4.14.Final'
+    api 'org.infinispan:infinispan-hibernate-cache-v53:9.4.14.Final'
+
+
+
+
+    api 'com.h2database:h2'
+    api 'org.jboss.narayana.jta:jta'
+    api 'org.jboss.narayana.jta:jdbc'
+    api 'org.jboss.narayana.jta:narayana-jta'
+    api 'org.jboss.narayana.jts:narayana-jts-integration'
+
+
 }

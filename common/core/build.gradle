@@ -1,6 +1,16 @@
-
 dependencies {
-    implementation project(':common:lambda')
+    api project(':common:lambda')
+
+    api 'javax.mail:mail'
+    api 'javax.xml.bind:jaxb-api'
+    api 'javax.json:javax.json-api'
+    api 'javax.ws.rs:javax.ws.rs-api'
+    api 'javax.activation:activation'
+    api 'javax.persistence:javax.persistence-api'
+    api 'org.eclipse.persistence:org.eclipse.persistence.moxy'
+
+    implementation 'org.glassfish:javax.json'
+
     testImplementation project(':test:test-common')
-    testImplementation 'org.junit.platform:junit-platform-runner'
+
 }

@@ -13,8 +13,6 @@ import javax.sql.DataSource;
 import javax.transaction.TransactionManager;
 import javax.transaction.TransactionSynchronizationRegistry;
 import javax.transaction.UserTransaction;
-import org.apache.ignite.Ignite;
-import org.apache.ignite.configuration.CacheConfiguration;
 import org.cfg4j.provider.ConfigurationProvider;
 import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.jpa.Search;
@@ -98,8 +96,7 @@ public class HibernateConfigurer {
       DataSource dataSource,
       HibernateProviderConfigurationSource source,
       PersistenceUnit persistenceConfiguration,
-      ConfigurationProvider provider,
-      Ignite ignite) {
+      ConfigurationProvider provider) {
     LocalContainerEntityManagerFactoryBean entityManagerFactoryBean =
         new LocalContainerEntityManagerFactoryBean();
     entityManagerFactoryBean.setPersistenceUnitName("default-persistence-unit");
@@ -111,13 +108,12 @@ public class HibernateConfigurer {
     entityManagerFactoryBean.setPackagesToScan(persistenceConfiguration.getScannedPackages());
 
     Properties properties = Configurations.toNative(provider, source);
-    configureCache(ignite, properties, provider, source.getCache(), source);
+    configureCache(properties, provider, source.getCache(), source);
     entityManagerFactoryBean.setJpaProperties(properties);
     return entityManagerFactoryBean;
   }
 
   protected void configureCache(
-      Ignite ignite,
       Properties jpaProperties,
       ConfigurationProvider cfgProvider,
       HibernateCacheConfiguration cache,
@@ -126,7 +122,7 @@ public class HibernateConfigurer {
     if (provider == null) {
       log.info("No L2 Cache configured");
     }
-    jpaProperties.put("hibernate.connection.autocommit", false);
+    jpaProperties.put("hibernate.connection.autocommit", "true");
 
     if (cache == null) {
       log.info("No L2 Cache configured");
@@ -137,16 +133,17 @@ public class HibernateConfigurer {
         String cacheProvider = cache.provider();
         log.info("L2 Cache is enabled");
         log.info("Cache provider: '" + cacheProvider + "'");
-        jpaProperties.put("hibernate.cache.use_second_level_cache", true);
+        jpaProperties.put("hibernate.cache.use_second_level_cache", "true");
       }
       if (cache.enableQueryCache()) {
         log.info("Query cache is enabled");
-        ignite.getOrCreateCache(new CacheConfiguration<>(UPDATE_TIMESTAMPS_CACHE_NAME));
-        ignite.getOrCreateCache(new CacheConfiguration<>(STANDARD_QUERY_CACHE_NAME));
-        jpaProperties.put("hibernate.cache.use_query_cache", true);
+        jpaProperties.put("hibernate.cache.use_query_cache", "true");
       }
       jpaProperties.put("hibernate.cache.region.factory_class", cache.regionFactory());
       jpaProperties.put("org.apache.ignite.hibernate.grid_name", cache.fabricName());
+      jpaProperties.put(
+          "hibernate.cache.infinispan.cfg",
+          "org/infinispan/hibernate/cache/commons/builder/infinispan-configs-local.xml");
     }
 
     jpaProperties.put(

@@ -1,10 +1,9 @@
-
-
 dependencies {
-    implementation project(":common:core")
-    implementation 'org.eclipse.persistence:org.eclipse.persistence.moxy'
-    implementation 'org.springframework.security:spring-security-acl'
-    implementation 'org.springframework.security:spring-security-config'
+    api 'javax.xml.bind:jaxb-api'
+    api 'javax.json:javax.json-api'
+    api 'javax.ws.rs:javax.ws.rs-api'
+    api 'org.eclipse.persistence:org.eclipse.persistence.moxy'
 
+    implementation project(":common:core")
 }
 

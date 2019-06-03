@@ -13,15 +13,6 @@ plugins {
 apply plugin: 'nebula-aggregate-javadocs'
 
 
-task archiveReports(type: Zip) {
-    from "$buildDir/docs"
-    include "/**/*"
-
-    from "$buildDir/reports/clover"
-
-    archiveName 'reports.zip'
-}
-
 allprojects {
 
 
@@ -31,7 +22,6 @@ allprojects {
     apply plugin: 'maven-publish'
     apply plugin: 'net.ltgt.apt'
     apply plugin: 'project-report'
-    apply plugin: 'com.bmuschko.clover'
     apply plugin: "com.diffplug.gradle.spotless"
     apply plugin: 'io.spring.dependency-management'
 
@@ -42,12 +32,23 @@ allprojects {
         }
     }
 
-    clover {
-        report {
-            html = true
-        }
-    }
 
+    test {
+        useJUnitPlatform {
+            includeEngines 'junit-jupiter'
+            excludeEngines 'junit-vintage'
+        }
+
+        allJvmArgs = [
+                "-server",
+                "-Xmx10g",
+                "-Xms2g",
+                "-Dfile.encoding=UTF-8",
+                "-XX:MaxMetaspaceSize=2g",
+                "-XX:+UnlockExperimentalVMOptions",
+                "-XX:+UseZGC"
+        ]
+    }
 
     def repos = [
             'http://artifacts.sunshower.io/repository/sunshower-cache'
@@ -66,9 +67,6 @@ allprojects {
     }
 
 
-    dependencies {
-        clover 'org.openclover:clover:4.2.0'
-    }
 
     repositories {
         mavenLocal()
@@ -89,25 +87,14 @@ allprojects {
         }
     }
 
-    plugins.withType(JavaPlugin) {
 
+    plugins.withType(JavaPlugin) {
         dependencies {
-            annotationProcessor "org.projectlombok:lombok"
+
             compileOnly 'org.projectlombok:lombok'
             testCompileOnly 'org.projectlombok:lombok'
-            implementation 'javax.ws.rs:javax.ws.rs-api'
-            implementation 'org.eclipse.persistence:org.eclipse.persistence.moxy'
-            implementation 'org.hibernate.javax.persistence:hibernate-jpa-2.1-api'
-
-
-            testCompile 'javax.mail:mail'
-            
-            testImplementation('org.hamcrest:hamcrest-core')
-            testImplementation('org.mockito:mockito-core')
-
-            testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
-            testImplementation 'org.junit.jupiter:junit-jupiter-api'
-
+            annotationProcessor "org.projectlombok:lombok"
+            testAnnotationProcessor "org.projectlombok:lombok"
         }
     }
 
@@ -159,24 +146,7 @@ publishing {
             }
         }
     }
-
-    publications {
-        maven(MavenPublication) {
-            artifact archiveReports {
-                classifier 'reports'
-            }
-        }
-    }
 }
 
-
-assemble.dependsOn cloverAggregateReports
-//assemble.dependsOn 'aggregateJavadocs'
-
-assemble.dependsOn archiveReports
-archiveReports.mustRunAfter cloverAggregateReports
-//archiveReports.mustRunAfter 'aggregateJavadocs'
-
-
-defaultTasks 'clean', 'build', 'cloverAggregateReports'
+defaultTasks 'clean', 'build'
 

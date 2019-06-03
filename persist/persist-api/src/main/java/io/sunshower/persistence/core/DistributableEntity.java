@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import lombok.val;
 import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.FieldBridge;
 
@@ -28,7 +29,10 @@ public class DistributableEntity extends AbstractEntity<Identifier> {
 
   public DistributableEntity() {
     super(null);
-    setId(getSequence().next());
+    val seq = getSequence();
+    if (seq != null) {
+      setId(seq.next());
+    }
   }
 
   public DistributableEntity(Identifier id) {

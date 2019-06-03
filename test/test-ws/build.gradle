@@ -1,22 +1,14 @@
 dependencies {
-    implementation 'org.springframework.security:spring-security-acl'
-    implementation 'org.springframework.security:spring-security-config'
-    implementation 'org.jboss.resteasy:resteasy-client'
-    implementation 'org.jboss.resteasy:resteasy-jaxrs'
-    implementation 'org.jboss.resteasy:resteasy-spring'
-    implementation project(':common:common-ws')
-    implementation project(':common:reflect')
-    implementation project(':common:common-config')
-    implementation project(':test:test-core')
-    implementation 'javax.inject:javax.inject'
-    implementation 'org.springframework:spring-test'
+    api project(':common:reflect')
+    api project(':common:common-ws')
 
-    implementation 'org.jboss.resteasy:resteasy-undertow'
-    implementation 'org.jboss.resteasy:resteasy-servlet-initializer'
+    api 'org.springframework:spring-test'
+    api 'org.springframework:spring-context'
+    api 'org.jboss.resteasy:resteasy-undertow'
+    api 'org.jboss.resteasy:resteasy-spring'
 
+    testImplementation project(':test:test-api')
 
-    api 'org.junit.jupiter:junit-jupiter-engine'
-    api 'org.junit.jupiter:junit-jupiter-api'
 
 }
 
