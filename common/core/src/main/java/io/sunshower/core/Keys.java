@@ -11,7 +11,7 @@ public class Keys {
     if (input == null || input.isEmpty()) {
       throw new IllegalArgumentException("Cannot construct a key from nothing or the empty string");
     }
-    return Normalizer.normalize(input, Normalizer.Form.NFD)
+    return Normalizer.normalize(input, Normalizer.Form.NFC)
         .replaceAll("[^\\p{ASCII}]", "")
         .replaceAll("[^a-zA-Z]", "_")
         .toUpperCase();
