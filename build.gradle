@@ -33,6 +33,22 @@ allprojects {
     }
 
 
+    test {
+        useJUnitPlatform {
+            includeEngines 'junit-jupiter'
+            excludeEngines 'junit-vintage'
+        }
+
+        allJvmArgs = [
+                "-server",
+                "-Xmx10g",
+                "-Xms2g",
+                "-Dfile.encoding=UTF8",
+                "-XX:MaxMetaspaceSize=2g",
+                "-XX:+UnlockExperimentalVMOptions",
+                "-XX:+UseZGC"
+        ]
+    }
 
     def repos = [
             'http://artifacts.sunshower.io/repository/sunshower-cache'
