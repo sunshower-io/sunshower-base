@@ -122,7 +122,7 @@ public class HibernateConfigurer {
     if (provider == null) {
       log.info("No L2 Cache configured");
     }
-    jpaProperties.put("hibernate.connection.autocommit", false);
+    jpaProperties.put("hibernate.connection.autocommit", "true");
 
     if (cache == null) {
       log.info("No L2 Cache configured");
@@ -133,11 +133,11 @@ public class HibernateConfigurer {
         String cacheProvider = cache.provider();
         log.info("L2 Cache is enabled");
         log.info("Cache provider: '" + cacheProvider + "'");
-        jpaProperties.put("hibernate.cache.use_second_level_cache", true);
+        jpaProperties.put("hibernate.cache.use_second_level_cache", "true");
       }
       if (cache.enableQueryCache()) {
         log.info("Query cache is enabled");
-        jpaProperties.put("hibernate.cache.use_query_cache", true);
+        jpaProperties.put("hibernate.cache.use_query_cache", "true");
       }
       jpaProperties.put("hibernate.cache.region.factory_class", cache.regionFactory());
       jpaProperties.put("org.apache.ignite.hibernate.grid_name", cache.fabricName());
