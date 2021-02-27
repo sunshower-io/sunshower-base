@@ -9,11 +9,10 @@ podTemplate(containers: [
 
     node(POD_LABEL) {
         stage('Get a Maven project') {
+            git url: 'git@github.com:sunshower-io/sunshower-base'
             container('maven') {
                 stage('Build a Maven project') {
-                    sh "ls -la"
-                    sh "ls -la ../"
-                    sh "ls -la ../../"
+                    sh 'ls -la'
                     sh 'mvn clean install -f bom'
                 }
             }
