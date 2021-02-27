@@ -11,6 +11,7 @@ podTemplate(containers: [
         stage('Get a Maven project') {
             container('maven') {
                 stage('Build a Maven project') {
+                    sh "ls -la"
                     sh 'mvn clean install -f bom'
                 }
             }
