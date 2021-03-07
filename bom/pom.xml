@@ -10,14 +10,15 @@
     <parent>
         <groupId>io.sunshower.env</groupId>
         <artifactId>parent</artifactId>
-        <version>1.0.17.Final</version>
+        <version>1.0.1-SNAPSHOT</version>
+        <relativePath/>
     </parent>
 
     <name>bom</name>
     <url>http://maven.apache.org</url>
 
     <properties>
-        <env.version>1.0.17.Final</env.version>
+        <env.version>1.0.1-SNAPSHOT</env.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <modules>
