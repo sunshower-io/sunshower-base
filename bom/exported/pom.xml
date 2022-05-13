@@ -1,150 +1,32 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-  <parent>
+    <parent>
+        <groupId>io.sunshower.base</groupId>
+        <artifactId>bom</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <relativePath>../</relativePath>
+    </parent>
     <groupId>io.sunshower.base</groupId>
-    <artifactId>bom</artifactId>
-    <version>1.0.12-SNAPSHOT</version>
-    <relativePath>../</relativePath>
-  </parent>
-  <groupId>io.sunshower.base</groupId>
-  <artifactId>bom-exported</artifactId>
-  <version>1.0.12-SNAPSHOT</version>
-  <packaging>pom</packaging>
+    <artifactId>bom-exported</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
 
-  <name>Sunshower.io Exported Bill-Of-Materials</name>
-  <url>http://www.sunshower.io</url>
-  <properties>
-    <sunshower-base.version>1.0.12-SNAPSHOT</sunshower-base.version>
-  </properties>
+    <name>Arcus Exported Bill-Of-Materials</name>
+    <url>http://www.sunshower.io</url>
+    <properties>
+        <arcus.version>1.41.43-SNAPSHOT</arcus.version>
+    </properties>
 
+    <description>
+        Sunshower-Base Bill-Of-Materials Exported Artifacts
+    </description>
 
-  <dependencyManagement>
-    <dependencies>
-      
-      <!--
-      
-      Common exports
-      
-      -->
-
-      <dependency>
-        <groupId>io.sunshower.common</groupId>
-        <artifactId>common-api</artifactId>
-        <version>${sunshower-base.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>io.sunshower.common</groupId>
-        <artifactId>annotations</artifactId>
-        <version>${sunshower-base.version}</version>
-      </dependency>
+    <dependencyManagement>
+        <dependencies>
 
 
-      <dependency>
-        <groupId>io.sunshower.common</groupId>
-        <artifactId>common-config</artifactId>
-        <version>${sunshower-base.version}</version>
-      </dependency>
-
-
-      <dependency>
-        <groupId>io.sunshower.common</groupId>
-        <artifactId>common-ws</artifactId>
-        <version>${sunshower-base.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>io.sunshower.common</groupId>
-        <artifactId>core</artifactId>
-        <version>${sunshower-base.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>io.sunshower.common</groupId>
-        <artifactId>lambda</artifactId>
-        <version>${sunshower-base.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>io.sunshower.common</groupId>
-        <artifactId>lang</artifactId>
-        <version>${sunshower-base.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>io.sunshower.common</groupId>
-        <artifactId>reflect</artifactId>
-        <version>${sunshower-base.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>io.sunshower.persist</groupId>
-        <artifactId>persist-api</artifactId>
-        <version>${sunshower-base.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>io.sunshower.persist</groupId>
-        <artifactId>persist-core</artifactId>
-        <version>${sunshower-base.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>io.sunshower.persist</groupId>
-        <artifactId>persist-hibernate</artifactId>
-        <version>${sunshower-base.version}</version>
-      </dependency>
-
-
-      <dependency>
-        <groupId>io.sunshower.persist</groupId>
-        <artifactId>persist-ignite</artifactId>
-        <version>${sunshower-base.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>io.sunshower.persist</groupId>
-        <artifactId>persist-jpa</artifactId>
-        <version>${sunshower-base.version}</version>
-      </dependency>
-      
-      
-      <!--
-      Test exports
-      -->
-
-      <dependency>
-        <groupId>io.sunshower.test</groupId>
-        <artifactId>test-api</artifactId>
-        <version>${sunshower-base.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>io.sunshower.test</groupId>
-        <artifactId>test-common</artifactId>
-        <version>${sunshower-base.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>io.sunshower.test</groupId>
-        <artifactId>test-core</artifactId>
-        <version>${sunshower-base.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>io.sunshower.test</groupId>
-        <artifactId>test-persist</artifactId>
-        <version>${sunshower-base.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>io.sunshower.test</groupId>
-        <artifactId>test-ws</artifactId>
-        <version>${sunshower-base.version}</version>
-      </dependency>
-      
-    </dependencies>
-  </dependencyManagement>
+        </dependencies>
+    </dependencyManagement>
 </project>

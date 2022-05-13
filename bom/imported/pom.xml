@@ -1,43 +1,261 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>io.sunshower.base</groupId>
-        <artifactId>bom</artifactId>
-        <version>1.0.12-SNAPSHOT</version>
-        <relativePath>../</relativePath>
-    </parent>
+  <parent>
     <groupId>io.sunshower.base</groupId>
-    <artifactId>bom-imported</artifactId>
-    <version>1.0.12-SNAPSHOT</version>
-    <packaging>pom</packaging>
+    <artifactId>bom</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <relativePath>../</relativePath>
+  </parent>
+  <groupId>io.sunshower.base</groupId>
+  <artifactId>bom-imported</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
 
-    <name>Sunshower.io Imported Bill-Of-Materials</name>
-    <url>http://www.sunshower.io</url>
+  <name>Sunshower-Base Imported Bill-Of-Materials</name>
+  <url>http://www.sunshower.io</url>
 
+  <description>
+    Arcus Bill-Of-Materials Imported Artifacts
+  </description>
+
+  <properties>
+    <mockito.version>4.4.0</mockito.version>
+    <jaxrs-api.version>2.1</jaxrs-api.version>
+    <jeromq.version>0.3.5</jeromq.version>
+    <bytebuddy.version>1.10.21</bytebuddy.version>
+    <jsr-330.version>1</jsr-330.version>
+    <spring.version>5.3.15</spring.version>
+    <lombok.version>1.18.22</lombok.version>
+    <findbugs-annotations.version>3.0.1</findbugs-annotations.version>
+    <jmh-generator-annprocess.version>1.35</jmh-generator-annprocess.version>
+    <junit-bom.version>5.8.2</junit-bom.version>
+  </properties>
+
+
+  <dependencyManagement>
 
     <dependencies>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-entitymanager</artifactId>
-        </dependency>
 
-        <dependency>
-            <groupId>io.sunshower.env</groupId>
-            <artifactId>common-dependencies</artifactId>
-            <type>pom</type>
-            <scope>import</scope>
-            <version>${env.version}</version>
-        </dependency>
+      <dependency>
+        <groupId>org.junit-pioneer</groupId>
+        <artifactId>junit-pioneer</artifactId>
+        <version>1.6.2</version>
+        <scope>test</scope>
+      </dependency>
 
-        <dependency>
-            <groupId>org.powermock.modules.test.powermockito</groupId>
-            <artifactId>powermock-modules-test-powermockito</artifactId>
-            <version>1.4.5-SONATYPE</version>
-        </dependency>
+      <!-- benchmarks -->
+
+      <dependency>
+        <groupId>org.openjdk.jmh</groupId>
+        <artifactId>jmh-core</artifactId>
+        <version>${jmh-generator-annprocess.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.openjdk.jmh</groupId>
+        <artifactId>jmh-generator-annprocess</artifactId>
+        <version>${jmh-generator-annprocess.version}</version>
+      </dependency>
+
+
+      <!-- end benchmarks -->
+      <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-search-orm</artifactId>
+        <version>5.11.8.Final</version>
+      </dependency>
+      <!-- https://mvnrepository.com/artifact/com.google.code.findbugs/annotations -->
+      <dependency>
+        <groupId>com.google.code.findbugs</groupId>
+        <artifactId>annotations</artifactId>
+        <version>${findbugs-annotations.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>${lombok.version}</version>
+        <scope>provided</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.mockito</groupId>
+        <artifactId>mockito-junit-jupiter</artifactId>
+        <version>${mockito.version}</version>
+        <scope>test</scope>
+      </dependency>
+
+
+      <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-core</artifactId>
+        <version>5.4.29.Final</version>
+      </dependency>
+
+
+      <dependency>
+        <groupId>org.mockito</groupId>
+        <artifactId>mockito-inline</artifactId>
+        <version>${mockito.version}</version>
+        <scope>test</scope>
+      </dependency>
+
+
+      <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-entitymanager</artifactId>
+        <version>5.4.29.Final</version>
+      </dependency>
+
+
+      <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-bom</artifactId>
+        <version>5.4.5</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+
+      <dependency>
+        <groupId>org.springframework.data</groupId>
+        <artifactId>spring-data-bom</artifactId>
+        <version>2020.0.5</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>com.fasterxml.jackson.module</groupId>
+        <artifactId>jackson-module-jaxb-annotations</artifactId>
+        <version>2.12.2</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.fasterxml.jackson.dataformat</groupId>
+        <artifactId>jackson-dataformat-xml</artifactId>
+        <version>2.12.2</version>
+      </dependency>
+
+
+      <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-databind</artifactId>
+        <version>2.12.2</version>
+      </dependency>
+
+
+      <dependency>
+        <groupId>com.fasterxml.jackson.dataformat</groupId>
+        <artifactId>jackson-dataformat-yaml</artifactId>
+        <version>2.12.2</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-core</artifactId>
+        <version>2.14.0</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-api</artifactId>
+        <version>2.14.0</version>
+      </dependency>
+
+
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-framework-bom</artifactId>
+        <version>5.3.14</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>javax</groupId>
+        <artifactId>javaee-api</artifactId>
+        <version>8.0.1</version>
+        <scope>provided</scope>
+      </dependency>
+
+      <!--
+          API Dependencies
+      -->
+      <dependency>
+        <groupId>org.jboss.resteasy</groupId>
+        <artifactId>jaxrs-api</artifactId>
+        <version>3.0.12.Final</version>
+      </dependency>
+
+      <dependency>
+        <groupId>javax.inject</groupId>
+        <artifactId>javax.inject</artifactId>
+        <version>${jsr-330.version}</version>
+      </dependency>
+
+
+      <!--
+          Test dependencies
+      -->
+
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>${junit.version}</version>
+        <scope>test</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.spockframework</groupId>
+        <artifactId>spock-core</artifactId>
+        <version>2.1-M2-groovy-3.0</version>
+        <scope>test</scope>
+      </dependency>
+
+
+      <dependency>
+        <groupId>org.mockito</groupId>
+        <artifactId>mockito-core</artifactId>
+        <version>${mockito.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-context</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-test</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+
+      <!--
+          Library dependencies
+      -->
+
+
+      <dependency>
+        <groupId>net.bytebuddy</groupId>
+        <artifactId>byte-buddy</artifactId>
+        <version>${bytebuddy.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.junit</groupId>
+        <artifactId>junit-bom</artifactId>
+        <version>${junit-bom.version}</version>
+        <type>pom</type>
+      </dependency>
 
 
     </dependencies>
+  </dependencyManagement>
+
 
 </project>

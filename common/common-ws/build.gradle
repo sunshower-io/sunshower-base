@@ -1,9 +1,0 @@
-dependencies {
-    api 'javax.xml.bind:jaxb-api'
-    api 'javax.json:javax.json-api'
-    api 'javax.ws.rs:javax.ws.rs-api'
-    api 'org.eclipse.persistence:org.eclipse.persistence.moxy'
-
-    implementation project(":common:core")
-}
-

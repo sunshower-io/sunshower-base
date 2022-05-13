@@ -1,152 +1,258 @@
-buildscript {
-    apply from: 'gradle/buildscript.gradle', to: buildscript
-    dependencies {
-        classpath "net.ltgt.gradle:gradle-apt-plugin:0.18"
-    }
-
-}
-
 plugins {
+    id 'pmd'
+    id 'groovy'
     id 'java-library'
+    id "com.github.spotbugs" version "4.7.1"
+    id "com.diffplug.spotless" version "6.1.0"
+    id "io.spring.dependency-management" version "1.0.11.RELEASE"
 }
 
-apply plugin: 'nebula-aggregate-javadocs'
-
+apply from: "$rootDir/tasks/revisions.gradle"
 
 allprojects {
-
-
     apply plugin: 'java'
-    apply plugin: 'java-library'
-    apply plugin: 'idea'
+    apply plugin: 'signing'
     apply plugin: 'maven-publish'
-    apply plugin: 'net.ltgt.apt'
-    apply plugin: 'project-report'
-    apply plugin: "com.diffplug.gradle.spotless"
     apply plugin: 'io.spring.dependency-management'
-
-
-    spotless {
-        java {
-            googleJavaFormat('1.5')
-        }
-    }
-
-
-    test {
-        useJUnitPlatform {
-            includeEngines 'junit-jupiter'
-            excludeEngines 'junit-vintage'
-        }
-
-        allJvmArgs = [
-                "-server",
-                "-Xmx10g",
-                "-Xms2g",
-                "-Dfile.encoding=UTF-8",
-                "-XX:MaxMetaspaceSize=2g",
-                "-XX:+UnlockExperimentalVMOptions",
-                "-XX:+UseZGC"
-        ]
-    }
-
-    def repos = [
-            'http://artifacts.sunshower.io/repository/sunshower-cache'
-    ]
-
-
-    task testArtifact(type: Jar, dependsOn: testClasses) {
-        classifier = 'tests'
-        from sourceSets.test.output
-    }
-
-
-    task sourceJar(type: Jar, dependsOn: classes) {
-        classifier = 'sources'
-        from sourceSets.main.allSource
-    }
-
-
 
     repositories {
         mavenLocal()
-        repos.each { repo ->
-            maven {
-                url "$repo"
-                credentials {
-                    username mavenRepositoryUsername
-                    password mavenRepositoryPassword
-                }
+        mavenCentral()
+
+        maven {
+            url "https://maven.pkg.github.com/sunshower-io/sunshower-env"
+            credentials {
+                username "$mavenRepositoryUsername"
+                password "$mavenRepositoryPassword"
             }
         }
     }
+
 
     dependencyManagement {
         imports {
-            mavenBom("io.sunshower.base:bom-imported:${version}")
+            mavenBom "io.sunshower.base:bom-imported:$version"
         }
     }
 
 
-    plugins.withType(JavaPlugin) {
-        dependencies {
+}
 
-            compileOnly 'org.projectlombok:lombok'
-            testCompileOnly 'org.projectlombok:lombok'
-            annotationProcessor "org.projectlombok:lombok"
-            testAnnotationProcessor "org.projectlombok:lombok"
+subprojects {
+    apply plugin: 'pmd'
+    apply plugin: 'java'
+    apply plugin: 'groovy'
+    apply plugin: 'java-library'
+    apply plugin: "com.github.spotbugs"
+    apply plugin: "com.diffplug.spotless"
+
+    spotbugsMain {
+        reports {
+            html {
+                enabled = true
+            }
         }
     }
 
+    spotbugsTest {
+        enabled = false
+    }
 
-    publishing {
-        repositories {
-            maven {
-                url mavenRepositoryUrl
 
-                credentials {
-                    username mavenRepositoryUsername
-                    password mavenRepositoryPassword
-                }
-            }
-        }
-
-        publications {
-            maven(MavenPublication) {
-                from components.java
-
-                artifact sourceJar {
-                    classifier "sources"
-                }
-
-                artifact testArtifact {
-                    classifier = 'tests'
-                }
-            }
-        }
+    pmd {
+        toolVersion = '6.34.0'
+        sourceSets = [sourceSets.main]
+        ruleSets = [
+                "${project.rootDir}/check/pmd/rules/errorprone.xml"
+        ]
     }
 
     test {
-        useJUnitPlatform {
-            includeEngines 'junit-jupiter'
+        useJUnitPlatform()
+    }
+
+    spotless {
+        java {
+            googleJavaFormat('1.12.0')
         }
     }
 
-}
-
-
-publishing {
-    repositories {
-        maven {
-            url mavenRepositoryUrl
-
-            credentials {
-                username mavenRepositoryUsername
-                password mavenRepositoryPassword
+    sourceSets {
+        benchmarks {
+            java {
+//                compileClasspath += sourceSets.test.runtimeClasspath
+//                runtimeClasspath += sourceSets.test.runtimeClasspath
             }
         }
     }
+
+    spotbugsBenchmarks {
+        enabled = false
+    }
+
+    publishing {
+
+        repositories {
+            mavenLocal()
+
+            maven {
+                credentials {
+                    username "$mavenRepositoryUsername"
+                    password "$mavenRepositoryPassword"
+                }
+                url "$mavenRepositoryUrl"
+            }
+        }
+
+        task sourcesJar(type: Jar, dependsOn: classes) {
+            archiveClassifier = 'sources'
+            from sourceSets.main.allSource
+        }
+
+        task testJar(type: Jar) {
+            archiveClassifier = 'tests'
+            from sourceSets.test.output
+        }
+
+        task javadocJar(type: Jar) {
+            from javadoc
+            archiveClassifier = 'javadoc'
+        }
+
+        task runBenchmarks(type: Test) {
+            description = "Run Arcus Benchmarks"
+            classpath = sourceSets.benchmarks.runtimeClasspath
+            testClassesDirs = sourceSets.benchmarks.output.classesDirs
+        }
+
+        publications {
+
+            pluginMaven(MavenPublication) {
+
+                /**
+                 * components source
+                 */
+                from components.java
+
+                /**
+                 * maven coordinates
+                 */
+                groupId = project.group
+                version = project.version
+                artifactId = project.name
+
+                /**
+                 * included artifacts
+                 */
+
+                artifact testJar
+                artifact sourcesJar
+                artifact javadocJar
+
+                versionMapping {
+                    usage('java-api') {
+                        fromResolutionOf('runtimeClasspath')
+                    }
+                    usage('java-runtime') {
+                        fromResolutionResult()
+                    }
+                }
+                pom {
+                    name = 'Sunshower Arcus'
+                    description = 'Sunshower Core Libraries'
+                    url = 'https://github.com/sunshower-io/sunshower-arcus'
+                    licenses {
+                        license {
+                            name = 'The Apache License, Version 2.0'
+                            url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        }
+                    }
+                    developers {
+                        developer {
+                            id = 'josiah'
+                            name = 'Josiah Haswell'
+                            email = 'josiah@sunshower.io'
+                        }
+                    }
+                    scm {
+                        connection = 'scm:git:git://github.com/sunshower-io/sunshower-arcus.git'
+                        developerConnection = 'scm:git:ssh://github.com/sunshower-io/sunshower-arcus.git'
+                        url = 'https://www.sunshower.io/'
+                    }
+                }
+            }
+
+        }
+
+    }
+
+
+    signing {
+        useGpgCmd()
+        sign publishing.publications.pluginMaven
+    }
+
+
+
+    dependencies {
+        compileOnly 'com.google.code.findbugs:annotations'
+        testCompileOnly 'com.google.code.findbugs:annotations'
+
+
+        [
+                'jmh-core',
+                'jmh-generator-annprocess'
+        ].each {
+            benchmarksImplementation "org.openjdk.jmh:$it"
+            benchmarksAnnotationProcessor "org.openjdk.jmh:$it"
+        }
+
+        benchmarksImplementation sourceSets.main.output
+
+        [
+                'org.projectlombok:lombok'
+        ].each { dependency ->
+            compileOnly(dependency)
+            testCompileOnly(dependency)
+            annotationProcessor(dependency)
+            testAnnotationProcessor(dependency)
+            benchmarksCompileOnly(dependency)
+            benchmarksAnnotationProcessor(dependency)
+        }
+
+
+        [
+                'org.spockframework:spock-core',
+                'org.junit-pioneer:junit-pioneer',
+                'org.mockito:mockito-junit-jupiter',
+                'org.junit.platform:junit-platform-suite-engine',
+
+
+                'org.mockito:mockito-inline',
+                'org.junit-pioneer:junit-pioneer',
+                'org.junit.jupiter:junit-jupiter-params'
+        ].each {
+            testImplementation it
+            benchmarksImplementation it
+        }
+
+        [
+                'api',
+                'engine'
+
+        ].each { dep ->
+
+            testImplementation "org.junit.jupiter:junit-jupiter-$dep"
+            testImplementation "org.junit.platform:junit-platform-suite-$dep"
+        }
+
+
+    }
 }
 
-defaultTasks 'clean', 'build'
 
+defaultTasks(
+        'clean',
+        'build',
+        'spotlessApply'
+)

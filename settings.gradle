@@ -1,22 +1,7 @@
 include(
-        'common',
-        'common:common-log',
-        'common:core',
-        'common:annotations',
-        'common:lambda',
-        'common:lang',
-        'common:reflect',
-        'common:common-ws',
-        'common:common-config',
-        'test',
-        'test:test-api',
-        'test:test-common',
-        'test:test-core',
-        'test:test-persist',
-        'test:test-ws',
-        'persist:persist-api',
-        'persist:persist-core',
-        'persist:persist-hibernate',
-//        'persist:persist-ignite',
-        'persist:persist-jpa'
+   'sunshower-model:model-api',
+   'sunshower-model:model-core',
+   'sunshower-security:security-api',
+   'sunshower-security:security-core',
 )
+

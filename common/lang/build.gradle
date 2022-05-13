@@ -1,9 +1,0 @@
-
-dependencies {
-
-    api project(':common:lambda')
-    api project(':common:annotations')
-    
-    
-    testImplementation project(':test:test-common')
-}

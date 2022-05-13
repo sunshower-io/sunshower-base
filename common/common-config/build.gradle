@@ -1,4 +1,0 @@
-dependencies {
-    api 'org.cfg4j:cfg4j-core'
-    implementation 'org.cfg4j:cfg4j-git'
-}
