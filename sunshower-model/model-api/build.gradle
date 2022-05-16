@@ -1,0 +1,7 @@
+
+dependencies {
+    api 'io.sunshower.arcus.persist:persist-api'
+    api 'io.sunshower.arcus.persist:persist-core'
+
+    testImplementation 'io.sunshower.arcus.persist:persist-api:test-fixtures'
+}

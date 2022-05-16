@@ -20,6 +20,12 @@ allprojects {
         mavenCentral()
 
         maven {
+            url 'https://repo.spring.io/milestone'
+        }
+        maven {
+            url 'https://repo.spring.io/release'
+        }
+        maven {
             url "https://maven.pkg.github.com/sunshower-io/sunshower-env"
             credentials {
                 username "$mavenRepositoryUsername"
