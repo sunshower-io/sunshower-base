@@ -57,7 +57,7 @@ public class ObjectIdentity extends AbstractEntity<Identifier> {
           @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL),
           @JoinColumn(name = OBJECT_IDENTITY_TYPE)
       }))
-  private SecuredType object;
+  private SecuredObject object;
 
   /**
    * reference to parent column name: parent_object

@@ -16,7 +16,7 @@ import lombok.Setter;
  */
 @Entity
 @Table(name = SECURED_OBJECT_TYPE)
-public class SecuredType extends AbstractEntity<Identifier> {
+public class SecuredObject extends AbstractEntity<Identifier> {
 
   /**
    * the type this related to

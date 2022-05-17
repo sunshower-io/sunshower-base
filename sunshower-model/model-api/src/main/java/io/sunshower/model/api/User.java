@@ -26,6 +26,9 @@ public class User extends AbstractEntity<Identifier>  {
   }))
   private String username;
 
+  /**
+   * password--always a salted hash
+   */
   @Setter
   @Getter(onMethod = @__({
       @Basic,

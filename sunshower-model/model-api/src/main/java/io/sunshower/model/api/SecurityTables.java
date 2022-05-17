@@ -14,6 +14,8 @@ public interface SecurityTables {
 
   String SECURITY_IDENTITY = "acl_sid";
 
+  String ACCESS_CONTROL_ENTRY = "acl_entry";
+
   String USER = "SUNSHOWER_USER";
 
   /**

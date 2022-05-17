@@ -14,7 +14,8 @@ public class AbstractEntity<ID extends Serializable> implements Persistable<ID> 
   @Getter(onMethod = @__({@Id, @GeneratedValue(generator = "flake")}))
   private ID id;
 
-  protected AbstractEntity() {}
+  protected AbstractEntity() {
+  }
 
   protected AbstractEntity(ID id) {
     this.id = id;
@@ -23,5 +24,27 @@ public class AbstractEntity<ID extends Serializable> implements Persistable<ID> 
   @Override
   public Persistable<ID> clone() {
     return new AbstractEntity<>(id);
+  }
+
+
+  @Override
+  public int hashCode() {
+    return isNew() ? 0 : getId().hashCode();
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if(o == null) {
+      return false;
+    }
+    if(o == this) {
+      return true;
+    }
+
+    if(getClass().isAssignableFrom(o.getClass())) {
+      return ((AbstractEntity<ID>) o).getId().equals(id);
+    }
+    return false;
+
   }
 }

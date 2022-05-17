@@ -1,9 +1,10 @@
-CREATE TABLE SUNSHOWER_USER (
+CREATE TABLE SUNSHOWER_USER
+(
 
     /**
       the id
      */
-    id BINARY(16) NOT NULL PRIMARY KEY,
+    id BINARY (16) NOT NULL PRIMARY KEY,
 
     /**
       the username
@@ -118,4 +119,62 @@ CREATE TABLE acl_object_identity
     CONSTRAINT owner_sid_reference
         FOREIGN KEY (owner_sid)
             REFERENCES acl_sid (id)
+);
+
+/**
+  references io.sunshower.model.api.AccessControlEntry
+ */
+CREATE TABLE acl_entry
+(
+
+    /**
+      primary key
+     */
+    id BINARY (16) NOT NULL PRIMARY KEY,
+
+    /**
+      reference  acl_object_identity
+     */
+    acl_object_identity BINARY (16) NOT NULL,
+
+
+    /**
+      the access control entry order
+     */
+
+    ace_order     INTEGER NOT NULL,
+
+    /**
+      reference the acl_sid (secured object)
+     */
+    sid BINARY (16) NOT NULL,
+
+
+    mask          INTEGER NOT NULL,
+
+    granting      BOOLEAN NOT NULL,
+
+    audit_success BOOLEAN NOT NULL,
+    audit_failure BOOLEAN NOT NULL,
+
+    CONSTRAINT
+        acl_entry_unique_id_order
+        UNIQUE (
+                acl_object_identity,
+                ace_order
+            ),
+
+
+    CONSTRAINT
+        acl_entry_acl_object_identity_ref
+    FOREIGN KEY
+        (acl_object_identity)
+    REFERENCES
+        acl_object_identity(id),
+
+
+    CONSTRAINT
+        acl_entry_acl_sid_ref
+    FOREIGN KEY (sid)
+    REFERENCES acl_sid(id)
 );
