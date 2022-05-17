@@ -40,6 +40,12 @@ class SecuredTypeTest {
   @Test
   void ensurePersistingSecurityIdentityWorks() {
     val sid = new SecurityIdentity();
+
+    val user = new User();
+    user.setUsername("sup");
+    user.setPassword("password");
+    sid.setOwner(user);
+    entityManager.persist(user);
     entityManager.persist(sid);
     entityManager.flush();
     assertNotNull(sid.getId());
