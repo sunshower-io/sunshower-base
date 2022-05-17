@@ -1,7 +1,53 @@
 
+apply plugin: 'java-library'
+apply plugin: 'java-test-fixtures'
 dependencies {
     api 'io.sunshower.arcus.persist:persist-api'
+    api 'io.sunshower.arcus.persist:persist-jpa'
     api 'io.sunshower.arcus.persist:persist-core'
+    api 'io.sunshower.arcus.persist:persist-flyway'
+    api 'io.sunshower.arcus.persist:persist-hibernate'
 
-    testImplementation 'io.sunshower.arcus.persist:persist-api:test-fixtures'
+//    testImplementation 'io.sunshower.arcus.persist:persist-api:test-fixtures'
+//    testImplementation 'io.sunshower.arcus.persist:persist-hibernate:test-fixtures'
+
+    [
+            'persist-jpa',
+            'persist-flyway',
+            'persist-hibernate'
+    ].each {
+        testImplementation(
+                name: it,
+                group: 'io.sunshower.arcus.persist',
+                classifier: 'test-fixtures'
+        )
+    }
+
+
+
+    /**
+     * implementation dependencies
+     */
+
+    [
+            'org.eclipse:yasson',
+            'org.glassfish:jakarta.el',
+            'jakarta.el:jakarta.el-api',
+            'org.hibernate:hibernate-core',
+            'org.hibernate:hibernate-entitymanager',
+            'org.springframework.data:spring-data-jpa',
+            'org.hibernate.validator:hibernate-validator'
+    ].each {
+        implementation it
+        testFixturesApi it
+    }
+
+
+
+    /**
+     * test implementation dependencies
+     */
+    testFixturesApi 'com.h2database:h2'
+    testFixturesApi 'org.springframework:spring-test'
+    testFixturesApi 'io.sunshower.arcus.persist:persist-condensation'
 }

@@ -224,6 +224,10 @@ subprojects {
             testAnnotationProcessor(dependency)
             benchmarksCompileOnly(dependency)
             benchmarksAnnotationProcessor(dependency)
+            plugins.withType(JavaTestFixturesPlugin) {
+                testFixturesImplementation dependency
+                testFixturesAnnotationProcessor dependency
+            }
         }
 
 
@@ -237,9 +241,12 @@ subprojects {
                 'org.mockito:mockito-inline',
                 'org.junit-pioneer:junit-pioneer',
                 'org.junit.jupiter:junit-jupiter-params'
-        ].each {
-            testImplementation it
-            benchmarksImplementation it
+        ].each {dependency ->
+            testImplementation dependency
+            benchmarksImplementation dependency
+            plugins.withType(JavaTestFixturesPlugin) {
+                testFixturesImplementation dependency
+            }
         }
 
         [
@@ -250,6 +257,10 @@ subprojects {
 
             testImplementation "org.junit.jupiter:junit-jupiter-$dep"
             testImplementation "org.junit.platform:junit-platform-suite-$dep"
+            plugins.withType(JavaTestFixturesPlugin) {
+                testFixturesImplementation "org.junit.jupiter:junit-jupiter-$dep"
+                testFixturesImplementation "org.junit.platform:junit-platform-suite-$dep"
+            }
         }
 
 
