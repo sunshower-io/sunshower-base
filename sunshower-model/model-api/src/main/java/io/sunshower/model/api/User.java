@@ -6,15 +6,17 @@ import static io.sunshower.model.api.SecurityTables.User.USERNAME;
 
 import io.sunshower.persistence.id.Identifier;
 import jakarta.persistence.Basic;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Table(name = USER)
-public class User extends AbstractEntity<Identifier>  {
+public class User extends AbstractEntity<Identifier> {
 
   /**
    * username for this user
@@ -36,6 +38,25 @@ public class User extends AbstractEntity<Identifier>  {
   }))
   private String password;
 
+
+  @Getter(onMethod = @__({
+      @OneToOne(
+          mappedBy = "user",
+          cascade = CascadeType.ALL,
+          orphanRemoval = true
+      )}))
+  private UserDetails details;
+
+
+
+  public void setDetails(UserDetails details) {
+    if (details != null) {
+      this.details = details;
+      details.setUser(this);
+    } else {
+      this.details = null;
+    }
+  }
 
 
 }

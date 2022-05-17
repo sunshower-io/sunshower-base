@@ -34,14 +34,14 @@ public class AbstractEntity<ID extends Serializable> implements Persistable<ID> 
 
   @Override
   public boolean equals(Object o) {
-    if(o == null) {
+    if (o == null) {
       return false;
     }
-    if(o == this) {
+    if (o == this) {
       return true;
     }
 
-    if(getClass().isAssignableFrom(o.getClass())) {
+    if (getClass().isAssignableFrom(o.getClass())) {
       return ((AbstractEntity<ID>) o).getId().equals(id);
     }
     return false;

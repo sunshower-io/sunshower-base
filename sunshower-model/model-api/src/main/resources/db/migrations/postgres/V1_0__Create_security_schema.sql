@@ -22,6 +22,15 @@ CREATE TABLE SUNSHOWER_USER
     CONSTRAINT
         system_user_unique_username
         UNIQUE (username)
+
+);
+
+CREATE TABLE USER_DETAILS(
+    id BINARY(16) NOT NULL PRIMARY KEY,
+    icon bytea,
+    first_name VARCHAR(255) NOT NULL,
+    last_name VARCHAR(255) NOT NULL
+
 );
 
 CREATE UNIQUE INDEX
