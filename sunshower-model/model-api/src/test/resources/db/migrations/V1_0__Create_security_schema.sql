@@ -1,5 +1,4 @@
-CREATE TABLE system_user
-(
+CREATE TABLE SUNSHOWER_USER (
 
     /**
       the id
@@ -14,7 +13,7 @@ CREATE TABLE system_user
     /**
       the password
      */
-    password varchar(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
 
     /**
       unique constraint on username
@@ -26,7 +25,7 @@ CREATE TABLE system_user
 
 CREATE UNIQUE INDEX
     system_user_username_idx
-    on system_user (username);
+    on SUNSHOWER_USER (username);
 
 CREATE TABLE acl_sid
 (
@@ -35,7 +34,7 @@ CREATE TABLE acl_sid
     sid       varchar(128) NOT NULL,
 
     CONSTRAINT unique_principal_sid
-        UNIQUE (sid, principal);
+        UNIQUE (sid, principal)
 );
 
 /**
@@ -85,6 +84,8 @@ CREATE TABLE acl_object_identity
       the ID of the referenced object
      */
     object_id_identity BINARY (16) NOT NULL,
+
+    entries_inheriting BOOLEAN,
 
 
     /**
