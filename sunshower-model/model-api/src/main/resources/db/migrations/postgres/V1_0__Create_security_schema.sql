@@ -11,6 +11,27 @@ CREATE TABLE SUNSHOWER_USER
      */
     username VARCHAR(255) NOT NULL,
 
+   /**
+     when was this user created
+    */
+    created TIMESTAMP default NOW(),
+
+    /**
+      when was this user last logged on
+     */
+    last_authenticated TIMESTAMP,
+
+
+    locked BOOLEAN DEFAULT FALSE,
+
+    expired BOOLEAN DEFAULT FALSE,
+
+    salt BINARY(32),
+
+    initialization_vector BINARY(16),
+
+
+
     /**
       the password
      */
@@ -29,7 +50,13 @@ CREATE TABLE USER_DETAILS(
     id BINARY(16) NOT NULL PRIMARY KEY,
     icon bytea,
     first_name VARCHAR(255) NOT NULL,
-    last_name VARCHAR(255) NOT NULL
+    last_name VARCHAR(255) NOT NULL,
+
+    CONSTRAINT
+        user_details_to_user
+    FOREIGN KEY (id)
+    REFERENCES
+        SUNSHOWER_USER(id)
 
 );
 

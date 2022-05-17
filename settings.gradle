@@ -1,7 +1,11 @@
 include(
-   'sunshower-model:model-api',
-   'sunshower-model:model-core',
-   'sunshower-security:security-api',
-   'sunshower-security:security-core',
+        'sunshower-model:model-api',
+        'sunshower-model:model-core',
+        'sunshower-security:security-api',
+        'sunshower-security:security-core',
+        'sunshower-security:realms',
+        'sunshower-security:realms',
+        'sunshower-security:realms:realm-api',
+        'sunshower-security:realms:file-realm'
 )
 

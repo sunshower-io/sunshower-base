@@ -1,0 +1,8 @@
+
+
+dependencies {
+
+    api project(':sunshower-security:realms:realm-api')
+    implementation 'io.sunshower.arcus.cryptkeeper:cryptkeeper-api'
+    implementation 'io.sunshower.arcus.cryptkeeper:cryptkeeper-core'
+}

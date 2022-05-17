@@ -42,6 +42,9 @@ dependencies {
         testFixturesApi it
     }
 
+    api 'org.springframework.security:spring-security-core'
+
+    testImplementation 'io.sunshower.arcus.cryptkeeper:cryptkeeper-core'
 
 
     /**
