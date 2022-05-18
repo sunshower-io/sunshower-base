@@ -4,6 +4,11 @@ import static io.sunshower.model.api.SecurityTables.USER;
 import static io.sunshower.model.api.SecurityTables.User.PASSWORD;
 import static io.sunshower.model.api.SecurityTables.User.USERNAME;
 
+import io.sunshower.arcus.condensation.Alias;
+import io.sunshower.arcus.condensation.Attribute;
+import io.sunshower.arcus.condensation.Convert;
+import io.sunshower.arcus.condensation.Element;
+import io.sunshower.arcus.condensation.RootElement;
 import io.sunshower.persistence.id.Identifier;
 import jakarta.persistence.Basic;
 import jakarta.persistence.CascadeType;
@@ -21,10 +26,10 @@ import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 
 @Entity
+@RootElement
 @Table(name = USER)
 public class User extends AbstractEntity<Identifier> implements
     org.springframework.security.core.userdetails.UserDetails {
-
 
 
   @Setter
@@ -32,6 +37,8 @@ public class User extends AbstractEntity<Identifier> implements
       @Basic,
       @Column(name = "salt")
   }))
+  @Attribute
+  @Convert(Base58Converter.class)
   private byte[] salt;
 
   @Setter
@@ -39,6 +46,11 @@ public class User extends AbstractEntity<Identifier> implements
       @Basic,
       @Column(name = "initialization_vector")
   }))
+  @Attribute(alias = @Alias(
+      read = "initialization-vector",
+      write = "initialization-vector"
+  ))
+  @Convert(Base58Converter.class)
   private byte[] initializationVector;
 
   @Setter
@@ -46,6 +58,7 @@ public class User extends AbstractEntity<Identifier> implements
       @Basic,
       @Column(name = "locked")
   }))
+  @Attribute
   private boolean locked;
 
   @Setter
@@ -53,6 +66,7 @@ public class User extends AbstractEntity<Identifier> implements
       @Basic,
       @Column(name = "expired")
   }))
+  @Attribute
   private boolean expired;
 
   @Setter
@@ -61,6 +75,7 @@ public class User extends AbstractEntity<Identifier> implements
       @Column(name = "created"),
       @Temporal(TemporalType.TIMESTAMP)
   }))
+  @Attribute
   private Date created;
 
 
@@ -70,6 +85,10 @@ public class User extends AbstractEntity<Identifier> implements
       @Column(name = "last_authenticated"),
       @Temporal(TemporalType.TIMESTAMP)
   }))
+  @Attribute(alias = @Alias(
+      read = "last-authenticated",
+      write = "last-authenticated"
+  ))
   private Date lastAuthenticated;
   /**
    * username for this user
@@ -79,6 +98,7 @@ public class User extends AbstractEntity<Identifier> implements
       @Basic,
       @Column(name = USERNAME)
   }))
+  @Attribute
   private String username;
 
   /**
@@ -89,6 +109,7 @@ public class User extends AbstractEntity<Identifier> implements
       @Basic,
       @Column(name = PASSWORD)
   }))
+  @Attribute
   private String password;
 
 
@@ -98,6 +119,7 @@ public class User extends AbstractEntity<Identifier> implements
           cascade = CascadeType.ALL,
           orphanRemoval = true
       )}))
+  @Element
   private UserDetails details;
 
 

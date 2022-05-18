@@ -1,5 +1,8 @@
 package io.sunshower.model.api;
 
+import io.sunshower.arcus.condensation.Alias;
+import io.sunshower.arcus.condensation.Attribute;
+import io.sunshower.arcus.condensation.RootElement;
 import io.sunshower.persistence.id.Identifier;
 import jakarta.persistence.Basic;
 import jakarta.persistence.CascadeType;
@@ -15,6 +18,7 @@ import lombok.NonNull;
 import lombok.Setter;
 
 @Entity
+@RootElement
 @Table(name = "USER_DETAILS")
 public class UserDetails extends AbstractEntity<Identifier> {
 
@@ -24,6 +28,7 @@ public class UserDetails extends AbstractEntity<Identifier> {
       @Basic,
       @Column(name = "first_name")
   }))
+  @Attribute(alias = @Alias(read = "first-name", write = "first-name"))
   private String firstName;
 
   @Setter
@@ -31,6 +36,7 @@ public class UserDetails extends AbstractEntity<Identifier> {
       @Basic,
       @Column(name = "last_name")
   }))
+  @Attribute(alias = @Alias(read = "last-name", write = "last-name"))
   private String lastName;
 
   @Setter

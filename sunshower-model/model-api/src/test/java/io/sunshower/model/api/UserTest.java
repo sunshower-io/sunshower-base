@@ -3,11 +3,13 @@ package io.sunshower.model.api;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import io.sunshower.arcus.condensation.Condensation;
 import io.sunshower.crypt.JCAEncryptionService;
 import io.sunshower.lang.common.encodings.Encodings;
 import io.sunshower.lang.common.encodings.Encodings.Type;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.charset.StandardCharsets;
@@ -20,6 +22,36 @@ class UserTest {
 
   @PersistenceContext
   private EntityManager entityManager;
+
+  @Test
+  void ensureUserIsWrittenCorrectly() throws IOException {
+    val user = new User();
+
+    user.setUsername("Josiah");
+
+    val encoding = Encodings.create(Type.Base58);
+    val salt = generate(32);
+    val iv = generate(16);
+    val encryptionService = new JCAEncryptionService(
+        encoding, encoding.encode(salt.array()), "testpassword");
+    encryptionService.setInitializationVector(encoding.encode(iv.array()));
+
+    user.setSalt(salt.array());
+    user.setInitializationVector(iv.array());
+    val pw = encryptionService.generatePassword("testpassword");
+    val pw2 = encoding.encode(pw.getEncoded());
+    user.setPassword(pw2);
+
+    val details = new UserDetails();
+    details.setLastName("test");
+    details.setFirstName("whatever");
+    user.setDetails(details);
+    entityManager.persist(user);
+    entityManager.flush();
+    val result = Condensation.create("json").write(User.class, user);
+    System.out.println(result);
+
+  }
 
   @Test
   void ensureSavingPasswordAndIVAndSaltWorks() {

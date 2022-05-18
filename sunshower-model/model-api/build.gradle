@@ -8,6 +8,8 @@ dependencies {
     api 'io.sunshower.arcus.persist:persist-flyway'
     api 'io.sunshower.arcus.persist:persist-hibernate'
 
+    implementation 'io.sunshower.arcus:condensation-json'
+
 //    testImplementation 'io.sunshower.arcus.persist:persist-api:test-fixtures'
 //    testImplementation 'io.sunshower.arcus.persist:persist-hibernate:test-fixtures'
 
