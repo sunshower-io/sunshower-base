@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+  <activeProfiles>
+    <activeProfile>github</activeProfile>
+  </activeProfiles>
+
+  <servers>
+    <server>
+      <id>arcus-releases</id>
+      <username>${maven-repo.github.username}</username>
+      <password>${maven-repo.github.password}</password>
+    </server>
+
+    <server>
+      <id>arcus-snapshots</id>
+      <username>${maven-repo.github.username}</username>
+      <password>${maven-repo.github.password}</password>
+    </server>
+
+    <server>
+      <id>sunshower-github</id>
+      <username>${maven-repo.github.username}</username>
+      <password>${maven-repo.github.password}</password>
+    </server>
+
+    <server>
+      <id>maven-central-repo</id>
+      <username>${maven-repo.github.username}</username>
+      <password>${maven-repo.github.password}</password>
+    </server>
+  </servers>
+  <profiles>
+    <profile>
+      <id>github</id>
+      <repositories>
+        <repository>
+          <id>maven-central-repo</id>
+          <url>http://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+        <repository>
+          <id>central</id>
+          <url>https://repo1.maven.org/maven2</url>
+        </repository>
+        <repository>
+          <id>sunshower-github</id>
+          <url>https://maven.pkg.github.com/sunshower-io/*</url>
+          <snapshots>
+            <enabled>true</enabled>
+          </snapshots>
+          <releases>
+            <enabled>true</enabled>
+          </releases>
+        </repository>
+      </repositories>
+    </profile>
+  </profiles>
+
+</settings>
