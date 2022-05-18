@@ -9,6 +9,7 @@ import io.sunshower.crypt.core.Leases;
 import io.sunshower.crypt.core.SecretService;
 import io.sunshower.crypt.core.VaultLease;
 import io.sunshower.crypt.secrets.StringSecret;
+import io.sunshower.crypt.vault.AuthenticationFailedException;
 import io.sunshower.lang.common.encodings.Encoding;
 import io.sunshower.lang.common.encodings.Encodings;
 import io.sunshower.lang.common.encodings.Encodings.Type;
@@ -92,7 +93,10 @@ public class FileBackedCryptKeeperRealm extends AbstractUserDetailsAuthenticatio
   @Override
   protected UserDetails retrieveUser(String username,
       UsernamePasswordAuthenticationToken authentication) throws AuthenticationException {
-    return null;
+    return findByUsername(username).flatMap(
+            u -> doAuthenticate(u, String.valueOf(authentication.getCredentials())))
+        .orElseThrow(
+            () -> new AuthenticationFailedException("Error: no user with those credentials!"));
   }
 
 
