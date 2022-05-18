@@ -1,29 +1,177 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
-    <groupId>io.sunshower.base</groupId>
-    <artifactId>bom</artifactId>
-    <version>1.0.12-SNAPSHOT</version>
-    <packaging>pom</packaging>
+  <groupId>io.sunshower.base</groupId>
+  <artifactId>bom</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
 
-    <parent>
-        <groupId>io.sunshower.env</groupId>
-        <artifactId>parent</artifactId>
-        <version>1.0.2.Final</version>
-        <relativePath/>
-    </parent>
+  <parent>
+    <groupId>io.sunshower.environment</groupId>
+    <artifactId>parent</artifactId>
+    <version>1.0.23.Final</version>
+  </parent>
 
-    <name>bom</name>
-    <url>http://maven.apache.org</url>
+  <name>Sunshower Base Bill-Of-Materials</name>
 
-    <properties>
-        <env.version>1.0.2.Final</env.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
-    <modules>
-        <module>imported</module>
-        <module>exported</module>
-    </modules>
+  <properties>
+    <environment.version>1.0.23.Final</environment.version>
+    <environment.version>1.0.5.Final</environment.version>
+    <arcus.version>1.41.43-SNAPSHOT</arcus.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven-javadoc-plugin.version>2.9.1</maven-javadoc-plugin.version>
+    <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
+    <maven-source-plugin.version>2.2.1</maven-source-plugin.version>
+  </properties>
+
+  <url>https://www.sunshower.io</url>
+  <licenses>
+    <license>
+      <name>MIT License</name>
+      <url>http://www.opensource.org/licenses/mit-license.php</url>
+    </license>
+  </licenses>
+
+  <description>
+    Arcus Bill-Of-Materials parent POM
+  </description>
+
+  <developers>
+    <developer>
+      <email>josiah@sunshower.io</email>
+      <url>https://sunshower.io</url>
+      <roles>
+        <role>
+          admin
+        </role>
+      </roles>
+    </developer>
+    <developer>
+      <email>lisa@sunshower.io</email>
+      <url>https://sunshower.io</url>
+      <roles>
+        <role>
+          admin
+        </role>
+      </roles>
+    </developer>
+  </developers>
+
+  <modules>
+    <module>imported</module>
+    <module>exported</module>
+  </modules>
+
+  <scm>
+    <tag>HEAD</tag>
+    <url>https://github.com/sunshower-io/${project.scm.tag}</url>
+    <connection>scm:git:https://${env.GITHUB_PSW}@github.com/sunshower-io/sunshower-base
+    </connection>
+
+    <developerConnection>scm:git:https://${env.GITHUB_PSW}@github.com/sunshower-io/sunshower-base
+    </developerConnection>
+  </scm>
+
+  <repositories>
+    <repository>
+      <id>sunshower-github</id>
+      <name>Sunshower-env Github</name>
+      <url>https://maven.pkg.github.com/sunshower-io/*</url>
+    </repository>
+    <repository>
+      <id>repository.spring.milestone</id>
+      <name>Spring Milestone Repository</name>
+      <url>https://repo.spring.io/milestone</url>
+    </repository>
+    <repository>
+      <id>repository.spring.release</id>
+      <name>Spring GA Repository</name>
+      <url>https://repo.spring.io/release</url>
+    </repository>
+  </repositories>
+
+  <profiles>
+    <profile>
+      <id>maven-central</id>
+      <distributionManagement>
+        <repository>
+          <id>maven-central-repo</id>
+          <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+        <snapshotRepository>
+          <id>maven-central-repo</id>
+          <name>Sunshower-env Github</name>
+          <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+        </snapshotRepository>
+      </distributionManagement>
+    </profile>
+  </profiles>
+
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-gpg-plugin</artifactId>
+      </plugin>
+    </plugins>
+
+
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-source-plugin</artifactId>
+          <version>${maven-source-plugin.version}</version>
+          <executions>
+            <execution>
+              <id>attach-sources</id>
+              <goals>
+                <goal>jar-no-fork</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-javadoc-plugin</artifactId>
+          <version>${maven-javadoc-plugin.version}</version>
+          <executions>
+            <execution>
+              <id>attach-javadocs</id>
+              <goals>
+                <goal>jar</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-gpg-plugin</artifactId>
+          <version>${maven-gpg-plugin.version}</version>
+          <executions>
+            <execution>
+              <id>sign-artifacts</id>
+              <phase>verify</phase>
+              <goals>
+                <goal>sign</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
 
 </project>

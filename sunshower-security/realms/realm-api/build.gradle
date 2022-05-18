@@ -1,0 +1,4 @@
+
+dependencies {
+    api project(":sunshower-model:model-api")
+}

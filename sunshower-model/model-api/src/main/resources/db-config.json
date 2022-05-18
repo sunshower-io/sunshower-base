@@ -1,0 +1,17 @@
+{
+  "scanned-packages": [
+    "io.sunshower.model.api",
+    "io.sunshower.arcus.persist.hibernate",
+    "io.sunshower.arcus.persist.hibernate.entities"
+  ],
+  "driver-class": "org.h2.Driver",
+  "mode": "Both",
+  "connection-string": "jdbc:h2:mem:test;DB_CLOSE_DELAY=-1",
+  "additional-properties": {
+    "hibernate.hbm2ddl.auto": "none",
+    "hibernate.dialect": "org.hibernate.dialect.H2Dialect"
+  },
+  "migration-locations": [
+    "classpath:db/migrations/postgres"
+  ]
+}
