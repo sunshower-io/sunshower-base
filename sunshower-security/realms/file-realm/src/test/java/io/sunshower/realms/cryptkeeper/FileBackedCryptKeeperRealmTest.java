@@ -33,7 +33,6 @@ class FileBackedCryptKeeperRealmTest {
     this.realm = new FileBackedCryptKeeperRealm(new RealmConfiguration(file, password));
   }
 
-
   @Test
   void ensureRealmCanBeUnlocked() {
     assertFalse(realm.isLocked());
@@ -50,7 +49,6 @@ class FileBackedCryptKeeperRealmTest {
     assertNotNull(u);
     assertNotEquals("password", u.getPassword());
   }
-
 
   @Test
   void ensureAuthenticatingUserWorks() {
@@ -72,9 +70,11 @@ class FileBackedCryptKeeperRealmTest {
     realm.saveUser(user);
     assertEquals(1, realm.getUsers().size());
     realm.close();
-    assertThrows(LockedVaultException.class, () -> {
-      realm.authenticate(user.getUsername(), "password");
-    });
+    assertThrows(
+        LockedVaultException.class,
+        () -> {
+          realm.authenticate(user.getUsername(), "password");
+        });
   }
 
   @Test
@@ -83,9 +83,11 @@ class FileBackedCryptKeeperRealmTest {
     realm.saveUser(user);
     assertEquals(1, realm.getUsers().size());
     realm.lock();
-    assertThrows(VaultException.class, () -> {
-      realm.deleteUser(user);
-    });
+    assertThrows(
+        VaultException.class,
+        () -> {
+          realm.deleteUser(user);
+        });
   }
 
   @Test
@@ -117,7 +119,6 @@ class FileBackedCryptKeeperRealmTest {
     realm.unlock(password);
     assertTrue(realm.authenticate(user.getUsername(), "password").isPresent());
   }
-
 
   @Test
   void ensureNoSaltsAreReused() {
@@ -165,5 +166,4 @@ class FileBackedCryptKeeperRealmTest {
     user.setDetails(details);
     return user;
   }
-
 }

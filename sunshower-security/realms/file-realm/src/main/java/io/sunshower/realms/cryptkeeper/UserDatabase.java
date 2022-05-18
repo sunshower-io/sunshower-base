@@ -42,7 +42,6 @@ public class UserDatabase {
 
   private transient Map<String, Identifier> usernameCache;
 
-
   public UserDatabase() {
     users = new HashMap<>();
     usernameCache = new LRUCache<>(128);
@@ -52,7 +51,6 @@ public class UserDatabase {
     this();
     this.vaultId = vaultId;
   }
-
 
   public User findByUsername(String username) {
     assert users != null;
@@ -80,7 +78,6 @@ public class UserDatabase {
     users.put(user.getId(), user);
   }
 
-
   public void removeUser(@NonNull User user) {
     usernameCache.remove(user.getUsername());
     users.remove(user.getId());
@@ -89,7 +86,6 @@ public class UserDatabase {
   public Collection<User> getUsers() {
     return users.values();
   }
-
 
   public User getUser(Identifier id) {
     return users.get(id);
