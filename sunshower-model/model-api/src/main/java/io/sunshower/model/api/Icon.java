@@ -11,18 +11,10 @@ import lombok.Setter;
 public class Icon {
 
   @Setter
-  @Getter(onMethod = @__({
-      @Embedded
-  }))
+  @Getter(onMethod = @__({@Embedded}))
   private MediaType mediaType;
 
-
   @Setter
-  @Getter(onMethod = @__({
-      @Lob,
-      @Column(length = 1000000, name = "icon")
-  }))
+  @Getter(onMethod = @__({@Lob, @Column(length = 1000000, name = "icon")}))
   private byte[] data;
-
-
 }

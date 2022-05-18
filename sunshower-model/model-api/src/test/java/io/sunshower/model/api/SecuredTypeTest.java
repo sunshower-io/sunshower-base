@@ -25,8 +25,6 @@ class SecuredTypeTest {
 
     entityManager.persist(tenant);
 
-
-
     val user = new User();
     user.setUsername("sup");
     user.setPassword("password");
@@ -37,7 +35,6 @@ class SecuredTypeTest {
     entityManager.flush();
     assertNotNull(sid.getId());
   }
-
 
   private Tenant tenant() {
     val tenant = new Tenant();

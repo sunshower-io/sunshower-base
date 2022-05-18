@@ -24,48 +24,46 @@ public class Group extends AbstractEntity<Identifier> implements IconAware {
   private Icon icon;
 
   @Setter
-  @Getter(onMethod = @__({
-      @Basic,
-      @Column(name = "name")
-  }))
+  @Getter(onMethod = @__({@Basic, @Column(name = "name")}))
   private String name;
 
   @Setter
-  @Getter(onMethod = @__({
-      @Basic,
-      @Column(name = "description")
-  }))
+  @Getter(onMethod = @__({@Basic, @Column(name = "description")}))
   private String description;
 
   @Setter
-  @Getter(onMethod = @__({
-      @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true),
-      @JoinTable(name = "GROUPS_TO_ROLES",
-          joinColumns =
-          @JoinColumn(name = "group_id"),
-          inverseJoinColumns = @JoinColumn(name = "role_id")
-      )}))
+  @Getter(
+      onMethod =
+          @__({
+            @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true),
+            @JoinTable(
+                name = "GROUPS_TO_ROLES",
+                joinColumns = @JoinColumn(name = "group_id"),
+                inverseJoinColumns = @JoinColumn(name = "role_id"))
+          }))
   private Set<Role> roles;
 
   @Setter
-  @Getter(onMethod = @__({
-      @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true),
-      @JoinTable(name = "GROUPS_TO_USERS",
-          joinColumns =
-          @JoinColumn(name = "group_id"),
-          inverseJoinColumns = @JoinColumn(name = "user_id")
-      )}))
+  @Getter(
+      onMethod =
+          @__({
+            @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true),
+            @JoinTable(
+                name = "GROUPS_TO_USERS",
+                joinColumns = @JoinColumn(name = "group_id"),
+                inverseJoinColumns = @JoinColumn(name = "user_id"))
+          }))
   private Set<User> users;
 
-
   @Setter
-  @Getter(onMethod = @__({
-      @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true),
-      @JoinTable(name = "PERMISSIONS_TO_USERS",
-          joinColumns =
-          @JoinColumn(name = "group_id"),
-          inverseJoinColumns = @JoinColumn(name = "user_id")
-      )}))
+  @Getter(
+      onMethod =
+          @__({
+            @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true),
+            @JoinTable(
+                name = "PERMISSIONS_TO_USERS",
+                joinColumns = @JoinColumn(name = "group_id"),
+                inverseJoinColumns = @JoinColumn(name = "user_id"))
+          }))
   private Set<Permission> permissions;
-
 }

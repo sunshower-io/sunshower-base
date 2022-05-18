@@ -10,10 +10,6 @@ import lombok.Setter;
 public class MediaType {
 
   @Setter
-  @Getter(onMethod = @__({
-      @Basic,
-      @Column(name = "type")
-  }))
+  @Getter(onMethod = @__({@Basic, @Column(name = "type")}))
   private String type;
-
 }

@@ -17,23 +17,20 @@ import org.springframework.security.core.GrantedAuthority;
 @Table(name = "ROLES")
 public class Role extends AbstractEntity<Identifier> implements GrantedAuthority {
 
-
   @Setter
-  @Getter(onMethod = @__({
-      @Basic,
-      @Column(name = "name")
-  }))
+  @Getter(onMethod = @__({@Basic, @Column(name = "name")}))
   private String name;
 
   @Setter
-  @Getter(onMethod = @__({
-      @ManyToMany,
-      @JoinTable(name = "ROLES_TO_USERS",
-          joinColumns =
-          @JoinColumn(name = "role_id"),
-          inverseJoinColumns = @JoinColumn(name = "user_id")
-      )
-  }))
+  @Getter(
+      onMethod =
+          @__({
+            @ManyToMany,
+            @JoinTable(
+                name = "ROLES_TO_USERS",
+                joinColumns = @JoinColumn(name = "role_id"),
+                inverseJoinColumns = @JoinColumn(name = "user_id"))
+          }))
   private Set<User> users;
 
   @Override
@@ -44,6 +41,4 @@ public class Role extends AbstractEntity<Identifier> implements GrantedAuthority
   public void setAuthority(String authority) {
     this.name = authority;
   }
-
-
 }

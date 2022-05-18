@@ -19,25 +19,20 @@ import org.springframework.security.core.GrantedAuthority;
 public class Permission extends AbstractEntity<Identifier> implements GrantedAuthority {
 
   @Setter
-  @Getter(onMethod = @__({
-      @Basic,
-      @Column(name = "name")
-  }))
+  @Getter(onMethod = @__({@Basic, @Column(name = "name")}))
   private String name;
 
-
   @Setter
-  @Getter(onMethod = @__({
-      @ManyToOne(fetch = FetchType.LAZY),
-      @JoinColumn(name = "grantee_id")
-  }))
+  @Getter(onMethod = @__({@ManyToOne(fetch = FetchType.LAZY), @JoinColumn(name = "grantee_id")}))
   private User grantee;
 
   @Setter
-  @Getter(onMethod = @__({
-      @OneToOne(cascade = CascadeType.ALL),
-      @JoinColumn(name = "access_control_entry_id")
-  }))
+  @Getter(
+      onMethod =
+          @__({
+            @OneToOne(cascade = CascadeType.ALL),
+            @JoinColumn(name = "access_control_entry_id")
+          }))
   private AccessControlEntry entry;
 
   @Override
@@ -48,6 +43,4 @@ public class Permission extends AbstractEntity<Identifier> implements GrantedAut
   public void setAuthority(String authority) {
     this.name = authority;
   }
-
-
 }

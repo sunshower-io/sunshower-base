@@ -17,6 +17,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
+@SuppressWarnings("PMD")
 @Table(name = SECURITY_IDENTITY)
 public class SecurityIdentity extends AbstractEntity<Identifier> {
 

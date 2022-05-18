@@ -20,20 +20,13 @@ import java.util.Set;
 import lombok.Getter;
 import lombok.Setter;
 
-/**
- * a tenant is a collection of users and realms
- */
+/** a tenant is a collection of users and realms */
 @Entity
 @Table(name = "TENANTS")
 public class Tenant extends AbstractEntity<Identifier> implements IconAware {
 
-
   @Setter
-  @Getter(onMethod = @__({
-      @Basic,
-      @Column(name = "name")
-
-  }))
+  @Getter(onMethod = @__({@Basic, @Column(name = "name")}))
   private String name;
 
   @Setter
@@ -41,47 +34,33 @@ public class Tenant extends AbstractEntity<Identifier> implements IconAware {
   private Icon icon;
 
   @Setter
-  @Getter(onMethod = @__({
-      @Basic,
-      @Column(name = "description")
-  }))
+  @Getter(onMethod = @__({@Basic, @Column(name = "description")}))
   private String description;
 
   @Setter
-  @Getter(onMethod = @__({
-      @Basic,
-      @Temporal(TemporalType.TIMESTAMP),
-      @Column(name = "created")
-  }))
+  @Getter(onMethod = @__({@Basic, @Temporal(TemporalType.TIMESTAMP), @Column(name = "created")}))
   private Date created;
 
-
   @Setter
-  @Getter(onMethod = @__({
-      @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true),
-      @JoinTable(
-          name = "TENANTS_TO_USERS",
-          joinColumns =
-          @JoinColumn(name = "tenant_id"),
-          inverseJoinColumns = @JoinColumn(name = "user_id")
-      )
-  }))
+  @Getter(
+      onMethod =
+          @__({
+            @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true),
+            @JoinTable(
+                name = "TENANTS_TO_USERS",
+                joinColumns = @JoinColumn(name = "tenant_id"),
+                inverseJoinColumns = @JoinColumn(name = "user_id"))
+          }))
   private Set<User> users;
 
   private Set<Realm> realms;
 
   @Setter
-  @Getter(onMethod = @__({
-      @OneToOne(fetch = FetchType.LAZY),
-      @JoinColumn(name = "parent_id")
-  }))
+  @Getter(onMethod = @__({@OneToOne(fetch = FetchType.LAZY), @JoinColumn(name = "parent_id")}))
   private Tenant parent;
 
-
   @Setter
-  @Getter(onMethod = @__({
-      @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
-  }))
+  @Getter(onMethod = @__({@OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)}))
   private Set<Tenant> children;
 
   public void addUser(User user) {

@@ -30,6 +30,7 @@ import org.springframework.security.core.GrantedAuthority;
 @Entity
 @RootElement
 @Table(name = USER)
+@SuppressWarnings("PMD")
 public class User extends TenantedEntity
     implements org.springframework.security.core.userdetails.UserDetails {
 
@@ -64,55 +65,43 @@ public class User extends TenantedEntity
   @Setter
   @Getter(
       onMethod =
-      @__({@Basic, @Column(name = "last_authenticated"), @Temporal(TemporalType.TIMESTAMP)}))
+          @__({@Basic, @Column(name = "last_authenticated"), @Temporal(TemporalType.TIMESTAMP)}))
   @Attribute(alias = @Alias(read = "last-authenticated", write = "last-authenticated"))
   @Convert(DateConverter.class)
   private Date lastAuthenticated;
-  /**
-   * username for this user
-   */
+  /** username for this user */
   @Setter
   @Getter(onMethod = @__({@Basic, @Column(name = USERNAME)}))
   @Attribute
   private String username;
 
-  /**
-   * password--always a salted hash
-   */
+  /** password--always a salted hash */
   @Setter
   @Getter(onMethod = @__({@Basic, @Column(name = PASSWORD)}))
   @Attribute
   private String password;
 
-
-  /**
-   * a role is a category of user that grants or prohibits access to system-functionality
-   */
+  /** a role is a category of user that grants or prohibits access to system-functionality */
   @Setter
-  @Getter(onMethod = @__({
-      @ManyToMany(mappedBy = "users")
-  }))
+  @Getter(onMethod = @__({@ManyToMany(mappedBy = "users")}))
   private Set<Role> roles;
 
-
   @Setter
-  @Getter(onMethod = @__({
-      @ManyToMany(mappedBy = "users")
-  }))
+  @Getter(onMethod = @__({@ManyToMany(mappedBy = "users")}))
   private Set<Group> groups;
 
-  /**
-   * a permission is a granted authority that grants a specific user access to a specific object
-   */
+  /** a permission is a granted authority that grants a specific user access to a specific object */
   @Setter
-  @Getter(onMethod = @__({
-      @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true),
-  }))
+  @Getter(
+      onMethod =
+          @__({
+            @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true),
+          }))
   private Set<Permission> permissions;
 
   @Getter(
       onMethod =
-      @__({@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)}))
+          @__({@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)}))
   @Element
   private UserDetails details;
 

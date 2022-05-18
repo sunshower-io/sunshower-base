@@ -12,37 +12,29 @@ import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 
-/**
- * a realm a source of user information such as OAuth, databases, or filesystems
- */
+/** a realm a source of user information such as OAuth, databases, or filesystems */
 @Entity
 @Table(name = "REALMS")
 public class Realm extends TenantedEntity {
 
   @Setter
-  @Getter(onMethod = @__({
-      @Basic,
-      @Column(name = "name")
-  }))
+  @Getter(onMethod = @__({@Basic, @Column(name = "name")}))
   private String name;
 
   @Setter
-  @Getter(onMethod = @__({
-      @Basic,
-      @Column(name = "provider")
-  }))
+  @Getter(onMethod = @__({@Basic, @Column(name = "provider")}))
   @Convert(converter = ClassConverter.class)
   private Class<?> provider;
 
-
   @Setter
-  @Getter(onMethod = @__({
-      @OneToMany,
-      @JoinTable(name = "REALM_TO_USERS",
-          joinColumns = @JoinColumn(name = "realm_id"),
-          inverseJoinColumns = @JoinColumn(name = "user_id")
-      )
-  }))
+  @Getter(
+      onMethod =
+          @__({
+            @OneToMany,
+            @JoinTable(
+                name = "REALM_TO_USERS",
+                joinColumns = @JoinColumn(name = "realm_id"),
+                inverseJoinColumns = @JoinColumn(name = "user_id"))
+          }))
   private List<User> users;
-
 }

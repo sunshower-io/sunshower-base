@@ -33,13 +33,9 @@ public class UserDetails extends AbstractEntity<Identifier> implements IconAware
   @Attribute(alias = @Alias(read = "last-name", write = "last-name"))
   private String lastName;
 
-
   @Setter
-  @Getter(onMethod = @__({
-      @Embedded
-  }))
+  @Getter(onMethod = @__({@Embedded}))
   private Icon icon;
-
 
   @Setter
   @Getter(
@@ -57,5 +53,4 @@ public class UserDetails extends AbstractEntity<Identifier> implements IconAware
     this.user = user;
     user.setDetails(this);
   }
-
 }

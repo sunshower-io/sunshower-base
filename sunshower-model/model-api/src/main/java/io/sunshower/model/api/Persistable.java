@@ -9,6 +9,7 @@ import javax.annotation.Nullable;
  *
  * @param <ID> the type of the ID
  */
+@SuppressWarnings("PMD")
 public interface Persistable<ID extends Serializable> extends Cloneable {
 
   /** @return the ID associated with this persistable, or null if it hasn't been persisted yet */

@@ -10,6 +10,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @MappedSuperclass
+@SuppressWarnings("PMD")
 public class AbstractEntity<ID extends Serializable> implements Persistable<ID> {
 
   @Setter
