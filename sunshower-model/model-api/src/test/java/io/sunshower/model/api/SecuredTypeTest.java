@@ -21,13 +21,27 @@ class SecuredTypeTest {
   void ensurePersistingSecurityIdentityWorks() {
     val sid = new SecurityIdentity();
 
+    val tenant = tenant();
+
+    entityManager.persist(tenant);
+
+
+
     val user = new User();
     user.setUsername("sup");
     user.setPassword("password");
     sid.setOwner(user);
     entityManager.persist(user);
+    tenant.addUser(user);
     entityManager.persist(sid);
     entityManager.flush();
     assertNotNull(sid.getId());
+  }
+
+
+  private Tenant tenant() {
+    val tenant = new Tenant();
+    tenant.setName("pepsi");
+    return tenant;
   }
 }

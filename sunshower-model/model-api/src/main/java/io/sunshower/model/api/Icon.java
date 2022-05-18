@@ -12,8 +12,7 @@ public class Icon {
 
   @Setter
   @Getter(onMethod = @__({
-      @Embedded,
-      @Column(name = "media_type")
+      @Embedded
   }))
   private MediaType mediaType;
 
@@ -21,7 +20,7 @@ public class Icon {
   @Setter
   @Getter(onMethod = @__({
       @Lob,
-      @Column(length = 1000000)
+      @Column(length = 1000000, name = "icon")
   }))
   private byte[] data;
 

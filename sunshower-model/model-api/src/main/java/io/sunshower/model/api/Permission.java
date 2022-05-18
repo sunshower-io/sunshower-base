@@ -45,5 +45,9 @@ public class Permission extends AbstractEntity<Identifier> implements GrantedAut
     return name;
   }
 
+  public void setAuthority(String authority) {
+    this.name = authority;
+  }
+
 
 }

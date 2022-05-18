@@ -9,7 +9,6 @@ import io.sunshower.arcus.condensation.Attribute;
 import io.sunshower.arcus.condensation.Convert;
 import io.sunshower.arcus.condensation.Element;
 import io.sunshower.arcus.condensation.RootElement;
-import io.sunshower.persistence.id.Identifier;
 import jakarta.persistence.Basic;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -31,7 +30,7 @@ import org.springframework.security.core.GrantedAuthority;
 @Entity
 @RootElement
 @Table(name = USER)
-public class User extends AbstractEntity<Identifier>
+public class User extends TenantedEntity
     implements org.springframework.security.core.userdetails.UserDetails {
 
   @Setter

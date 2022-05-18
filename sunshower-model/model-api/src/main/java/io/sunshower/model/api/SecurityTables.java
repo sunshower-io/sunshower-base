@@ -12,7 +12,7 @@ public interface SecurityTables {
 
   String ACCESS_CONTROL_ENTRY = "acl_entry";
 
-  String USER = "SUNSHOWER_USER";
+  String USER = "USERS";
 
   /** constant names for acl_object_identity */
   interface AclObjectIdentityFields {
