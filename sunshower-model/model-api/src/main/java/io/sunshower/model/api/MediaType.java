@@ -7,12 +7,13 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Embeddable
-public class AuditResult {
+public class MediaType {
 
   @Setter
-  @Getter(onMethod = @__({@Basic, @Column(name = "audit_success")}))
-  boolean success;
+  @Getter(onMethod = @__({
+      @Basic,
+      @Column(name = "type")
+  }))
+  private String type;
 
-  @Getter(onMethod = @__({@Basic, @Column(name = "audit_failure")}))
-  boolean failure;
 }

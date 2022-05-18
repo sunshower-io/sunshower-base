@@ -10,10 +10,7 @@ import org.junit.jupiter.api.Test;
 @ModelTest
 class SecuredTypeTest {
 
-
-  @PersistenceContext
-  EntityManager entityManager;
-
+  @PersistenceContext EntityManager entityManager;
 
   @Test
   void ensureEverythingIsConfiguredProperly() {
@@ -33,5 +30,4 @@ class SecuredTypeTest {
     entityManager.flush();
     assertNotNull(sid.getId());
   }
-
 }

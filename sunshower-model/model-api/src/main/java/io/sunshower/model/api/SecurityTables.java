@@ -2,14 +2,10 @@ package io.sunshower.model.api;
 
 public interface SecurityTables {
 
-  /**
-   * the object identity table
-   */
+  /** the object identity table */
   String ACL_OBJECT_IDENTITY = "acl_object_identity";
 
-  /**
-   * the type of a secured object
-   */
+  /** the type of a secured object */
   String SECURED_OBJECT_TYPE = "acl_class";
 
   String SECURITY_IDENTITY = "acl_sid";
@@ -18,9 +14,7 @@ public interface SecurityTables {
 
   String USER = "SUNSHOWER_USER";
 
-  /**
-   * constant names for acl_object_identity
-   */
+  /** constant names for acl_object_identity */
   interface AclObjectIdentityFields {
     String INHERITS_ENTRIES = "entries_inheriting";
     String PARENT_REFERENCE = "parent_object";
@@ -28,10 +22,7 @@ public interface SecurityTables {
     String OBJECT_IDENTITY_REFERENCE = "object_id_identity";
   }
 
-  /**
-   * constant names of acl_sid
-   * reference SecurityIdentity
-   */
+  /** constant names of acl_sid reference SecurityIdentity */
   interface AclSecurityIdentity {
     String SID = "sid";
 

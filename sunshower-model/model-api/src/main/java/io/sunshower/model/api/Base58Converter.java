@@ -7,7 +7,6 @@ import io.sunshower.lang.common.encodings.Encodings.Type;
 
 public class Base58Converter implements Converter<byte[], String> {
 
-
   static final Encoding encoding;
 
   static {
@@ -16,7 +15,7 @@ public class Base58Converter implements Converter<byte[], String> {
 
   @Override
   public byte[] read(String s) {
-    if(s == null) {
+    if (s == null) {
       return null;
     }
     return encoding.decode(s);
@@ -24,7 +23,7 @@ public class Base58Converter implements Converter<byte[], String> {
 
   @Override
   public String write(byte[] bytes) {
-    if(bytes == null) {
+    if (bytes == null) {
       return null;
     }
     return encoding.encode(bytes);

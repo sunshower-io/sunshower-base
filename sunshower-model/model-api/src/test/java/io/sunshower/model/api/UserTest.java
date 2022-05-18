@@ -20,8 +20,7 @@ import org.junit.jupiter.api.Test;
 @ModelTest
 class UserTest {
 
-  @PersistenceContext
-  private EntityManager entityManager;
+  @PersistenceContext private EntityManager entityManager;
 
   @Test
   void ensureUserIsWrittenCorrectly() throws IOException {
@@ -32,8 +31,8 @@ class UserTest {
     val encoding = Encodings.create(Type.Base58);
     val salt = generate(32);
     val iv = generate(16);
-    val encryptionService = new JCAEncryptionService(
-        encoding, encoding.encode(salt.array()), "testpassword");
+    val encryptionService =
+        new JCAEncryptionService(encoding, encoding.encode(salt.array()), "testpassword");
     encryptionService.setInitializationVector(encoding.encode(iv.array()));
 
     user.setSalt(salt.array());
@@ -50,7 +49,6 @@ class UserTest {
     entityManager.flush();
     val result = Condensation.create("json").write(User.class, user);
     System.out.println(result);
-
   }
 
   @Test
@@ -62,8 +60,8 @@ class UserTest {
     val encoding = Encodings.create(Type.Base58);
     val salt = generate(32);
     val iv = generate(16);
-    val encryptionService = new JCAEncryptionService(
-        encoding, encoding.encode(salt.array()), "testpassword");
+    val encryptionService =
+        new JCAEncryptionService(encoding, encoding.encode(salt.array()), "testpassword");
     encryptionService.setInitializationVector(encoding.encode(iv.array()));
 
     user.setSalt(salt.array());
@@ -74,16 +72,13 @@ class UserTest {
     entityManager.persist(user);
     entityManager.flush();
 
-    val encryptionService2 = new JCAEncryptionService(
-        encoding, encoding.encode(user.getSalt()), "testpassword");
+    val encryptionService2 =
+        new JCAEncryptionService(encoding, encoding.encode(user.getSalt()), "testpassword");
     encryptionService2.setInitializationVector(encoding.encode(user.getInitializationVector()));
 
     val encoded = encoding.encode(encryptionService2.generatePassword("testpassword").getEncoded());
     assertEquals(encoded, user.getPassword());
-
-
   }
-
 
   @Test
   void ensureUserDetailsIsCascaded() {
@@ -119,5 +114,4 @@ class UserTest {
     }
     return ba;
   }
-
 }

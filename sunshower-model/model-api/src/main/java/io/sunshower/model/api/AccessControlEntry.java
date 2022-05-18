@@ -18,51 +18,29 @@ import lombok.Setter;
 @Table(name = ACCESS_CONTROL_ENTRY)
 public class AccessControlEntry extends AbstractEntity<Identifier> {
 
-
   @Setter
-  @Getter(onMethod = @__({
-      @Basic,
-      @Column(name = "ace_order")
-  }))
+  @Getter(onMethod = @__({@Basic, @Column(name = "ace_order")}))
   private int order;
 
-
   @Setter
-  @Getter(onMethod = @__({
-      @Basic,
-      @Column(name = "mask")
-  }))
+  @Getter(onMethod = @__({@Basic, @Column(name = "mask")}))
   private int mask;
 
-
   @Setter
-  @Getter(onMethod = @__({
-      @Basic,
-      @Column(name = "granting")
-  }))
+  @Getter(onMethod = @__({@Basic, @Column(name = "granting")}))
   private boolean granting;
 
   @Setter
-  @Getter(onMethod = @__({
-      @OneToOne,
-      @JoinColumn(name = "sid")
-  }))
+  @Getter(onMethod = @__({@OneToOne, @JoinColumn(name = "sid")}))
   private SecurityIdentity identity;
 
-
   @Setter
-  @Getter(onMethod = @__({
-      @OneToOne(fetch = FetchType.LAZY),
-      @JoinColumn(name = "acl_object_identity")
-  }))
+  @Getter(
+      onMethod =
+          @__({@OneToOne(fetch = FetchType.LAZY), @JoinColumn(name = "acl_object_identity")}))
   private SecuredObject instance;
 
-
   @Setter
-  @Getter(onMethod = @__({
-      @Embedded
-  }))
+  @Getter(onMethod = @__({@Embedded}))
   private AuditResult auditResult;
-
-
 }

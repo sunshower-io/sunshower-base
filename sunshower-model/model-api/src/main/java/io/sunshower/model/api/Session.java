@@ -27,7 +27,7 @@ public class Session implements Authentication {
   @Override
   public UserDetails getDetails() {
     val user = getPrincipal();
-    if(user != null) {
+    if (user != null) {
       return user.getDetails();
     }
     return null;
@@ -36,7 +36,7 @@ public class Session implements Authentication {
   @Override
   public User getPrincipal() {
     val authentication = SecurityContextHolder.getContext().getAuthentication();
-    if(authentication != null) {
+    if (authentication != null) {
       return (User) authentication.getPrincipal();
     }
     return null;
@@ -49,9 +49,7 @@ public class Session implements Authentication {
   }
 
   @Override
-  public void setAuthenticated(boolean isAuthenticated) throws IllegalArgumentException {
-
-  }
+  public void setAuthenticated(boolean isAuthenticated) throws IllegalArgumentException {}
 
   @Override
   public String getName() {

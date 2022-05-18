@@ -14,6 +14,4 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {FlywayTestConfiguration.class})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ModelTest {
-
-}
+public @interface ModelTest {}

@@ -9,12 +9,12 @@ CREATE TABLE SUNSHOWER_USER
     /**
       the username
      */
-    username VARCHAR(255) NOT NULL,
+    username           VARCHAR(255) NOT NULL,
 
-   /**
-     when was this user created
-    */
-    created TIMESTAMP default NOW(),
+    /**
+      when was this user created
+     */
+    created            TIMESTAMP default NOW(),
 
     /**
       when was this user last logged on
@@ -22,20 +22,19 @@ CREATE TABLE SUNSHOWER_USER
     last_authenticated TIMESTAMP,
 
 
-    locked BOOLEAN DEFAULT FALSE,
+    locked             BOOLEAN   DEFAULT FALSE,
 
-    expired BOOLEAN DEFAULT FALSE,
+    expired            BOOLEAN   DEFAULT FALSE,
 
-    salt BINARY(32),
+    salt BINARY (32),
 
-    initialization_vector BINARY(16),
-
+    initialization_vector BINARY (16),
 
 
     /**
       the password
      */
-    password VARCHAR(255) NOT NULL,
+    password           VARCHAR(255) NOT NULL,
 
     /**
       unique constraint on username
@@ -46,17 +45,19 @@ CREATE TABLE SUNSHOWER_USER
 
 );
 
-CREATE TABLE USER_DETAILS(
-    id BINARY(16) NOT NULL PRIMARY KEY,
-    icon bytea,
+
+CREATE TABLE USER_DETAILS
+(
+    id BINARY (16) NOT NULL PRIMARY KEY,
+    icon       bytea,
     first_name VARCHAR(255) NOT NULL,
-    last_name VARCHAR(255) NOT NULL,
+    last_name  VARCHAR(255) NOT NULL,
 
     CONSTRAINT
         user_details_to_user
-    FOREIGN KEY (id)
-    REFERENCES
-        SUNSHOWER_USER(id)
+        FOREIGN KEY (id)
+            REFERENCES
+                SUNSHOWER_USER (id)
 
 );
 
@@ -203,14 +204,40 @@ CREATE TABLE acl_entry
 
     CONSTRAINT
         acl_entry_acl_object_identity_ref
-    FOREIGN KEY
-        (acl_object_identity)
-    REFERENCES
-        acl_object_identity(id),
+        FOREIGN KEY
+            (acl_object_identity)
+            REFERENCES
+                acl_object_identity (id),
 
 
     CONSTRAINT
         acl_entry_acl_sid_ref
-    FOREIGN KEY (sid)
-    REFERENCES acl_sid(id)
+        FOREIGN KEY (sid)
+            REFERENCES acl_sid (id)
+);
+
+/**
+  maps to io.sunshower.model.api.Permission
+ */
+CREATE TABLE PERMISSION
+(
+
+    id BINARY (16) NOT NULL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    grantee_id BINARY (16),
+    access_control_entry_id BINARY (16),
+
+    CONSTRAINT permission_unique_name
+        UNIQUE (name),
+
+    CONSTRAINT permission_grantee_reference
+        FOREIGN KEY
+            (grantee_id)
+            REFERENCES
+                SUNSHOWER_USER (id),
+
+
+    CONSTRAINT permission_ace_reference
+        FOREIGN KEY (access_control_entry_id)
+            REFERENCES acl_entry (id)
 );

@@ -21,33 +21,18 @@ import lombok.Setter;
 public class SecurityIdentity extends AbstractEntity<Identifier> {
 
   @Setter
-  @Getter(onMethod = @__({
-      @Basic,
-      @Column(name = PRINCIPAL)
-  }))
+  @Getter(onMethod = @__({@Basic, @Column(name = PRINCIPAL)}))
   private boolean principal;
-  /**
-   * reference user by username
-   */
-  @Getter(onMethod = @__({
-      @OneToOne(fetch = FetchType.LAZY),
-      @JoinColumn(name = SID)
-  }))
+  /** reference user by username */
+  @Getter(onMethod = @__({@OneToOne(fetch = FetchType.LAZY), @JoinColumn(name = SID)}))
   private User owner;
 
-  /**
-   * username: used to map owner
-   */
+  /** username: used to map owner */
   @Setter // you should not use this
-  @Getter(onMethod = @__({
-      @Basic,
-      @Column(name = SID, insertable = false, updatable = false)
-  }))
+  @Getter(onMethod = @__({@Basic, @Column(name = SID, insertable = false, updatable = false)}))
   private String username;
 
-  /**
-   * @param owner the owner of this SID
-   */
+  /** @param owner the owner of this SID */
   public void setOwner(@Nullable User owner) {
     if (owner == null) {
       this.owner = null;
@@ -57,5 +42,4 @@ public class SecurityIdentity extends AbstractEntity<Identifier> {
       this.username = owner.getUsername();
     }
   }
-
 }

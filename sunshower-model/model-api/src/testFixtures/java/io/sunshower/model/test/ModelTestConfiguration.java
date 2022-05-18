@@ -1,5 +1,3 @@
 package io.sunshower.model.test;
 
-public class ModelTestConfiguration {
-
-}
+public class ModelTestConfiguration {}

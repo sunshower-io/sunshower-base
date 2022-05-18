@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Objects;
@@ -44,8 +45,9 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Log
-public class FileBackedCryptKeeperRealm extends AbstractUserDetailsAuthenticationProvider implements
-    RealmManager {
+public class FileBackedCryptKeeperRealm
+    extends AbstractUserDetailsAuthenticationProvider
+    implements RealmManager {
 
 
   static final Encoding encoding;
@@ -147,6 +149,7 @@ public class FileBackedCryptKeeperRealm extends AbstractUserDetailsAuthenticatio
     if (details != null) {
       details.setId(user.getId());
     }
+    user.setCreated(new Date());
     flush();
     return user.getId();
   }
@@ -159,6 +162,7 @@ public class FileBackedCryptKeeperRealm extends AbstractUserDetailsAuthenticatio
       user.setInitializationVector(encryptionSet.getInitializationVector());
       updatePassword(user, encryptionSet);
       user.setId(sequence.next());
+      user.setCreated(new Date());
       val details = user.getDetails();
       if (details != null) {
         details.setId(user.getId());
@@ -168,16 +172,6 @@ public class FileBackedCryptKeeperRealm extends AbstractUserDetailsAuthenticatio
     flush();
   }
 
-  private void updatePassword(User user, EncryptionServiceSet encryptionSet) {
-    val secret = new StringSecret();
-    secret.setId(user.getId());
-    secret.setName("Password for " + user.getUsername());
-    secret.setDescription("Password Secret");
-    val password = getEncryptedPassword(encryptionSet, user.getPassword());
-    secret.setMaterial(password);
-    user.setPassword(password.toString());
-    vaultLease.save(secret);
-  }
 
 
   @Override
@@ -340,9 +334,11 @@ public class FileBackedCryptKeeperRealm extends AbstractUserDetailsAuthenticatio
       val encodedPassword = getEncodedPassword(u, password);
       val secret = vaultLease.lease(u.getId());
       if (Objects.equals(encodedPassword, ((StringSecret) secret.get()).getMaterial())) {
+        u.setLastAuthenticated(new Date());
         return Optional.of(u);
       }
     }
+    flush();
     return Optional.empty();
   }
 
@@ -358,5 +354,16 @@ public class FileBackedCryptKeeperRealm extends AbstractUserDetailsAuthenticatio
     pwdService.setInitializationVector(encoding.encode(encryptionSet.getInitializationVector()));
     val secretKey = pwdService.generatePassword(password);
     return encoding.encode(secretKey.getEncoded());
+  }
+
+  private void updatePassword(User user, EncryptionServiceSet encryptionSet) {
+    val secret = new StringSecret();
+    secret.setId(user.getId());
+    secret.setName("Password for " + user.getUsername());
+    secret.setDescription("Password Secret");
+    val password = getEncryptedPassword(encryptionSet, user.getPassword());
+    secret.setMaterial(password);
+    user.setPassword(password.toString());
+    vaultLease.save(secret);
   }
 }

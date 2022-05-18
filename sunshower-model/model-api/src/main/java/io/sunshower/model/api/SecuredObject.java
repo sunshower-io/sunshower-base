@@ -11,22 +11,13 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-/**
- * entity relating an ObjectIdentity to a type
- */
+/** entity relating an ObjectIdentity to a type */
 @Entity
 @Table(name = SECURED_OBJECT_TYPE)
 public class SecuredObject extends AbstractEntity<Identifier> {
 
-  /**
-   * the type this related to
-   */
+  /** the type this related to */
   @Setter
-  @Getter(onMethod = @__({
-      @Column(name = "class"),
-      @Convert(converter = TypeConverter.class)
-  }))
+  @Getter(onMethod = @__({@Column(name = "class"), @Convert(converter = TypeConverter.class)}))
   private Class<?> type;
-
-
 }

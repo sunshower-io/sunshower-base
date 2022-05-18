@@ -25,58 +25,36 @@ import lombok.Setter;
 @Table(name = ACL_OBJECT_IDENTITY)
 public class ObjectIdentity extends AbstractEntity<Identifier> {
 
-
-  /**
-   * determine whether this entry inherits its ancestor's permissions
-   */
+  /** determine whether this entry inherits its ancestor's permissions */
   @Setter
-  @Getter(onMethod = @__({
-      @Basic,
-      @Column(name = INHERITS_ENTRIES)
-  }))
+  @Getter(onMethod = @__({@Basic, @Column(name = INHERITS_ENTRIES)}))
   private boolean inherits;
   /**
    * referenced identity type
-   * <p>
-   * column name: object_id_identity
+   *
+   * <p>column name: object_id_identity
    */
   @Setter // you should not use this directly
-  @Getter(onMethod = @__({
-      @Basic,
-      @Column(name = OBJECT_IDENTITY_REFERENCE)
-  }))
+  @Getter(onMethod = @__({@Basic, @Column(name = OBJECT_IDENTITY_REFERENCE)}))
   private Identifier reference;
 
-  /**
-   * referenced secured object type column name: object_id_class
-   */
+  /** referenced secured object type column name: object_id_class */
   @Setter
   @Getter(
       onMethod =
-      @__({
-          @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL),
-          @JoinColumn(name = OBJECT_IDENTITY_TYPE)
-      }))
+          @__({
+            @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL),
+            @JoinColumn(name = OBJECT_IDENTITY_TYPE)
+          }))
   private SecuredObject object;
 
-  /**
-   * reference to parent column name: parent_object
-   */
+  /** reference to parent column name: parent_object */
   @Setter
-  @Getter(onMethod = @__({
-      @ManyToOne,
-      @JoinColumn(name = PARENT_REFERENCE)
-  }))
+  @Getter(onMethod = @__({@ManyToOne, @JoinColumn(name = PARENT_REFERENCE)}))
   private ObjectIdentity parent;
 
-  /**
-   * mapped children
-   */
+  /** mapped children */
   @Setter
-  @Getter(onMethod = @__({
-      @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
-  }))
+  @Getter(onMethod = @__({@OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)}))
   private Set<ObjectIdentity> children;
-
-
 }
