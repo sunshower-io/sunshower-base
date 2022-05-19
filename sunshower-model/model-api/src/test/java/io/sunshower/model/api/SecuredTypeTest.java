@@ -2,8 +2,8 @@ package io.sunshower.model.api;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import lombok.val;
 import org.junit.jupiter.api.Test;
 

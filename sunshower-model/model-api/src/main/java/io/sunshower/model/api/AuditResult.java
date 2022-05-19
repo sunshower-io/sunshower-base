@@ -1,8 +1,8 @@
 package io.sunshower.model.api;
 
-import jakarta.persistence.Basic;
-import jakarta.persistence.Column;
-import jakarta.persistence.Embeddable;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,6 +13,7 @@ public class AuditResult {
   @Getter(onMethod = @__({@Basic, @Column(name = "audit_success")}))
   boolean success;
 
+  @Setter
   @Getter(onMethod = @__({@Basic, @Column(name = "audit_failure")}))
   boolean failure;
 }

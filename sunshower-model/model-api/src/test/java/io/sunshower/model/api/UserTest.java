@@ -7,13 +7,13 @@ import io.sunshower.arcus.condensation.Condensation;
 import io.sunshower.crypt.JCAEncryptionService;
 import io.sunshower.lang.common.encodings.Encodings;
 import io.sunshower.lang.common.encodings.Encodings.Type;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import lombok.val;
 import org.junit.jupiter.api.Test;
 

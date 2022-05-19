@@ -1,5 +1,6 @@
 package io.sunshower.realms.cryptkeeper;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.io.File;
 import java.security.SecureRandom;
 import lombok.Getter;
@@ -8,6 +9,7 @@ import lombok.val;
 
 @Getter
 @Setter
+@SuppressFBWarnings
 public class RealmConfiguration {
 
   private final File base;

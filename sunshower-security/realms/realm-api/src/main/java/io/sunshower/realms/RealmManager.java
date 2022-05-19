@@ -8,6 +8,7 @@ import java.util.Optional;
 
 public interface RealmManager extends AutoCloseable {
 
+  String getName();
 
   void lock();
 
@@ -26,7 +27,6 @@ public interface RealmManager extends AutoCloseable {
   Optional<User> findByUsername(String username);
 
   Optional<User> authenticate(String username, String password);
-
 
   User getUser(Identifier id);
 }

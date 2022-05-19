@@ -7,7 +7,7 @@ public class DateConverter implements Converter<Date, String> {
 
   @Override
   public Date read(String l) {
-    if(l == null) {
+    if (l == null) {
       return null;
     }
     return new Date(Long.parseLong(l));

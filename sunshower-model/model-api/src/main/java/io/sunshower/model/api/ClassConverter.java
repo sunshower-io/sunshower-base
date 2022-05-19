@@ -1,6 +1,6 @@
 package io.sunshower.model.api;
 
-import jakarta.persistence.AttributeConverter;
+import javax.persistence.AttributeConverter;
 
 public class ClassConverter implements AttributeConverter<Class<?>, String> {
 

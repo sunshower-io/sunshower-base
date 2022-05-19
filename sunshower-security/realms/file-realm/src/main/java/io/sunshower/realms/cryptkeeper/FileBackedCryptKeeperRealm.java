@@ -26,6 +26,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -96,6 +97,11 @@ public class FileBackedCryptKeeperRealm extends AbstractUserDetailsAuthenticatio
         .flatMap(u -> doAuthenticate(u, String.valueOf(authentication.getCredentials())))
         .orElseThrow(
             () -> new AuthenticationFailedException("Error: no user with those credentials!"));
+  }
+
+  @Override
+  public String getName() {
+    return "file-realm";
   }
 
   @Override
@@ -261,7 +267,8 @@ public class FileBackedCryptKeeperRealm extends AbstractUserDetailsAuthenticatio
   private void flush() {
     synchronized (lock) {
       try (val output =
-          new OutputStreamWriter(new BufferedOutputStream(new FileOutputStream(userdb)))) {
+          new OutputStreamWriter(
+              new BufferedOutputStream(new FileOutputStream(userdb)), StandardCharsets.UTF_8)) {
         output.write(condensation.write(UserDatabase.class, userDatabase));
         output.flush();
       }

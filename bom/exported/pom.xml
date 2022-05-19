@@ -57,7 +57,7 @@
 
         <dependency>
             <groupId>io.sunshower.base</groupId>
-            <artifactId>realm-core</artifactId>
+            <artifactId>file-realm</artifactId>
             <version>${base.version}</version>
         </dependency>
     </dependencies>

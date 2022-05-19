@@ -4,10 +4,10 @@ import static io.sunshower.model.api.SecurityTables.SECURED_OBJECT_TYPE;
 
 import io.sunshower.arcus.persist.jpa.TypeConverter;
 import io.sunshower.persistence.id.Identifier;
-import jakarta.persistence.Column;
-import jakarta.persistence.Convert;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.Convert;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
