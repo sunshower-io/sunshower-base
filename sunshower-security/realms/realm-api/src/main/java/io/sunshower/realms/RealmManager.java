@@ -12,6 +12,8 @@ public interface RealmManager extends AutoCloseable {
 
   void lock();
 
+  void save();
+
   boolean isLocked();
 
   void unlock(CharSequence password);

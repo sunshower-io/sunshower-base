@@ -116,6 +116,11 @@ public class FileBackedCryptKeeperRealm extends AbstractUserDetailsAuthenticatio
   }
 
   @Override
+  public void save() {
+    flush();
+  }
+
+  @Override
   public boolean isLocked() {
     return locked;
   }

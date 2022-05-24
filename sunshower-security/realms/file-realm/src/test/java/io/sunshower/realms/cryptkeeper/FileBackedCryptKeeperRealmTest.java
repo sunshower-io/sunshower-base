@@ -102,6 +102,14 @@ class FileBackedCryptKeeperRealmTest {
   }
 
   @Test
+  void ensureFindingUserByUsernameWorks() {
+    val user = getUser();
+    realm.saveUser(user);
+    assertEquals(1, realm.getUsers().size());
+    assertEquals(user, realm.findByUsername(user.getUsername()).get());
+  }
+
+  @Test
   void ensureRemovingUserWorks() {
     val user = getUser();
     realm.saveUser(user);
