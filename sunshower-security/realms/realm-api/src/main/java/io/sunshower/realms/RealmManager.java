@@ -31,4 +31,16 @@ public interface RealmManager extends AutoCloseable {
   Optional<User> authenticate(String username, String password);
 
   User getUser(Identifier id);
+
+  void setOwner(Identifier id);
+
+  List<Identifier> getAdministrators();
+
+  void addAdministrator(User admin);
+
+  void removeAdministrator(User admin);
+
+  void setOwner(User user);
+
+  boolean isOwner(User user);
 }

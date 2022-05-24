@@ -9,8 +9,10 @@ import io.sunshower.arcus.condensation.mappings.LRUCache;
 import io.sunshower.crypt.vault.IdentifierConverter;
 import io.sunshower.model.api.User;
 import io.sunshower.persistence.id.Identifier;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import lombok.Getter;
@@ -40,10 +42,19 @@ public class UserDatabase {
   @Convert(key = IdentifierConverter.class)
   private Map<Identifier, User> users;
 
+  @Getter
+  @Setter
+  @Attribute
+  @Convert(IdentifierConverter.class)
+  private Identifier owner;
+
+  @Getter @Setter @Element private List<Identifier> administrators;
+
   private transient Map<String, Identifier> usernameCache;
 
   public UserDatabase() {
     users = new HashMap<>();
+    administrators = new ArrayList<>();
     usernameCache = new LRUCache<>(128);
   }
 
@@ -89,5 +100,13 @@ public class UserDatabase {
 
   public User getUser(Identifier id) {
     return users.get(id);
+  }
+
+  public boolean isOwner(Identifier id) {
+    return Objects.equals(owner, id);
+  }
+
+  public void removeAdministrator(Identifier id) {
+    administrators.remove(id);
   }
 }

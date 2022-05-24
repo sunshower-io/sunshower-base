@@ -29,6 +29,7 @@ import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -43,12 +44,15 @@ import lombok.val;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.provisioning.UserDetailsManager;
 
 @Log
 @SuppressWarnings("PMD")
 public class FileBackedCryptKeeperRealm extends AbstractUserDetailsAuthenticationProvider
-    implements RealmManager {
+    implements RealmManager, UserDetailsManager {
 
   static final Encoding encoding;
   /** need a global lock on this one */
@@ -161,6 +165,39 @@ public class FileBackedCryptKeeperRealm extends AbstractUserDetailsAuthenticatio
     return user.getId();
   }
 
+  private void updatePassword(User user, String oldPassword, String newPassword) {
+    val newEncryptionSet = secretService.createEncryptionServiceSet(newPassword);
+    user.setSalt(newEncryptionSet.getSalt());
+    user.setInitializationVector(newEncryptionSet.getInitializationVector());
+    val encryptedPassword = getEncryptedPassword(newEncryptionSet, newPassword);
+    val secret = (StringSecret) vaultLease.lease(user.getId()).get();
+    vaultLease.delete(secret);
+    secret.setMaterial(encryptedPassword);
+    vaultLease.save(secret);
+  }
+
+  @Override
+  public void updateUser(UserDetails user) {
+    val u = findByUsername(user.getUsername());
+    if (u.isPresent()) {
+      val toUpdate = u.get();
+      if (user instanceof User) {
+        val actualUser = (User) user;
+        val actualDetails = actualUser.getDetails();
+        if (actualDetails != null) {
+          var newDetails = toUpdate.getDetails();
+          if (newDetails == null) {
+            newDetails = new io.sunshower.model.api.UserDetails();
+            toUpdate.setDetails(newDetails);
+          }
+          newDetails.setFirstName(actualDetails.getFirstName());
+          newDetails.setLastName(actualDetails.getLastName());
+        }
+      }
+      flush();
+    }
+  }
+
   @Override
   public void saveAll(Collection<User> users) {
     for (val user : users) {
@@ -207,9 +244,88 @@ public class FileBackedCryptKeeperRealm extends AbstractUserDetailsAuthenticatio
   }
 
   @Override
+  public void setOwner(Identifier id) {
+    userDatabase.setOwner(id);
+    flush();
+  }
+
+  @Override
+  public List<Identifier> getAdministrators() {
+    return Collections.unmodifiableList(userDatabase.getAdministrators());
+  }
+
+  @Override
+  public void addAdministrator(User admin) {
+    userDatabase.getAdministrators().add(admin.getId());
+    flush();
+  }
+
+  @Override
+  public void removeAdministrator(User admin) {
+    userDatabase.getAdministrators().remove(admin.getId());
+    flush();
+  }
+
+  @Override
+  public void setOwner(User user) {
+    userDatabase.setOwner(user.getId());
+    flush();
+  }
+
+  @Override
+  public boolean isOwner(User user) {
+    return userDatabase.isOwner(user.getId());
+  }
+
+  @Override
   public void close() {
     flush();
     lock();
+  }
+
+  @Override
+  public void createUser(UserDetails user) {
+    val u = new User(user);
+    saveUser(u);
+  }
+
+  @Override
+  public void deleteUser(String username) {
+    findByUsername(username)
+        .ifPresent(
+            u -> {
+              userDatabase.removeUser(u);
+              userDatabase.removeAdministrator(u.getId());
+              flush();
+            });
+  }
+
+  @Override
+  public void changePassword(String oldPassword, String newPassword) {
+    val authentication = SecurityContextHolder.getContext().getAuthentication();
+    val user = userDatabase.findByUsername((String) authentication.getPrincipal());
+    if (user != null) {
+      updatePassword(user, oldPassword, newPassword);
+      if (userDatabase.isOwner(user.getId())) {
+        val vault = vaultLease.get();
+        val manager = vault.getManager();
+        manager.setPassword(vault.getId(), oldPassword, newPassword);
+      }
+    }
+  }
+
+  @Override
+  public boolean userExists(String username) {
+    return findByUsername(username).isPresent();
+  }
+
+  @Override
+  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    return findByUsername(username)
+        .orElseThrow(
+            () ->
+                new NoSuchElementException(
+                    "No user with '%s' found in this realm".formatted(username)));
   }
 
   private File checkBase(File base) {

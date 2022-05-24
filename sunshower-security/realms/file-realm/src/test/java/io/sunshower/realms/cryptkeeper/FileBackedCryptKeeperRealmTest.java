@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import io.sunshower.arcus.lang.test.Tests;
 import io.sunshower.crypt.core.LockedVaultException;
 import io.sunshower.crypt.core.VaultException;
+import io.sunshower.crypt.vault.AuthenticationFailedException;
 import io.sunshower.model.api.User;
 import io.sunshower.model.api.UserDetails;
 import java.io.File;
@@ -20,6 +21,7 @@ import lombok.NonNull;
 import lombok.val;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 class FileBackedCryptKeeperRealmTest {
 
@@ -126,6 +128,24 @@ class FileBackedCryptKeeperRealmTest {
     realm.close();
     realm.unlock(password);
     assertTrue(realm.authenticate(user.getUsername(), "password").isPresent());
+  }
+
+  @Test
+  void ensureChangingPasswordForOwnerResultsInRealmPasswordBeingChanged() {
+    var user = getUser();
+    val auth = new UserAuthentication(user);
+    SecurityContextHolder.getContext().setAuthentication(auth);
+    realm.createUser(user);
+    user = realm.findByUsername(user.getUsername()).get();
+    realm.setOwner(user.getId());
+    val newPassword = "glorbnarb";
+    realm.changePassword(password, newPassword);
+    assertThrows(
+        AuthenticationFailedException.class,
+        () -> {
+          realm.unlock(password);
+        });
+    realm.unlock(newPassword);
   }
 
   @Test

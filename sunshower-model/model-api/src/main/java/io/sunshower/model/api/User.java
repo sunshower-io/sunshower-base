@@ -25,6 +25,7 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.val;
 import org.springframework.security.core.GrantedAuthority;
 
 @Entity
@@ -104,6 +105,16 @@ public class User extends TenantedEntity
           @__({@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)}))
   @Element
   private UserDetails details;
+
+  public User() {}
+
+  public User(org.springframework.security.core.userdetails.UserDetails user) {
+    setUsername(user.getUsername());
+    setPassword(user.getPassword());
+    val details = new UserDetails();
+    details.setUser(this);
+    setDetails(details);
+  }
 
   public void setDetails(UserDetails details) {
     if (details != null) {
