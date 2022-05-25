@@ -190,6 +190,9 @@ public class FileBackedCryptKeeperRealm extends AbstractUserDetailsAuthenticatio
             newDetails = new io.sunshower.model.api.UserDetails();
             toUpdate.setDetails(newDetails);
           }
+          if (!Objects.equals(user.getPassword(), toUpdate.getPassword())) {
+            updatePassword(toUpdate, null, user.getPassword());
+          }
           newDetails.setFirstName(actualDetails.getFirstName());
           newDetails.setLastName(actualDetails.getLastName());
         }
@@ -443,7 +446,7 @@ public class FileBackedCryptKeeperRealm extends AbstractUserDetailsAuthenticatio
 
           @Override
           public byte[] getPassword() {
-            return new byte[0];
+            return password.getBytes(StandardCharsets.UTF_8);
           }
 
           @Override
