@@ -95,6 +95,9 @@ subprojects {
     spotbugsBenchmarks {
         enabled = false
     }
+    tasks.withType(Javadoc) {
+        failOnError false
+    }
 
     publishing {
 
