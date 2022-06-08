@@ -26,8 +26,10 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -42,19 +44,20 @@ import lombok.val;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.provisioning.UserDetailsManager;
 
 @Log
-public class FileBackedCryptKeeperRealm
-    extends AbstractUserDetailsAuthenticationProvider
-    implements RealmManager {
-
+@SuppressWarnings("PMD")
+public class FileBackedCryptKeeperRealm extends AbstractUserDetailsAuthenticationProvider
+    implements RealmManager, UserDetailsManager {
 
   static final Encoding encoding;
-  /**
-   * need a global lock on this one
-   */
+  /** need a global lock on this one */
   private static final Object lock;
+
   private static final Sequence<Identifier> sequence;
 
   static {
@@ -72,35 +75,38 @@ public class FileBackedCryptKeeperRealm
   private UserDatabase userDatabase;
   private RealmConfiguration configuration;
 
-
   public FileBackedCryptKeeperRealm(@NonNull RealmConfiguration configuration) {
     this.configuration = configuration;
     this.userdb = checkBase(configuration.getBase());
     this.condensation = Condensation.create("json");
     this.secretService = new DefaultSecretService(configuration.getBase(), condensation);
     unlock(configuration.getPassword());
-    this.encryptionService = new JCAEncryptionService(encoding.encode(configuration.getSalt()),
-        configuration.getPassword());
-    ((JCAEncryptionService) encryptionService).setInitializationVector(
-        encoding.encode(configuration.getInitializationVector()));
-  }
-
-
-  @Override
-  protected void additionalAuthenticationChecks(UserDetails userDetails,
-      UsernamePasswordAuthenticationToken authentication) throws AuthenticationException {
-
+    this.encryptionService =
+        new JCAEncryptionService(
+            encoding.encode(configuration.getSalt()), configuration.getPassword());
+    ((JCAEncryptionService) encryptionService)
+        .setInitializationVector(encoding.encode(configuration.getInitializationVector()));
   }
 
   @Override
-  protected UserDetails retrieveUser(String username,
-      UsernamePasswordAuthenticationToken authentication) throws AuthenticationException {
-    return findByUsername(username).flatMap(
-            u -> doAuthenticate(u, String.valueOf(authentication.getCredentials())))
+  protected void additionalAuthenticationChecks(
+      UserDetails userDetails, UsernamePasswordAuthenticationToken authentication)
+      throws AuthenticationException {}
+
+  @Override
+  protected UserDetails retrieveUser(
+      String username, UsernamePasswordAuthenticationToken authentication)
+      throws AuthenticationException {
+    return findByUsername(username)
+        .flatMap(u -> doAuthenticate(u, String.valueOf(authentication.getCredentials())))
         .orElseThrow(
             () -> new AuthenticationFailedException("Error: no user with those credentials!"));
   }
 
+  @Override
+  public String getName() {
+    return "file-realm";
+  }
 
   @Override
   public void lock() {
@@ -113,6 +119,10 @@ public class FileBackedCryptKeeperRealm
     }
   }
 
+  @Override
+  public void save() {
+    flush();
+  }
 
   @Override
   public boolean isLocked() {
@@ -127,10 +137,11 @@ public class FileBackedCryptKeeperRealm
     configuration.setInitializationVector(encoding.decode(userDatabase.getInitializationVector()));
     this.vaultLease = results.fst;
     this.userDatabase = results.snd;
-    this.encryptionService = new JCAEncryptionService(encoding.encode(configuration.getSalt()),
-        configuration.getPassword());
-    ((JCAEncryptionService) encryptionService).setInitializationVector(
-        encoding.encode(configuration.getInitializationVector()));
+    this.encryptionService =
+        new JCAEncryptionService(
+            encoding.encode(configuration.getSalt()), configuration.getPassword());
+    ((JCAEncryptionService) encryptionService)
+        .setInitializationVector(encoding.encode(configuration.getInitializationVector()));
     this.locked = false;
   }
 
@@ -154,6 +165,42 @@ public class FileBackedCryptKeeperRealm
     return user.getId();
   }
 
+  private void updatePassword(User user, String oldPassword, String newPassword) {
+    val newEncryptionSet = secretService.createEncryptionServiceSet(newPassword);
+    user.setSalt(newEncryptionSet.getSalt());
+    user.setInitializationVector(newEncryptionSet.getInitializationVector());
+    val encryptedPassword = getEncryptedPassword(newEncryptionSet, newPassword);
+    val secret = (StringSecret) vaultLease.lease(user.getId()).get();
+    vaultLease.delete(secret);
+    secret.setMaterial(encryptedPassword);
+    vaultLease.save(secret);
+  }
+
+  @Override
+  public void updateUser(UserDetails user) {
+    val u = findByUsername(user.getUsername());
+    if (u.isPresent()) {
+      val toUpdate = u.get();
+      if (user instanceof User) {
+        val actualUser = (User) user;
+        val actualDetails = actualUser.getDetails();
+        if (actualDetails != null) {
+          var newDetails = toUpdate.getDetails();
+          if (newDetails == null) {
+            newDetails = new io.sunshower.model.api.UserDetails();
+            toUpdate.setDetails(newDetails);
+          }
+          if (!Objects.equals(user.getPassword(), toUpdate.getPassword())) {
+            updatePassword(toUpdate, null, user.getPassword());
+          }
+          newDetails.setFirstName(actualDetails.getFirstName());
+          newDetails.setLastName(actualDetails.getLastName());
+        }
+      }
+      flush();
+    }
+  }
+
   @Override
   public void saveAll(Collection<User> users) {
     for (val user : users) {
@@ -171,8 +218,6 @@ public class FileBackedCryptKeeperRealm
     }
     flush();
   }
-
-
 
   @Override
   public void deleteUser(User user) {
@@ -193,8 +238,7 @@ public class FileBackedCryptKeeperRealm
 
   @Override
   public Optional<User> authenticate(String username, String password) {
-    return findByUsername(username)
-        .flatMap(u -> doAuthenticate(u, password));
+    return findByUsername(username).flatMap(u -> doAuthenticate(u, password));
   }
 
   @Override
@@ -202,11 +246,89 @@ public class FileBackedCryptKeeperRealm
     return userDatabase.getUser(id);
   }
 
+  @Override
+  public void setOwner(Identifier id) {
+    userDatabase.setOwner(id);
+    flush();
+  }
+
+  @Override
+  public List<Identifier> getAdministrators() {
+    return Collections.unmodifiableList(userDatabase.getAdministrators());
+  }
+
+  @Override
+  public void addAdministrator(User admin) {
+    userDatabase.getAdministrators().add(admin.getId());
+    flush();
+  }
+
+  @Override
+  public void removeAdministrator(User admin) {
+    userDatabase.getAdministrators().remove(admin.getId());
+    flush();
+  }
+
+  @Override
+  public void setOwner(User user) {
+    userDatabase.setOwner(user.getId());
+    flush();
+  }
+
+  @Override
+  public boolean isOwner(User user) {
+    return userDatabase.isOwner(user.getId());
+  }
 
   @Override
   public void close() {
     flush();
     lock();
+  }
+
+  @Override
+  public void createUser(UserDetails user) {
+    val u = new User(user);
+    saveUser(u);
+  }
+
+  @Override
+  public void deleteUser(String username) {
+    findByUsername(username)
+        .ifPresent(
+            u -> {
+              userDatabase.removeUser(u);
+              userDatabase.removeAdministrator(u.getId());
+              flush();
+            });
+  }
+
+  @Override
+  public void changePassword(String oldPassword, String newPassword) {
+    val authentication = SecurityContextHolder.getContext().getAuthentication();
+    val user = userDatabase.findByUsername((String) authentication.getPrincipal());
+    if (user != null) {
+      updatePassword(user, oldPassword, newPassword);
+      if (userDatabase.isOwner(user.getId())) {
+        val vault = vaultLease.get();
+        val manager = vault.getManager();
+        manager.setPassword(vault.getId(), oldPassword, newPassword);
+      }
+    }
+  }
+
+  @Override
+  public boolean userExists(String username) {
+    return findByUsername(username).isPresent();
+  }
+
+  @Override
+  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    return findByUsername(username)
+        .orElseThrow(
+            () ->
+                new NoSuchElementException(
+                    "No user with '%s' found in this realm".formatted(username)));
   }
 
   private File checkBase(File base) {
@@ -230,7 +352,9 @@ public class FileBackedCryptKeeperRealm
     } else {
       log.log(Level.INFO, "Directory {0} does not exist--attempting to create it", base);
       if (!base.mkdirs()) {
-        log.log(Level.SEVERE, "Failed to create directory {0}--please fix the issue and try again",
+        log.log(
+            Level.SEVERE,
+            "Failed to create directory {0}--please fix the issue and try again",
             base);
       }
     }
@@ -266,8 +390,9 @@ public class FileBackedCryptKeeperRealm
   @SneakyThrows
   private void flush() {
     synchronized (lock) {
-      try (val output = new OutputStreamWriter(
-          new BufferedOutputStream(new FileOutputStream(userdb)))) {
+      try (val output =
+          new OutputStreamWriter(
+              new BufferedOutputStream(new FileOutputStream(userdb)), StandardCharsets.UTF_8)) {
         output.write(condensation.write(UserDatabase.class, userDatabase));
         output.flush();
       }
@@ -279,17 +404,19 @@ public class FileBackedCryptKeeperRealm
       try (val input = new BufferedInputStream(new FileInputStream(userdb))) {
         Identifier vaultId;
         VaultLease vaultLease;
-        val leaseRequest = Leases.forPassword(configuration.getPassword())
-            .expiresIn(1, TimeUnit.DAYS);
+        val leaseRequest =
+            Leases.forPassword(configuration.getPassword()).expiresIn(1, TimeUnit.DAYS);
         try {
           userDatabase = condensation.read(UserDatabase.class, input);
           vaultId = userDatabase.getVaultId();
           vaultLease = secretService.lease(vaultId, leaseRequest);
         } catch (NoSuchElementException ex) {
           // database hasn't been saved
-          val vault = secretService.createVault("Default Vault",
-              "Default Vault for secrets management",
-              configuration.getPassword());
+          val vault =
+              secretService.createVault(
+                  "Default Vault",
+                  "Default Vault for secrets management",
+                  configuration.getPassword());
           vaultLease = secretService.lease(vault.getId(), leaseRequest);
           userDatabase = new UserDatabase(vault.getId());
           userDatabase.setSalt(encoding.encode(configuration.getSalt()));
@@ -305,27 +432,29 @@ public class FileBackedCryptKeeperRealm
   }
 
   private CharSequence getEncodedPassword(User u, String password) {
-    return getEncryptedPassword(new EncryptionServiceSet() {
-      @Override
-      public byte[] getSalt() {
-        return u.getSalt();
-      }
+    return getEncryptedPassword(
+        new EncryptionServiceSet() {
+          @Override
+          public byte[] getSalt() {
+            return u.getSalt();
+          }
 
-      @Override
-      public byte[] getInitializationVector() {
-        return u.getInitializationVector();
-      }
+          @Override
+          public byte[] getInitializationVector() {
+            return u.getInitializationVector();
+          }
 
-      @Override
-      public byte[] getPassword() {
-        return new byte[0];
-      }
+          @Override
+          public byte[] getPassword() {
+            return password.getBytes(StandardCharsets.UTF_8);
+          }
 
-      @Override
-      public EncryptionService getEncryptionService() {
-        return null;
-      }
-    }, password);
+          @Override
+          public EncryptionService getEncryptionService() {
+            return null;
+          }
+        },
+        password);
   }
 
   @NonNull
@@ -342,15 +471,11 @@ public class FileBackedCryptKeeperRealm
     return Optional.empty();
   }
 
-  private CharSequence getEncryptedPassword(
-      EncryptionServiceSet encryptionSet,
-      String password
-  ) {
+  private CharSequence getEncryptedPassword(EncryptionServiceSet encryptionSet, String password) {
 
-    val pwdService = new JCAEncryptionService(
-        encoding.encode(encryptionSet.getSalt()),
-        encoding.encode(configuration.getPassword())
-    );
+    val pwdService =
+        new JCAEncryptionService(
+            encoding.encode(encryptionSet.getSalt()), encoding.encode(configuration.getPassword()));
     pwdService.setInitializationVector(encoding.encode(encryptionSet.getInitializationVector()));
     val secretKey = pwdService.generatePassword(password);
     return encoding.encode(secretKey.getEncoded());

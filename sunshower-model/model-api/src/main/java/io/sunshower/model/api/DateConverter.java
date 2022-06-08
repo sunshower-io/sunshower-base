@@ -3,18 +3,21 @@ package io.sunshower.model.api;
 import io.sunshower.arcus.condensation.Converter;
 import java.util.Date;
 
-public class DateConverter implements Converter<Date, Long> {
+public class DateConverter implements Converter<Date, String> {
 
   @Override
-  public Date read(Long l) {
-    return new Date(l);
+  public Date read(String l) {
+    if (l == null) {
+      return null;
+    }
+    return new Date(Long.parseLong(l));
   }
 
   @Override
-  public Long write(Date date) {
+  public String write(Date date) {
     if (date == null) {
       return null;
     }
-    return date.getTime();
+    return Long.toString(date.getTime());
   }
 }

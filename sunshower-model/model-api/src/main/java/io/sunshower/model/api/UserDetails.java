@@ -4,16 +4,16 @@ import io.sunshower.arcus.condensation.Alias;
 import io.sunshower.arcus.condensation.Attribute;
 import io.sunshower.arcus.condensation.RootElement;
 import io.sunshower.persistence.id.Identifier;
-import jakarta.persistence.Basic;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Embedded;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.MapsId;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
@@ -33,13 +33,9 @@ public class UserDetails extends AbstractEntity<Identifier> implements IconAware
   @Attribute(alias = @Alias(read = "last-name", write = "last-name"))
   private String lastName;
 
-
   @Setter
-  @Getter(onMethod = @__({
-      @Embedded
-  }))
+  @Getter(onMethod = @__({@Embedded}))
   private Icon icon;
-
 
   @Setter
   @Getter(
@@ -57,5 +53,4 @@ public class UserDetails extends AbstractEntity<Identifier> implements IconAware
     this.user = user;
     user.setDetails(this);
   }
-
 }

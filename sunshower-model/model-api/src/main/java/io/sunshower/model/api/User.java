@@ -9,27 +9,29 @@ import io.sunshower.arcus.condensation.Attribute;
 import io.sunshower.arcus.condensation.Convert;
 import io.sunshower.arcus.condensation.Element;
 import io.sunshower.arcus.condensation.RootElement;
-import jakarta.persistence.Basic;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
-import jakarta.persistence.Transient;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Set;
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.val;
 import org.springframework.security.core.GrantedAuthority;
 
 @Entity
 @RootElement
 @Table(name = USER)
+@SuppressWarnings("PMD")
 public class User extends TenantedEntity
     implements org.springframework.security.core.userdetails.UserDetails {
 
@@ -64,57 +66,55 @@ public class User extends TenantedEntity
   @Setter
   @Getter(
       onMethod =
-      @__({@Basic, @Column(name = "last_authenticated"), @Temporal(TemporalType.TIMESTAMP)}))
+          @__({@Basic, @Column(name = "last_authenticated"), @Temporal(TemporalType.TIMESTAMP)}))
   @Attribute(alias = @Alias(read = "last-authenticated", write = "last-authenticated"))
   @Convert(DateConverter.class)
   private Date lastAuthenticated;
-  /**
-   * username for this user
-   */
+  /** username for this user */
   @Setter
   @Getter(onMethod = @__({@Basic, @Column(name = USERNAME)}))
   @Attribute
   private String username;
 
-  /**
-   * password--always a salted hash
-   */
+  /** password--always a salted hash */
   @Setter
   @Getter(onMethod = @__({@Basic, @Column(name = PASSWORD)}))
   @Attribute
   private String password;
 
-
-  /**
-   * a role is a category of user that grants or prohibits access to system-functionality
-   */
+  /** a role is a category of user that grants or prohibits access to system-functionality */
   @Setter
-  @Getter(onMethod = @__({
-      @ManyToMany(mappedBy = "users")
-  }))
+  @Getter(onMethod = @__({@ManyToMany(mappedBy = "users")}))
   private Set<Role> roles;
 
-
   @Setter
-  @Getter(onMethod = @__({
-      @ManyToMany(mappedBy = "users")
-  }))
+  @Getter(onMethod = @__({@ManyToMany(mappedBy = "users")}))
   private Set<Group> groups;
 
-  /**
-   * a permission is a granted authority that grants a specific user access to a specific object
-   */
+  /** a permission is a granted authority that grants a specific user access to a specific object */
   @Setter
-  @Getter(onMethod = @__({
-      @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true),
-  }))
+  @Getter(
+      onMethod =
+          @__({
+            @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true),
+          }))
   private Set<Permission> permissions;
 
   @Getter(
       onMethod =
-      @__({@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)}))
+          @__({@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)}))
   @Element
   private UserDetails details;
+
+  public User() {}
+
+  public User(org.springframework.security.core.userdetails.UserDetails user) {
+    setUsername(user.getUsername());
+    setPassword(user.getPassword());
+    val details = new UserDetails();
+    details.setUser(this);
+    setDetails(details);
+  }
 
   public void setDetails(UserDetails details) {
     if (details != null) {

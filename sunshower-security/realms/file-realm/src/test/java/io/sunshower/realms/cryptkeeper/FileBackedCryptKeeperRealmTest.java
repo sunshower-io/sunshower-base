@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import io.sunshower.arcus.lang.test.Tests;
 import io.sunshower.crypt.core.LockedVaultException;
 import io.sunshower.crypt.core.VaultException;
+import io.sunshower.crypt.vault.AuthenticationFailedException;
 import io.sunshower.model.api.User;
 import io.sunshower.model.api.UserDetails;
 import java.io.File;
@@ -20,6 +21,7 @@ import lombok.NonNull;
 import lombok.val;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 class FileBackedCryptKeeperRealmTest {
 
@@ -32,7 +34,6 @@ class FileBackedCryptKeeperRealmTest {
     assertTrue(file.mkdirs());
     this.realm = new FileBackedCryptKeeperRealm(new RealmConfiguration(file, password));
   }
-
 
   @Test
   void ensureRealmCanBeUnlocked() {
@@ -50,7 +51,6 @@ class FileBackedCryptKeeperRealmTest {
     assertNotNull(u);
     assertNotEquals("password", u.getPassword());
   }
-
 
   @Test
   void ensureAuthenticatingUserWorks() {
@@ -72,9 +72,11 @@ class FileBackedCryptKeeperRealmTest {
     realm.saveUser(user);
     assertEquals(1, realm.getUsers().size());
     realm.close();
-    assertThrows(LockedVaultException.class, () -> {
-      realm.authenticate(user.getUsername(), "password");
-    });
+    assertThrows(
+        LockedVaultException.class,
+        () -> {
+          realm.authenticate(user.getUsername(), "password");
+        });
   }
 
   @Test
@@ -83,9 +85,11 @@ class FileBackedCryptKeeperRealmTest {
     realm.saveUser(user);
     assertEquals(1, realm.getUsers().size());
     realm.lock();
-    assertThrows(VaultException.class, () -> {
-      realm.deleteUser(user);
-    });
+    assertThrows(
+        VaultException.class,
+        () -> {
+          realm.deleteUser(user);
+        });
   }
 
   @Test
@@ -97,6 +101,14 @@ class FileBackedCryptKeeperRealmTest {
     realm.unlock(password);
     realm.deleteUser(user);
     assertEquals(0, realm.getUsers().size());
+  }
+
+  @Test
+  void ensureFindingUserByUsernameWorks() {
+    val user = getUser();
+    realm.saveUser(user);
+    assertEquals(1, realm.getUsers().size());
+    assertEquals(user, realm.findByUsername(user.getUsername()).get());
   }
 
   @Test
@@ -118,6 +130,23 @@ class FileBackedCryptKeeperRealmTest {
     assertTrue(realm.authenticate(user.getUsername(), "password").isPresent());
   }
 
+  @Test
+  void ensureChangingPasswordForOwnerResultsInRealmPasswordBeingChanged() {
+    var user = getUser();
+    val auth = new UserAuthentication(user);
+    SecurityContextHolder.getContext().setAuthentication(auth);
+    realm.createUser(user);
+    user = realm.findByUsername(user.getUsername()).get();
+    realm.setOwner(user.getId());
+    val newPassword = "glorbnarb";
+    realm.changePassword(password, newPassword);
+    assertThrows(
+        AuthenticationFailedException.class,
+        () -> {
+          realm.unlock(password);
+        });
+    realm.unlock(newPassword);
+  }
 
   @Test
   void ensureNoSaltsAreReused() {
@@ -165,5 +194,4 @@ class FileBackedCryptKeeperRealmTest {
     user.setDetails(details);
     return user;
   }
-
 }

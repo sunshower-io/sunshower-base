@@ -1,8 +1,8 @@
 package io.sunshower.model.api;
 
-import jakarta.persistence.Basic;
-import jakarta.persistence.Column;
-import jakarta.persistence.Embeddable;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,10 +10,6 @@ import lombok.Setter;
 public class MediaType {
 
   @Setter
-  @Getter(onMethod = @__({
-      @Basic,
-      @Column(name = "type")
-  }))
+  @Getter(onMethod = @__({@Basic, @Column(name = "type")}))
   private String type;
-
 }

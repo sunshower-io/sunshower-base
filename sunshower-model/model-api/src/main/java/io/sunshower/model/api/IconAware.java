@@ -5,5 +5,4 @@ public interface IconAware {
   void setIcon(Icon icon);
 
   Icon getIcon();
-
 }
