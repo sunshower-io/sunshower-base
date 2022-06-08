@@ -32,34 +32,34 @@
         <version>${base.version}</version>
       </dependency>
 
-        <dependency>
-            <groupId>io.sunshower.base</groupId>
-            <artifactId>model-core</artifactId>
-            <version>${base.version}</version>
-        </dependency>
+      <dependency>
+        <groupId>io.sunshower.base</groupId>
+        <artifactId>model-core</artifactId>
+        <version>${base.version}</version>
+      </dependency>
 
-        <dependency>
-            <groupId>io.sunshower.base</groupId>
-            <artifactId>security-api</artifactId>
-            <version>${base.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.sunshower.base</groupId>
-            <artifactId>security-core</artifactId>
-            <version>${base.version}</version>
-        </dependency>
+      <dependency>
+        <groupId>io.sunshower.base</groupId>
+        <artifactId>security-api</artifactId>
+        <version>${base.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.sunshower.base</groupId>
+        <artifactId>security-core</artifactId>
+        <version>${base.version}</version>
+      </dependency>
 
-        <dependency>
-            <groupId>io.sunshower.base</groupId>
-            <artifactId>realm-api</artifactId>
-            <version>${base.version}</version>
-        </dependency>
+      <dependency>
+        <groupId>io.sunshower.base</groupId>
+        <artifactId>realm-api</artifactId>
+        <version>${base.version}</version>
+      </dependency>
 
-        <dependency>
-            <groupId>io.sunshower.base</groupId>
-            <artifactId>file-realm</artifactId>
-            <version>${base.version}</version>
-        </dependency>
+      <dependency>
+        <groupId>io.sunshower.base</groupId>
+        <artifactId>file-realm</artifactId>
+        <version>${base.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 </project>
